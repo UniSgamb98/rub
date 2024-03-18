@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane alignment="CENTER" hgap="2.0" prefHeight="400.0" prefWidth="600.0" vgap="5.0"
+          xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="com.example.rub.LoginController">
+    <Label layoutX="193.0" layoutY="175.0" text="Operatore:"/>
+    <ChoiceBox fx:id="operator" layoutX="260.0" layoutY="147.0" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1"/>
+    <Button onAction="#doLogin" layoutX="384.0" layoutY="207.0" mnemonicParsing="false" text="LogIn" GridPane.columnIndex="2"
+            GridPane.rowIndex="2"/>
+</GridPane>

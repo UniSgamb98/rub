@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="189.0" prefWidth="508.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.NewEntryController">
+   <GridPane alignment="CENTER" prefHeight="208.0" prefWidth="508.0">
+       <Label text="Ragione Sociale:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+       <TextField fx:id="ragioneSociale" onAction="#sendNewEntry" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="0" />
+
+       <Label text="Persona di Riferimento:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+       <TextField fx:id="personaRiferimento" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+
+       <Label text="Paese:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+       <TextField fx:id="paese" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+       <Label text="Città:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+       <TextField fx:id="citta" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+
+       <Label text="Telefono:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+       <TextField fx:id="telefono" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+       <Label text="Email:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+       <TextField fx:id="email" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+
+       <Label text="Tipo Cliente:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+       <ChoiceBox fx:id="tipoCliente" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+       <Label text="Interesse:" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+       <ChoiceBox fx:id="interesse" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+       <Button onAction="#abortNewEntry" text="Annulla" GridPane.columnIndex="0" GridPane.rowIndex="5">
+         <GridPane.margin>
+            <Insets top="20.0" />
+         </GridPane.margin></Button>
+       <Button onAction="#sendNewEntry" text="Invia" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+         <GridPane.margin>
+            <Insets top="20.0" />
+         </GridPane.margin></Button>
+
+      <columnConstraints>
+         <ColumnConstraints maxWidth="138.0" minWidth="120.0" prefWidth="130.0" />
+         <ColumnConstraints maxWidth="133.0" minWidth="115.0" prefWidth="123.0" />
+         <ColumnConstraints maxWidth="68.0" minWidth="54.0" prefWidth="54.0" />
+         <ColumnConstraints maxWidth="145.0" minWidth="131.0" prefWidth="145.0" />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
+      <padding>
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      </padding>
+
+   </GridPane>
+</AnchorPane>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane alignment="CENTER" prefHeight="407.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.EntryDetailsPageController">
+    <Label text="Ragione Sociale:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <TextField GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="0" />
+
+    <Label text="Riferimento:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <TextField GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+
+    <Label text="Paese:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <Label text="Città:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+    <TextField GridPane.columnIndex="3" GridPane.rowIndex="2" />
+
+    <Label text="Telefono:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <Label text="Email:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+    <TextField GridPane.columnIndex="3" GridPane.rowIndex="3" />
+
+    <Label text="Interessamento:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+    <Label text="Tipo Cliente:" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+    <TextField GridPane.columnIndex="3" GridPane.rowIndex="4" />
+    <BorderPane GridPane.columnSpan="5" GridPane.rowIndex="5">
+      <top>
+        <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
+            <Label text="N* contatti: " />
+            <Label text="X" GridPane.columnIndex="1" />
+
+            <Label text="Ultima Chiamata: " GridPane.rowIndex="1" />
+            <Label text="dd/mm/aaaa" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin></Label>
+            <Label text="Prox Chiamata: " GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin></Label>
+            <Label text="dd/mm/aaaa" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin></Label>
+            <columnConstraints>
+               <ColumnConstraints />
+               <ColumnConstraints />
+               <ColumnConstraints />
+               <ColumnConstraints />
+               <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
+            </rowConstraints>
+        </GridPane>
+      </top>
+    </BorderPane>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+</GridPane>
