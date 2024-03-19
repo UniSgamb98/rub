@@ -1,6 +1,7 @@
 package com.example.rub;
 
 import com.example.rub.functionalities.DBManager;
+import com.example.rub.functionalities.GlobalContext;
 import com.example.rub.objects.DisplayableEntry;
 import com.example.rub.objects.filter.FiltersToolColumn;
 import javafx.collections.FXCollections;
@@ -37,6 +38,7 @@ public class SearchEntryController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         results = FXCollections.observableArrayList();
         resultsView.setItems(results);
+        DBManager.update();
         displayResults(DBManager.getAllEntries());
     }
 
@@ -70,7 +72,7 @@ public class SearchEntryController implements Initializable {
 
     public void doRequestEntryDetails(MouseEvent event){
         DisplayableEntry displayableEntry = (DisplayableEntry) resultsView.getSelectionModel().getSelectedItem();
-        System.out.println("Apertura "+ displayableEntry);
+        System.out.println("Apertura della scheda " + displayableEntry);
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("entry-details-page.fxml")));
         try {
             Parent root = loader.load();       //cambio scena

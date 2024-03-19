@@ -23,4 +23,9 @@ public class DisplayableEntry extends HBox {
         return entry;
     }
 
+    @Override
+    public String toString(){
+        return entry.getRagioneSociale();
+    }
+
 }

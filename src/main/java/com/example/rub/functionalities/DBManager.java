@@ -15,9 +15,9 @@ public abstract class DBManager extends TagsManager{
         bean.setId(uuid);
         database.put(uuid, bean);
         indexNewEntry(bean, uuid);
-        write(database, "database");
-        write(index, "indice");
-        write(groupedTags, "glossario");
+        MyUtils.write(database, "database");
+        MyUtils.write(index, "indice");
+        MyUtils.write(groupedTags, "glossario");
         System.out.println("Nuovo contatto inserito in database!");
     }
     public static Contatto retriveEntry(UUID uuid){  //carica un Contatto dal database
@@ -60,18 +60,29 @@ public abstract class DBManager extends TagsManager{
     private static void loadData(){     //Legge il database e indice dai file salvati persistentemente
         if (database == null) {
             try {
-                index = (HashMap<String, LinkedList<UUID>>) read("indice");
-                database = (HashMap<UUID, Contatto>) read("database");
-                groupedTags = (ArrayList<Filter>) read("glossario");
+                index = (HashMap<String, LinkedList<UUID>>) MyUtils.read("indice");
+                database = (HashMap<UUID, Contatto>) MyUtils.read("database");
+                groupedTags = (ArrayList<Filter>) MyUtils.read("glossario");
             } catch (Exception e) {
                 database = new HashMap<>();
                 index = new HashMap<>();
                 groupedTags = new ArrayList<>();
                 System.out.println("Database non trovato... Scrittura di uno nuovo");
-                write(database, "database");
-                write(index, "indice");
-                write(groupedTags, "glossario");
+                MyUtils.write(database, "database");
+                MyUtils.write(index, "indice");
+                MyUtils.write(groupedTags, "glossario");
             }
         }
     }
+
+    public static void update(){
+        try {
+            index = (HashMap<String, LinkedList<UUID>>) MyUtils.read("indice");
+            database = (HashMap<UUID, Contatto>) MyUtils.read("database");
+            groupedTags = (ArrayList<Filter>) MyUtils.read("glossario");
+        } catch (Exception e){
+            System.out.println("Problemi durante l'update dal Database persistente");
+        }
+    }
+    //TODO: Funzione che ricostruisce index e glossario dal solo database
 }
