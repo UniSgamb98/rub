@@ -39,7 +39,7 @@ public abstract class DBManager extends TagsManager{
     public static LinkedList<String> getFilterOptionsFromCategory(TagCategories category){
         LinkedList<String> temp = new LinkedList<>();
         for(int i = 0; i < TagCategories.values().length; i++ ){
-            if (groupedTags.get(i).getCategory() == category){
+            if (!groupedTags.isEmpty() && groupedTags.get(i).getCategory() == category){
                 temp.addAll(groupedTags.get(i).getTags());
             }
         }

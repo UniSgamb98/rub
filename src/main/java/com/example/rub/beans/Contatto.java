@@ -118,4 +118,9 @@ public class Contatto implements Serializable {
     public void setId(UUID id) {
         this.id = id;
     }
+
+    @Override
+    public String toString(){
+        return "[" + ragioneSociale + "|" + personaRiferimento + "|" + paese + "|" + citta + "|" + tipoCliente + "|" + interessamento + "|" + telefono + "|" + email + "]";
+    }
 }
