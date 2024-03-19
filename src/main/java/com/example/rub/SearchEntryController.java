@@ -1,26 +1,30 @@
 package com.example.rub;
 
 import com.example.rub.functionalities.DBManager;
+import com.example.rub.objects.filter.FiltersToolColumn;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
 public class SearchEntryController implements Initializable {
     @FXML
-    public VBox filtersVBox;    //oggetto in indice 0 è una scritta.
+    public FiltersToolColumn filterTool;    //oggetto in indice 0 è una scritta.
     @FXML
     public TextField rapidSearchBar;
     @FXML
@@ -30,30 +34,16 @@ public class SearchEntryController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         results = FXCollections.observableArrayList();
-        ArrayList<String> filters = DBManager.getFilterOptions();
-        int i = 0;
-        for (String filter : filters){
-            i++;
-            filtersVBox.getChildren().add(new ToggleButton(filter));
-        }
-        System.out.println("Filtri trovati: " + i);
         resultsView.setItems(results);
         displayResults(DBManager.getAllEntries());
     }
 
     public void doFilteredSearch() {
         System.out.println("Eseguo ricerca filtrata");
-        ArrayList<String> activeFilters = new ArrayList<>();
+        LinkedList<UUID> listToDisplay = new LinkedList<>(filterTool.getFilteredList());
 
-        for (Node nodeIn : filtersVBox.getChildren()) {
-            if (nodeIn instanceof ToggleButton && ((ToggleButton) nodeIn).isSelected()) {
-                activeFilters.add(((ToggleButton)nodeIn).getText());
-            }
-        }
-        System.out.println("Trovati "+ activeFilters + " filtri attivi");
-
-        if(activeFilters.isEmpty()) displayResults(DBManager.getAllEntries());
-        else displayResults(DBManager.getEntryFromFilter(activeFilters.get(0)));
+        if(listToDisplay.isEmpty()) displayResults(DBManager.getAllEntries());
+        else displayResults(listToDisplay);
     }
     private void displayResults(LinkedList<UUID> resultToDisplay){
         results.clear();
@@ -67,11 +57,11 @@ public class SearchEntryController implements Initializable {
         String input = rapidSearchBar.getText();
         if (input.isEmpty())    {
             displayResults(DBManager.getAllEntries());
-            System.out.println("Input nullo, mostro elenco completo");
+            System.out.println("   Input nullo, mostro elenco completo");
         }
         else    {
             displayResults(DBManager.rapidSearch(input));
-            System.out.println("Trovati " + DBManager.rapidSearch(input).size() + " Risultati");
+            System.out.println("   Trovati " + DBManager.rapidSearch(input).size() + " Risultati");
         }
         rapidSearchBar.clear();
     }
@@ -79,5 +69,15 @@ public class SearchEntryController implements Initializable {
     public void doRequestEntryDetails(){
         System.out.println("Apertura "+ resultsView.getSelectionModel().getSelectedItem());
 
+    }
+
+    public void doSwitchToFirstPage(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("firstPage.fxml")));       //cambio scena
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) { System.out.println("Errore durante la transizione in firstPage con doSwitchToFirstPage in SearchEntryController");   }
     }
 }

@@ -1,11 +1,12 @@
 package com.example.rub.functionalities;
 
 import com.example.rub.beans.Contatto;
+import com.example.rub.enums.TagCategories;
 import com.example.rub.objects.DisplayableEntry;
+import com.example.rub.objects.filter.Filter;
 import javafx.scene.layout.HBox;
 
 import java.util.*;
-
 
 public abstract class DBManager extends TagsManager{
 
@@ -16,7 +17,8 @@ public abstract class DBManager extends TagsManager{
         indexNewEntry(bean, uuid);
         write(database, "database");
         write(index, "indice");
-        System.out.println("Nuovi dati salvati correttamente!");
+        write(groupedTags, "glossario");
+        System.out.println("Nuovo contatto inserito in database!");
     }
     public static Contatto retriveEntry(UUID uuid){  //carica un Contatto dal database
         return database.get(uuid);
@@ -34,8 +36,14 @@ public abstract class DBManager extends TagsManager{
         loadData();
     }   //Recupera i dati all'avvio grazie alla chiamata in firstPageController
 
-    public static ArrayList<String> getFilterOptions(){
-        return new ArrayList<>(index.keySet());
+    public static LinkedList<String> getFilterOptionsFromCategory(TagCategories category){
+        LinkedList<String> temp = new LinkedList<>();
+        for(int i = 0; i < TagCategories.values().length; i++ ){
+            if (groupedTags.get(i).getCategory() == category){
+                temp.addAll(groupedTags.get(i).getTags());
+            }
+        }
+        return temp;
     }
 
     public static LinkedList<UUID> rapidSearch(String input){
@@ -54,12 +62,15 @@ public abstract class DBManager extends TagsManager{
             try {
                 index = (HashMap<String, LinkedList<UUID>>) read("indice");
                 database = (HashMap<UUID, Contatto>) read("database");
+                groupedTags = (ArrayList<Filter>) read("glossario");
             } catch (Exception e) {
                 database = new HashMap<>();
                 index = new HashMap<>();
+                groupedTags = new ArrayList<>();
                 System.out.println("Database non trovato... Scrittura di uno nuovo");
                 write(database, "database");
                 write(index, "indice");
+                write(groupedTags, "glossario");
             }
         }
     }

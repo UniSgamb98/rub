@@ -3,24 +3,26 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import com.example.rub.objects.filter.FiltersToolColumn?>
 <BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.SearchEntryController">
     <left>
-        <VBox fx:id="filtersVBox" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <Label text="Filtri:" />
-        </VBox>
+        <FiltersToolColumn fx:id="filterTool" prefHeight="200.0" prefWidth="150.0" BorderPane.alignment="CENTER" />
     </left>
    <center>
        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-           <ListView onMouseClicked="#doRequestEntryDetails" fx:id="resultsView" prefHeight="366.0" prefWidth="413.0" />
+           <ListView fx:id="resultsView" onMouseClicked="#doRequestEntryDetails" prefHeight="366.0" prefWidth="413.0" />
        </HBox>
    </center>
    <top>
        <HBox alignment="CENTER" prefHeight="34.0" prefWidth="600.0" BorderPane.alignment="CENTER">
            <Label text="Ricerca rapida:" />
-           <TextField onAction="#doRapidSearch" fx:id="rapidSearchBar" />
+           <TextField fx:id="rapidSearchBar" onAction="#doRapidSearch" />
        </HBox>
    </top>
    <right>
       <Button mnemonicParsing="false" onAction="#doFilteredSearch" text="Aggiorna" BorderPane.alignment="TOP_CENTER" />
    </right>
+    <bottom>
+        <Button mnemonicParsing="false" onAction="#doSwitchToFirstPage" text="Indietro" BorderPane.alignment="BASELINE_LEFT"/>
+    </bottom>
 </BorderPane>
