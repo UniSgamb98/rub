@@ -1,6 +1,7 @@
 package com.example.rub;
 
 import com.example.rub.functionalities.DBManager;
+import com.example.rub.objects.DisplayableEntry;
 import com.example.rub.objects.filter.FiltersToolColumn;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -66,9 +68,20 @@ public class SearchEntryController implements Initializable {
         rapidSearchBar.clear();
     }
 
-    public void doRequestEntryDetails(){
-        System.out.println("Apertura "+ resultsView.getSelectionModel().getSelectedItem());
-
+    public void doRequestEntryDetails(MouseEvent event){
+        DisplayableEntry displayableEntry = (DisplayableEntry) resultsView.getSelectionModel().getSelectedItem();
+        System.out.println("Apertura "+ displayableEntry);
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("entry-details-page.fxml")));
+        try {
+            Parent root = loader.load();       //cambio scena
+            EntryDetailsPageController controller = loader.getController();
+            controller.setEntryProperty(displayableEntry.getEntry());
+            controller.init();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) { System.out.println("Errore durante la transizione in firstPage con doRequestEntryDetails in SearchEntryController");   }
     }
 
     public void doSwitchToFirstPage(ActionEvent event) {

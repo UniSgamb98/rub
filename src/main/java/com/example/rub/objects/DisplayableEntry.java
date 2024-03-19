@@ -19,4 +19,8 @@ public class DisplayableEntry extends HBox {
         return entry.getId();
     }
 
+    public Contatto getEntry(){
+        return entry;
+    }
+
 }

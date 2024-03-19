@@ -3,6 +3,7 @@ module com.example.rub {
     requires javafx.fxml;
     exports com.example.rub.objects;
     exports com.example.rub.enums;
+    exports com.example.rub.beans;
 
 
     opens com.example.rub to javafx.fxml;

@@ -42,13 +42,23 @@ public class Contatto implements Serializable {
     public String getEmail() {
         return email;
     }
-
-    public Date getProssimaChiamata() {
-        return prossimaChiamata;
+    public String getProssimaChiamata() {
+        String ret;
+        if (prossimaChiamata == null){
+            ret = "N/a";
+        } else {
+            ret = prossimaChiamata.toString();
+        }
+        return ret;
     }
-
-    public Date getUltimaChiamata() {
-        return ultimaChiamata;
+    public String getUltimaChiamata() {
+        String ret;
+        if (ultimaChiamata == null){
+            ret = "N/a";
+        } else {
+            ret = ultimaChiamata.toString();
+        }
+        return ret;
     }
 
     public int getVolteContattati() {
