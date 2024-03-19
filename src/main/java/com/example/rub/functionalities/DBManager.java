@@ -84,5 +84,41 @@ public abstract class DBManager extends TagsManager{
             System.out.println("Problemi durante l'update dal Database persistente");
         }
     }
+
+    public static void modifyEntry(UUID id, Contatto modifiedBean){
+        Contatto oldBean = database.get(id);
+        String changes = oldBean.compareChanges(modifiedBean);
+        for (int i = 0; i < changes.length(); i++){
+            switch (changes.charAt(i)){
+                case '0':
+                    oldBean.setRagioneSociale(modifiedBean.getRagioneSociale());
+                    break;
+                case '1':
+                    oldBean.setPersonaRiferimento(modifiedBean.getPersonaRiferimento());
+                    break;
+                case '2':
+                    oldBean.setTelefono(modifiedBean.getTelefono());
+                    break;
+                case '3':
+                    oldBean.setEmail(modifiedBean.getEmail());
+                    break;
+                case '4':
+                    oldBean.setInteressamento(modifiedBean.getInteressamento());
+                    break;
+                case '5':
+                    oldBean.setTipoCliente(modifiedBean.getTipoCliente());
+                    break;
+                case '6':
+                    changeIndexEntry(oldBean.getId(),TagCategories.PAESE, oldBean.getPaese(), modifiedBean.getPaese());
+                    oldBean.setPaese(modifiedBean.getPaese());
+                    break;
+                case 7:
+                    index.get(oldBean.getCitta()).remove(oldBean.getId());
+                    index.get(modifiedBean.getCitta()).add(modifiedBean.getId());
+                    oldBean.setCitta(modifiedBean.getCitta());
+                    break;
+            }
+        }
+    }
     //TODO: Funzione che ricostruisce index e glossario dal solo database
 }

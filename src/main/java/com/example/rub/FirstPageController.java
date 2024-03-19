@@ -2,7 +2,6 @@ package com.example.rub;
 
 import com.example.rub.beans.Contatto;
 import com.example.rub.enums.Interessamento;
-import com.example.rub.enums.TagCategories;
 import com.example.rub.enums.TipoCliente;
 import com.example.rub.functionalities.DBManager;
 import javafx.event.ActionEvent;
