@@ -76,7 +76,7 @@ public class EntryDetailsPageController implements Initializable {
                 GlobalContext.openedEntries.add(entryToDisplayDetails.getId());
                 MyUtils.write(GlobalContext.openedEntries, "fileAperti");
                 saveButton.setVisible(true);
-                setFieldDisability(true);
+                setFieldDisability(false);
             } else {    //Apertura fallita
                 ((CheckBox) event.getTarget()).setSelected(false);
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -86,7 +86,7 @@ public class EntryDetailsPageController implements Initializable {
             }
         } else {    //Checkbox = false
             saveButton.setVisible(false);
-            setFieldDisability(false);
+            setFieldDisability(true);
             GlobalContext.openedEntries.remove(entryToDisplayDetails.getId());
             if (GlobalContext.openedEntries.isEmpty()){     //ELIMINIZAIONE SE VUOTI DI FILE APERTI
                 MyUtils.delete("fileAperti");
