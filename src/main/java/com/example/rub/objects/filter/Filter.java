@@ -26,4 +26,7 @@ public class Filter implements Serializable {
     public void removeTag(String tag) {
         tags.remove(tag);
     }
+    public int getSize(){
+        return tags.size();
+    }
 }

@@ -11,20 +11,20 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.ResourceBundle;
 import java.util.UUID;
 
-public class EntryDetailsPageController{
+public class EntryDetailsPageController implements Initializable {
     private final ObjectProperty<Contatto> entryProperty = new SimpleObjectProperty<>();
     @FXML
     public Label prossimaChiamata;
@@ -33,9 +33,9 @@ public class EntryDetailsPageController{
     @FXML
     public Label volteContattati;
     @FXML
-    public TextField tipoCliente;
+    public ChoiceBox<TipoCliente> tipoCliente;
     @FXML
-    public TextField interessamento;
+    public ChoiceBox<Interessamento> interessamento;
     @FXML
     public TextField email;
     @FXML
@@ -48,6 +48,10 @@ public class EntryDetailsPageController{
     public TextField personaDiRiferimento;
     @FXML
     public TextField ragioneSociale;
+    @FXML
+    public CheckBox isModifiable;
+    @FXML
+    public Button saveButton;
     private Contatto entryToDisplayDetails;
     public void switchToSearchEntry(ActionEvent event) {
         GlobalContext.openedEntries.remove(entryToDisplayDetails.getId());
@@ -62,7 +66,7 @@ public class EntryDetailsPageController{
     }
 
     public void allowChangesPressed(ActionEvent event){
-        if (((CheckBox) event.getTarget()).isSelected()) {
+        if (isModifiable.isSelected()) {  //Checkbox = true
             try {
                 GlobalContext.openedEntries = (ArrayList<UUID>) MyUtils.read("fileAperti");
             } catch (Exception e) {
@@ -71,14 +75,18 @@ public class EntryDetailsPageController{
             if (!GlobalContext.openedEntries.contains(entryToDisplayDetails.getId())) {
                 GlobalContext.openedEntries.add(entryToDisplayDetails.getId());
                 MyUtils.write(GlobalContext.openedEntries, "fileAperti");
-            } else {
+                saveButton.setVisible(true);
+                setFieldDisability(true);
+            } else {    //Apertura fallita
                 ((CheckBox) event.getTarget()).setSelected(false);
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Impossibile salvare cambiamenti");
                 alert.setContentText("Qualcun'altro ha aperto la scheda che cerchi di modificare");
                 alert.showAndWait();
             }
-        } else {
+        } else {    //Checkbox = false
+            saveButton.setVisible(false);
+            setFieldDisability(false);
             GlobalContext.openedEntries.remove(entryToDisplayDetails.getId());
             if (GlobalContext.openedEntries.isEmpty()){     //ELIMINIZAIONE SE VUOTI DI FILE APERTI
                 MyUtils.delete("fileAperti");
@@ -106,8 +114,8 @@ public class EntryDetailsPageController{
         citta.setText(entryToDisplayDetails.getCitta());
         telefono.setText(entryToDisplayDetails.getTelefono());
         email.setText(entryToDisplayDetails.getEmail());
-        interessamento.setText(entryToDisplayDetails.getInteressamento().name());
-        tipoCliente.setText(entryToDisplayDetails.getTipoCliente().name());
+        interessamento.setValue(entryToDisplayDetails.getInteressamento());
+        tipoCliente.setValue(entryToDisplayDetails.getTipoCliente());
         volteContattati.setText("" + entryToDisplayDetails.getVolteContattati());
         ultimaChiamata.setText(entryToDisplayDetails.getUltimaChiamata());
         prossimaChiamata.setText(entryToDisplayDetails.getProssimaChiamata());
@@ -120,11 +128,27 @@ public class EntryDetailsPageController{
         newEntry.setPaese(paese.getText());
         newEntry.setPersonaRiferimento(personaDiRiferimento.getText());
         newEntry.setTelefono(telefono.getText());
-        newEntry.setInteressamento(Interessamento.valueOf(interessamento.getText()));
-        newEntry.setTipoCliente(TipoCliente.valueOf(tipoCliente.getText()));
+        newEntry.setInteressamento(interessamento.getValue());
+        newEntry.setTipoCliente(tipoCliente.getValue());
         return newEntry;
     }
     public void setEntryProperty(Contatto entry){
         entryProperty.set(entry);
+    }
+    private void setFieldDisability(boolean state){
+        ragioneSociale.setDisable(state);
+        personaDiRiferimento.setDisable(state);
+        citta.setDisable(state);
+        paese.setDisable(state);
+        email.setDisable(state);
+        telefono.setDisable(state);
+        ragioneSociale.setDisable(state);
+        ragioneSociale.setDisable(state);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        tipoCliente.getItems().addAll(TipoCliente.LABORATORIO, TipoCliente.RIVENDITORE, TipoCliente.CENTROFRESAGGIO);
+        interessamento.getItems().addAll(Interessamento.IMMEDIATO, Interessamento.PROSSIMAMENTE, Interessamento.NULLO);
     }
 }

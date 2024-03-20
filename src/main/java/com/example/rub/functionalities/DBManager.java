@@ -110,15 +110,16 @@ public abstract class DBManager extends TagsManager{
                     break;
                 case '6':
                     changeIndexEntry(oldBean.getId(),TagCategories.PAESE, oldBean.getPaese(), modifiedBean.getPaese());
-                    oldBean.setPaese(modifiedBean.getPaese());
                     break;
-                case 7:
-                    index.get(oldBean.getCitta()).remove(oldBean.getId());
-                    index.get(modifiedBean.getCitta()).add(modifiedBean.getId());
-                    oldBean.setCitta(modifiedBean.getCitta());
+                case '7':
+                    changeIndexEntry(oldBean.getId(),TagCategories.CITTA, oldBean.getCitta(), modifiedBean.getCitta());
                     break;
             }
         }
+        database.put(id, modifiedBean);
+        MyUtils.write(database, "database");
+        MyUtils.write(index, "indice");
+        MyUtils.write(groupedTags, "glossario");
     }
     //TODO: Funzione che ricostruisce index e glossario dal solo database
 }

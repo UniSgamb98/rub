@@ -8,25 +8,25 @@
     <center>
 <GridPane alignment="CENTER" prefHeight="250.0" prefWidth="500.0">
     <Label text="Ragione Sociale:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-    <TextField fx:id="ragioneSociale" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="0" />
+    <TextField fx:id="ragioneSociale" disable="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="0" />
 
     <Label text="Riferimento:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-    <TextField fx:id="personaDiRiferimento" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+    <TextField fx:id="personaDiRiferimento" disable="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" />
 
     <Label text="Paese:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-    <TextField fx:id="paese" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <TextField fx:id="paese" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
     <Label text="Città:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-    <TextField fx:id="citta" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+    <TextField fx:id="citta" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
 
     <Label text="Telefono:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-    <TextField fx:id="telefono" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <TextField fx:id="telefono" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
     <Label text="Email:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-    <TextField fx:id="email" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+    <TextField fx:id="email" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="3" />
 
     <Label text="Interessamento:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-    <TextField fx:id="interessamento" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+    <ChoiceBox fx:id="interessamento" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
     <Label text="Tipo Cliente:" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-    <TextField fx:id="tipoCliente" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+    <ChoiceBox fx:id="tipoCliente" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="4" />
     <BorderPane GridPane.columnSpan="5" GridPane.rowIndex="5">
       <top>
         <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
@@ -46,9 +46,35 @@
                <GridPane.margin>
                   <Insets left="5.0" />
                </GridPane.margin></Label>
+                  <columnConstraints>
+                     <ColumnConstraints />
+                     <ColumnConstraints />
+                     <ColumnConstraints />
+                     <ColumnConstraints />
+                     <ColumnConstraints />
+                  </columnConstraints>
+                  <rowConstraints>
+                     <RowConstraints />
+                     <RowConstraints />
+                  </rowConstraints>
         </GridPane>
       </top>
     </BorderPane>
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
 </GridPane>
     </center>
    <bottom>
@@ -61,14 +87,13 @@
    <right>
        <VBox spacing="10.0" BorderPane.alignment="CENTER">
            <BorderPane.margin>
-               <Insets right="10.0" top="50.0"/>
+               <Insets right="10.0" top="50.0" />
            </BorderPane.margin>
-           <CheckBox onAction="#allowChangesPressed" mnemonicParsing="false" text="Abilita Modifiche"/>
-           <Button onAction="#doSaveChanges" mnemonicParsing="false" text="Salva"/>
-           <Button onAction="#doRegisterCall" alignment="CENTER" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0"
-                   text="Registra Chiamata" textAlignment="CENTER" wrapText="true">
+           <CheckBox fx:id="isModifiable" mnemonicParsing="false" onAction="#allowChangesPressed" text="Abilita Modifiche" />
+           <Button fx:id="saveButton" mnemonicParsing="false" onAction="#doSaveChanges" text="Salva" visible="false" />
+           <Button alignment="CENTER" mnemonicParsing="false" onAction="#doRegisterCall" prefHeight="70.0" prefWidth="70.0" text="Registra Chiamata" textAlignment="CENTER" wrapText="true">
               <VBox.margin>
-                  <Insets left="20.0" top="50.0"/>
+                  <Insets left="20.0" top="50.0" />
               </VBox.margin>
            </Button>
        </VBox>
