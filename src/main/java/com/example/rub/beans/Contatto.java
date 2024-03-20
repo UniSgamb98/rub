@@ -12,7 +12,7 @@ public class Contatto implements Serializable {
     private String ragioneSociale;
     private String personaRiferimento;
     private String telefono;
-    private String email;
+    private String emailReferente;
     private int volteContattati;
     private Interessamento interessamento;
     private TipoCliente tipoCliente;
@@ -20,6 +20,12 @@ public class Contatto implements Serializable {
     private String citta;
     private Date ultimaChiamata;
     private Date prossimaChiamata;
+    private String codiceFiscale;
+    private String cap;
+    private String partitaIva;
+    private String emailCertificata;
+    private String emailGenereica;
+    private String sitoWeb;
     private UUID id;
 
     // TODO: private note delle chiamate;
@@ -40,8 +46,8 @@ public class Contatto implements Serializable {
         return paese;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailReferente() {
+        return emailReferente;
     }
     public String getProssimaChiamata() {
         String ret;
@@ -98,8 +104,8 @@ public class Contatto implements Serializable {
         this.paese = paese;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailReferente(String emailReferente) {
+        this.emailReferente = emailReferente;
     }
 
     public void setCitta(String citta) {
@@ -132,7 +138,7 @@ public class Contatto implements Serializable {
 
     @Override
     public String toString(){
-        return "[" + ragioneSociale + "|" + personaRiferimento + "|" + paese + "|" + citta + "|" + tipoCliente + "|" + interessamento + "|" + telefono + "|" + email + "]";
+        return "[" + ragioneSociale + "|" + personaRiferimento + "|" + paese + "|" + citta + "|" + tipoCliente + "|" + interessamento + "|" + telefono + "|" + emailReferente + "]";
     }
 
     public String compareChanges(Contatto modifiedBean){
@@ -140,7 +146,7 @@ public class Contatto implements Serializable {
         if (!Objects.equals(ragioneSociale, modifiedBean.getRagioneSociale()))  ret += "0";
         if (!Objects.equals(personaRiferimento, modifiedBean.getPersonaRiferimento()))  ret += "1";
         if (!Objects.equals(telefono, modifiedBean.getTelefono()))  ret += "2";
-        if (!Objects.equals(email, modifiedBean.getEmail()))  ret += "3";
+        if (!Objects.equals(emailReferente, modifiedBean.getEmailReferente()))  ret += "3";
         if (!Objects.equals(interessamento, modifiedBean.getInteressamento()))  ret += "4";
         if (!Objects.equals(tipoCliente, modifiedBean.getTipoCliente()))  ret += "5";
         if (!Objects.equals(paese, modifiedBean.getPaese()))  ret += "6";

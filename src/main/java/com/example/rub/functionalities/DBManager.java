@@ -100,7 +100,7 @@ public abstract class DBManager extends TagsManager{
                     oldBean.setTelefono(modifiedBean.getTelefono());
                     break;
                 case '3':
-                    oldBean.setEmail(modifiedBean.getEmail());
+                    oldBean.setEmailReferente(modifiedBean.getEmailReferente());
                     break;
                 case '4':
                     oldBean.setInteressamento(modifiedBean.getInteressamento());

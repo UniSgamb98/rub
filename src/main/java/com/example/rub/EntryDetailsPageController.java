@@ -113,18 +113,18 @@ public class EntryDetailsPageController implements Initializable {
         paese.setText(entryToDisplayDetails.getPaese());
         citta.setText(entryToDisplayDetails.getCitta());
         telefono.setText(entryToDisplayDetails.getTelefono());
-        email.setText(entryToDisplayDetails.getEmail());
+        email.setText(entryToDisplayDetails.getEmailReferente());
         interessamento.setValue(entryToDisplayDetails.getInteressamento());
         tipoCliente.setValue(entryToDisplayDetails.getTipoCliente());
         volteContattati.setText("" + entryToDisplayDetails.getVolteContattati());
         ultimaChiamata.setText(entryToDisplayDetails.getUltimaChiamata());
         prossimaChiamata.setText(entryToDisplayDetails.getProssimaChiamata());
     }
-    private Contatto getContatto(){
+    private Contatto getContatto(){     //TODO: Aggiornare con nuovi dati
         Contatto newEntry = new Contatto();                         //creazione Bean contatto
         newEntry.setRagioneSociale(ragioneSociale.getText());
         newEntry.setCitta(citta.getText());
-        newEntry.setEmail(email.getText());
+        newEntry.setEmailReferente(email.getText());
         newEntry.setPaese(paese.getText());
         newEntry.setPersonaRiferimento(personaDiRiferimento.getText());
         newEntry.setTelefono(telefono.getText());

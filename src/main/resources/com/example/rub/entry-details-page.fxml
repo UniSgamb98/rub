@@ -10,7 +10,7 @@
     <Label text="Ragione Sociale:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
     <TextField fx:id="ragioneSociale" disable="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="0" />
 
-    <Label text="Riferimento:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <Label text="Referente:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
     <TextField fx:id="personaDiRiferimento" disable="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" />
 
     <Label text="Paese:" GridPane.columnIndex="0" GridPane.rowIndex="2" />

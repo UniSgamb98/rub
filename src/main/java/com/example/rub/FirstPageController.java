@@ -84,7 +84,7 @@ public class FirstPageController implements Initializable {
                 bean.setTelefono(attribute);
                 break;
             case 3:
-                bean.setEmail(attribute);
+                bean.setEmailReferente(attribute);
                 break;
             case 4:
                 bean.setInteressamento(Interessamento.valueOf(attribute));

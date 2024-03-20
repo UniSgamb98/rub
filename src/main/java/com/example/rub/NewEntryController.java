@@ -15,7 +15,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.*;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -67,11 +66,11 @@ public class NewEntryController implements Initializable {
         } catch (Exception e) { System.out.println("Errore durante la transizione in firstPage con abortNewEntry");   }
     }
 
-    private Contatto getContatto() {
+    private Contatto getContatto() {    //TODO: Aggiornare con nuovi dati
         Contatto newEntry = new Contatto();                         //creazione Bean contatto
         newEntry.setRagioneSociale(ragioneSociale.getText());
         newEntry.setCitta(citta.getText());
-        newEntry.setEmail(email.getText());
+        newEntry.setEmailReferente(email.getText());
         newEntry.setPaese(paese.getText());
         newEntry.setPersonaRiferimento(personaRiferimento.getText());
         newEntry.setTelefono(telefono.getText());
