@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Region extends Locality implements Serializable {
-    private final ArrayList<String> cities;
+    private final ArrayList<Locality> cities;
     private String region;
 
     public Region(String region){
@@ -26,14 +26,14 @@ public class Region extends Locality implements Serializable {
     }
 
 
-    public ArrayList<String> getCities() {
+    public ArrayList<Locality> getCities() {
         return cities;
     }
 
-    public void addCities(String city){
+    public void addCities(Locality city){
         cities.add(city);
     }
-    public void addAllCities(String... city){
+    public void addAllCities(Locality... city){
         cities.addAll(Arrays.asList(city));
     }
     public void removeCities(String city){

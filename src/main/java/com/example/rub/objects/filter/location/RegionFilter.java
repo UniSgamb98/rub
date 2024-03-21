@@ -26,7 +26,7 @@ public class RegionFilter extends VBox implements AutoRemoving{
     }
 
     private void addRegion(){
-        if (regionsSelection.isEmpty() || regionsSelection.get(regionsSelection.size() - 1) == null) {
+        if (regionsSelection.isEmpty() || regionsSelection.get(regionsSelection.size() - 1).getSelectedItem() != null) {
             Choice regionSelected = new Choice(this, citiesFilter, stateUsedInFilterTree.getRegions());
             regionsSelection.add(regionSelected);
             this.getChildren().add(regionsSelection.size() - 1, regionSelected);

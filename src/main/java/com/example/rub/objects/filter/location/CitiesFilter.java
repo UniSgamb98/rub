@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class CitiesFilter extends VBox implements AutoRemoving {
     private final ArrayList<Choice> citiesSelection;
-    private final Region regionUsedInFilterTree;
+    private Region regionUsedInFilterTree;
 
     public CitiesFilter(Region regionUsedInFilterTree){
         this.regionUsedInFilterTree = regionUsedInFilterTree;
@@ -41,6 +41,10 @@ public class CitiesFilter extends VBox implements AutoRemoving {
         }
         return ret;
     }
+
+    public void setRegionUsedInFilterTree(Region region){
+        regionUsedInFilterTree = region;
+    }
     @Override
     public void removeChoice(Choice choice){
         citiesSelection.remove(choice);
@@ -48,7 +52,11 @@ public class CitiesFilter extends VBox implements AutoRemoving {
 
     @Override
     public Locality getMyLocality() {
-        return null;
+        return regionUsedInFilterTree;
+    }
+
+    public void setLocality(Locality locality) {
+        regionUsedInFilterTree = (Region) locality;
     }
 
     @Override

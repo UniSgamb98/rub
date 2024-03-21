@@ -1,5 +1,6 @@
 package com.example.rub.objects.filter.location;
 
+import com.example.rub.functionalities.locations.Locality;
 import com.example.rub.functionalities.locations.Region;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -11,22 +12,22 @@ import java.util.ArrayList;
 
 public class Choice extends HBox {
     protected Button removeButton;
-    protected ChoiceBox<String> items;
-    private final Node parent;
-    private VBox child;
+    protected ChoiceBox<Locality> items;
+    private final Node parent;  //un filtro piu ampio
+    private VBox child; //il filtro piu stretto
 
-    public Choice(HBox parent, VBox child, ArrayList<String> item){
+    public Choice(HBox parent, VBox child, ArrayList<Locality> item){
         this.child = child;
         this.parent = parent;
         constructorChoice(item);
     }
-    public Choice(VBox parent, VBox child,  ArrayList<String> item){
+    public Choice(VBox parent, VBox child,  ArrayList<Locality> item){
         this.child = child;
         this.parent = parent;
         constructorChoice(item);
     }
 
-    private void constructorChoice(ArrayList<String> item){
+    private void constructorChoice(ArrayList<Locality> item){
         removeButton = new Button("-");
         items = new ChoiceBox<>();
         items.getItems().addAll(item);
@@ -39,7 +40,8 @@ public class Choice extends HBox {
         if (parent instanceof CitiesFilter){
             //do nothing
         } else if (parent instanceof RegionFilter) {
-            setChild(new CitiesFilter((Region) ((RegionFilter) parent).getMyLocality()));           //TODO: devo passare una regione non una string
+            ((CitiesFilter)child).setLocality(items.getValue());
+            //setChild(new CitiesFilter((Region) ((RegionFilter) parent).getMyLocality()));           //TODO: devo passare una regione non una string
         } else if (parent instanceof  Node) {
 
         }
@@ -61,6 +63,6 @@ public class Choice extends HBox {
     }
 
     public String getSelectedItem(){
-        return items.getValue();
+        return items.getValue().toString();
     }
 }

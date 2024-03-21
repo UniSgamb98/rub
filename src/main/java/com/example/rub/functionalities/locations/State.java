@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class State extends Locality implements Serializable {
-    private final ArrayList<Region> regions;
+    private final ArrayList<Locality> regions;
     private String state;
 
     public State(String state){
@@ -20,12 +20,8 @@ public class State extends Locality implements Serializable {
         this.state = state;
     }
 
-    public ArrayList<String> getRegions() {
-        ArrayList<String> ret = new ArrayList<>();
-        for (Region i : regions){
-            ret.add(i.getStringRegion());
-        }
-        return ret;
+    public ArrayList<Locality> getRegions() {
+        return new ArrayList<>(regions);
     }
 
 
