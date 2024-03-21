@@ -9,6 +9,7 @@ module com.example.rub {
     opens com.example.rub to javafx.fxml;
     exports com.example.rub;
     exports com.example.rub.objects.filter;
-    exports com.example.rub.enums.location.interfaceses;
     exports com.example.rub.functionalities;
+    exports com.example.rub.functionalities.locations;
+    exports com.example.rub.objects.filter.location;
 }
