@@ -12,7 +12,4 @@ public abstract class Locality {
     public String getLocalityName(){
         return name;
     }
-    public Locality get(){
-        return this;
-    }
 }

@@ -29,9 +29,4 @@ public class State extends Locality implements Serializable {
     public String toString(){
         return getLocalityName();
     }
-    @Override
-    public Locality get(){
-        return (State) this;
-    }
-
 }

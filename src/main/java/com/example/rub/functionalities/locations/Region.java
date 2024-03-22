@@ -25,8 +25,4 @@ public class Region extends Locality implements Serializable {
     public String toString(){
         return getLocalityName();
     }
-    @Override
-    public Locality get(){
-        return (Region) this;
-    }
 }

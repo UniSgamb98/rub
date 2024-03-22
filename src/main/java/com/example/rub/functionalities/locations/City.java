@@ -8,9 +8,4 @@ public class City extends Locality{
     public String toString(){
         return getLocalityName();
     }
-
-    @Override
-    public Locality get(){
-        return (City) this;
-    }
 }

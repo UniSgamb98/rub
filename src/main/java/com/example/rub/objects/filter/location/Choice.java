@@ -1,7 +1,6 @@
 package com.example.rub.objects.filter.location;
 
 import com.example.rub.functionalities.locations.Locality;
-import com.example.rub.functionalities.locations.Region;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.HBox;
@@ -13,7 +12,7 @@ public class Choice extends HBox {
     protected Button removeButton;
     private final ChoiceBox<Locality> itemChoice;
     private final VBox parent;
-    private Filter child;
+    private final Filter child;
 
     public Choice(VBox parent, Filter child,  ArrayList<Locality> items){
         this.child = child;
@@ -28,7 +27,7 @@ public class Choice extends HBox {
     public String getSelectLocalityName(){
         return itemChoice.getValue().getLocalityName();
     }
-    public Locality getSelectedLocality(){
+    public Locality getSelectedLocality(){      //TODO Questo forse torna utile quando cambi il valore della citta e lancia la exception
         return itemChoice.getValue();
     }
 
@@ -37,11 +36,10 @@ public class Choice extends HBox {
         if (parent instanceof CitiesFilter){
             //do nothing
         } else if (parent instanceof RegionFilter) {
-            //(((Region)itemChoice.getValue()));
-           // (AutoRemoving) child.setAssigned((Region)(itemChoice.getValue()).get());
-            //setChild(new CitiesFilter((Region) ((RegionFilter) parent).getMyLocality()));           //TODO: devo passare una regione non una string
+            child.setVisibility(true);
+            child.setAssigned(itemChoice.getValue());
         } else if (parent instanceof  StateFilter) {
-
+        //TODO
         }
     }
     private void removeSelf(){
