@@ -5,44 +5,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class State extends Locality implements Serializable {
-    private final ArrayList<Locality> regions;
-    private String state;
-
     public State(String state){
-        regions = new ArrayList<>();
-        this.state = state;
-    }
-
-    public String getState(){
-        return state;
-    }
-    public void setState(String state) {
-        this.state = state;
+        super(state);
+        subLocalities = new ArrayList<>();
     }
 
     public ArrayList<Locality> getRegions() {
-        return new ArrayList<>(regions);
+        return subLocalities;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
     public void addRegion(Region region){
-        regions.add(region);
+        subLocalities.add(region);
     }
     public void addAllRegion(Region... region){
-        regions.addAll(Arrays.asList(region));
+        subLocalities.addAll(Arrays.asList(region));
     }
     public void removeRegion(Region region){
-        regions.remove(region);
+        subLocalities.remove(region);
+    }
+    @Override
+    public String toString(){
+        return getLocalityName();
     }
 }

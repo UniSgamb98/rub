@@ -8,6 +8,6 @@ public class RegionComp implements Comparator<Region> {
 
     @Override
     public int compare(Region o1, Region o2) {
-        return o1.getStringRegion().compareTo(o2.getStringRegion());
+        return o1.getLocalityName().compareTo(o2.getLocalityName());
     }
 }
