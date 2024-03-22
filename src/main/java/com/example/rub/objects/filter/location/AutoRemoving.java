@@ -3,6 +3,6 @@ package com.example.rub.objects.filter.location;
 import com.example.rub.functionalities.locations.Locality;
 
 public interface AutoRemoving {
-    public void removeChoice(Choice choice);
-    public Locality getMyLocality();
+    void removeChoice(Choice choice);
+    void setAssigned(Locality locality);
 }

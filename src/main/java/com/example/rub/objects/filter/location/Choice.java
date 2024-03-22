@@ -1,7 +1,7 @@
 package com.example.rub.objects.filter.location;
 
+import com.example.rub.functionalities.locations.Locality;
 import com.example.rub.functionalities.locations.Region;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.HBox;
@@ -11,56 +11,41 @@ import java.util.ArrayList;
 
 public class Choice extends HBox {
     protected Button removeButton;
-    protected ChoiceBox<String> items;
-    private final Node parent;
-    private VBox child;
+    private final ChoiceBox<Locality> itemChoice;
+    private final VBox parent;
+    private Filter child;
 
-    public Choice(HBox parent, VBox child, ArrayList<String> item){
+    public Choice(VBox parent, Filter child,  ArrayList<Locality> items){
         this.child = child;
         this.parent = parent;
-        constructorChoice(item);
-    }
-    public Choice(VBox parent, VBox child,  ArrayList<String> item){
-        this.child = child;
-        this.parent = parent;
-        constructorChoice(item);
-    }
-
-    private void constructorChoice(ArrayList<String> item){
         removeButton = new Button("-");
-        items = new ChoiceBox<>();
-        items.getItems().addAll(item);
+        itemChoice = new ChoiceBox<>();
+        itemChoice.getItems().addAll(items);
         removeButton.setOnAction(actionEvent -> removeSelf());
-        items.setOnAction(actionEvent -> valueHasChanged());
-        this.getChildren().addAll(removeButton, items, child);
+        itemChoice.setOnAction(actionEvent -> valueHasChanged());
+        this.getChildren().addAll(removeButton, itemChoice, child);
+    }
+    public String getSelectLocalityName(){
+        return itemChoice.getValue().getLocalityName();
+    }
+    public Locality getSelectedLocality(){
+        return itemChoice.getValue();
     }
 
+    //Questo deve assegnare al child il suo assignedLocality;
     private void valueHasChanged() {
         if (parent instanceof CitiesFilter){
             //do nothing
         } else if (parent instanceof RegionFilter) {
-            setChild(new CitiesFilter((Region) ((RegionFilter) parent).getMyLocality()));           //TODO: devo passare una regione non una string
-        } else if (parent instanceof  Node) {
+            //(((Region)itemChoice.getValue()));
+           // (AutoRemoving) child.setAssigned((Region)(itemChoice.getValue()).get());
+            //setChild(new CitiesFilter((Region) ((RegionFilter) parent).getMyLocality()));           //TODO: devo passare una regione non una string
+        } else if (parent instanceof  StateFilter) {
 
         }
-
     }
-
     private void removeSelf(){
-        if (this.getParent() instanceof VBox){
-            ((VBox) parent).getChildren().remove(this);
+            parent.getChildren().remove(this);
             ((AutoRemoving) parent).removeChoice(this);
-        }else{
-            ((HBox) parent).getChildren().remove(this);
-            ((AutoRemoving) parent).removeChoice(this);
-        }
-    }
-
-    public void setChild(VBox child){
-        this.child = child;
-    }
-
-    public String getSelectedItem(){
-        return items.getValue();
     }
 }

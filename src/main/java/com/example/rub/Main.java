@@ -1,5 +1,6 @@
 package com.example.rub;
 
+import com.example.rub.functionalities.locations.City;
 import com.example.rub.functionalities.locations.Region;
 import com.example.rub.functionalities.locations.State;
 import com.example.rub.objects.filter.location.CitiesFilter;
@@ -16,13 +17,16 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         //FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
        // Scene scene = new Scene(fxmlLoader.load(), 380, 285);
+        City peschiera = new City("Peschiera");
+        City castelnuovo = new City("Castelnuovo");
+        City pacengo = new City("Pacengo");
         Region veneto = new Region("Veneto");
         Region lombardia = new Region("Lombardia");
         Region lazio = new Region("Lazio");
-        veneto.addAllCities("Peschiera", "Castelnuovo", "Pacengo");
+        veneto.addAllCities(peschiera, castelnuovo, pacengo);
         State italia = new State("Italia");
         italia.addAllRegion(veneto, lombardia, lazio);
-        Scene scene = new Scene(new RegionFilter(italia));
+        Scene scene = new Scene(new RegionFilter(italia),600,600);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();

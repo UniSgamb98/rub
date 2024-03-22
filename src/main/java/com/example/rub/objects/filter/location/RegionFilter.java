@@ -8,17 +8,15 @@ import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 
-public class RegionFilter extends VBox implements AutoRemoving{
+public class RegionFilter extends Filter implements AutoRemoving{
     private final ArrayList<Choice> regionsSelection;
-    private final State stateUsedInFilterTree;
+    private final State stateAssigned;
     private CitiesFilter citiesFilter;
-    private Region myRegion;
 
 
     public RegionFilter(State stateUsedInFilterTree){
-        myRegion = null;
-        citiesFilter = new CitiesFilter(myRegion);
-        this.stateUsedInFilterTree = stateUsedInFilterTree;
+        citiesFilter = new CitiesFilter(null);      //TODO NON DOVREBBE ESSERE ASSEGNATO AL COSTRUTTORE MA ASSEGNATO AL CHANGEVALUE();
+        this.stateAssigned = stateUsedInFilterTree;
         regionsSelection = new ArrayList<>();
         Button addRegionButton = new Button("Aggiungi Regione");
         this.getChildren().add(addRegionButton);
@@ -26,19 +24,15 @@ public class RegionFilter extends VBox implements AutoRemoving{
     }
 
     private void addRegion(){
-        if (regionsSelection.isEmpty() || regionsSelection.get(regionsSelection.size() - 1) == null) {
-            Choice regionSelected = new Choice(this, citiesFilter, stateUsedInFilterTree.getRegions());
-            regionsSelection.add(regionSelected);
-            this.getChildren().add(regionsSelection.size() - 1, regionSelected);
+        try {
+            if (regionsSelection.isEmpty() || !regionsSelection.get(regionsSelection.size() - 1).getSelectLocalityName().isEmpty()) {
+                Choice regionChoice = new Choice(this, citiesFilter, stateAssigned.getRegions());
+                regionsSelection.add(regionChoice);
+                this.getChildren().add(regionsSelection.size() - 1, regionChoice);
+            }
+        }catch (Exception e) {
+            System.out.println("Nessuna voce selezionata");
         }
-    }
-
-    public ArrayList<String> getSelectedRegions(){
-        ArrayList<String> ret = new ArrayList<>();
-        for (Choice i : regionsSelection){
-            ret.add(i.getSelectedItem());
-        }
-        return ret;
     }
 
     @Override
@@ -47,8 +41,13 @@ public class RegionFilter extends VBox implements AutoRemoving{
     }
 
     @Override
-    public Locality getMyLocality() {
-        return myRegion;
+    public void setAssigned(Locality locality) {
+
+    }
+
+    @Override
+    public String toString(){
+        return "RegionFilter dello stato " + stateAssigned;
     }
 
 }

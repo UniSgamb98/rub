@@ -27,9 +27,9 @@ public class LocationManager implements Serializable {
         int i = 0;
         int j = states.size();
         while (!found){
-            if(state.compareTo(states.get((i + j)/2).getState()) < 0){
+            if(state.compareTo(states.get((i + j)/2).getLocalityName()) < 0){
                 j = (i + j)/2;
-            } else if (state.compareTo(states.get((i + j)/2).getState()) > 0) {
+            } else if (state.compareTo(states.get((i + j)/2).getLocalityName()) > 0) {
                 i = (i + j)/2;
             } else if (i == j) {
                 found = true;
