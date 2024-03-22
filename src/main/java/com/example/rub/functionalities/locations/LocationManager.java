@@ -1,8 +1,5 @@
 package com.example.rub.functionalities.locations;
 
-import com.example.rub.functionalities.locations.comparators.StateComp;
-import com.example.rub.objects.filter.location.Filter;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;

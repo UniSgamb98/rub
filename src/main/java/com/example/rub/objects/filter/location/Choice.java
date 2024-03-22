@@ -27,22 +27,14 @@ public class Choice extends HBox {
     public String getSelectLocalityName(){
         return itemChoice.getValue().getLocalityName();
     }
-    public Locality getSelectedLocality(){      //TODO Questo forse torna utile quando cambi il valore della citta e lancia la exception
-        return itemChoice.getValue();
-    }
 
     private void valueHasChanged() {
-        if (parent instanceof CitiesFilter){
-            //do nothing
-        } else if (parent instanceof RegionFilter) {
-            child.setVisibility(true);
-            System.out.println(itemChoice.getValue().toString());
-            child.setAssigned(itemChoice.getValue());
-        } else if (parent instanceof  StateFilter) {
+        if (!(parent instanceof CitiesFilter)){
             child.setVisibility(true);
             child.setAssigned(itemChoice.getValue());
         }
     }
+
     private void removeSelf(){
             parent.getChildren().remove(this);
             ((AutoRemoving) parent).removeChoice(this);

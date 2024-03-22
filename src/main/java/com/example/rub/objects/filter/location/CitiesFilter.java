@@ -15,7 +15,6 @@ public class CitiesFilter extends Filter {
         this.regionAssigned = regionAssigned;
         citiesSelection = new ArrayList<>();
         addCityButton = new Button("Aggiungi Centro Abitato");
-        //this.getChildren().add(addCityButton);
         addCityButton.setOnAction(actionEvent -> addCity());
     }
 
@@ -30,12 +29,6 @@ public class CitiesFilter extends Filter {
             System.out.println("Nessuna voce selezionata");
         }
     }
-    private void addAllCity(){
-        Choice citySelected = new Choice(this, null, regionAssigned.getCities());
-        citiesSelection.add(citySelected);
-        this.getChildren().add(citiesSelection.size()-1, citySelected);
-    }
-
     @Override
     public void setAssigned(Locality region){
         regionAssigned = (Region) region;
