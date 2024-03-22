@@ -31,15 +31,16 @@ public class Choice extends HBox {
         return itemChoice.getValue();
     }
 
-    //Questo deve assegnare al child il suo assignedLocality;
     private void valueHasChanged() {
         if (parent instanceof CitiesFilter){
             //do nothing
         } else if (parent instanceof RegionFilter) {
             child.setVisibility(true);
+            System.out.println(itemChoice.getValue().toString());
             child.setAssigned(itemChoice.getValue());
         } else if (parent instanceof  StateFilter) {
-        //TODO
+            child.setVisibility(true);
+            child.setAssigned(itemChoice.getValue());
         }
     }
     private void removeSelf(){

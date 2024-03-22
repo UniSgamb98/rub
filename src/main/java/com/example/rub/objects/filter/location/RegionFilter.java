@@ -1,7 +1,9 @@
 package com.example.rub.objects.filter.location;
 
 import com.example.rub.functionalities.locations.Locality;
+import com.example.rub.functionalities.locations.Region;
 import com.example.rub.functionalities.locations.State;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
 import java.util.ArrayList;
@@ -16,11 +18,11 @@ public class RegionFilter extends Filter {
         this.stateAssigned = stateUsedInFilterTree;
         regionsSelection = new ArrayList<>();
         addRegionButton = new Button("Aggiungi Regione");
-        this.getChildren().add(addRegionButton);
-        addRegionButton.setOnAction(actionEvent -> addRegion());
+        //this.getChildren().add(addRegionButton);
+        addRegionButton.setOnAction(actionEvent -> addRegion(actionEvent));
     }
 
-    private void addRegion(){
+    private void addRegion(ActionEvent event){
         try {
             if (regionsSelection.isEmpty() || !regionsSelection.get(regionsSelection.size() - 1).getSelectLocalityName().isEmpty()) {
                 CitiesFilter citiesFilter = new CitiesFilter(null);

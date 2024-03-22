@@ -40,7 +40,6 @@ public class CitiesFilter extends Filter {
     public void setAssigned(Locality region){
         regionAssigned = (Region) region;
     }
-
     @Override
     public void removeChoice(Choice choice){
         citiesSelection.remove(choice);

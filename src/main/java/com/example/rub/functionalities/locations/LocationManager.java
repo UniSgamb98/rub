@@ -1,22 +1,32 @@
 package com.example.rub.functionalities.locations;
 
 import com.example.rub.functionalities.locations.comparators.StateComp;
+import com.example.rub.objects.filter.location.Filter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class LocationManager implements Serializable {
-    ArrayList<State> states;
-
-    public LocationManager(){
-        states = new ArrayList<>();
+public class LocationManager extends Locality implements Serializable {
+    public LocationManager(String manager){
+        super(manager);
+        subLocalities = new ArrayList<>();
     }
 
-    public ArrayList<State> getStates(){
-        return states;
+    public ArrayList<Locality> getStates(){
+        return subLocalities;
     }
-
     public void addState(State state){
+        subLocalities.add(state);
+    }
+    public void addAllStates(State... states){
+        subLocalities.addAll(Arrays.asList(states));
+    }
+    public void removeState(State state){
+        subLocalities.remove(state);
+    }
+
+   /* public void addState(State state){
         states.add(state);
         states.sort(new StateComp());
     }
@@ -39,11 +49,12 @@ public class LocationManager implements Serializable {
             }
         }
         return ret;
+    }*/
+
+    @Override
+    public String toString(){
+        return getLocalityName();
     }
-
-
-
-
 }
 
 

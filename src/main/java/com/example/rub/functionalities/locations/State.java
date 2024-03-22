@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class State extends Locality implements Serializable {
-
     public State(String state){
         super(state);
         subLocalities = new ArrayList<>();
@@ -23,8 +22,6 @@ public class State extends Locality implements Serializable {
     public void removeRegion(Region region){
         subLocalities.remove(region);
     }
-
-
     @Override
     public String toString(){
         return getLocalityName();
