@@ -30,8 +30,8 @@ public class Choice extends HBox {
 
     private void valueHasChanged() {
         if (!(parent instanceof CitiesFilter)){
-            child.setVisibility(true);
             child.setAssigned(itemChoice.getValue());
+            child.setVisibility(true);
         }
     }
 

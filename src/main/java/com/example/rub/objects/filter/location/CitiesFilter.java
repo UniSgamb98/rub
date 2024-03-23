@@ -32,6 +32,10 @@ public class CitiesFilter extends Filter {
     @Override
     public void setAssigned(Locality region){
         regionAssigned = (Region) region;
+        for (Choice i : citiesSelection){
+            this.getChildren().remove(i);
+        }
+        citiesSelection.clear();
     }
     @Override
     public void removeChoice(Choice choice){
@@ -44,7 +48,9 @@ public class CitiesFilter extends Filter {
     @Override
     protected void setVisibility(boolean visibility){   //TODO se lo si modifica due volte lancia una exception
         if (visibility){
-            this.getChildren().add(addCityButton);
+            if (!this.getChildren().contains(addCityButton)) {
+                this.getChildren().add(addCityButton);
+            }
         } else {
             this.getChildren().remove(addCityButton);
         }

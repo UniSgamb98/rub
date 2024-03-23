@@ -40,6 +40,10 @@ public class RegionFilter extends Filter {
     @Override
     public void setAssigned(Locality state){
         stateAssigned = (State) state;
+        for (Choice i : regionsSelection){
+            this.getChildren().remove(i);
+        }
+        regionsSelection.clear();
     }
 
     @Override
@@ -49,7 +53,9 @@ public class RegionFilter extends Filter {
     @Override
     protected void setVisibility(boolean visibility){
         if (visibility){
-            this.getChildren().add(addRegionButton);
+            if(!this.getChildren().contains(addRegionButton)){
+                this.getChildren().add(addRegionButton);
+            }
         } else {
             this.getChildren().remove(addRegionButton);
         }
