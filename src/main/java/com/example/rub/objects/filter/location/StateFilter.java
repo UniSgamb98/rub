@@ -31,6 +31,17 @@ public class StateFilter extends Filter {
             System.out.println("Nessuna voce selezionata");
         }
     }
+    public ArrayList<String> getActiveFilters(){
+        ArrayList<String> ret = new ArrayList<>();
+        for (Choice i : statesSelection){
+            if (((RegionFilter)i.getChild()).getSelectionSize() == 0){
+                ret.add(i.getSelectLocalityName());
+            } else{
+                ret.addAll(((RegionFilter) i.getChild()).getActiveFilters());
+            }
+        }
+        return ret;
+    }
     @Override
     public void removeChoice(Choice choice) {
         statesSelection.remove(choice);

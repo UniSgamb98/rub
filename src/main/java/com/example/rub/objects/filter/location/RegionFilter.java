@@ -31,7 +31,21 @@ public class RegionFilter extends Filter {
             System.out.println("Nessuna voce selezionata");
         }
     }
+    public ArrayList<String> getActiveFilters(){
+        ArrayList<String> ret = new ArrayList<>();
+        for (Choice i : regionsSelection){
+            if (((CitiesFilter)i.getChild()).getSelectionSize() == 0){
+                ret.add(i.getSelectLocalityName());
+            } else{
+                ret.addAll(((CitiesFilter) i.getChild()).getActiveFilters());
+            }
+        }
+        return ret;
+    }
 
+    public int getSelectionSize(){
+        return regionsSelection.size();
+    }
     @Override
     public void removeChoice(Choice choice){
         regionsSelection.remove(choice);
@@ -44,6 +58,10 @@ public class RegionFilter extends Filter {
             this.getChildren().remove(i);
         }
         regionsSelection.clear();
+    }
+    @Override
+    public State getAssigned(){
+        return stateAssigned;
     }
 
     @Override

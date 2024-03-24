@@ -37,6 +37,17 @@ public class CitiesFilter extends Filter {
         }
         citiesSelection.clear();
     }
+    public ArrayList<String> getActiveFilters(){
+        ArrayList<String> ret = new ArrayList<>();
+        for (Choice i : citiesSelection){
+            ret.add(i.getSelectLocalityName());
+        }
+        return ret;
+    }
+
+    public int getSelectionSize(){
+        return citiesSelection.size();
+    }
     @Override
     public void removeChoice(Choice choice){
         citiesSelection.remove(choice);

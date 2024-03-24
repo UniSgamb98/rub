@@ -34,7 +34,9 @@ public class Choice extends HBox {
             child.setVisibility(true);
         }
     }
-
+    protected Filter getChild(){
+        return child;
+    }
     private void removeSelf(){
             parent.getChildren().remove(this);
             ((AutoRemoving) parent).removeChoice(this);

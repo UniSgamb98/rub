@@ -3,6 +3,8 @@ package com.example.rub.functionalities.locations;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.UUID;
 
 public class LocationManager extends Locality implements Serializable {
     public LocationManager(String manager){

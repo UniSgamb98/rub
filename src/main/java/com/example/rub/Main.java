@@ -4,28 +4,19 @@ import com.example.rub.functionalities.locations.City;
 import com.example.rub.functionalities.locations.LocationManager;
 import com.example.rub.functionalities.locations.Region;
 import com.example.rub.functionalities.locations.State;
-import com.example.rub.objects.filter.location.RegionFilter;
 import com.example.rub.objects.filter.location.StateFilter;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class Main extends Application {
     @Override
-    public void start(Stage stage) {
-        City peschiera = new City("Peschiera");
-        City castelnuovo = new City("Castelnuovo");
-        City pacengo = new City("Pacengo");
-        Region veneto = new Region("Veneto");
-        Region lombardia = new Region("Lombardia");
-        Region lazio = new Region("Lazio");
-        State italia = new State("Italia");
-        State uk = new State("Inghilterra");
-        LocationManager manager = new LocationManager("Manager");
-        veneto.addAllCities(peschiera, castelnuovo, pacengo);
-        italia.addAllRegion(veneto, lombardia, lazio);
-        manager.addAllStates(italia, uk);
-        Scene scene = new Scene(new StateFilter(manager),600,600);
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 380, 285);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();

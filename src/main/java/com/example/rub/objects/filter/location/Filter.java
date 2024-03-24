@@ -9,5 +9,8 @@ public class Filter extends VBox implements AutoRemoving{
     public void removeChoice(Choice choice) {}
     @Override
     public void setAssigned(Locality locality) {}
+    public Locality getAssigned() {
+        return null;
+    }
     protected void setVisibility(boolean visibility){}      //TODO Questo forse è meglio metterlo sempre true boH
 }
