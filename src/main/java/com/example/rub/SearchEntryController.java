@@ -1,7 +1,6 @@
 package com.example.rub;
 
 import com.example.rub.functionalities.DBManager;
-import com.example.rub.functionalities.GlobalContext;
 import com.example.rub.objects.DisplayableEntry;
 import com.example.rub.objects.filter.FiltersToolColumn;
 import javafx.collections.FXCollections;
@@ -38,7 +37,11 @@ public class SearchEntryController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         results = FXCollections.observableArrayList();
         resultsView.setItems(results);
-        DBManager.update();
+        try {
+            DBManager.update();
+        } catch (Exception e) {
+            System.out.println("Problemi durante l'update dal Database persistente");
+        }
         displayResults(DBManager.getAllEntries());
     }
 

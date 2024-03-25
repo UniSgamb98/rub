@@ -1,17 +1,12 @@
 package com.example.rub.functionalities.locations;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class State extends Locality implements Serializable {
+public class State extends Locality {
     public State(String state){
         super(state);
         subLocalities = new ArrayList<>();
-    }
-
-    public ArrayList<Locality> getRegions() {
-        return subLocalities;
     }
     public void addRegion(Region region){
         subLocalities.add(region);

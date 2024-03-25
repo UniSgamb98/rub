@@ -21,7 +21,7 @@ public class CitiesFilter extends Filter {
     private void addCity(){
         try {
             if (citiesSelection.isEmpty() || !citiesSelection.get(citiesSelection.size() - 1).getSelectLocalityName().isEmpty()) {
-                Choice cityChoice = new Choice(this, new Filter(), regionAssigned.getCities());
+                Choice cityChoice = new Choice(this, new Filter(), regionAssigned.getSubLocalities());
                 citiesSelection.add(cityChoice);
                 this.getChildren().add(citiesSelection.size() - 1, cityChoice);
             }
@@ -57,13 +57,9 @@ public class CitiesFilter extends Filter {
         return "CityFilter della regione " + regionAssigned;
     }
     @Override
-    protected void setVisibility(boolean visibility){   //TODO se lo si modifica due volte lancia una exception
-        if (visibility){
-            if (!this.getChildren().contains(addCityButton)) {
-                this.getChildren().add(addCityButton);
-            }
-        } else {
-            this.getChildren().remove(addCityButton);
+    protected void becomeVisible(){
+        if (!this.getChildren().contains(addCityButton)) {
+            this.getChildren().add(addCityButton);
         }
     }
 }

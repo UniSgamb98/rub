@@ -1,10 +1,5 @@
 package com.example.rub;
 
-import com.example.rub.functionalities.locations.City;
-import com.example.rub.functionalities.locations.LocationManager;
-import com.example.rub.functionalities.locations.Region;
-import com.example.rub.functionalities.locations.State;
-import com.example.rub.objects.filter.location.StateFilter;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

@@ -23,7 +23,7 @@ public class RegionFilter extends Filter {
         try {
             if (regionsSelection.isEmpty() || !regionsSelection.get(regionsSelection.size() - 1).getSelectLocalityName().isEmpty()) {
                 CitiesFilter citiesFilter = new CitiesFilter(null);
-                Choice regionChoice = new Choice(this, citiesFilter, stateAssigned.getRegions());
+                Choice regionChoice = new Choice(this, citiesFilter, stateAssigned.getSubLocalities());
                 regionsSelection.add(regionChoice);
                 this.getChildren().add(regionsSelection.size() - 1, regionChoice);
             }
@@ -60,23 +60,13 @@ public class RegionFilter extends Filter {
         regionsSelection.clear();
     }
     @Override
-    public State getAssigned(){
-        return stateAssigned;
-    }
-
-    @Override
     public String toString(){
         return "RegionFilter dello stato " + stateAssigned;
     }
     @Override
-    protected void setVisibility(boolean visibility){
-        if (visibility){
-            if(!this.getChildren().contains(addRegionButton)){
-                this.getChildren().add(addRegionButton);
-            }
-        } else {
-            this.getChildren().remove(addRegionButton);
+    protected void becomeVisible(){
+        if(!this.getChildren().contains(addRegionButton)){
+            this.getChildren().add(addRegionButton);
         }
     }
-
 }

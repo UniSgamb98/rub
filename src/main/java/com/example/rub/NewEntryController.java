@@ -20,7 +20,28 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class NewEntryController implements Initializable {
-
+    @FXML
+    public TextField emailReferente;
+    @FXML
+    public TextField via;
+    @FXML
+    public TextField regione;
+    @FXML
+    public TextField partitaIva;
+    @FXML
+    public TextField codiceFiscale;
+    @FXML
+    public TextField numeroCivico;
+    @FXML
+    public TextField cap;
+    @FXML
+    public TextField provincia;
+    @FXML
+    public TextField sitoWeb;
+    @FXML
+    public TextField titolare;
+    @FXML
+    public TextField pec;
     @FXML
     private TextField citta;
     @FXML
@@ -70,12 +91,23 @@ public class NewEntryController implements Initializable {
         Contatto newEntry = new Contatto();                         //creazione Bean contatto
         newEntry.setRagioneSociale(ragioneSociale.getText());
         newEntry.setCitta(citta.getText());
-        newEntry.setEmailReferente(email.getText());
+        newEntry.setEmailReferente(emailReferente.getText());
         newEntry.setPaese(paese.getText());
         newEntry.setPersonaRiferimento(personaRiferimento.getText());
         newEntry.setTelefono(telefono.getText());
         newEntry.setInteressamento(interesse.getValue());
         newEntry.setTipoCliente(tipoCliente.getValue());
+        newEntry.setCap(cap.getText());
+        newEntry.setCodiceFiscale(codiceFiscale.getText());
+        newEntry.setEmailCertificata(pec.getText());
+        newEntry.setEmailGenereica(email.getText());
+        newEntry.setSitoWeb(sitoWeb.getText());
+        newEntry.setTitolare(titolare.getText());
+        newEntry.setNumeroCivico(numeroCivico.getText());
+        newEntry.setPartitaIva(partitaIva.getText());
+        newEntry.setRegione(regione.getText());
+        newEntry.setIndirizzo(via.getText());
+        newEntry.setProvincia(provincia.getText());
         return newEntry;
     }
 }

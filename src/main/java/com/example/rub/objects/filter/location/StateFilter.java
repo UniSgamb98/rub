@@ -23,7 +23,7 @@ public class StateFilter extends Filter {
         try {
             if (statesSelection.isEmpty() || !statesSelection.get(statesSelection.size() - 1).getSelectLocalityName().isEmpty()) {
                 RegionFilter regionsFilter = new RegionFilter(null);
-                Choice stateChoice = new Choice(this, regionsFilter, managerUsed.getStates());
+                Choice stateChoice = new Choice(this, regionsFilter, managerUsed.getSubLocalities());
                 statesSelection.add(stateChoice);
                 this.getChildren().add(statesSelection.size() - 1, stateChoice);
             }
@@ -56,12 +56,8 @@ public class StateFilter extends Filter {
         return "StateFilter del mondo " + managerUsed;
     }
     @Override
-    protected void setVisibility(boolean visibility){
-        if (visibility){
-            this.getChildren().add(addStateButton);
-        } else {
-            this.getChildren().remove(addStateButton);
-        }
+    protected void becomeVisible(){
+        this.getChildren().add(addStateButton);
     }
 
 }

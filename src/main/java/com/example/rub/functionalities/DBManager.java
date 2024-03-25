@@ -1,23 +1,27 @@
 package com.example.rub.functionalities;
 
 import com.example.rub.beans.Contatto;
-import com.example.rub.enums.TagCategories;
+import com.example.rub.functionalities.locations.LocationManager;
 import com.example.rub.objects.DisplayableEntry;
-import com.example.rub.objects.filter.Filter;
 import javafx.scene.layout.HBox;
 
+import java.io.IOException;
 import java.util.*;
 
 public abstract class DBManager extends TagsManager{
 
     public static void saveEntry(Contatto bean){ //Salva un Contatto nel database
+        try {
+            update();
+        } catch (Exception e) {
+            System.out.println("Salvataggio rischioso, Errore durante l'update del Database persistente");
+        }
         UUID uuid = UUID.randomUUID();
         bean.setId(uuid);
         database.put(uuid, bean);
         indexNewEntry(bean, uuid);
         MyUtils.write(database, "database");
         MyUtils.write(index, "indice");
-        MyUtils.write(groupedTags, "glossario");
         System.out.println("Nuovo contatto inserito in database!");
     }
     public static Contatto retriveEntry(UUID uuid){  //carica un Contatto dal database
@@ -35,17 +39,6 @@ public abstract class DBManager extends TagsManager{
     public static void init(){
         loadData();
     }   //Recupera i dati all'avvio grazie alla chiamata in firstPageController
-
-    public static LinkedList<String> getFilterOptionsFromCategory(TagCategories category){
-        LinkedList<String> temp = new LinkedList<>();
-        for(int i = 0; i < TagCategories.values().length; i++ ){
-            if (!groupedTags.isEmpty() && groupedTags.get(i).getCategory() == category){
-                temp.addAll(groupedTags.get(i).getTags());
-            }
-        }
-        return temp;
-    }
-
     public static LinkedList<UUID> rapidSearch(String input){
         LinkedList<UUID> ret = new LinkedList<>();
         for (Contatto i : database.values()){
@@ -60,29 +53,22 @@ public abstract class DBManager extends TagsManager{
     private static void loadData(){     //Legge il database e indice dai file salvati persistentemente
         if (database == null) {
             try {
-                index = (HashMap<String, LinkedList<UUID>>) MyUtils.read("indice");
-                database = (HashMap<UUID, Contatto>) MyUtils.read("database");
-                groupedTags = (ArrayList<Filter>) MyUtils.read("glossario");
+                update();
             } catch (Exception e) {
                 database = new HashMap<>();
                 index = new HashMap<>();
-                groupedTags = new ArrayList<>();
+                locationManager = new LocationManager();
                 System.out.println("Database non trovato... Scrittura di uno nuovo");
                 MyUtils.write(database, "database");
                 MyUtils.write(index, "indice");
-                MyUtils.write(groupedTags, "glossario");
+                MyUtils.write(locationManager, "mondo");
             }
         }
     }
-
-    public static void update(){
-        try {
-            index = (HashMap<String, LinkedList<UUID>>) MyUtils.read("indice");
-            database = (HashMap<UUID, Contatto>) MyUtils.read("database");
-            groupedTags = (ArrayList<Filter>) MyUtils.read("glossario");
-        } catch (Exception e){
-            System.out.println("Problemi durante l'update dal Database persistente");
-        }
+    public static void update() throws IOException, ClassNotFoundException {
+        index = (HashMap<String, LinkedList<UUID>>) MyUtils.read("indice");
+        database = (HashMap<UUID, Contatto>) MyUtils.read("database");
+        locationManager = (LocationManager) MyUtils.read("mondo");
     }
 
     public static void modifyEntry(UUID id, Contatto modifiedBean){
@@ -109,17 +95,27 @@ public abstract class DBManager extends TagsManager{
                     oldBean.setTipoCliente(modifiedBean.getTipoCliente());
                     break;
                 case '6':
-                    changeIndexEntry(oldBean.getId(),TagCategories.PAESE, oldBean.getPaese(), modifiedBean.getPaese());
+                    changeIndexEntry(oldBean.getId(), oldBean.getPaese(), modifiedBean.getPaese());
                     break;
                 case '7':
-                    changeIndexEntry(oldBean.getId(),TagCategories.CITTA, oldBean.getCitta(), modifiedBean.getCitta());
+                    changeIndexEntry(oldBean.getId(), oldBean.getCitta(), modifiedBean.getCitta());
                     break;
             }
         }
         database.put(id, modifiedBean);
         MyUtils.write(database, "database");
         MyUtils.write(index, "indice");
-        MyUtils.write(groupedTags, "glossario");
     }
-    //TODO: Funzione che ricostruisce index e glossario dal solo database
+
+    public static void reconstruct(){
+        HashMap<UUID, Contatto> oldDatabase = database;
+        database = new HashMap<>();
+        for (Contatto i : oldDatabase.values()){
+            DBManager.saveEntry(i);
+        }
+        MyUtils.write(database, "database");
+        MyUtils.write(index, "indice");
+        MyUtils.write(locationManager, "mondo");
+        System.out.println("il Database è stato ricostruito");
+    }
 }
