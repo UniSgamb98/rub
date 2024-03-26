@@ -6,28 +6,28 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.EntryDetailsPageController">
     <center>
-<GridPane alignment="CENTER" prefHeight="250.0" prefWidth="500.0">
+<GridPane alignment="CENTER" prefHeight="232.0" prefWidth="650.0">
     <Label text="Ragione Sociale:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
     <TextField fx:id="ragioneSociale" disable="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="0" />
 
     <Label text="Referente:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
     <TextField fx:id="personaDiRiferimento" disable="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" />
 
-    <Label text="Paese:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <Label text="Paese:" GridPane.rowIndex="2" />
     <TextField fx:id="paese" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-    <Label text="Città:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-    <TextField fx:id="citta" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+    <Label text="Città:" GridPane.rowIndex="3" />
+    <TextField fx:id="citta" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-    <Label text="Telefono:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-    <TextField fx:id="telefono" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-    <Label text="Email:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-    <TextField fx:id="email" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+    <Label text="Telefono:" GridPane.rowIndex="4" />
+    <TextField fx:id="telefono" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+    <Label text="Email:" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+    <TextField fx:id="email" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="4" />
 
-    <Label text="Interessamento:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-    <ChoiceBox fx:id="interessamento" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-    <Label text="Tipo Cliente:" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-    <ChoiceBox fx:id="tipoCliente" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-    <BorderPane GridPane.columnSpan="5" GridPane.rowIndex="5">
+    <Label text="Interessamento:" GridPane.rowIndex="5" />
+    <ChoiceBox fx:id="interessamento" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+    <Label text="Tipo Cliente:" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+    <ChoiceBox fx:id="tipoCliente" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+    <BorderPane GridPane.columnSpan="5" GridPane.rowIndex="6">
       <top>
         <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
             <Label text="N* contatti: " />
@@ -60,14 +60,29 @@
         </GridPane>
       </top>
     </BorderPane>
+         <Label text="Regione:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+         <TextField GridPane.columnIndex="3" GridPane.rowIndex="2" />
+         <HBox alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3">
+            <children>
+               <Label text="Via:">
+                  <padding>
+                     <Insets right="5.0" />
+                  </padding></Label>
+               <TextField prefHeight="25.0" prefWidth="220.0" />
+               <Label text="Civico:" />
+               <TextField prefHeight="25.0" prefWidth="37.0" />
+            </children>
+         </HBox>
          <columnConstraints>
             <ColumnConstraints />
             <ColumnConstraints />
             <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints />
+            <ColumnConstraints minWidth="35.0" prefWidth="250.0" />
+            <ColumnConstraints maxWidth="114.0" minWidth="0.0" prefWidth="0.0" />
          </columnConstraints>
          <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
             <RowConstraints />
             <RowConstraints />
             <RowConstraints />
