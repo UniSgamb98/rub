@@ -46,7 +46,6 @@ public class StateFilter extends Filter {
     public void removeChoice(Choice choice) {
         statesSelection.remove(choice);
     }
-
     @Override
     public void setAssigned(Locality locality) {
         managerUsed = (LocationManager) locality;
@@ -59,5 +58,4 @@ public class StateFilter extends Filter {
     protected void becomeVisible(){
         this.getChildren().add(addStateButton);
     }
-
 }

@@ -24,12 +24,17 @@ public class FiltersToolColumn extends VBox {
         this.getChildren().addAll(new Separator(), locationFilter);
     }
     public LinkedList<UUID> getFilteredList(){
-        LinkedList<UUID> toBeFilteredList = new LinkedList<>(DBManager.getAllEntries());
+        LinkedList<UUID> filteredList = new LinkedList<>();
         ArrayList<String> activeFilters = new ArrayList<>(locationFilter.getActiveFilters());
         for (String i : activeFilters){
-            toBeFilteredList.retainAll(DBManager.getEntryFromFilter(i));
+            LinkedList<UUID> addedElementFromSingleFilter = new LinkedList<>(DBManager.getEntryFromFilter(i));
+            for (UUID j : addedElementFromSingleFilter){
+                if(!filteredList.contains(j)){
+                    filteredList.add(j);
+                }
+            }
         }
         System.out.println("   Trovati i filtri " + activeFilters + " attivi per la ricerca.");
-        return toBeFilteredList;
+        return filteredList;
     }
 }

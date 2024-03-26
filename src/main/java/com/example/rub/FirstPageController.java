@@ -57,9 +57,13 @@ public class FirstPageController implements Initializable {
                 newEntryFromFile = new Contatto();
                 int subStringStart = 0;
                 int subStringEnd = in.indexOf(";");
-                for(int i = 0; i < 8; i++){
+                for(int i = 0; i < 21; i++){
                     String subString = in.substring(subStringStart,subStringEnd);
-                    fillAttribute(i,newEntryFromFile, subString);
+                    if(subString.equals("%")) {
+                        fillAttribute(i, newEntryFromFile, "");
+                    } else {
+                        fillAttribute(i, newEntryFromFile, subString);
+                    }
                     subStringStart = subStringEnd+1;
                     subStringEnd = in.indexOf(";", subStringStart+1);
                 }
@@ -81,22 +85,72 @@ public class FirstPageController implements Initializable {
                 bean.setPersonaRiferimento(attribute);
                 break;
             case 2:
-                bean.setTelefono(attribute);
-                break;
-            case 3:
                 bean.setEmailReferente(attribute);
                 break;
+            case 3:
+                bean.setTelefono(attribute);
+                break;
             case 4:
-                bean.setInteressamento(Interessamento.valueOf(attribute));
-                break;
-            case 5:
-                bean.setTipoCliente(TipoCliente.valueOf(attribute));
-                break;
-            case 6:
                 bean.setPaese(attribute);
                 break;
-            case 7:
+            case 5:
+                bean.setRegione(attribute);
+                break;
+            case 6:
                 bean.setCitta(attribute);
+                break;
+            case 7:
+                bean.setIndirizzo(attribute);
+                break;
+            case 8:
+                bean.setNumeroCivico(attribute);
+                break;
+            case 9:
+                bean.setProvincia(attribute);
+                break;
+            case 10:
+                bean.setCap(attribute);
+                break;
+            case 11:
+                if(attribute.isEmpty()) {
+                    bean.setInteressamento(Interessamento.BLANK);
+                } else{
+                    bean.setInteressamento(Interessamento.valueOf(attribute));
+                }
+                break;
+            case 12:
+                if (attribute.isEmpty()){
+                    bean.setTipoCliente(TipoCliente.BLANK);
+                } else {
+                    bean.setTipoCliente(TipoCliente.valueOf(attribute));
+                }
+                break;
+            case 13:
+                bean.setPartitaIva(attribute);
+                break;
+            case 14:
+                bean.setCodiceFiscale(attribute);
+                break;
+            case 15:
+                bean.setTitolare(attribute);
+                break;
+            case 16:
+                bean.setEmailGenereica(attribute);
+                break;
+            case 17:
+                bean.setEmailCertificata(attribute);
+                break;
+            case 18:
+                //bean.setVolteContattati(attribute);
+                break;
+            case 19:
+                //bean.setUltimaChiamata(attribute);
+                break;
+            case 20:
+                //bean.setProssimaChiamata(attribute);
+                break;
+            case 21:
+                bean.setSitoWeb(attribute);
                 break;
         }
     }
