@@ -32,8 +32,11 @@ public class Contatto implements Serializable {
     private Date prossimaChiamata;
     private String sitoWeb;
     private UUID id;
+    private UUID noteId;
 
-    // TODO: private note delle chiamate;
+    public Contatto(){
+        noteId = UUID.randomUUID();
+    }
 
     public String getTelefono() {
         return telefono;
@@ -121,6 +124,9 @@ public class Contatto implements Serializable {
     public String getRegione() {
         return regione;
     }
+    public UUID getNoteId() {
+        return noteId;
+    }
 
     public void setTipoCliente(TipoCliente tipoCliente) {
         this.tipoCliente = tipoCliente;
@@ -152,8 +158,8 @@ public class Contatto implements Serializable {
     public void setUltimaChiamata(Date ultimaChiamata) {
         this.ultimaChiamata = ultimaChiamata;
     }
-    public void setVolteContattati(int volteContattati) {
-        this.volteContattati = volteContattati;
+    public void incrementVolteContattati() {
+        volteContattati++;
     }
     public void setCap(String cap) {
         this.cap = cap;
@@ -190,6 +196,9 @@ public class Contatto implements Serializable {
     }
     public void setRegione(String regione) {
         this.regione = regione;
+    }
+    public void setNoteId(UUID noteId) {
+        this.noteId = noteId;
     }
 
     @Override

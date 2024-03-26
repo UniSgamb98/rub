@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.RegisterCallController">
+   <top>
+      <Label text="INFORMAZIONI DELLA CHIAMATA" BorderPane.alignment="CENTER" />
+   </top>
+   <left>
+      <VBox alignment="TOP_CENTER" prefHeight="383.0" prefWidth="196.0" BorderPane.alignment="CENTER">
+         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <Label alignment="CENTER" text="FeedBack:" />
+            <ChoiceBox fx:id="feedback" prefHeight="25.0" prefWidth="70.0" />
+         </HBox>
+         <Label text="Programma la prossima chiamata:" />
+         <DatePicker fx:id="prossimaChiamata" />
+         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <Label alignment="CENTER" contentDisplay="TOP" prefHeight="63.0" prefWidth="63.0"
+                   text="Durata chiamata in minuti" textAlignment="CENTER" wrapText="true"/>
+            <TextField fx:id="durata" prefHeight="25.0" prefWidth="92.0"/>
+         </HBox>
+      </VBox>
+   </left>
+   <center>
+      <TextArea fx:id="note" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+   <bottom>
+      <AnchorPane BorderPane.alignment="CENTER">
+         <Button layoutX="524.0" layoutY="106.0" mnemonicParsing="false" onAction="#doRegisterCall" text="Invia" AnchorPane.bottomAnchor="10" AnchorPane.rightAnchor="10" />
+         <Button layoutX="60.0" layoutY="69.0" mnemonicParsing="false" onAction="#doCancelRegistration" text="Annulla" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" />
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+      </AnchorPane>
+   </bottom>
+</BorderPane>

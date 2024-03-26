@@ -1,6 +1,6 @@
-Orodent;Gaetano;direzione@orodent.com;3356403545;Italia;Veneto;Castelnuovo;Gaetana Agnesi;18;VR;37014;%;%;0054451621;%;Gambini Gaetano;info@orodent.com;orodent@pec.it;%;%;%;orodent.com;
-Vision;Lara;direzione@visionhotel.it;3356403545;Italia;Veneto;Peschiera;Gaetana Agnesi;18;VR;37014;%;%;0054451621;%;Gambini Gaetano;info@orodent.com;orodent@pec.it;%;%;%;orodent.com;
-Dental Pro;Rossi Lee;direzione@orodent.com;3356403545;Vietnam;boh;Hanoi;Gaetana Agnesi;18;VR;37014;%;%;0054451621;%;Gambini Gaetano;info@orodent.com;orodent@pec.it;%;%;%;orodent.com;
-Arber Male;Arber;direzione@orodent.com;3356403545;Albania;boh;boh;Gaetana Agnesi;18;VR;37014;%;%;0054451621;%;Gambini Gaetano;info@orodent.com;orodent@pec.it;%;%;%;orodent.com;
-Yndetech roma;Emidio Cenerilli;direzione@orodent.com;3356403545;Italia;Lazio;Roma;Gaetana Agnesi;18;VR;37014;%;%;0054451621;%;Gambini Gaetano;info@orodent.com;orodent@pec.it;%;%;%;orodent.com;
-Yndetech fano;Gaetano;direzione@orodent.com;3356403545;Italia;Marche;Fano;Gaetana Agnesi;18;VR;37014;%;%;0054451621;%;Gambini Gaetano;info@orodent.com;orodent@pec.it;%;%;%;orodent.com;
+Orodent;Gaetano;direzione@orodent.com;3356403545;Italia;Veneto;Castelnuovo;Gaetana Agnesi;18;VR;37014;%;%;0054451621;%;Gambini Gaetano;info@orodent.com;orodent@pec.it;orodent.com;
+Vision;Lara;direzione@visionhotel.it;3356403545;Italia;Veneto;Peschiera;Gaetana Agnesi;18;VR;37014;%;%;0054451621;%;Gambini Gaetano;info@orodent.com;orodent@pec.it;orodent.com;
+Dental Pro;Rossi Lee;direzione@orodent.com;3356403545;Vietnam;boh;Hanoi;Gaetana Agnesi;18;VR;37014;%;%;0054451621;%;Gambini Gaetano;info@orodent.com;orodent@pec.it;orodent.com;
+Arber Male;Arber;direzione@orodent.com;3356403545;Albania;boh;boh;Gaetana Agnesi;18;VR;37014;%;%;0054451621;%;Gambini Gaetano;info@orodent.com;orodent@pec.it;orodent.com;
+Yndetech roma;Emidio Cenerilli;direzione@orodent.com;3356403545;Italia;Lazio;Roma;Gaetana Agnesi;18;VR;37014;%;%;0054451621;%;Gambini Gaetano;info@orodent.com;orodent@pec.it;orodent.com;
+Yndetech fano;Gaetano;direzione@orodent.com;3356403545;Italia;Marche;Fano;Gaetana Agnesi;18;VR;37014;%;%;0054451621;%;Gambini Gaetano;info@orodent.com;orodent@pec.it;orodent.com;

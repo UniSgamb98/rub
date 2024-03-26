@@ -1,7 +1,6 @@
 package com.example.rub.functionalities.locations;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class State extends Locality {
     public State(String state){

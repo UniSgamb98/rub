@@ -18,11 +18,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.ResourceBundle;
-import java.util.UUID;
+import java.util.*;
 
 public class EntryDetailsPageController implements Initializable {
     private final ObjectProperty<Contatto> entryProperty = new SimpleObjectProperty<>();
@@ -97,10 +95,30 @@ public class EntryDetailsPageController implements Initializable {
     }
 
     public void doRegisterCall() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Lavoro per il futuro");
-        alert.setContentText("Questa funzionalità non è ancora disponibile");
-        alert.showAndWait();
+        try {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("register-call.fxml"));
+            Parent root = loader.load();
+            RegisterCallController controller = loader.getController();
+            controller.setEntryProperty(entryToDisplayDetails);
+            Stage callStage = new Stage();
+            callStage.setTitle("Chiamata");
+            Scene scene = new Scene(root, 380, 285);
+            callStage.setScene(scene);
+            callStage.show();
+        } catch (IOException e) {
+            System.out.println("Errore durante la transizione in register-call con doRegisterCall in EntryDetailsPageController");
+        }
+
+        /*
+        try {
+            NoteManager nm = new NoteManager();
+            Document doc = nm.createDocument();
+            nm.addCallNote(doc, "Ciao");
+            System.out.println(doc.getElementsByTagName("companyName"));
+            nm.writeXml(doc, System.out);
+        } catch (ParserConfigurationException | TransformerException e) {
+            throw new RuntimeException(e);
+        }*/
     }
     public void doSaveChanges() {
         DBManager.modifyEntry(entryToDisplayDetails.getId(),getContatto());

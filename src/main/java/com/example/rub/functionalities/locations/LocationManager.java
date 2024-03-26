@@ -1,7 +1,6 @@
 package com.example.rub.functionalities.locations;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class LocationManager extends Locality {
     public LocationManager(){

@@ -57,7 +57,7 @@ public class FirstPageController implements Initializable {
                 newEntryFromFile = new Contatto();
                 int subStringStart = 0;
                 int subStringEnd = in.indexOf(";");
-                for(int i = 0; i < 21; i++){
+                for(int i = 0; i < 18; i++){
                     String subString = in.substring(subStringStart,subStringEnd);
                     if(subString.equals("%")) {
                         fillAttribute(i, newEntryFromFile, "");
@@ -141,15 +141,6 @@ public class FirstPageController implements Initializable {
                 bean.setEmailCertificata(attribute);
                 break;
             case 18:
-                //bean.setVolteContattati(attribute);
-                break;
-            case 19:
-                //bean.setUltimaChiamata(attribute);
-                break;
-            case 20:
-                //bean.setProssimaChiamata(attribute);
-                break;
-            case 21:
                 bean.setSitoWeb(attribute);
                 break;
         }
