@@ -11,12 +11,6 @@ public class State extends Locality {
     public void addRegion(Region region){
         subLocalities.add(region);
     }
-    public void addAllRegion(Region... region){
-        subLocalities.addAll(Arrays.asList(region));
-    }
-    public void removeRegion(Region region){
-        subLocalities.remove(region);
-    }
     @Override
     public String toString(){
         return getLocalityName();

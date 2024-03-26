@@ -11,16 +11,8 @@ public class LocationManager extends Locality {
     public void addState(State state){
         subLocalities.add(state);
     }
-    public void addAllStates(State... states){
-        subLocalities.addAll(Arrays.asList(states));
-    }
-    public void removeState(State state){
-        subLocalities.remove(state);
-    }
     @Override
     public String toString(){
         return getLocalityName();
     }
 }
-
-
