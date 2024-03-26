@@ -60,6 +60,10 @@ public class RegionFilter extends Filter {
         regionsSelection.clear();
     }
     @Override
+    public Locality getAssigned(){
+        return stateAssigned;
+    }
+    @Override
     public String toString(){
         return "RegionFilter dello stato " + stateAssigned;
     }

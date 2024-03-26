@@ -5,6 +5,7 @@ import com.example.rub.functionalities.locations.LocationManager;
 import javafx.scene.control.Button;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 public class StateFilter extends Filter {
     private final ArrayList<Choice> statesSelection;
@@ -40,6 +41,8 @@ public class StateFilter extends Filter {
                 ret.addAll(((RegionFilter) i.getChild()).getActiveFilters());
             }
         }
+        Predicate<String> condition = n -> n.equals("manager"); //QUESTO SUCCEDE SE SI LASCIA UN CHOICE SENZA VALORE
+        ret.removeIf(condition);
         return ret;
     }
     @Override
@@ -49,6 +52,10 @@ public class StateFilter extends Filter {
     @Override
     public void setAssigned(Locality locality) {
         managerUsed = (LocationManager) locality;
+    }
+    @Override
+    public Locality getAssigned(){
+        return managerUsed;
     }
     @Override
     public String toString(){

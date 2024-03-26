@@ -25,7 +25,13 @@ public class Choice extends HBox {
         this.getChildren().addAll(removeButton, itemChoice, child);
     }
     public String getSelectLocalityName(){
-        return itemChoice.getValue().getLocalityName();
+        String ret;
+        if (itemChoice.getValue() == null){
+            ret = ((Filter)parent).getAssigned().getLocalityName();
+        } else {
+            ret = itemChoice.getValue().getLocalityName();
+        }
+        return ret;
     }
 
     private void valueHasChanged() {

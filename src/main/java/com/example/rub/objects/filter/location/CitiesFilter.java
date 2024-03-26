@@ -37,6 +37,10 @@ public class CitiesFilter extends Filter {
         }
         citiesSelection.clear();
     }
+    @Override
+    public Locality getAssigned(){
+        return regionAssigned;
+    }
     public ArrayList<String> getActiveFilters(){
         ArrayList<String> ret = new ArrayList<>();
         for (Choice i : citiesSelection){
