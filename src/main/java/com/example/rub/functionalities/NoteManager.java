@@ -32,7 +32,7 @@ public class NoteManager {
     public void addCallNote (Document doc, String note){
         Element call = doc.createElement("chiamata");
         Calendar now = Calendar.getInstance();
-        call.setAttribute("data",now.get(Calendar.DAY_OF_MONTH) + "/" + now.get(Calendar.MONTH) + "/" + now.get(Calendar.YEAR));
+        call.setAttribute("data",now.get(Calendar.DAY_OF_MONTH) + "/" + (now.get(Calendar.MONTH)+1) + "/" + now.get(Calendar.YEAR));
         call.setAttribute("operatore", GlobalContext.operator.name());
         call.setTextContent(note);
         Element root = doc.getDocumentElement();
