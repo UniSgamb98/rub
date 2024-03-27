@@ -33,19 +33,13 @@
             <Label text="N* contatti: " />
             <Label fx:id="volteContattati" text="X" GridPane.columnIndex="1" />
 
-            <Label text="Ultima Chiamata: " GridPane.rowIndex="1" />
-            <Label fx:id="ultimaChiamata" text="dd/mm/aaaa" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets left="5.0" />
-               </GridPane.margin></Label>
-            <Label text="Prox Chiamata: " GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <Label text="Ultima Chiamata: " GridPane.rowIndex="2" />
+            <Label text="Prox Chiamata: " GridPane.columnIndex="3" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="15.0" />
                </GridPane.margin></Label>
-            <Label fx:id="prossimaChiamata" text="dd/mm/aaaa" GridPane.columnIndex="4" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets left="5.0" />
-               </GridPane.margin></Label>
+                  <DatePicker fx:id="ultimaChiamata" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <DatePicker fx:id="prossimaChiamata" GridPane.columnIndex="4" GridPane.rowIndex="2" />
                   <columnConstraints>
                      <ColumnConstraints />
                      <ColumnConstraints />
@@ -54,6 +48,7 @@
                      <ColumnConstraints />
                   </columnConstraints>
                   <rowConstraints>
+                     <RowConstraints />
                      <RowConstraints />
                      <RowConstraints />
                   </rowConstraints>

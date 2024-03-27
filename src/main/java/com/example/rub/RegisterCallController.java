@@ -63,7 +63,6 @@ public class RegisterCallController implements Initializable {
     public void setControllerProperty(EntryDetailsPageController controller) {
         controllerProperty.set(controller);
     }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         feedback.getItems().addAll(Interessamento.NON_TROVATO.name(), Interessamento.NON_INERENTE.name(), Interessamento.NULLO.name(), Interessamento.RICHIAMARE.name(), Interessamento.INFO.name(), Interessamento.LISTINO.name(), Interessamento.CAMPIONE.name(), Interessamento.CLIENTE.name());

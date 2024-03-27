@@ -25,9 +25,9 @@ import java.util.*;
 public class EntryDetailsPageController implements Initializable {
     private final ObjectProperty<Contatto> entryProperty = new SimpleObjectProperty<>();
     @FXML
-    public Label prossimaChiamata;
+    public DatePicker prossimaChiamata;
     @FXML
-    public Label ultimaChiamata;
+    public DatePicker ultimaChiamata;
     @FXML
     public Label volteContattati;
     @FXML
@@ -161,8 +161,8 @@ public class EntryDetailsPageController implements Initializable {
         interessamento.setValue(entryToDisplayDetails.getInteressamento());
         tipoCliente.setValue(entryToDisplayDetails.getTipoCliente());
         volteContattati.setText("" + entryToDisplayDetails.getVolteContattati());
-        ultimaChiamata.setText(entryToDisplayDetails.getUltimaChiamata());
-        prossimaChiamata.setText(entryToDisplayDetails.getProssimaChiamata());
+        ultimaChiamata.setValue(entryToDisplayDetails.getUltimaChiamata());
+        prossimaChiamata.setValue(entryToDisplayDetails.getProssimaChiamata());
         regione.setText(entryToDisplayDetails.getRegione());
         cap.setText(entryToDisplayDetails.getCap());
         pec.setText(entryToDisplayDetails.getEmailCertificata());
@@ -174,7 +174,6 @@ public class EntryDetailsPageController implements Initializable {
         codiceFiscale.setText(entryToDisplayDetails.getCodiceFiscale());
         provincia.setText(entryToDisplayDetails.getProvincia());
         indirizzo.setText(entryToDisplayDetails.getIndirizzo());
-
     }
     private Contatto getContatto(){     //TODO: Aggiornare con nuovi dati
         Contatto newEntry = new Contatto();                         //creazione Bean contatto
@@ -186,6 +185,20 @@ public class EntryDetailsPageController implements Initializable {
         newEntry.setTelefono(telefono.getText());
         newEntry.setInteressamento(interessamento.getValue());
         newEntry.setTipoCliente(tipoCliente.getValue());
+        newEntry.setVolteContattati(Integer.parseInt(volteContattati.getText()));
+        newEntry.setUltimaChiamata(ultimaChiamata.getValue());
+        newEntry.setProssimaChiamata(prossimaChiamata.getValue());
+        newEntry.setRegione(regione.getText());
+        newEntry.setCap(cap.getText());
+        newEntry.setEmailCertificata(pec.getText());
+        newEntry.setEmailGenereica(emailGenerica.getText());
+        newEntry.setTitolare(titolare.getText());
+        newEntry.setPartitaIva(partitaIva.getText());
+        newEntry.setNumeroCivico(civico.getText());
+        newEntry.setSitoWeb(sito.getText());
+        newEntry.setCodiceFiscale(codiceFiscale.getText());
+        newEntry.setProvincia(provincia.getText());
+        newEntry.setIndirizzo(indirizzo.getText());
         return newEntry;
     }
     public void setEntryProperty(Contatto entry){

@@ -54,23 +54,11 @@ public class Contatto implements Serializable {
     public String getEmailReferente() {
         return emailReferente;
     }
-    public String getProssimaChiamata() {
-        String ret;
-        if (prossimaChiamata == null){
-            ret = "N/a";
-        } else {
-            ret = prossimaChiamata.toString();
-        }
-        return ret;
+    public LocalDate getProssimaChiamata() {
+        return prossimaChiamata;
     }
-    public String getUltimaChiamata() {
-        String ret;
-        if (ultimaChiamata == null){
-            ret = "N/a";
-        } else {
-            ret = ultimaChiamata.toString();
-        }
-        return ret;
+    public LocalDate getUltimaChiamata() {
+        return ultimaChiamata;
     }
     public int getVolteContattati() {
         return volteContattati;
@@ -198,6 +186,9 @@ public class Contatto implements Serializable {
     }
     public void setRememberMe(boolean rememberMe) {
         this.rememberMe = rememberMe;
+    }
+    public void setVolteContattati(int volteContattati) {
+        this.volteContattati = volteContattati;
     }
 
     @Override

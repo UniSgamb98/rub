@@ -86,7 +86,7 @@ public abstract class DBManager extends TagsManager{
         locationManager = (LocationManager) MyUtils.read("mondo");
     }
 
-    public static void modifyEntry(UUID id, Contatto modifiedBean){
+    public static void modifyEntry(UUID id, Contatto modifiedBean){ //TODO
         Contatto oldBean = database.get(id);
         String changes = oldBean.compareChanges(modifiedBean);
         for (int i = 0; i < changes.length(); i++){
