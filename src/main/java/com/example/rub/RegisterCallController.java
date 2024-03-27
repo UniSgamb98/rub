@@ -1,22 +1,25 @@
 package com.example.rub;
 
 import com.example.rub.beans.Contatto;
+import com.example.rub.enums.Interessamento;
+import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.NoteManager;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.w3c.dom.Document;
 
-public class RegisterCallController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class RegisterCallController implements Initializable {
     private final ObjectProperty<Contatto> entryProperty = new SimpleObjectProperty<>();
-    private Contatto bean;
+    private final ObjectProperty<EntryDetailsPageController> controllerProperty = new SimpleObjectProperty<>();
     @FXML
     public ChoiceBox<String> feedback;
     @FXML
@@ -31,20 +34,38 @@ public class RegisterCallController {
         stage.close();
     }
     public void doRegisterCall(ActionEvent event) {
-        bean = entryProperty.get();
-        bean.incrementVolteContattati();
-        //TODO: NoteManager Stuff
+        Contatto bean = entryProperty.get();
         try {
             NoteManager nm = new NoteManager();
-            Document doc = nm.createDocument();
-            nm.addCallNote(doc, note.getText());
-            System.out.println(doc.getElementsByTagName("companyName"));
-            nm.writeXml(doc, System.out);
-        } catch (Exception ignored){
-
+            Document doc;
+            try {   //RECUPERO xml NOTE SE INESISTENTE CREAZIONE DI UNO NUOVO
+                doc = nm.readXml("bin\\note\\" + bean.getNoteId()+ ".xml");
+            }catch (Exception e) {
+                System.out.println("Creazione nuovo documento di nota");
+                doc = nm.createDocument(bean.getRagioneSociale());
+            }
+            nm.addCallNote(doc, note.getText(), durata.getText());
+            try {
+                bean.setInteressamento(Interessamento.valueOf(feedback.getValue()));
+            } catch (Exception ignored) {}
+            DBManager.setNextCall(bean.getId(), prossimaChiamata.getValue());
+            nm.writeXml(doc, "bin\\Note\\" + bean.getNoteId() + ".xml");
+        } catch (Exception e){
+            System.out.println("Errore durante la scrittura del file Xml delle note");
         }
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+        controllerProperty.get().refresh();
     }
     public void setEntryProperty(Contatto entry){
         entryProperty.set(entry);
+    }
+    public void setControllerProperty(EntryDetailsPageController controller) {
+        controllerProperty.set(controller);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        feedback.getItems().addAll(Interessamento.NON_TROVATO.name(), Interessamento.NON_INERENTE.name(), Interessamento.NULLO.name(), Interessamento.RICHIAMARE.name(), Interessamento.INFO.name(), Interessamento.LISTINO.name(), Interessamento.CAMPIONE.name(), Interessamento.CLIENTE.name());
     }
 }

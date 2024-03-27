@@ -20,7 +20,7 @@ public class CitiesFilter extends Filter {
 
     private void addCity(){
         try {
-            if (citiesSelection.isEmpty() || !citiesSelection.get(citiesSelection.size() - 1).getSelectLocalityName().isEmpty()) {
+            if (citiesSelection.isEmpty() || !citiesSelection.get(citiesSelection.size() - 1).getSelectLocalityName(false).isEmpty()) {
                 Choice cityChoice = new Choice(this, new Filter(), regionAssigned.getSubLocalities());
                 citiesSelection.add(cityChoice);
                 this.getChildren().add(citiesSelection.size() - 1, cityChoice);
@@ -44,7 +44,7 @@ public class CitiesFilter extends Filter {
     public ArrayList<String> getActiveFilters(){
         ArrayList<String> ret = new ArrayList<>();
         for (Choice i : citiesSelection){
-            ret.add(i.getSelectLocalityName());
+            ret.add(i.getSelectLocalityName(true));
         }
         return ret;
     }

@@ -6,7 +6,6 @@ import com.example.rub.enums.TipoCliente;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
 import com.example.rub.functionalities.MyUtils;
-import com.example.rub.functionalities.NoteManager;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
@@ -18,10 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.w3c.dom.Document;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -39,7 +35,7 @@ public class EntryDetailsPageController implements Initializable {
     @FXML
     public ChoiceBox<Interessamento> interessamento;
     @FXML
-    public TextField email;
+    public TextField emailReferente;
     @FXML
     public TextField telefono;
     @FXML
@@ -54,6 +50,28 @@ public class EntryDetailsPageController implements Initializable {
     public CheckBox isModifiable;
     @FXML
     public Button saveButton;
+    @FXML
+    public TextField regione;
+    @FXML
+    public TextField indirizzo;
+    @FXML
+    public TextField civico;
+    @FXML
+    public TextField provincia;
+    @FXML
+    public TextField cap;
+    @FXML
+    public TextField titolare;
+    @FXML
+    public TextField sito;
+    @FXML
+    public TextField pec;
+    @FXML
+    public TextField emailGenerica;
+    @FXML
+    public TextField codiceFiscale;
+    @FXML
+    public TextField partitaIva;
     private Contatto entryToDisplayDetails;
     public void switchToSearchEntry(ActionEvent event) {
         GlobalContext.openedEntries.remove(entryToDisplayDetails.getId());
@@ -104,6 +122,7 @@ public class EntryDetailsPageController implements Initializable {
             Parent root = loader.load();
             RegisterCallController controller = loader.getController();
             controller.setEntryProperty(entryToDisplayDetails);
+            controller.setControllerProperty(this);
             Stage callStage = new Stage();
             callStage.setTitle("Chiamata");
             Scene scene = new Scene(root, 380, 285);
@@ -117,25 +136,41 @@ public class EntryDetailsPageController implements Initializable {
         DBManager.modifyEntry(entryToDisplayDetails.getId(),getContatto());
     }
 
-    public void init() {
-        entryToDisplayDetails = entryProperty.get();
+    public void init(boolean fromScratch) {
+        if (fromScratch) {
+            entryToDisplayDetails = entryProperty.get();
+        } else {
+            entryToDisplayDetails = DBManager.retriveEntry(entryToDisplayDetails.getId());
+        }
         ragioneSociale.setText(entryToDisplayDetails.getRagioneSociale());
         personaDiRiferimento.setText(entryToDisplayDetails.getPersonaRiferimento());
         paese.setText(entryToDisplayDetails.getPaese());
         citta.setText(entryToDisplayDetails.getCitta());
         telefono.setText(entryToDisplayDetails.getTelefono());
-        email.setText(entryToDisplayDetails.getEmailReferente());
+        emailReferente.setText(entryToDisplayDetails.getEmailReferente());
         interessamento.setValue(entryToDisplayDetails.getInteressamento());
         tipoCliente.setValue(entryToDisplayDetails.getTipoCliente());
         volteContattati.setText("" + entryToDisplayDetails.getVolteContattati());
         ultimaChiamata.setText(entryToDisplayDetails.getUltimaChiamata());
         prossimaChiamata.setText(entryToDisplayDetails.getProssimaChiamata());
+        regione.setText(entryToDisplayDetails.getRegione());
+        cap.setText(entryToDisplayDetails.getCap());
+        pec.setText(entryToDisplayDetails.getEmailCertificata());
+        emailGenerica.setText(entryToDisplayDetails.getEmailGenereica());
+        titolare.setText(entryToDisplayDetails.getTitolare());
+        partitaIva.setText(entryToDisplayDetails.getPartitaIva());
+        civico.setText(entryToDisplayDetails.getNumeroCivico());
+        sito.setText(entryToDisplayDetails.getSitoWeb());
+        codiceFiscale.setText(entryToDisplayDetails.getCodiceFiscale());
+        provincia.setText(entryToDisplayDetails.getProvincia());
+        indirizzo.setText(entryToDisplayDetails.getIndirizzo());
+
     }
     private Contatto getContatto(){     //TODO: Aggiornare con nuovi dati
         Contatto newEntry = new Contatto();                         //creazione Bean contatto
         newEntry.setRagioneSociale(ragioneSociale.getText());
         newEntry.setCitta(citta.getText());
-        newEntry.setEmailReferente(email.getText());
+        newEntry.setEmailReferente(emailReferente.getText());
         newEntry.setPaese(paese.getText());
         newEntry.setPersonaRiferimento(personaDiRiferimento.getText());
         newEntry.setTelefono(telefono.getText());
@@ -151,7 +186,7 @@ public class EntryDetailsPageController implements Initializable {
         personaDiRiferimento.setDisable(state);
         citta.setDisable(state);
         paese.setDisable(state);
-        email.setDisable(state);
+        emailReferente.setDisable(state);
         telefono.setDisable(state);
         ragioneSociale.setDisable(state);
         ragioneSociale.setDisable(state);
@@ -160,6 +195,9 @@ public class EntryDetailsPageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tipoCliente.getItems().addAll(TipoCliente.LABORATORIO, TipoCliente.RIVENDITORE, TipoCliente.CENTROFRESAGGIO);
-        interessamento.getItems().addAll(Interessamento.IMMEDIATO, Interessamento.PROSSIMAMENTE, Interessamento.NULLO);
+        interessamento.getItems().addAll(Interessamento.NON_TROVATO, Interessamento.NON_INERENTE, Interessamento.NULLO, Interessamento.RICHIAMARE, Interessamento.INFO,Interessamento.LISTINO,Interessamento.CAMPIONE, Interessamento.CLIENTE);
+    }
+    public void refresh(){
+        init(false);
     }
 }

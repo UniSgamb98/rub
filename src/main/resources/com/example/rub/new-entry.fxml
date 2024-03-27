@@ -21,11 +21,6 @@
        <TextField fx:id="telefono" GridPane.columnIndex="1" GridPane.rowIndex="11" />
        <Label text="Email:" GridPane.columnIndex="2" GridPane.rowIndex="11" />
        <TextField fx:id="emailReferente" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" />
-
-       <Label text="Tipo Cliente:" GridPane.rowIndex="17" />
-       <ChoiceBox fx:id="tipoCliente" GridPane.columnIndex="1" GridPane.rowIndex="17" />
-       <Label text="Interesse:" GridPane.columnIndex="2" GridPane.rowIndex="17" />
-       <ChoiceBox fx:id="interesse" GridPane.columnIndex="3" GridPane.rowIndex="17" />
        <Button onAction="#abortNewEntry" text="Annulla" GridPane.rowIndex="20">
          <GridPane.margin>
             <Insets top="20.0" />
@@ -44,18 +39,17 @@
       <TextField fx:id="partitaIva" GridPane.columnIndex="1" GridPane.rowIndex="10" />
       <TextField fx:id="codiceFiscale" GridPane.columnIndex="3" GridPane.rowIndex="10" />
       <Label text="Email Referente:" GridPane.rowIndex="2" />
-       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3"
-             GridPane.rowIndex="8">
-           <Label text="Civico:"/>
-           <TextField fx:id="numeroCivico" prefHeight="25.0" prefWidth="25.0"/>
+       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="8">
+           <Label text="Civico:" />
+           <TextField fx:id="numeroCivico" prefHeight="25.0" prefWidth="25.0" />
        </HBox>
        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7">
-           <Label text="CAP:"/>
-           <TextField fx:id="cap" prefHeight="25.0" prefWidth="96.0"/>
+           <Label text="CAP:" />
+           <TextField fx:id="cap" prefHeight="25.0" prefWidth="96.0" />
        </HBox>
        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7">
-           <Label alignment="CENTER_RIGHT" text="Provincia:"/>
-           <TextField fx:id="provincia" prefHeight="25.0" prefWidth="27.0"/>
+           <Label alignment="CENTER_RIGHT" text="Provincia:" />
+           <TextField fx:id="provincia" prefHeight="25.0" prefWidth="27.0" />
        </HBox>
       <Label text="P.E.C:" GridPane.columnIndex="2" GridPane.rowIndex="13" />
       <TextField fx:id="email" GridPane.columnIndex="3" GridPane.rowIndex="11" />

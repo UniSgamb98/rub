@@ -57,7 +57,7 @@ public class FirstPageController implements Initializable {
                 newEntryFromFile = new Contatto();
                 int subStringStart = 0;
                 int subStringEnd = in.indexOf(";");
-                for(int i = 0; i < 18; i++){
+                for(int i = 0; i < 19; i++){
                     String subString = in.substring(subStringStart,subStringEnd);
                     if(subString.equals("%")) {
                         fillAttribute(i, newEntryFromFile, "");

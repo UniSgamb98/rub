@@ -21,7 +21,7 @@ public class RegionFilter extends Filter {
 
     private void addRegion(){
         try {
-            if (regionsSelection.isEmpty() || !regionsSelection.get(regionsSelection.size() - 1).getSelectLocalityName().isEmpty()) {
+            if (regionsSelection.isEmpty() || !regionsSelection.get(regionsSelection.size() - 1).getSelectLocalityName(false).isEmpty()) {
                 CitiesFilter citiesFilter = new CitiesFilter(null);
                 Choice regionChoice = new Choice(this, citiesFilter, stateAssigned.getSubLocalities());
                 regionsSelection.add(regionChoice);
@@ -35,7 +35,7 @@ public class RegionFilter extends Filter {
         ArrayList<String> ret = new ArrayList<>();
         for (Choice i : regionsSelection){
             if (((CitiesFilter)i.getChild()).getSelectionSize() == 0){
-                ret.add(i.getSelectLocalityName());
+                ret.add(i.getSelectLocalityName(true));
             } else{
                 ret.addAll(((CitiesFilter) i.getChild()).getActiveFilters());
             }

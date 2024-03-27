@@ -3,7 +3,7 @@ package com.example.rub.functionalities.locations;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Locality implements Serializable {
+public abstract class Locality implements Serializable {    //TODO: USARE DI PIù LA EREDITARIETA ES. ADDCITY
     private final String name;
     protected ArrayList<Locality> subLocalities;
 

@@ -4,7 +4,7 @@ import com.example.rub.enums.Interessamento;
 import com.example.rub.enums.TipoCliente;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -28,11 +28,12 @@ public class Contatto implements Serializable {
     private String emailGenereica;
     private String emailCertificata;
     private int volteContattati;
-    private Date ultimaChiamata;
-    private Date prossimaChiamata;
+    private LocalDate ultimaChiamata;
+    private LocalDate prossimaChiamata;
     private String sitoWeb;
     private UUID id;
-    private UUID noteId;
+    private final UUID noteId;
+    private boolean rememberMe;
 
     public Contatto(){
         noteId = UUID.randomUUID();
@@ -41,19 +42,15 @@ public class Contatto implements Serializable {
     public String getTelefono() {
         return telefono;
     }
-
     public String getPersonaRiferimento() {
         return personaRiferimento;
     }
-
     public String getCitta() {
         return citta;
     }
-
     public String getPaese() {
         return paese;
     }
-
     public String getEmailReferente() {
         return emailReferente;
     }
@@ -75,7 +72,6 @@ public class Contatto implements Serializable {
         }
         return ret;
     }
-
     public int getVolteContattati() {
         return volteContattati;
     }
@@ -127,6 +123,9 @@ public class Contatto implements Serializable {
     public UUID getNoteId() {
         return noteId;
     }
+    public boolean getRememberMe(){
+        return rememberMe;
+    }
 
     public void setTipoCliente(TipoCliente tipoCliente) {
         this.tipoCliente = tipoCliente;
@@ -149,13 +148,13 @@ public class Contatto implements Serializable {
     public void setInteressamento(Interessamento interessamento) {
         this.interessamento = interessamento;
     }
-    public void setProssimaChiamata(Date prossimaChiamata) {
+    public void setProssimaChiamata(LocalDate prossimaChiamata) {
         this.prossimaChiamata = prossimaChiamata;
     }
     public void setRagioneSociale(String ragioneSociale) {
         this.ragioneSociale = ragioneSociale;
     }
-    public void setUltimaChiamata(Date ultimaChiamata) {
+    public void setUltimaChiamata(LocalDate ultimaChiamata) {
         this.ultimaChiamata = ultimaChiamata;
     }
     public void incrementVolteContattati() {
@@ -197,8 +196,8 @@ public class Contatto implements Serializable {
     public void setRegione(String regione) {
         this.regione = regione;
     }
-    public void setNoteId(UUID noteId) {
-        this.noteId = noteId;
+    public void setRememberMe(boolean rememberMe) {
+        this.rememberMe = rememberMe;
     }
 
     @Override

@@ -1,8 +1,13 @@
 package com.example.rub.enums;
 
 public enum Interessamento {
-    IMMEDIATO,
+    BLANK,
+    NON_TROVATO,
+    NON_INERENTE,
     NULLO,
-    PROSSIMAMENTE,
-    BLANK
+    RICHIAMARE,
+    INFO,
+    LISTINO,
+    CAMPIONE,
+    CLIENTE
 }

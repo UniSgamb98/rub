@@ -22,7 +22,7 @@ public class StateFilter extends Filter {
 
     private void addState(){
         try {
-            if (statesSelection.isEmpty() || !statesSelection.get(statesSelection.size() - 1).getSelectLocalityName().isEmpty()) {
+            if (statesSelection.isEmpty() || !(statesSelection.get(statesSelection.size() - 1).getSelectLocalityName(false).isEmpty())) {
                 RegionFilter regionsFilter = new RegionFilter(null);
                 Choice stateChoice = new Choice(this, regionsFilter, managerUsed.getSubLocalities());
                 statesSelection.add(stateChoice);
@@ -36,7 +36,7 @@ public class StateFilter extends Filter {
         ArrayList<String> ret = new ArrayList<>();
         for (Choice i : statesSelection){
             if (((RegionFilter)i.getChild()).getSelectionSize() == 0){
-                ret.add(i.getSelectLocalityName());
+                ret.add(i.getSelectLocalityName(true));
             } else{
                 ret.addAll(((RegionFilter) i.getChild()).getActiveFilters());
             }

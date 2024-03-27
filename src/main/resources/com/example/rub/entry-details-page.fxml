@@ -13,21 +13,21 @@
     <Label text="Referente:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
     <TextField fx:id="personaDiRiferimento" disable="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" />
 
-    <Label text="Paese:" GridPane.rowIndex="2" />
-    <TextField fx:id="paese" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-    <Label text="Città:" GridPane.rowIndex="3" />
-    <TextField fx:id="citta" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <Label text="Paese:" GridPane.rowIndex="6" />
+    <TextField fx:id="paese" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+    <Label text="Città:" GridPane.rowIndex="7" />
+    <TextField fx:id="citta" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="7" />
 
-    <Label text="Telefono:" GridPane.rowIndex="4" />
-    <TextField fx:id="telefono" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-    <Label text="Email:" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-    <TextField fx:id="email" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+    <Label text="Telefono:" GridPane.rowIndex="11" />
+    <TextField fx:id="telefono" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+    <Label text="Email Referente:" GridPane.rowIndex="3" />
+    <TextField fx:id="emailReferente" disable="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="3" />
 
-    <Label text="Interessamento:" GridPane.rowIndex="5" />
-    <ChoiceBox fx:id="interessamento" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-    <Label text="Tipo Cliente:" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-    <ChoiceBox fx:id="tipoCliente" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-    <BorderPane GridPane.columnSpan="5" GridPane.rowIndex="6">
+    <Label text="Interessamento:" GridPane.rowIndex="14" />
+    <ChoiceBox fx:id="interessamento" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+    <Label text="Tipo Cliente:" GridPane.columnIndex="2" GridPane.rowIndex="14" />
+    <ChoiceBox fx:id="tipoCliente" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="14" />
+    <BorderPane GridPane.columnSpan="5" GridPane.rowIndex="15">
       <top>
         <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
             <Label text="N* contatti: " />
@@ -60,19 +60,44 @@
         </GridPane>
       </top>
     </BorderPane>
-         <Label text="Regione:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-         <TextField GridPane.columnIndex="3" GridPane.rowIndex="2" />
-         <HBox alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3">
-            <children>
-               <Label text="Via:">
-                  <padding>
-                     <Insets right="5.0" />
-                  </padding></Label>
-               <TextField prefHeight="25.0" prefWidth="220.0" />
-               <Label text="Civico:" />
-               <TextField prefHeight="25.0" prefWidth="37.0" />
-            </children>
-         </HBox>
+         <Label text="Regione:" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+         <TextField fx:id="regione" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+    <HBox alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7">
+        <Label text="Via:">
+            <padding>
+                <Insets right="5.0"/>
+            </padding>
+        </Label>
+        <TextField fx:id="indirizzo" disable="true" prefHeight="25.0" prefWidth="220.0"/>
+        <Label text="Civico:"/>
+        <TextField fx:id="civico" disable="true" prefHeight="25.0" prefWidth="37.0"/>
+    </HBox>
+         <Separator prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="5">
+            <GridPane.margin>
+               <Insets bottom="10.0" top="10.0" />
+            </GridPane.margin>
+         </Separator>
+         <Label text="Provincia:" GridPane.rowIndex="8" />
+         <TextField fx:id="provincia" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+         <Label text="CAP:" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+         <TextField fx:id="cap" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+         <Separator prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="9">
+            <GridPane.margin>
+               <Insets bottom="10.0" top="10.0" />
+            </GridPane.margin>
+         </Separator>
+         <Label text="P.Iva:" GridPane.rowIndex="10" />
+         <Label text="Codice Fiscale:" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+         <Label text="Email:" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+         <Label text="Sito Web:" GridPane.rowIndex="12" />
+         <Label text="P.E.C:" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+         <Label text="Titolare:" GridPane.rowIndex="13" />
+         <TextField fx:id="titolare" disable="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="13" />
+         <TextField fx:id="sito" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+         <TextField fx:id="pec" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="12" />
+         <TextField fx:id="emailGenerica" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="11" />
+         <TextField fx:id="codiceFiscale" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="10" />
+         <TextField fx:id="partitaIva" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="10" />
          <columnConstraints>
             <ColumnConstraints />
             <ColumnConstraints />
@@ -81,6 +106,15 @@
             <ColumnConstraints maxWidth="114.0" minWidth="0.0" prefWidth="0.0" />
          </columnConstraints>
          <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
             <RowConstraints />
             <RowConstraints />
             <RowConstraints />

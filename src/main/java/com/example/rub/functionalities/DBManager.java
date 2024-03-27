@@ -6,6 +6,7 @@ import com.example.rub.objects.DisplayableEntry;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 
 public abstract class DBManager extends TagsManager{
@@ -105,6 +106,26 @@ public abstract class DBManager extends TagsManager{
         database.put(id, modifiedBean);
         MyUtils.write(database, "database");
         MyUtils.write(index, "indice");
+    }
+    public static void setNextCall(UUID uuid, LocalDate date){
+        try {
+            database = (HashMap<UUID, Contatto>) MyUtils.read("database");
+            Contatto data = database.get(uuid);
+            data.setProssimaChiamata(date);
+            data.incrementVolteContattati();
+            Calendar now = Calendar.getInstance();
+            System.out.println(now.get(Calendar.DATE));
+            int year = now.get(Calendar.YEAR);
+            int month = now.get(Calendar.MONTH);
+            int day = now.get(Calendar.DAY_OF_MONTH);
+            LocalDate today = LocalDate.of(year,month,day);
+            data.setUltimaChiamata(today);
+            data.setRememberMe(date == null);
+            database.put(uuid, data);
+            MyUtils.write(database, "database");
+        } catch (Exception e){
+            System.out.println("Errore durante setNextCall in DBManager");
+        }
     }
 
     public static void reconstruct(){

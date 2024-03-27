@@ -81,7 +81,7 @@ public class SearchEntryController implements Initializable {
             Parent root = loader.load();       //cambio scena
             EntryDetailsPageController controller = loader.getController();
             controller.setEntryProperty(displayableEntry.getEntry());
-            controller.init();
+            controller.init(true);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
