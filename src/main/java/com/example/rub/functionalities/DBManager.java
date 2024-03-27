@@ -25,6 +25,20 @@ public abstract class DBManager extends TagsManager{
         MyUtils.write(index, "indice");
         System.out.println("Nuovo contatto inserito in database!");
     }
+    public static void deleteEntry(UUID id){
+        try {
+            update();
+        } catch (Exception e){
+            System.out.println("Errore durante l'eliminazione di una entry");
+        }
+        removeEntryFromLocationManager(id);
+        removeEntryFromIndex(id);
+        database.remove(id);
+
+        MyUtils.write(database, "database");
+        MyUtils.write(index, "indice");
+        MyUtils.write(locationManager, "mondo");
+    }
     public static Contatto retriveEntry(UUID uuid){  //carica un Contatto dal database
         return database.get(uuid);
     }

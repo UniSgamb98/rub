@@ -65,12 +65,12 @@
     <HBox alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7">
         <Label text="Via:">
             <padding>
-                <Insets right="5.0"/>
+                <Insets right="5.0" />
             </padding>
         </Label>
-        <TextField fx:id="indirizzo" disable="true" prefHeight="25.0" prefWidth="220.0"/>
-        <Label text="Civico:"/>
-        <TextField fx:id="civico" disable="true" prefHeight="25.0" prefWidth="37.0"/>
+        <TextField fx:id="indirizzo" disable="true" prefHeight="25.0" prefWidth="220.0" />
+        <Label text="Civico:" />
+        <TextField fx:id="civico" disable="true" prefHeight="25.0" prefWidth="37.0" />
     </HBox>
          <Separator prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="5">
             <GridPane.margin>
@@ -134,7 +134,7 @@
       </Button>
    </bottom>
    <right>
-       <VBox spacing="10.0" BorderPane.alignment="CENTER">
+       <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
            <BorderPane.margin>
                <Insets right="10.0" top="50.0" />
            </BorderPane.margin>
@@ -142,9 +142,14 @@
            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#doSaveChanges" text="Salva" visible="false" />
            <Button alignment="CENTER" mnemonicParsing="false" onAction="#doRegisterCall" prefHeight="70.0" prefWidth="70.0" text="Registra Chiamata" textAlignment="CENTER" wrapText="true">
               <VBox.margin>
-                  <Insets left="20.0" top="50.0" />
+                  <Insets top="50.0" />
               </VBox.margin>
            </Button>
+         <Button alignment="CENTER" mnemonicParsing="false" onAction="#doDelete" text="Elimina Recod">
+            <VBox.margin>
+               <Insets top="80.0" />
+            </VBox.margin>
+         </Button>
        </VBox>
    </right>
 </BorderPane>

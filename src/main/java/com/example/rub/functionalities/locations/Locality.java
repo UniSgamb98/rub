@@ -10,6 +10,9 @@ public abstract class Locality implements Serializable {    //TODO: USARE DI PIÃ
     public Locality(String name) {
         this.name = name;
     }
+    public void removeSubLocality(String subLocality){
+        subLocalities.removeIf(i -> i.getLocalityName().equals(subLocality));
+    }
     public Locality getSubLocality(String subLocality){
         Locality ret = null;
         for (Locality i : subLocalities){

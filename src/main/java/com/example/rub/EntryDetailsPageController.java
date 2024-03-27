@@ -132,6 +132,16 @@ public class EntryDetailsPageController implements Initializable {
             System.out.println("Errore durante la transizione in register-call con doRegisterCall in EntryDetailsPageController");
         }
     }
+    public void doDelete(ActionEvent event){
+        DBManager.deleteEntry(entryToDisplayDetails.getId());
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("search-entry.fxml")));       //cambio scena
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) { System.out.println("Errore durante la transizione in search-entry con doDelete in EntryDetailsPageController");   }
+    }
     public void doSaveChanges() {
         DBManager.modifyEntry(entryToDisplayDetails.getId(),getContatto());
     }

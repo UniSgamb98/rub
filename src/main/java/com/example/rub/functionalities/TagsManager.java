@@ -21,6 +21,20 @@ public abstract class TagsManager {
 
         insertNewEntryInLocationManager(newEntry);
     }
+    protected static void removeEntryFromIndex(UUID id){
+        Contatto temp = database.get(id);
+        removeTagFromIndex(id, temp.getPaese());
+        removeTagFromIndex(id, temp.getRegione());
+        removeTagFromIndex(id, temp.getProvincia());
+        removeTagFromIndex(id, temp.getCitta());
+    }
+    private static void removeTagFromIndex(UUID id, String tag){
+        if (index.get(tag).size() == 1){
+            index.remove(tag);
+        } else {
+            index.get(tag).remove(id);
+        }
+    }
 
     protected static void insertNewEntryInLocationManager (Contatto newEntry){
         State state = new State(newEntry.getPaese());
@@ -46,6 +60,21 @@ public abstract class TagsManager {
             System.out.println("Errore durante l'inserimento di newEntry in LocationManager");
         }
     }
+    protected static void removeEntryFromLocationManager(UUID id){
+        String paese = database.get(id).getPaese();
+        String regione = database.get(id).getRegione();
+        String citta = database.get(id).getCitta();
+        boolean np = index.get(paese).size() == 1;
+        boolean nr = index.get(regione).size() == 1;
+        if (np && nr){
+            locationManager.removeSubLocality(paese);
+        } else if (!nr && np) {
+            locationManager.getSubLocality(paese).removeSubLocality(regione);                        //F V rim regione
+        } else {
+            locationManager.getSubLocality(paese).getSubLocality(regione).removeSubLocality(citta);
+        }
+    }
+    @Deprecated //TODO
     protected static void changeIndexEntry(UUID id, String oldTag, String newTag){  //RIMOZIONE DEL TAG DA INDEX E DA GROUPEDTAGS SE NECESSARIO
         if (index.get(oldTag).size() == 1){
             index.remove(oldTag);
@@ -66,8 +95,5 @@ public abstract class TagsManager {
             temp.add(uuid);
             index.put(tag, temp);
         }
-    }
-    private static void removeTag(){
-        //TODO remove in indice
     }
 }
