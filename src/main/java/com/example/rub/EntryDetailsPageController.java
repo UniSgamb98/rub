@@ -74,8 +74,7 @@ public class EntryDetailsPageController implements Initializable {
     public TextField partitaIva;
     private Contatto entryToDisplayDetails;
     public void switchToSearchEntry(ActionEvent event) {
-        GlobalContext.openedEntries.remove(entryToDisplayDetails.getId());
-        MyUtils.write(GlobalContext.openedEntries,"fileAperti");
+        shutdown();
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("search-entry.fxml")));       //cambio scena
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -107,11 +106,12 @@ public class EntryDetailsPageController implements Initializable {
         } else {    //Checkbox = false
             saveButton.setVisible(false);
             setFieldDisability(true);
-            GlobalContext.openedEntries.remove(entryToDisplayDetails.getId());
-            if (GlobalContext.openedEntries.isEmpty()){     //ELIMINIZAIONE SE VUOTI DI FILE APERTI
-                MyUtils.delete("fileAperti");
-            } else {    //ALTRIMENTI SOVRASCRIVO FILEAPERTI
+            try {
+                GlobalContext.openedEntries = (ArrayList<UUID>) MyUtils.read("fileAperti");
+                GlobalContext.openedEntries.remove(entryToDisplayDetails.getId());
                 MyUtils.write(GlobalContext.openedEntries, "fileAperti");
+            } catch (IOException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
             }
         }
     }
@@ -147,7 +147,7 @@ public class EntryDetailsPageController implements Initializable {
     }
 
     public void init(boolean fromScratch) {
-        if (fromScratch) {
+        if (fromScratch) {  //true entro da search entry / false ho chiuso la finestra di registra chiamata
             entryToDisplayDetails = entryProperty.get();
         } else {
             entryToDisplayDetails = DBManager.retriveEntry(entryToDisplayDetails.getId());
@@ -175,7 +175,7 @@ public class EntryDetailsPageController implements Initializable {
         provincia.setText(entryToDisplayDetails.getProvincia());
         indirizzo.setText(entryToDisplayDetails.getIndirizzo());
     }
-    private Contatto getContatto(){     //TODO: Aggiornare con nuovi dati
+    private Contatto getContatto(){
         Contatto newEntry = new Contatto();                         //creazione Bean contatto
         newEntry.setRagioneSociale(ragioneSociale.getText());
         newEntry.setCitta(citta.getText());
@@ -205,20 +205,28 @@ public class EntryDetailsPageController implements Initializable {
         entryProperty.set(entry);
     }
     private void setFieldDisability(boolean state){
-        ragioneSociale.setDisable(state);
-        personaDiRiferimento.setDisable(state);
-        citta.setDisable(state);
-        paese.setDisable(state);
-        emailReferente.setDisable(state);
-        telefono.setDisable(state);
-        ragioneSociale.setDisable(state);
-        ragioneSociale.setDisable(state);
+        for (TextField textField : Arrays.asList(ragioneSociale, personaDiRiferimento, citta, paese, emailReferente, telefono, regione, indirizzo, provincia, cap, civico, partitaIva, codiceFiscale, emailGenerica, sito, pec, titolare)) {
+            textField.setDisable(state);
+        }
+        interessamento.setDisable(state);
+        tipoCliente.setDisable(state);
+        ultimaChiamata.setDisable(state);
+        prossimaChiamata.setDisable(state);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tipoCliente.getItems().addAll(TipoCliente.LABORATORIO, TipoCliente.RIVENDITORE, TipoCliente.CENTROFRESAGGIO);
         interessamento.getItems().addAll(Interessamento.NON_TROVATO, Interessamento.NON_INERENTE, Interessamento.NULLO, Interessamento.RICHIAMARE, Interessamento.INFO,Interessamento.LISTINO,Interessamento.CAMPIONE, Interessamento.CLIENTE);
+    }
+    public void shutdown(){
+            try {
+                GlobalContext.openedEntries = (ArrayList<UUID>) MyUtils.read("fileAperti");
+            } catch (Exception e){
+                GlobalContext.openedEntries = new ArrayList<>();
+            }
+            GlobalContext.openedEntries.remove(entryToDisplayDetails.getId());
+            MyUtils.write(GlobalContext.openedEntries,"fileAperti");
     }
     public void refresh(){
         init(false);

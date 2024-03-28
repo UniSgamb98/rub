@@ -5,7 +5,6 @@ import com.example.rub.enums.TipoCliente;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
 import java.util.UUID;
 
 public class Contatto implements Serializable {
@@ -194,18 +193,5 @@ public class Contatto implements Serializable {
     @Override
     public String toString(){
         return "[" + ragioneSociale + "|" + personaRiferimento + "|" + paese + "|" + citta + "|" + tipoCliente + "|" + interessamento + "|" + telefono + "|" + emailReferente + "]";
-    }
-
-    public String compareChanges(Contatto modifiedBean){        //TODO: non fare una funzione apposta, togli il switch dall'altra parte
-        String ret = "";
-        if (!Objects.equals(ragioneSociale, modifiedBean.getRagioneSociale()))  ret += "0";
-        if (!Objects.equals(personaRiferimento, modifiedBean.getPersonaRiferimento()))  ret += "1";
-        if (!Objects.equals(telefono, modifiedBean.getTelefono()))  ret += "2";
-        if (!Objects.equals(emailReferente, modifiedBean.getEmailReferente()))  ret += "3";
-        if (!Objects.equals(interessamento, modifiedBean.getInteressamento()))  ret += "4";
-        if (!Objects.equals(tipoCliente, modifiedBean.getTipoCliente()))  ret += "5";
-        if (!Objects.equals(paese, modifiedBean.getPaese()))  ret += "6";
-        if (!Objects.equals(citta, modifiedBean.getCitta()))  ret += "7";
-        return ret;
     }
 }

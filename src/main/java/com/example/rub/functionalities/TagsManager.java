@@ -43,19 +43,19 @@ public abstract class TagsManager {
         region.addCity(city);
         state.addRegion(region);
         try {
-            LocationManager manager = (LocationManager) MyUtils.read("mondo");
-            if (manager.contains(newEntry.getPaese())){
-                State stateContained = (State) manager.getSubLocality(newEntry.getPaese());
+            if (locationManager.contains(newEntry.getPaese())){
+                State stateContained = (State) locationManager.getSubLocality(newEntry.getPaese());
                 if (stateContained.contains(newEntry.getRegione())){
                     Region regionContained = (Region) stateContained.getSubLocality(newEntry.getRegione());
-                    regionContained.addCity(city);
+                    if (!regionContained.contains(newEntry.getCitta())) {
+                        regionContained.addCity(city);
+                    }
                 }else {
                     stateContained.addRegion(region);
                 }
             } else {
-                manager.addState(state);
+                locationManager.addState(state);
             }
-            MyUtils.write(manager, "mondo");
         } catch (Exception e) {
             System.out.println("Errore durante l'inserimento di newEntry in LocationManager");
         }
@@ -64,14 +64,15 @@ public abstract class TagsManager {
         String paese = database.get(id).getPaese();
         String regione = database.get(id).getRegione();
         String citta = database.get(id).getCitta();
-        boolean np = index.get(paese).size() == 1;
-        boolean nr = index.get(regione).size() == 1;
-        if (np && nr){
-            locationManager.removeSubLocality(paese);
-        } else if (!nr && np) {
-            locationManager.getSubLocality(paese).removeSubLocality(regione);                        //F V rim regione
-        } else {
+        boolean nc = index.get(citta).size() == 1;
+        if (nc){
             locationManager.getSubLocality(paese).getSubLocality(regione).removeSubLocality(citta);
+            if (locationManager.getSubLocality(paese).getSubLocality(regione).getSubLocalities().isEmpty()){
+                locationManager.getSubLocality(paese).removeSubLocality(regione);
+                if (locationManager.getSubLocality(paese).getSubLocalities().isEmpty()){
+                    locationManager.removeSubLocality(paese);
+                }
+            }
         }
     }
     @Deprecated //TODO

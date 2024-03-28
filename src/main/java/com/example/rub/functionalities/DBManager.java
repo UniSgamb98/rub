@@ -23,6 +23,7 @@ public abstract class DBManager extends TagsManager{
         indexNewEntry(bean, uuid);
         MyUtils.write(database, "database");
         MyUtils.write(index, "indice");
+        MyUtils.write(locationManager, "mondo");
         System.out.println("Nuovo contatto inserito in database!");
     }
     public static void deleteEntry(UUID id){
@@ -86,40 +87,49 @@ public abstract class DBManager extends TagsManager{
         locationManager = (LocationManager) MyUtils.read("mondo");
     }
 
-    public static void modifyEntry(UUID id, Contatto modifiedBean){ //TODO
-        Contatto oldBean = database.get(id);
-        String changes = oldBean.compareChanges(modifiedBean);
-        for (int i = 0; i < changes.length(); i++){
-            switch (changes.charAt(i)){
-                case '0':
-                    oldBean.setRagioneSociale(modifiedBean.getRagioneSociale());
-                    break;
-                case '1':
-                    oldBean.setPersonaRiferimento(modifiedBean.getPersonaRiferimento());
-                    break;
-                case '2':
-                    oldBean.setTelefono(modifiedBean.getTelefono());
-                    break;
-                case '3':
-                    oldBean.setEmailReferente(modifiedBean.getEmailReferente());
-                    break;
-                case '4':
-                    oldBean.setInteressamento(modifiedBean.getInteressamento());
-                    break;
-                case '5':
-                    oldBean.setTipoCliente(modifiedBean.getTipoCliente());
-                    break;
-                case '6':
-                    changeIndexEntry(oldBean.getId(), oldBean.getPaese(), modifiedBean.getPaese());
-                    break;
-                case '7':
-                    changeIndexEntry(oldBean.getId(), oldBean.getCitta(), modifiedBean.getCitta());
-                    break;
-            }
+    public static void modifyEntry(UUID id, Contatto modifiedBean){
+        try {
+            update();
+            Contatto oldBean = database.get(id);
+
+            removeEntryFromLocationManager(id);
+            removeEntryFromIndex(id);
+
+            if (!oldBean.getRagioneSociale().equals(modifiedBean.getRagioneSociale()))   oldBean.setRagioneSociale(modifiedBean.getRagioneSociale());
+            if (!oldBean.getPersonaRiferimento().equals(modifiedBean.getPersonaRiferimento()))   oldBean.setPersonaRiferimento(modifiedBean.getPersonaRiferimento());
+            if (!oldBean.getEmailReferente().equals(modifiedBean.getEmailReferente())) oldBean.setEmailReferente(modifiedBean.getEmailReferente());
+            if (!oldBean.getPaese().equals(modifiedBean.getPaese()))   oldBean.setPaese(modifiedBean.getPaese());
+            if (!oldBean.getRegione().equals(modifiedBean.getRegione()))   oldBean.setRegione(modifiedBean.getRegione());
+            if (!oldBean.getCitta().equals(modifiedBean.getCitta()))   oldBean.setCitta(modifiedBean.getCitta());
+            if (!oldBean.getIndirizzo().equals(modifiedBean.getIndirizzo()))   oldBean.setIndirizzo(modifiedBean.getIndirizzo());
+            if (!oldBean.getNumeroCivico().equals(modifiedBean.getNumeroCivico()))   oldBean.setNumeroCivico(modifiedBean.getNumeroCivico());
+            if (!oldBean.getProvincia().equals(modifiedBean.getProvincia()))   oldBean.setProvincia(modifiedBean.getProvincia());
+            if (!oldBean.getCap().equals(modifiedBean.getCap()))   oldBean.setCap(modifiedBean.getCap());
+            if (!oldBean.getPartitaIva().equals(modifiedBean.getPartitaIva()))   oldBean.setPartitaIva(modifiedBean.getPartitaIva());
+            if (!oldBean.getCodiceFiscale().equals(modifiedBean.getCodiceFiscale()))   oldBean.setCodiceFiscale(modifiedBean.getCodiceFiscale());
+            if (!oldBean.getTelefono().equals(modifiedBean.getTelefono()))   oldBean.setTelefono(modifiedBean.getTelefono());
+            if (!oldBean.getEmailGenereica().equals(modifiedBean.getEmailGenereica()))   oldBean.setEmailGenereica(modifiedBean.getEmailGenereica());
+            if (!oldBean.getEmailCertificata().equals(modifiedBean.getEmailCertificata()))   oldBean.setEmailCertificata(modifiedBean.getEmailCertificata());
+            if (!oldBean.getSitoWeb().equals(modifiedBean.getSitoWeb()))   oldBean.setSitoWeb(modifiedBean.getSitoWeb());
+            if (!oldBean.getTitolare().equals(modifiedBean.getTitolare()))   oldBean.setTitolare(modifiedBean.getTitolare());
+
+            if (!Objects.equals(oldBean.getTipoCliente(), modifiedBean.getTipoCliente()))   oldBean.setTipoCliente(modifiedBean.getTipoCliente());
+            if (!Objects.equals(oldBean.getInteressamento(), modifiedBean.getInteressamento()))   oldBean.setInteressamento(modifiedBean.getInteressamento());
+            if (!Objects.equals(oldBean.getUltimaChiamata(), modifiedBean.getUltimaChiamata()))   oldBean.setUltimaChiamata(modifiedBean.getUltimaChiamata());
+            if (!Objects.equals(oldBean.getProssimaChiamata(), modifiedBean.getProssimaChiamata()))   oldBean.setProssimaChiamata(modifiedBean.getProssimaChiamata());
+
+
+            //database.remove(id);
+
+            //database.put(id, oldBean);
+            indexNewEntry(oldBean, id);
+
+            MyUtils.write(database, "database");
+            MyUtils.write(index, "indice");
+            MyUtils.write(locationManager, "mondo");
+        } catch (Exception e){
+            System.out.println("Errore durante la modifica di entry");
         }
-        database.put(id, modifiedBean);
-        MyUtils.write(database, "database");
-        MyUtils.write(index, "indice");
     }
     public static void setNextCall(UUID uuid, LocalDate date){
         try {

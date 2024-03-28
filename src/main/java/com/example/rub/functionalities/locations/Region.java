@@ -8,11 +8,7 @@ public class Region extends Locality {
         subLocalities = new ArrayList<>();
     }
     public void addCity(City city){
-        for (Locality i : subLocalities){
-            if (!i.getLocalityName().equals(city.getLocalityName())){
-                subLocalities.add(city);
-            }
-        }
+        subLocalities.add(city);
     }
     @Override
     public String toString(){
