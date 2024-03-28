@@ -48,10 +48,10 @@ public class NoteManager {
         // pretty print
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         DOMSource source = new DOMSource(doc);
-        StreamResult result = new StreamResult(new File(output));
+        StreamResult result = new StreamResult(new File("bin\\Note\\" + output + ".xml"));
         transformer.transform(source, result);
     }
     public Document readXml(String input) throws IOException, SAXException {
-        return docBuilder.parse(input);
+        return docBuilder.parse("bin\\Note\\" + input + ".xml");
     }
 }

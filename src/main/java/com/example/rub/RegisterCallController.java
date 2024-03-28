@@ -49,7 +49,7 @@ public class RegisterCallController implements Initializable {
                 bean.setInteressamento(Interessamento.valueOf(feedback.getValue()));
             } catch (Exception ignored) {}
             DBManager.setNextCall(bean.getId(), prossimaChiamata.getValue());
-            nm.writeXml(doc, "bin\\Note\\" + bean.getNoteId() + ".xml");
+            nm.writeXml(doc, ""+bean.getNoteId());
         } catch (Exception e){
             System.out.println("Errore durante la scrittura del file Xml delle note");
         }

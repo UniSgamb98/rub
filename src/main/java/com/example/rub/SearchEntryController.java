@@ -82,12 +82,15 @@ public class SearchEntryController implements Initializable {
             EntryDetailsPageController controller = loader.getController();
             controller.setEntryProperty(displayableEntry.getEntry());
             controller.init(true);
+            controller.setNoteDocument();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setOnHidden(e -> controller.shutdown());
             stage.show();
-        } catch (Exception e) { System.out.println("Errore durante la transizione in firstPage con doRequestEntryDetails in SearchEntryController");   }
+        } catch (Exception e) {
+            System.out.println("Errore durante la transizione in firstPage con doRequestEntryDetails in SearchEntryController");
+        }
     }
 
     public void doSwitchToFirstPage(ActionEvent event) {

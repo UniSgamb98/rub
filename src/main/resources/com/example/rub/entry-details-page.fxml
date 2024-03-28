@@ -4,30 +4,31 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import com.example.rub.objects.NoteDisplayer?>
 <BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.EntryDetailsPageController">
     <center>
-<GridPane alignment="CENTER" prefHeight="232.0" prefWidth="650.0">
-    <Label text="Ragione Sociale:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-    <TextField fx:id="ragioneSociale" disable="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="0" />
+<GridPane alignment="CENTER" prefHeight="350.0" prefWidth="650.0">
+    <Label text="Ragione Sociale:" GridPane.columnIndex="1" />
+    <TextField fx:id="ragioneSociale" disable="true" GridPane.columnIndex="2" GridPane.columnSpan="3" />
 
-    <Label text="Referente:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-    <TextField fx:id="personaDiRiferimento" disable="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+    <Label text="Referente:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <TextField fx:id="personaDiRiferimento" disable="true" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
 
-    <Label text="Paese:" GridPane.rowIndex="6" />
-    <TextField fx:id="paese" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-    <Label text="Città:" GridPane.rowIndex="7" />
-    <TextField fx:id="citta" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+    <Label text="Paese:" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+    <TextField fx:id="paese" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+    <Label text="Città:" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+    <TextField fx:id="citta" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="7" />
 
-    <Label text="Telefono:" GridPane.rowIndex="11" />
-    <TextField fx:id="telefono" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-    <Label text="Email Referente:" GridPane.rowIndex="3" />
-    <TextField fx:id="emailReferente" disable="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+    <Label text="Telefono:" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+    <TextField fx:id="telefono" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+    <Label text="Email Referente:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <TextField fx:id="emailReferente" disable="true" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3" />
 
-    <Label text="Interessamento:" GridPane.rowIndex="14" />
-    <ChoiceBox fx:id="interessamento" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-    <Label text="Tipo Cliente:" GridPane.columnIndex="2" GridPane.rowIndex="14" />
-    <ChoiceBox fx:id="tipoCliente" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="14" />
-    <BorderPane GridPane.columnSpan="5" GridPane.rowIndex="15">
+    <Label text="Interessamento:" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+    <ChoiceBox fx:id="interessamento" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="14" />
+    <Label text="Tipo Cliente:" GridPane.columnIndex="3" GridPane.rowIndex="14" />
+    <ChoiceBox fx:id="tipoCliente" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="14" />
+    <BorderPane GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="15">
       <top>
         <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
             <Label text="N* contatti: " />
@@ -51,13 +52,14 @@
                      <RowConstraints />
                      <RowConstraints />
                      <RowConstraints />
+                     <RowConstraints />
                   </rowConstraints>
         </GridPane>
       </top>
     </BorderPane>
-         <Label text="Regione:" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-         <TextField fx:id="regione" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-    <HBox alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7">
+         <Label text="Regione:" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+         <TextField fx:id="regione" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+    <HBox alignment="CENTER_LEFT" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="7">
         <Label text="Via:">
             <padding>
                 <Insets right="5.0" />
@@ -67,33 +69,35 @@
         <Label text="Civico:" />
         <TextField fx:id="civico" disable="true" prefHeight="25.0" prefWidth="37.0" />
     </HBox>
-         <Separator prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="5">
+         <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="5">
             <GridPane.margin>
                <Insets bottom="10.0" top="10.0" />
             </GridPane.margin>
          </Separator>
-         <Label text="Provincia:" GridPane.rowIndex="8" />
-         <TextField fx:id="provincia" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-         <Label text="CAP:" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-         <TextField fx:id="cap" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-         <Separator prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="9">
+         <Label text="Provincia:" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+         <TextField fx:id="provincia" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+         <Label text="CAP:" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+         <TextField fx:id="cap" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+         <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="9">
             <GridPane.margin>
                <Insets bottom="10.0" top="10.0" />
             </GridPane.margin>
          </Separator>
-         <Label text="P.Iva:" GridPane.rowIndex="10" />
-         <Label text="Codice Fiscale:" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-         <Label text="Email:" GridPane.columnIndex="2" GridPane.rowIndex="11" />
-         <Label text="Sito Web:" GridPane.rowIndex="12" />
-         <Label text="P.E.C:" GridPane.columnIndex="2" GridPane.rowIndex="12" />
-         <Label text="Titolare:" GridPane.rowIndex="13" />
-         <TextField fx:id="titolare" disable="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="13" />
-         <TextField fx:id="sito" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-         <TextField fx:id="pec" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="12" />
-         <TextField fx:id="emailGenerica" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="11" />
-         <TextField fx:id="codiceFiscale" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="10" />
-         <TextField fx:id="partitaIva" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+         <Label text="P.Iva:" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+         <Label text="Codice Fiscale:" GridPane.columnIndex="3" GridPane.rowIndex="10" />
+         <Label text="Email:" GridPane.columnIndex="3" GridPane.rowIndex="11" />
+         <Label text="Sito Web:" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+         <Label text="P.E.C:" GridPane.columnIndex="3" GridPane.rowIndex="12" />
+         <Label text="Titolare:" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+         <TextField fx:id="titolare" disable="true" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="13" />
+         <TextField fx:id="sito" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+         <TextField fx:id="pec" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="12" />
+         <TextField fx:id="emailGenerica" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="11" />
+         <TextField fx:id="codiceFiscale" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="10" />
+         <TextField fx:id="partitaIva" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+         <NoteDisplayer fx:id="noteDisplayer" GridPane.columnIndex="1" GridPane.rowIndex="16"/>
          <columnConstraints>
+            <ColumnConstraints />
             <ColumnConstraints />
             <ColumnConstraints />
             <ColumnConstraints />
@@ -101,6 +105,7 @@
             <ColumnConstraints maxWidth="114.0" minWidth="0.0" prefWidth="0.0" />
          </columnConstraints>
          <rowConstraints>
+            <RowConstraints />
             <RowConstraints />
             <RowConstraints />
             <RowConstraints />

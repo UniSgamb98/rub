@@ -6,6 +6,7 @@ import com.example.rub.enums.TipoCliente;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
 import com.example.rub.functionalities.MyUtils;
+import com.example.rub.objects.NoteDisplayer;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
@@ -72,6 +73,8 @@ public class EntryDetailsPageController implements Initializable {
     public TextField codiceFiscale;
     @FXML
     public TextField partitaIva;
+    @FXML
+    public NoteDisplayer noteDisplayer;
     private Contatto entryToDisplayDetails;
     public void switchToSearchEntry(ActionEvent event) {
         shutdown();
@@ -132,8 +135,13 @@ public class EntryDetailsPageController implements Initializable {
             System.out.println("Errore durante la transizione in register-call con doRegisterCall in EntryDetailsPageController");
         }
     }
-    public void doDelete(ActionEvent event){
+    public void doDelete(ActionEvent event){        //ToDO elimina anche la nota che adesso non riesce
         DBManager.deleteEntry(entryToDisplayDetails.getId());
+        try {
+            MyUtils.delete("bin\\Note\\" + entryToDisplayDetails.getNoteId() + ".xml");
+        } catch (Exception e){
+            System.out.println("Nessuna nota da cancellare");
+        }
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("search-entry.fxml")));       //cambio scena
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -203,6 +211,9 @@ public class EntryDetailsPageController implements Initializable {
     }
     public void setEntryProperty(Contatto entry){
         entryProperty.set(entry);
+    }
+    public void setNoteDocument(){
+        noteDisplayer.setDocument(""+entryToDisplayDetails.getNoteId());
     }
     private void setFieldDisability(boolean state){
         for (TextField textField : Arrays.asList(ragioneSociale, personaDiRiferimento, citta, paese, emailReferente, telefono, regione, indirizzo, provincia, cap, civico, partitaIva, codiceFiscale, emailGenerica, sito, pec, titolare)) {
