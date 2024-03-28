@@ -39,7 +39,7 @@ public class RegisterCallController implements Initializable {
             NoteManager nm = new NoteManager();
             Document doc;
             try {   //RECUPERO xml NOTE SE INESISTENTE CREAZIONE DI UNO NUOVO
-                doc = nm.readXml("bin\\note\\" + bean.getNoteId()+ ".xml");
+                doc = nm.readXml("" + bean.getNoteId());
             }catch (Exception e) {
                 System.out.println("Creazione nuovo documento di nota");
                 doc = nm.createDocument(bean.getRagioneSociale());

@@ -138,7 +138,6 @@ public abstract class DBManager extends TagsManager{
             data.setProssimaChiamata(date);
             data.incrementVolteContattati();
             Calendar now = Calendar.getInstance();
-            System.out.println(now.get(Calendar.DATE));
             int year = now.get(Calendar.YEAR);
             int month = now.get(Calendar.MONTH);
             int day = now.get(Calendar.DAY_OF_MONTH);

@@ -7,7 +7,7 @@ import org.w3c.dom.Element;
 
 public class DisplayableNote extends GridPane {
     public DisplayableNote(Element element){
-        Label operator = new Label("Operatore: " + element.getAttribute("data"));
+        Label operator = new Label("Operatore: " + element.getAttribute("operatore"));
         Label duration = new Label("Durata: " + element.getAttribute("durata"));
         Text content = new Text(element.getTextContent());
         Label day = new Label("Giorno: " + element.getAttribute("data"));

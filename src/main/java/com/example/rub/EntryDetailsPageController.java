@@ -241,5 +241,6 @@ public class EntryDetailsPageController implements Initializable {
     }
     public void refresh(){
         init(false);
+        noteDisplayer.refresh();
     }
 }

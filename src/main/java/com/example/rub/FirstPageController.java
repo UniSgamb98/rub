@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -74,6 +75,11 @@ public class FirstPageController implements Initializable {
             br.close();
         } catch (IOException e){
             System.out.println("Errore nell'importazione da file txt");
+        } finally {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Importazione");
+            alert.setContentText("Importazione avvenuta con successo");
+            alert.showAndWait();
         }
     }
     private void fillAttribute (int index, Contatto bean, String attribute){

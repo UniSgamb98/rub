@@ -19,6 +19,7 @@ public class NoteDisplayer extends VBox {
     Document document;
     ObservableList<DisplayableNote> notes;
     ListView<DisplayableNote> notesView;
+    String path;
     public NoteDisplayer(){
         this.setMinHeight(250);
         this.setMinWidth(500);
@@ -30,15 +31,23 @@ public class NoteDisplayer extends VBox {
     }
 
     public void setDocument(String docPath) {
+        path = docPath;
+        manageNote();
+    }
+    public void refresh(){
+        notes.clear();
+        manageNote();
+    }
+    private void manageNote(){
         try {
-            document = new NoteManager().readXml(docPath);
+            document = new NoteManager().readXml(path);
             document.getDocumentElement().normalize();
             NodeList nodeList = document.getElementsByTagName("chiamata");
             for (int i = 0; i < nodeList.getLength(); i++){
                 Node node = nodeList.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE){
                     Element e = (Element) node;
-                    notes.add(new DisplayableNote(e));
+                    notes.add(0,new DisplayableNote(e));
                 }
             }
         } catch (IOException | SAXException | ParserConfigurationException e) {

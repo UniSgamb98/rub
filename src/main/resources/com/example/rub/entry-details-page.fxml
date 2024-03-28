@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.example.rub.objects.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import com.example.rub.objects.NoteDisplayer?>
 <BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.EntryDetailsPageController">
     <center>
 <GridPane alignment="CENTER" prefHeight="350.0" prefWidth="650.0">
@@ -95,7 +95,7 @@
          <TextField fx:id="emailGenerica" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="11" />
          <TextField fx:id="codiceFiscale" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="10" />
          <TextField fx:id="partitaIva" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-         <NoteDisplayer fx:id="noteDisplayer" GridPane.columnIndex="1" GridPane.rowIndex="16"/>
+         <NoteDisplayer fx:id="noteDisplayer" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="16" />
          <columnConstraints>
             <ColumnConstraints />
             <ColumnConstraints />
