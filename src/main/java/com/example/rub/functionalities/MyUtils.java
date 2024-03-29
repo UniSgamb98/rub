@@ -5,7 +5,7 @@ import java.io.*;
 public abstract class MyUtils {
     public static void write(Object file, String fileName){
         try {
-            File fileOne = new File(fileName);
+            File fileOne = new File("bin\\data\\" + fileName);
             FileOutputStream fos = new FileOutputStream(fileOne);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(file);
@@ -17,7 +17,7 @@ public abstract class MyUtils {
         }
     }
     public static Object read(String file) throws IOException, ClassNotFoundException {
-        File toRead = new File(file);
+        File toRead = new File("bin\\data\\" + file);
         FileInputStream fis = new FileInputStream(toRead);
         ObjectInputStream ois = new ObjectInputStream(fis);
         Object temp = ois.readObject();

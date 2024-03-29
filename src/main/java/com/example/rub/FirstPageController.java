@@ -73,14 +73,17 @@ public class FirstPageController implements Initializable {
 
             }while((in = br.readLine()) != null );
             br.close();
-        } catch (IOException e){
-            System.out.println("Errore nell'importazione da file txt");
-        } finally {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Importazione");
             alert.setContentText("Importazione avvenuta con successo");
             alert.showAndWait();
-        }
+        } catch (IOException e){
+            System.out.println("Errore nell'importazione da file txt");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Importazione");
+            alert.setContentText("Importazione fallita:" + e.getCause().toString());
+            alert.showAndWait();
+        }   //TODO mettere in finally lo show del messaggio e in try e catch i parametri del messaggio
     }
     private void fillAttribute (int index, Contatto bean, String attribute){
         switch (index){
