@@ -5,5 +5,4 @@ public enum TipoCliente {
     LABORATORIO,
     CENTROFRESAGGIO,
     BLANK
-
 }

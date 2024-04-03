@@ -194,34 +194,44 @@ public abstract class DBManager extends TagsManager{
         return ret;
     }
 
+    private static String checkEmptiness(String s){
+        String ret;
+        if (s.isBlank()){
+            ret = "%";
+        } else {
+            ret = s;
+        }
+        return ret;
+    }
     public static void export() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Esportazione");
         alert.setContentText("Esportazione avvenuta");
         try {
-            File file = new File("esportato.txt");
+            File file = new File("Importa.txt");
             FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
             for (Contatto i : database.values()){
-                bw.write(i.getRagioneSociale()+";");
-                bw.write(i.getPersonaRiferimento()+";");
-                bw.write(i.getEmailReferente()+";");
-                bw.write(i.getTelefono()+";");
-                bw.write(i.getPaese()+";");
-                bw.write(i.getRegione()+";");
-                bw.write(i.getCitta()+";");
-                bw.write(i.getIndirizzo()+";");
-                bw.write(i.getNumeroCivico()+";");
-                bw.write(i.getProvincia()+";");
-                bw.write(i.getCap()+";");
-                bw.write(i.getInteressamento().name()+";");
-                bw.write(i.getPartitaIva()+";");
-                bw.write(i.getCodiceFiscale()+";");
-                bw.write(i.getTitolare()+";");
-                bw.write(i.getEmailGenereica()+";");
-                bw.write(i.getEmailCertificata()+";");
-                bw.write(i.getSitoWeb()+";");
-                bw.write(i.getNoteId()+";");
+                bw.write(checkEmptiness(i.getRagioneSociale())+";");
+                bw.write(checkEmptiness(i.getPersonaRiferimento())+";");
+                bw.write(checkEmptiness(i.getEmailReferente())+";");
+                bw.write(checkEmptiness(i.getTelefono())+";");
+                bw.write(checkEmptiness(i.getPaese())+";");
+                bw.write(checkEmptiness(i.getRegione())+";");
+                bw.write(checkEmptiness(i.getCitta())+";");
+                bw.write(checkEmptiness(i.getIndirizzo())+";");
+                bw.write(checkEmptiness(i.getNumeroCivico())+";");
+                bw.write(checkEmptiness(i.getProvincia())+";");
+                bw.write(checkEmptiness(i.getCap())+";");
+                bw.write(checkEmptiness(i.getInteressamento().name())+";");
+                bw.write(checkEmptiness(i.getTipoCliente().name())+ ";");
+                bw.write(checkEmptiness(i.getPartitaIva())+";");
+                bw.write(checkEmptiness(i.getCodiceFiscale())+";");
+                bw.write(checkEmptiness(i.getTitolare())+";");
+                bw.write(checkEmptiness(i.getEmailGenereica())+";");
+                bw.write(checkEmptiness(i.getEmailCertificata())+";");
+                bw.write(checkEmptiness(i.getSitoWeb())+";");
+                bw.write(checkEmptiness(""+i.getNoteId())+";");
                 bw.newLine();
             }
             bw.flush();

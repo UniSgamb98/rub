@@ -155,7 +155,10 @@ public class FirstPageController implements Initializable {
                 bean.setSitoWeb(attribute);
                 break;
             case 19:
-                bean.setNoteId(UUID.fromString(attribute));
+                if(!attribute.isBlank()){
+                    System.out.println(UUID.fromString(attribute));
+                    bean.setNoteId(UUID.fromString(attribute));
+                }
         }
     }
 
@@ -186,10 +189,10 @@ public class FirstPageController implements Initializable {
         }
     }
 
-    public void doShowReport(ActionEvent event) {
+    public void doShowReport() {
     }
 
-    public void doExportForExcels(ActionEvent event) {
+    public void doExportForExcels() {
         DBManager.export();
     }
 }
