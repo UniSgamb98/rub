@@ -5,5 +5,6 @@ public enum Operatori {
     HUGO,
     GAETANO,
     TOMMASO,
-    VICTORIA
+    VICTORIA,
+    BLANK
 }

@@ -67,7 +67,7 @@ public class FirstPageController implements Initializable {
                 newEntryFromFile = new Contatto();
                 int subStringStart = 0;
                 int subStringEnd = in.indexOf(";");
-                for(int i = 0; i <= 19; i++){
+                for(int i = 0; i <= 20; i++){
                     String subString = in.substring(subStringStart,subStringEnd);
                     if(subString.equals("%")) {
                         fillAttribute(i, newEntryFromFile, "");
@@ -159,6 +159,13 @@ public class FirstPageController implements Initializable {
                     System.out.println(UUID.fromString(attribute));
                     bean.setNoteId(UUID.fromString(attribute));
                 }
+            case 20:
+                if (attribute.isEmpty()) {
+                    bean.setOperator(Operatori.BLANK);
+                } else {
+                    bean.setOperator(Operatori.valueOf(attribute));
+                }
+                break;
         }
     }
 

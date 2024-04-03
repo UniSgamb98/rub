@@ -232,6 +232,7 @@ public abstract class DBManager extends TagsManager{
                 bw.write(checkEmptiness(i.getEmailCertificata())+";");
                 bw.write(checkEmptiness(i.getSitoWeb())+";");
                 bw.write(checkEmptiness(""+i.getNoteId())+";");
+                bw.write(checkEmptiness(""+i.getOperator())+";");
                 bw.newLine();
             }
             bw.flush();

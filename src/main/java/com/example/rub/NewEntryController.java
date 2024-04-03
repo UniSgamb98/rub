@@ -2,6 +2,7 @@ package com.example.rub;
 
 import com.example.rub.beans.Contatto;
 import com.example.rub.functionalities.DBManager;
+import com.example.rub.functionalities.GlobalContext;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -78,7 +79,7 @@ public class NewEntryController {
         } catch (Exception e) { System.out.println("Errore durante la transizione in firstPage con abortNewEntry");   }
     }
 
-    private Contatto getContatto() {    //TODO: Aggiornare con nuovi dati
+    private Contatto getContatto() {
         Contatto newEntry = new Contatto();                         //creazione Bean contatto
         newEntry.setRagioneSociale(ragioneSociale.getText());
         newEntry.setCitta(citta.getText());
@@ -97,6 +98,7 @@ public class NewEntryController {
         newEntry.setRegione(regione.getText());
         newEntry.setIndirizzo(via.getText());
         newEntry.setProvincia(provincia.getText());
+        newEntry.setOperator(GlobalContext.operator);
         return newEntry;
     }
 }

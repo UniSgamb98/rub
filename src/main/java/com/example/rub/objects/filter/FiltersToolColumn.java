@@ -13,14 +13,18 @@ import java.util.UUID;
 public class FiltersToolColumn extends VBox {
     StateFilter locationFilter;
     public FiltersToolColumn (){
-        LocationManager manager = null;
+        LocationManager manager = null;         //TODO si può scrivere meglio
         try {
             manager = (LocationManager) MyUtils.read("mondo");
         } catch (Exception e) {
             DBManager.reconstruct();
         }
-
         locationFilter = new StateFilter(manager);
+
+
+
+
+
         this.getChildren().addAll(new Separator(), locationFilter);
     }
     public LinkedList<UUID> getFilteredList(){

@@ -13,6 +13,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -24,17 +25,21 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         operator.getItems().addAll(Operatori.values());
-        operator.setValue(Operatori.TOMMASO);
+        //operator.setValue(Operatori.TOMMASO);
     }
 
     public void doLogin(ActionEvent event) {
-        GlobalContext.operator = operator.getValue();
-        try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("firstPage.fxml")));       //cambio scena
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }catch (Exception e) { System.out.println("Errore durante la transizione in firstPage con doLogin"); }
+        if (Arrays.asList(Operatori.values()).contains(operator.getValue())) {
+            GlobalContext.operator = operator.getValue();
+            try {
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("firstPage.fxml")));       //cambio scena
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (Exception e) {
+                System.out.println("Errore durante la transizione in firstPage con doLogin");
+            }
+        }
     }
 }
