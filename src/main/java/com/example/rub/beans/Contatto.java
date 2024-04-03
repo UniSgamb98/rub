@@ -1,6 +1,7 @@
 package com.example.rub.beans;
 
 import com.example.rub.enums.Interessamento;
+import com.example.rub.enums.Operatori;
 import com.example.rub.enums.TipoCliente;
 
 import java.io.Serializable;
@@ -31,8 +32,8 @@ public class Contatto implements Serializable {
     private LocalDate prossimaChiamata;
     private String sitoWeb;
     private UUID id;
-    private final UUID noteId;
-    private boolean rememberMe;
+    private UUID noteId;
+    private Operatori operator;
 
     public Contatto(){
         noteId = UUID.randomUUID();
@@ -40,6 +41,9 @@ public class Contatto implements Serializable {
 
     public String getTelefono() {
         return telefono;
+    }
+    public Operatori getOperator() {
+        return operator;
     }
     public String getPersonaRiferimento() {
         return personaRiferimento;
@@ -110,12 +114,12 @@ public class Contatto implements Serializable {
     public UUID getNoteId() {
         return noteId;
     }
-    public boolean getRememberMe(){
-        return rememberMe;
-    }
 
     public void setTipoCliente(TipoCliente tipoCliente) {
         this.tipoCliente = tipoCliente;
+    }
+    public void setNoteId(UUID noteId) {
+        this.noteId = noteId;
     }
     public void setTelefono(String telefono) {
         this.telefono = telefono;
@@ -140,6 +144,9 @@ public class Contatto implements Serializable {
     }
     public void setRagioneSociale(String ragioneSociale) {
         this.ragioneSociale = ragioneSociale;
+    }
+    public void setOperator(Operatori operator) {
+        this.operator = operator;
     }
     public void setUltimaChiamata(LocalDate ultimaChiamata) {
         this.ultimaChiamata = ultimaChiamata;
@@ -182,9 +189,6 @@ public class Contatto implements Serializable {
     }
     public void setRegione(String regione) {
         this.regione = regione;
-    }
-    public void setRememberMe(boolean rememberMe) {
-        this.rememberMe = rememberMe;
     }
     public void setVolteContattati(int volteContattati) {
         this.volteContattati = volteContattati;

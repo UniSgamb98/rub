@@ -2,6 +2,7 @@ module com.example.rub {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.xml;
+    requires java.sql;
     exports com.example.rub.objects;
     exports com.example.rub.enums;
     exports com.example.rub.beans;

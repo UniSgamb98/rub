@@ -17,19 +17,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 public class FirstPageController implements Initializable {
     @FXML
     public Button importButton;
     @FXML
-    public Button reportButton;
+    public Button exportButton;
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -69,7 +67,7 @@ public class FirstPageController implements Initializable {
                 newEntryFromFile = new Contatto();
                 int subStringStart = 0;
                 int subStringEnd = in.indexOf(";");
-                for(int i = 0; i < 19; i++){
+                for(int i = 0; i <= 19; i++){
                     String subString = in.substring(subStringStart,subStringEnd);
                     if(subString.equals("%")) {
                         fillAttribute(i, newEntryFromFile, "");
@@ -81,7 +79,6 @@ public class FirstPageController implements Initializable {
                 }
                 System.out.println("   Inserimento di " + newEntryFromFile);
                 DBManager.saveEntry(newEntryFromFile, false);
-
             }while((in = br.readLine()) != null );
             br.close();
         } catch (IOException e){
@@ -157,6 +154,8 @@ public class FirstPageController implements Initializable {
             case 18:
                 bean.setSitoWeb(attribute);
                 break;
+            case 19:
+                bean.setNoteId(UUID.fromString(attribute));
         }
     }
 
@@ -165,7 +164,32 @@ public class FirstPageController implements Initializable {
         DBManager.init();
         if (GlobalContext.operator == Operatori.TOMMASO || GlobalContext.operator == Operatori.GAETANO || GlobalContext.operator == Operatori.VICTORIA){
             importButton.setVisible(true);
-            reportButton.setVisible(true);
+            importButton.setPrefSize(130.0,130.0);
+            exportButton.setVisible(true);
+            exportButton.setPrefSize(130.0,130.0);
         }
+    }
+
+    public void doShowCallsToMake() {
+        try {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("calls-page.fxml"));
+            Parent root = loader.load();
+            CallsPageController controller = loader.getController();
+            controller.setCallList(DBManager.getCallList());
+            Stage callStage = new Stage();
+            callStage.setTitle("Elenco Chiamate");
+            Scene scene = new Scene(root, 380, 285);
+            callStage.setScene(scene);
+            callStage.show();
+        } catch (Exception e) {
+            System.out.println("Errore durante la visualizzazione di callList con doShowCallList in FirstPageController");
+        }
+    }
+
+    public void doShowReport(ActionEvent event) {
+    }
+
+    public void doExportForExcels(ActionEvent event) {
+        DBManager.export();
     }
 }

@@ -4,8 +4,13 @@ import com.example.rub.beans.Contatto;
 import com.example.rub.beans.DeletedContatto;
 import com.example.rub.functionalities.locations.LocationManager;
 import com.example.rub.objects.DisplayableEntry;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.HBox;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -136,11 +141,10 @@ public abstract class DBManager extends TagsManager{
             data.incrementVolteContattati();
             Calendar now = Calendar.getInstance();
             int year = now.get(Calendar.YEAR);
-            int month = now.get(Calendar.MONTH);
+            int month = now.get(Calendar.MONTH)+1;
             int day = now.get(Calendar.DAY_OF_MONTH);
             LocalDate today = LocalDate.of(year,month,day);
             data.setUltimaChiamata(today);
-            data.setRememberMe(date == null);
             database.put(uuid, data);
             MyUtils.write(database, "database");
         } catch (Exception e){
@@ -169,4 +173,64 @@ public abstract class DBManager extends TagsManager{
         System.out.println("il Database è stato ricreato");
     }
 
+    public static LinkedList<UUID> getCallList() {
+        LinkedList<UUID> callList = new LinkedList<>();
+        for (Contatto i : database.values()){
+            if(isToday(i.getProssimaChiamata())) { callList.add(i.getId());}
+        }
+        return callList;
+    }
+
+    private static boolean isToday(LocalDate dateToConvert) {
+        boolean ret = false;
+        Calendar now = Calendar.getInstance();
+        try {
+            if (now.get(Calendar.DAY_OF_MONTH) == dateToConvert.getDayOfMonth() &&
+                    now.get(Calendar.MONTH) + 1 == dateToConvert.getMonthValue() &&
+                    now.get(Calendar.YEAR) == dateToConvert.getYear()) {
+                ret = true;
+            }
+        } catch (Exception ignored) {}
+        return ret;
+    }
+
+    public static void export() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Esportazione");
+        alert.setContentText("Esportazione avvenuta");
+        try {
+            File file = new File("esportato.txt");
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (Contatto i : database.values()){
+                bw.write(i.getRagioneSociale()+";");
+                bw.write(i.getPersonaRiferimento()+";");
+                bw.write(i.getEmailReferente()+";");
+                bw.write(i.getTelefono()+";");
+                bw.write(i.getPaese()+";");
+                bw.write(i.getRegione()+";");
+                bw.write(i.getCitta()+";");
+                bw.write(i.getIndirizzo()+";");
+                bw.write(i.getNumeroCivico()+";");
+                bw.write(i.getProvincia()+";");
+                bw.write(i.getCap()+";");
+                bw.write(i.getInteressamento().name()+";");
+                bw.write(i.getPartitaIva()+";");
+                bw.write(i.getCodiceFiscale()+";");
+                bw.write(i.getTitolare()+";");
+                bw.write(i.getEmailGenereica()+";");
+                bw.write(i.getEmailCertificata()+";");
+                bw.write(i.getSitoWeb()+";");
+                bw.write(i.getNoteId()+";");
+                bw.newLine();
+            }
+            bw.flush();
+            bw.close();
+        }
+        catch(IOException e) {
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setContentText("Esportazione fallita");
+        }
+        alert.show();
+    }
 }

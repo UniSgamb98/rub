@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.CallsPageController">
+   <bottom>
+      <AnchorPane prefHeight="82.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <Button mnemonicParsing="false" text="Indietro" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="20.0">
+         </Button>
+      </AnchorPane>
+   </bottom>
+   <left>
+      <VBox prefHeight="308.0" prefWidth="192.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets top="10.0" />
+         </BorderPane.margin>
+         <Label text="Label">
+            <VBox.margin>
+               <Insets left="30.0" />
+            </VBox.margin>
+         </Label>
+         <ListView fx:id="callList" prefHeight="200.0" prefWidth="152.0">
+            <VBox.margin>
+               <Insets left="30.0" />
+            </VBox.margin>
+         </ListView>
+      </VBox>
+   </left>
+</BorderPane>
