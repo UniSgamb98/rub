@@ -2,15 +2,19 @@ package com.example.rub;
 
 import com.example.rub.beans.Contatto;
 import com.example.rub.enums.Interessamento;
+import com.example.rub.enums.Operatori;
 import com.example.rub.enums.TipoCliente;
 import com.example.rub.functionalities.DBManager;
+import com.example.rub.functionalities.GlobalContext;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -22,6 +26,10 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class FirstPageController implements Initializable {
+    @FXML
+    public Button importButton;
+    @FXML
+    public Button reportButton;
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -49,6 +57,9 @@ public class FirstPageController implements Initializable {
         System.out.println("Importazione contatti da file...");
         String in;
         Contatto newEntryFromFile;
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Importazione");
+        alert.setContentText("Importazione avvenuta con successo");
         try{
             File file = new File("Importa.txt");
             FileReader fr = new FileReader(file);
@@ -69,21 +80,15 @@ public class FirstPageController implements Initializable {
                     subStringEnd = in.indexOf(";", subStringStart+1);
                 }
                 System.out.println("   Inserimento di " + newEntryFromFile);
-                DBManager.saveEntry(newEntryFromFile);
+                DBManager.saveEntry(newEntryFromFile, false);
 
             }while((in = br.readLine()) != null );
             br.close();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Importazione");
-            alert.setContentText("Importazione avvenuta con successo");
-            alert.showAndWait();
         } catch (IOException e){
             System.out.println("Errore nell'importazione da file txt");
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Importazione");
             alert.setContentText("Importazione fallita:" + e.getCause().toString());
+        }
             alert.showAndWait();
-        }   //TODO mettere in finally lo show del messaggio e in try e catch i parametri del messaggio
     }
     private void fillAttribute (int index, Contatto bean, String attribute){
         switch (index){
@@ -158,5 +163,9 @@ public class FirstPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb){
         DBManager.init();
+        if (GlobalContext.operator == Operatori.TOMMASO || GlobalContext.operator == Operatori.GAETANO || GlobalContext.operator == Operatori.VICTORIA){
+            importButton.setVisible(true);
+            reportButton.setVisible(true);
+        }
     }
 }

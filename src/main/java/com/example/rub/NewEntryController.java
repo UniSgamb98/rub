@@ -58,7 +58,7 @@ public class NewEntryController {
             alert.setContentText("Prego assicurarsi di riempire i campi: Paese, Regione, Città");
             alert.showAndWait();
         }
-        DBManager.saveEntry(newEntry);
+        DBManager.saveEntry(newEntry, false);
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("firstPage.fxml")));       //cambio scena
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

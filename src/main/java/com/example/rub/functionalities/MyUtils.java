@@ -16,6 +16,33 @@ public abstract class MyUtils {
             System.out.println("Scrittura file fallita: "+ fileName);
         }
     }
+
+    public static void writeAll(Object database, Object indice, Object mondo){
+        String[] datas = {"database", "indice", "mondo"};
+        for (String i : datas) {
+            try {
+                File fileOne = new File("bin\\data\\" + i);
+                FileOutputStream fos = new FileOutputStream(fileOne);
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                switch (i) {
+                    case "database":
+                        oos.writeObject(database);
+                        break;
+                    case "mondo":
+                        oos.writeObject(mondo);
+                        break;
+                    case "indice":
+                        oos.writeObject(indice);
+                        break;
+                }
+                oos.flush();
+                oos.close();
+                fos.close();
+            } catch (Exception e) {
+                System.out.println("Scrittura file fallita: " + i);
+            }
+        }
+    }
     public static Object read(String file) throws IOException, ClassNotFoundException {
         File toRead = new File("bin\\data\\" + file);
         FileInputStream fis = new FileInputStream(toRead);
@@ -24,15 +51,5 @@ public abstract class MyUtils {
         ois.close();
         fis.close();
         return temp;
-    }
-
-    public static void delete(String fileName){
-        File fileOne = new File(fileName);
-        try (FileOutputStream fos = new FileOutputStream(fileOne);
-             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-            oos.writeObject(new Object());
-        } catch (Exception e){
-            System.out.println("Cancellazione fallita di: "+ fileName);
-        }
     }
 }

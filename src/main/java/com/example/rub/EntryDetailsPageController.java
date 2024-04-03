@@ -135,13 +135,8 @@ public class EntryDetailsPageController implements Initializable {
             System.out.println("Errore durante la transizione in register-call con doRegisterCall in EntryDetailsPageController");
         }
     }
-    public void doDelete(ActionEvent event){        //ToDO elimina anche la nota che adesso non riesce
+    public void doDelete(ActionEvent event){
         DBManager.deleteEntry(entryToDisplayDetails.getId());
-        try {
-            MyUtils.delete("bin\\Note\\" + entryToDisplayDetails.getNoteId() + ".xml");
-        } catch (Exception e){
-            System.out.println("Nessuna nota da cancellare");
-        }
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("search-entry.fxml")));       //cambio scena
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

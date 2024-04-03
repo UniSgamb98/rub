@@ -1,29 +1,29 @@
 package com.example.rub.functionalities;
 
 import com.example.rub.beans.Contatto;
+import com.example.rub.beans.DeletedContatto;
 import com.example.rub.functionalities.locations.LocationManager;
 import com.example.rub.objects.DisplayableEntry;
 import javafx.scene.layout.HBox;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
 public abstract class DBManager extends TagsManager{
 
-    public static void saveEntry(Contatto bean){ //Salva un Contatto nel database
-        try {
-            update();
-        } catch (Exception e) {
-            System.out.println("Salvataggio rischioso, Errore durante l'update del Database persistente");
+    public static void saveEntry(Contatto bean, boolean isBeingReconstructed){ //Salva un Contatto nel database
+        if (!isBeingReconstructed) {
+            try {
+                update();
+            } catch (Exception e) {
+                System.out.println("Salvataggio rischioso, Errore durante l'update del Database persistente");
+            }
         }
         UUID uuid = UUID.randomUUID();
         bean.setId(uuid);
         database.put(uuid, bean);
         indexNewEntry(bean, uuid);
-        MyUtils.write(database, "database");
-        MyUtils.write(index, "indice");
-        MyUtils.write(locationManager, "mondo");
+        MyUtils.writeAll(database, index, locationManager);
         System.out.println("Nuovo contatto inserito in database!");
     }
     public static void deleteEntry(UUID id){
@@ -32,13 +32,19 @@ public abstract class DBManager extends TagsManager{
         } catch (Exception e){
             System.out.println("Errore durante l'eliminazione di una entry");
         }
+        try {
+            trashcan = (LinkedList<DeletedContatto>) MyUtils.read("dataStructure");
+        } catch (Exception e) {
+            trashcan = new LinkedList<>();
+        }
+            trashcan.add(new DeletedContatto(database.get(id)));
+
         removeEntryFromLocationManager(id);
         removeEntryFromIndex(id);
         database.remove(id);
 
-        MyUtils.write(database, "database");
-        MyUtils.write(index, "indice");
-        MyUtils.write(locationManager, "mondo");
+        MyUtils.writeAll(database, index, locationManager);
+        MyUtils.write(trashcan, "dataStructure");
     }
     public static Contatto retriveEntry(UUID uuid){  //carica un Contatto dal database
         return database.get(uuid);
@@ -67,24 +73,22 @@ public abstract class DBManager extends TagsManager{
         return ret;
     }
     private static void loadData(){     //Legge il database e indice dai file salvati persistentemente
-        if (database == null) {
-            try {
-                update();
-            } catch (Exception e) {
-                database = new HashMap<>();
-                index = new HashMap<>();
-                locationManager = new LocationManager();
-                System.out.println("Database non trovato... Scrittura di uno nuovo");
-                MyUtils.write(database, "database");
-                MyUtils.write(index, "indice");
-                MyUtils.write(locationManager, "mondo");
-            }
+        if (database == null) { //questa condizione è per eseguire il load solo la prima volta che si accede a firstpage
+            update();
         }
     }
-    public static void update() throws IOException, ClassNotFoundException {
-        index = (HashMap<String, LinkedList<UUID>>) MyUtils.read("indice");
-        database = (HashMap<UUID, Contatto>) MyUtils.read("database");
-        locationManager = (LocationManager) MyUtils.read("mondo");
+    public static void update(){
+        try {
+            database = (HashMap<UUID, Contatto>) MyUtils.read("database");
+            try {
+                index = (HashMap<String, LinkedList<UUID>>) MyUtils.read("indice");
+                locationManager = (LocationManager) MyUtils.read("mondo");
+            } catch (Exception e) {
+                reconstruct();
+            }
+        } catch (Exception e){
+            rebuild();
+        }
     }
 
     public static void modifyEntry(UUID id, Contatto modifiedBean){
@@ -112,21 +116,14 @@ public abstract class DBManager extends TagsManager{
             if (!oldBean.getEmailCertificata().equals(modifiedBean.getEmailCertificata()))   oldBean.setEmailCertificata(modifiedBean.getEmailCertificata());
             if (!oldBean.getSitoWeb().equals(modifiedBean.getSitoWeb()))   oldBean.setSitoWeb(modifiedBean.getSitoWeb());
             if (!oldBean.getTitolare().equals(modifiedBean.getTitolare()))   oldBean.setTitolare(modifiedBean.getTitolare());
-
             if (!Objects.equals(oldBean.getTipoCliente(), modifiedBean.getTipoCliente()))   oldBean.setTipoCliente(modifiedBean.getTipoCliente());
             if (!Objects.equals(oldBean.getInteressamento(), modifiedBean.getInteressamento()))   oldBean.setInteressamento(modifiedBean.getInteressamento());
             if (!Objects.equals(oldBean.getUltimaChiamata(), modifiedBean.getUltimaChiamata()))   oldBean.setUltimaChiamata(modifiedBean.getUltimaChiamata());
             if (!Objects.equals(oldBean.getProssimaChiamata(), modifiedBean.getProssimaChiamata()))   oldBean.setProssimaChiamata(modifiedBean.getProssimaChiamata());
 
-
-            //database.remove(id);
-
-            //database.put(id, oldBean);
             indexNewEntry(oldBean, id);
 
-            MyUtils.write(database, "database");
-            MyUtils.write(index, "indice");
-            MyUtils.write(locationManager, "mondo");
+            MyUtils.writeAll(database, index, locationManager);
         } catch (Exception e){
             System.out.println("Errore durante la modifica di entry");
         }
@@ -154,12 +151,22 @@ public abstract class DBManager extends TagsManager{
     public static void reconstruct(){
         HashMap<UUID, Contatto> oldDatabase = database;
         database = new HashMap<>();
+        index = new HashMap<>();
+        locationManager = new LocationManager();
         for (Contatto i : oldDatabase.values()){
-            DBManager.saveEntry(i);
+            DBManager.saveEntry(i, true);
         }
-        MyUtils.write(database, "database");
-        MyUtils.write(index, "indice");
-        MyUtils.write(locationManager, "mondo");
+        MyUtils.writeAll(database, index, locationManager);
         System.out.println("il Database è stato ricostruito");
     }
+
+    private static void rebuild(){
+        database = new HashMap<>();
+        index = new HashMap<>();
+        locationManager = new LocationManager();
+        System.out.println("Database non trovato... Scrittura di uno nuovo");
+        MyUtils.writeAll(database, index, locationManager);
+        System.out.println("il Database è stato ricreato");
+    }
+
 }

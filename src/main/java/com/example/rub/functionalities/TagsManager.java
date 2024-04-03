@@ -1,6 +1,7 @@
 package com.example.rub.functionalities;
 
 import com.example.rub.beans.Contatto;
+import com.example.rub.beans.DeletedContatto;
 import com.example.rub.functionalities.locations.*;
 
 import java.util.HashMap;
@@ -11,9 +12,10 @@ public abstract class TagsManager {
     protected static HashMap<UUID, Contatto> database;
     protected static HashMap<String, LinkedList<UUID>> index;
     protected static LocationManager locationManager;
+    protected static LinkedList<DeletedContatto> trashcan;
 
     protected static void indexNewEntry(Contatto newEntry, UUID uuid){    //indicizza un Contatto che appena stato creato
-        System.out.println("Aggiornamento tag di filtraggio");
+        System.out.println("    Aggiornamento tag di filtraggio");
         insertTagInIndex(newEntry.getPaese(), uuid);
         insertTagInIndex(newEntry.getCitta(), uuid);
         insertTagInIndex(newEntry.getRegione(), uuid);
@@ -86,12 +88,12 @@ public abstract class TagsManager {
     }
     private static void insertTagInIndex(String tag, UUID uuid){    //Aggiunge il tag l'uuid sotto la voce del tag fornito, se non trovato crea un tag
         if (index.containsKey(tag)) {   //TAG APPESO
-            System.out.println("   Tag " + tag + " trovato in indice.");
+            System.out.println("       Tag " + tag + " trovato in indice.");
             LinkedList<UUID> tagsUUID = index.get(tag);
             tagsUUID.add(uuid);
             index.put(tag, tagsUUID);
         } else {
-            System.out.println("   Creazione di un nuovo tag: " + tag);    //TAG AGGIUNTO
+            System.out.println("       Creazione di un nuovo tag: " + tag);    //TAG AGGIUNTO
             LinkedList<UUID> temp = new LinkedList<>();
             temp.add(uuid);
             index.put(tag, temp);
