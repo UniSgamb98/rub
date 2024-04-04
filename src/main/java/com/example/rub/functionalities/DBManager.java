@@ -15,6 +15,17 @@ import java.time.LocalDate;
 import java.util.*;
 
 public abstract class DBManager extends TagsManager{
+    private static void format(Contatto bean){
+        try {
+            bean.setPaese(bean.getPaese().substring(0, 1).toUpperCase() + bean.getPaese().substring(1).toLowerCase());
+        }catch (Exception e)    { bean.setPaese("?"); }
+        try {
+            bean.setRegione(bean.getRegione().substring(0, 1).toUpperCase() + bean.getRegione().substring(1).toLowerCase());
+        }catch (Exception e)    { bean.setRegione("??");}
+        try {
+            bean.setCitta(bean.getCitta().substring(0, 1).toUpperCase() + bean.getCitta().substring(1).toLowerCase());
+        }catch (Exception e)    { bean.setCitta("???");}
+    }
 
     public static void saveEntry(Contatto bean, boolean isBeingReconstructed){ //Salva un Contatto nel database
         if (!isBeingReconstructed) {
@@ -24,6 +35,7 @@ public abstract class DBManager extends TagsManager{
                 System.out.println("Salvataggio rischioso, Errore durante l'update del Database persistente");
             }
         }
+        format(bean);
         UUID uuid = UUID.randomUUID();
         bean.setId(uuid);
         database.put(uuid, bean);
@@ -213,16 +225,6 @@ public abstract class DBManager extends TagsManager{
         } catch (Exception ignored) {}
         return ret;
     }
-
-    private static String checkEmptiness(String s){
-        String ret;
-        if (s.isBlank()){
-            ret = "%";
-        } else {
-            ret = s;
-        }
-        return ret;
-    }
     public static void export() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Esportazione");
@@ -232,27 +234,27 @@ public abstract class DBManager extends TagsManager{
             FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
             for (Contatto i : database.values()){
-                bw.write(checkEmptiness(i.getRagioneSociale())+";");
-                bw.write(checkEmptiness(i.getPersonaRiferimento())+";");
-                bw.write(checkEmptiness(i.getEmailReferente())+";");
-                bw.write(checkEmptiness(i.getTelefono())+";");
-                bw.write(checkEmptiness(i.getPaese())+";");
-                bw.write(checkEmptiness(i.getRegione())+";");
-                bw.write(checkEmptiness(i.getCitta())+";");
-                bw.write(checkEmptiness(i.getIndirizzo())+";");
-                bw.write(checkEmptiness(i.getNumeroCivico())+";");
-                bw.write(checkEmptiness(i.getProvincia())+";");
-                bw.write(checkEmptiness(i.getCap())+";");
-                bw.write(checkEmptiness(i.getInteressamento().name())+";");
-                bw.write(checkEmptiness(i.getTipoCliente().name())+ ";");
-                bw.write(checkEmptiness(i.getPartitaIva())+";");
-                bw.write(checkEmptiness(i.getCodiceFiscale())+";");
-                bw.write(checkEmptiness(i.getTitolare())+";");
-                bw.write(checkEmptiness(i.getEmailGenereica())+";");
-                bw.write(checkEmptiness(i.getEmailCertificata())+";");
-                bw.write(checkEmptiness(i.getSitoWeb())+";");
-                bw.write(checkEmptiness(""+i.getNoteId())+";");
-                bw.write(checkEmptiness(""+i.getOperator())+";");
+                bw.write(i.getRagioneSociale()+";");
+                bw.write(i.getPersonaRiferimento()+";");
+                bw.write(i.getEmailReferente()+";");
+                bw.write(i.getTelefono()+";");
+                bw.write(i.getPaese()+";");
+                bw.write(i.getRegione()+";");
+                bw.write(i.getCitta()+";");
+                bw.write(i.getIndirizzo()+";");
+                bw.write(i.getNumeroCivico()+";");
+                bw.write(i.getProvincia()+";");
+                bw.write(i.getCap()+";");
+                bw.write(i.getInteressamento().name()+";");
+                bw.write(i.getTipoCliente().name()+ ";");
+                bw.write(i.getPartitaIva()+";");
+                bw.write(i.getCodiceFiscale()+";");
+                bw.write(i.getTitolare()+";");
+                bw.write(i.getEmailGenereica()+";");
+                bw.write(i.getEmailCertificata()+";");
+                bw.write(i.getSitoWeb()+";");
+                bw.write(i.getNoteId()+";");
+                bw.write(i.getOperator()+";");
                 bw.newLine();
             }
             bw.flush();

@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -67,15 +68,14 @@ public class FirstPageController implements Initializable {
                 newEntryFromFile = new Contatto();
                 int subStringStart = 0;
                 int subStringEnd = in.indexOf(";");
+                String subString;
                 for(int i = 0; i <= 20; i++){
-                    String subString = in.substring(subStringStart,subStringEnd);
-                    if(subString.equals("%")) {
-                        fillAttribute(i, newEntryFromFile, "");
-                    } else {
-                        fillAttribute(i, newEntryFromFile, subString);
-                    }
+
+                    subString = in.substring(subStringStart, subStringEnd);
+                    fillAttribute(i, newEntryFromFile, subString);
+
                     subStringStart = subStringEnd+1;
-                    subStringEnd = in.indexOf(";", subStringStart+1);
+                    subStringEnd = in.indexOf(";", subStringStart);
                 }
                 System.out.println("   Inserimento di " + newEntryFromFile);
                 DBManager.saveEntry(newEntryFromFile, false);
@@ -191,6 +191,7 @@ public class FirstPageController implements Initializable {
             callStage.setTitle("Elenco Chiamate");
             Scene scene = new Scene(root, 380, 285);
             callStage.setScene(scene);
+            callStage.getIcons().add(new Image("AppIcon.png"));
             callStage.show();
         } catch (Exception e) {
             System.out.println("Errore durante la visualizzazione di callList con doShowCallList in FirstPageController");

@@ -17,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -130,6 +131,7 @@ public class EntryDetailsPageController implements Initializable {
             callStage.setTitle("Chiamata");
             Scene scene = new Scene(root, 380, 285);
             callStage.setScene(scene);
+            callStage.getIcons().add(new Image("AppIcon.png"));
             callStage.show();
         } catch (IOException e) {
             System.out.println("Errore durante la transizione in register-call con doRegisterCall in EntryDetailsPageController");
