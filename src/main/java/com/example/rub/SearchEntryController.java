@@ -49,8 +49,7 @@ public class SearchEntryController implements Initializable {
         System.out.println("Eseguo ricerca filtrata");
         LinkedList<UUID> listToDisplay = new LinkedList<>(filterTool.getFilteredList());
 
-        if(listToDisplay.isEmpty()) displayResults(DBManager.getAllEntries());
-        else displayResults(listToDisplay);
+        displayResults(listToDisplay);
     }
     private void displayResults(LinkedList<UUID> resultToDisplay){
         results.clear();

@@ -159,6 +159,7 @@ public class FirstPageController implements Initializable {
                     System.out.println(UUID.fromString(attribute));
                     bean.setNoteId(UUID.fromString(attribute));
                 }
+                break;
             case 20:
                 if (attribute.isEmpty()) {
                     bean.setOperator(Operatori.BLANK);

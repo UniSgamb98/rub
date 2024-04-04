@@ -20,6 +20,8 @@ public abstract class TagsManager {
         insertTagInIndex(newEntry.getCitta(), uuid);
         insertTagInIndex(newEntry.getRegione(), uuid);
         insertTagInIndex(newEntry.getProvincia(), uuid);
+        insertTagInIndex(newEntry.getOperator().name(), uuid);
+        insertTagInIndex(newEntry.getInteressamento().name(), uuid);
 
         insertNewEntryInLocationManager(newEntry);
     }

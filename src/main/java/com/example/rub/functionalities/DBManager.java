@@ -69,11 +69,31 @@ public abstract class DBManager extends TagsManager{
     public static LinkedList<UUID> rapidSearch(String input){
         LinkedList<UUID> ret = new LinkedList<>();
         for (Contatto i : database.values()){
-            boolean a = Objects.equals(i.getPaese(), input);
-            boolean b = Objects.equals(i.getCitta(), input);
-            boolean c = Objects.equals(i.getRagioneSociale(), input);
-            boolean d = Objects.equals(i.getPersonaRiferimento(), input);
-            if (a||b||c||d) ret.add(i.getId());
+            boolean a = evaluate(i.getPaese(), input);
+            boolean b = evaluate(i.getCitta(), input);
+            boolean c = evaluate(i.getRagioneSociale(), input);
+            boolean d = evaluate(i.getPersonaRiferimento(), input);
+            boolean e = evaluate(i.getRegione(), input);
+            boolean f = evaluate(i.getProvincia(), input);
+            boolean g = evaluate(i.getTitolare(), input);
+            boolean h = evaluate(i.getIndirizzo(), input);
+            if (a||b||c||d||e||f||g||h) ret.add(i.getId());
+        }
+        return ret;
+    }
+    private static boolean evaluate(String whole, String input){
+        int start = 0;
+        int fin = input.length()-1;
+        input = input.toLowerCase();
+        whole = whole.toLowerCase();
+        boolean ret = false;
+        for (int i = 0; i < whole.length()-input.length()+1; i++){
+            if (whole.substring(start, fin+1).equals(input)) {
+                ret = true;
+                break;
+            }
+            start++;
+            fin++;
         }
         return ret;
     }
