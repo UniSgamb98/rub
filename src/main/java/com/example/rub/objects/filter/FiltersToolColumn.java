@@ -28,8 +28,8 @@ public class FiltersToolColumn extends VBox {
 
         operatori = new AllPurposeFilter(Operatori.HUGO.name(), Operatori.SANTOLO.name(), Operatori.VICTORIA.name());
         interesse = new AllPurposeFilter(Interessamento.NON_INERENTE.name(), Interessamento.NON_INERENTE.name(), Interessamento.NULLO.name(), Interessamento.RICHIAMARE.name(), Interessamento.INFO.name(), Interessamento.LISTINO.name(), Interessamento.CAMPIONE.name(), Interessamento.CLIENTE.name());
-
-        this.getChildren().addAll(new Separator(), locationFilter, operatori, new Separator(), interesse, new Separator());
+        this.getChildren().addAll(new Separator(), locationFilter, new Separator(), operatori, new Separator(), interesse, new Separator());
+        this.setSpacing(10.0);
     }
     public LinkedList<UUID> getFilteredList(){
         LinkedList<UUID> filteredList = new LinkedList<>();

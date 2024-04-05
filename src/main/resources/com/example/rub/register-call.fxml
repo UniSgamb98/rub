@@ -17,14 +17,13 @@
          <Label text="Programma la prossima chiamata:" />
          <DatePicker fx:id="prossimaChiamata" />
          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-            <Label alignment="CENTER" contentDisplay="TOP" prefHeight="63.0" prefWidth="63.0"
-                   text="Durata chiamata in minuti" textAlignment="CENTER" wrapText="true"/>
-            <TextField fx:id="durata" prefHeight="25.0" prefWidth="92.0"/>
+            <Label alignment="CENTER" contentDisplay="TOP" prefHeight="63.0" prefWidth="63.0" text="Durata chiamata in minuti" textAlignment="CENTER" wrapText="true" />
+            <TextField fx:id="durata" prefHeight="25.0" prefWidth="92.0" />
          </HBox>
       </VBox>
    </left>
    <center>
-      <TextArea fx:id="note" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <TextArea fx:id="note" prefHeight="200.0" prefWidth="200.0" wrapText="true" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
       <AnchorPane BorderPane.alignment="CENTER">

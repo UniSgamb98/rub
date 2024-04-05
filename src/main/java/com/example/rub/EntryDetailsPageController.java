@@ -138,14 +138,24 @@ public class EntryDetailsPageController implements Initializable {
         }
     }
     public void doDelete(ActionEvent event){
-        DBManager.deleteEntry(entryToDisplayDetails.getId());
-        try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("search-entry.fxml")));       //cambio scena
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) { System.out.println("Errore durante la transizione in search-entry con doDelete in EntryDetailsPageController");   }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Eliminazione permanente");
+        alert.setContentText("Sei sicuro di voler eliminare questo contatto?");
+        alert.setHeaderText("Eliminazione di " + entryToDisplayDetails.getRagioneSociale());
+        alert.showAndWait();
+        boolean result = alert.getResult().getText().equals("OK");
+        if  (result) {
+            DBManager.deleteEntry(entryToDisplayDetails.getId());
+            try {
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("search-entry.fxml")));       //cambio scena
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (Exception e) {
+                System.out.println("Errore durante la transizione in search-entry con doDelete in EntryDetailsPageController");
+            }
+        }
     }
     public void doSaveChanges() {
         DBManager.modifyEntry(entryToDisplayDetails.getId(),getContatto());

@@ -2,6 +2,7 @@ package com.example.rub.functionalities;
 
 import com.example.rub.beans.Contatto;
 import com.example.rub.beans.DeletedContatto;
+import com.example.rub.enums.Interessamento;
 import com.example.rub.functionalities.locations.LocationManager;
 import com.example.rub.objects.DisplayableEntry;
 import javafx.scene.control.Alert;
@@ -163,9 +164,14 @@ public abstract class DBManager extends TagsManager{
             MyUtils.writeAll(database, index, locationManager);
         } catch (Exception e){
             System.out.println("Errore durante la modifica di entry");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Operazione non compiuta");
+            alert.setTitle("Attenzione");
+            alert.setContentText("Riprovare");
+            alert.show();
         }
     }
-    public static void setNextCall(UUID uuid, LocalDate date){
+    public static void setNextCall(UUID uuid, LocalDate date, Interessamento feedback){      //TODO Dovrebbe controllare se i dati sono cambiati prima di fare I/O
         try {
             database = (HashMap<UUID, Contatto>) MyUtils.read("database");
             Contatto data = database.get(uuid);
@@ -177,9 +183,16 @@ public abstract class DBManager extends TagsManager{
             int day = now.get(Calendar.DAY_OF_MONTH);
             LocalDate today = LocalDate.of(year,month,day);
             data.setUltimaChiamata(today);
-            database.put(uuid, data);
-            MyUtils.write(database, "database");
+            if (feedback != null){
+                data.setInteressamento(feedback);
+            }
+            modifyEntry(uuid, data);
         } catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("Operazione non compiuta");
+            alert.setTitle("Attenzione");
+            alert.setContentText("Riprovare");
+            alert.show();
             System.out.println("Errore durante setNextCall in DBManager");
         }
     }

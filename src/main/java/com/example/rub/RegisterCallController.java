@@ -45,10 +45,11 @@ public class RegisterCallController implements Initializable {
                 doc = nm.createDocument(bean.getRagioneSociale());
             }
             nm.addCallNote(doc, note.getText(), durata.getText());
+            Interessamento fedback = null;
             try {
-                bean.setInteressamento(Interessamento.valueOf(feedback.getValue()));
+                fedback = Interessamento.valueOf(feedback.getValue());
             } catch (Exception ignored) {}
-            DBManager.setNextCall(bean.getId(), prossimaChiamata.getValue());
+            DBManager.setNextCall(bean.getId(), prossimaChiamata.getValue(), fedback);
             nm.writeXml(doc, ""+bean.getNoteId());
         } catch (Exception e){
             System.out.println("Errore durante la scrittura del file Xml delle note");

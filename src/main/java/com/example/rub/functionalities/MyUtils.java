@@ -52,4 +52,6 @@ public abstract class MyUtils {
         fis.close();
         return temp;
     }
+
+    //TODO mettere qua la funzione dell'apertura dei files
 }
