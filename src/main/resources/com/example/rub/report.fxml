@@ -1,14 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.rub.ReportController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane prefHeight="500.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.ReportController">
+   <bottom>
+      <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="43.0" layoutY="124.0" mnemonicParsing="false" text="Indietro" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" />
+         </children>
+      </AnchorPane>
+   </bottom>
+   <top>
+      <Label text="Attività svolte" textAlignment="CENTER" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets top="15.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <Label text="Operatore:" />
+                  <ChoiceBox prefWidth="150.0" />
+               </children>
+               <VBox.margin>
+                  <Insets left="40.0" />
+               </VBox.margin>
+            </HBox>
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Separator>
+            <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <VBox>
+                     <children>
+                        <Label text="Frequenza chiamate" />
+                        <LineChart minHeight="175.0" minWidth="300.0" prefHeight="150.0" prefWidth="259.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </LineChart>
+                     </children>
+                     <FlowPane.margin>
+                        <Insets right="30.0" />
+                     </FlowPane.margin>
+                  </VBox>
+                  <GridPane maxHeight="100.0" maxWidth="265.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="-Infinity" />
+                      <ColumnConstraints hgrow="SOMETIMES" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="-Infinity" />
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="83.0" minHeight="24.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Da:">
+                           <GridPane.margin>
+                              <Insets right="5.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <DatePicker prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" />
+                        <Label text="Durata:" GridPane.rowIndex="1" />
+                        <Label text="A:" GridPane.columnIndex="2">
+                           <GridPane.margin>
+                              <Insets right="5.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <DatePicker prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="3" />
+                         <CheckBox mnemonicParsing="false" text="Includi messaggi" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                        <TextField maxWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+               </children></FlowPane>
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Separator>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <VBox AnchorPane.rightAnchor="50.0">
+                     <children>
+                        <Label text="Storico" />
+                        <ListView prefHeight="200.0" prefWidth="250.0" />
+                     </children>
+                  </VBox>
+                  <ListView layoutX="48.0" layoutY="9.0" prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
