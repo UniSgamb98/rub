@@ -246,7 +246,7 @@ public class EntryDetailsPageController implements Initializable {
             GlobalContext.openedEntries.remove(entryToDisplayDetails.getId());
             MyUtils.write(GlobalContext.openedEntries,"fileAperti");
     }
-    public void refresh(){
+    public void refresh(){  //ciao
         init(false);
         noteDisplayer.refresh();
     }
