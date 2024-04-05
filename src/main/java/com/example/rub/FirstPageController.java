@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.UUID;
@@ -69,7 +70,7 @@ public class FirstPageController implements Initializable {
                 int subStringStart = 0;
                 int subStringEnd = in.indexOf(";");
                 String subString;
-                for(int i = 0; i <= 20; i++){
+                for(int i = 0; i <= 23; i++){
 
                     subString = in.substring(subStringStart, subStringEnd);
                     fillAttribute(i, newEntryFromFile, subString);
@@ -167,6 +168,28 @@ public class FirstPageController implements Initializable {
                     bean.setOperator(Operatori.valueOf(attribute));
                 }
                 break;
+            case 21:
+                bean.setVolteContattati(Integer.parseInt(attribute));
+                break;
+            case 22:
+                LocalDate t;
+                try{
+                    t = LocalDate.parse(attribute);
+                } catch (Exception e){
+                    t = null;
+                }
+                bean.setUltimaChiamata(t);
+                break;
+            case 23:
+                LocalDate j;
+                try{
+                    j = LocalDate.parse(attribute);
+                }catch (Exception e){
+                    j = null;
+                }
+                bean.setProssimaChiamata(j);
+                break;
+
         }
     }
 

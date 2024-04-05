@@ -3,6 +3,8 @@ package com.example.rub.functionalities;
 import com.example.rub.beans.Contatto;
 import com.example.rub.beans.DeletedContatto;
 import com.example.rub.enums.Interessamento;
+import com.example.rub.enums.Operatori;
+import com.example.rub.enums.TipoCliente;
 import com.example.rub.functionalities.locations.LocationManager;
 import com.example.rub.objects.DisplayableEntry;
 import javafx.scene.control.Alert;
@@ -171,7 +173,7 @@ public abstract class DBManager extends TagsManager{
             alert.show();
         }
     }
-    public static void setNextCall(UUID uuid, LocalDate date, Interessamento feedback){      //TODO Dovrebbe controllare se i dati sono cambiati prima di fare I/O
+    public static void setNextCall(UUID uuid, LocalDate date, Interessamento feedback){
         try {
             database = (HashMap<UUID, Contatto>) MyUtils.read("database");
             Contatto data = database.get(uuid);
@@ -258,8 +260,12 @@ public abstract class DBManager extends TagsManager{
                 bw.write(i.getNumeroCivico()+";");
                 bw.write(i.getProvincia()+";");
                 bw.write(i.getCap()+";");
-                bw.write(i.getInteressamento().name()+";");
-                bw.write(i.getTipoCliente().name()+ ";");
+                try {
+                    bw.write(i.getInteressamento().name() + ";");
+                }catch (Exception e) {  bw.write(Interessamento.BLANK.name() + ";");  }
+                try {
+                    bw.write(i.getTipoCliente().name() + ";");
+                } catch (Exception e) { bw.write(TipoCliente.BLANK.name() +";");    }
                 bw.write(i.getPartitaIva()+";");
                 bw.write(i.getCodiceFiscale()+";");
                 bw.write(i.getTitolare()+";");
@@ -267,7 +273,12 @@ public abstract class DBManager extends TagsManager{
                 bw.write(i.getEmailCertificata()+";");
                 bw.write(i.getSitoWeb()+";");
                 bw.write(i.getNoteId()+";");
-                bw.write(i.getOperator()+";");
+                try {
+                    bw.write(i.getOperator() + ";");
+                } catch (Exception e) {bw.write(Operatori.BLANK.name() + ";"); }
+                bw.write(i.getVolteContattati()+";");
+                bw.write(i.getUltimaChiamata()+";");
+                bw.write(i.getProssimaChiamata()+";");
                 bw.newLine();
             }
             bw.flush();
