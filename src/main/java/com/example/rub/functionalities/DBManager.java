@@ -3,6 +3,7 @@ package com.example.rub.functionalities;
 import com.example.rub.beans.Contatto;
 import com.example.rub.beans.DeletedContatto;
 import com.example.rub.enums.Interessamento;
+import com.example.rub.enums.comparator.InteressamentoComp;
 import com.example.rub.functionalities.locations.LocationManager;
 import com.example.rub.objects.DisplayableEntry;
 import javafx.scene.control.Alert;
@@ -154,6 +155,7 @@ public abstract class DBManager extends TagsManager{
             if (!oldBean.getEmailCertificata().equals(modifiedBean.getEmailCertificata()))   oldBean.setEmailCertificata(modifiedBean.getEmailCertificata());
             if (!oldBean.getSitoWeb().equals(modifiedBean.getSitoWeb()))   oldBean.setSitoWeb(modifiedBean.getSitoWeb());
             if (!oldBean.getTitolare().equals(modifiedBean.getTitolare()))   oldBean.setTitolare(modifiedBean.getTitolare());
+            if (oldBean.getVolteContattati() != modifiedBean.getVolteContattati())  oldBean.setVolteContattati(modifiedBean.getVolteContattati());
             if (!Objects.equals(oldBean.getTipoCliente(), modifiedBean.getTipoCliente()))   oldBean.setTipoCliente(modifiedBean.getTipoCliente());
             if (!Objects.equals(oldBean.getInteressamento(), modifiedBean.getInteressamento()))   oldBean.setInteressamento(modifiedBean.getInteressamento());
             if (!Objects.equals(oldBean.getUltimaChiamata(), modifiedBean.getUltimaChiamata()))   oldBean.setUltimaChiamata(modifiedBean.getUltimaChiamata());
@@ -171,7 +173,7 @@ public abstract class DBManager extends TagsManager{
             alert.show();
         }
     }
-    public static void setNextCall(UUID uuid, LocalDate date, Interessamento feedback){      //TODO Dovrebbe controllare se i dati sono cambiati prima di fare I/O
+    public static void setNextCall(UUID uuid, LocalDate date, Interessamento feedback){
         try {
             database = (HashMap<UUID, Contatto>) MyUtils.read("database");
             Contatto data = database.get(uuid);
@@ -184,7 +186,9 @@ public abstract class DBManager extends TagsManager{
             LocalDate today = LocalDate.of(year,month,day);
             data.setUltimaChiamata(today);
             if (feedback != null){
-                data.setInteressamento(feedback);
+                if (new InteressamentoComp().compare(feedback, data.getInteressamento()) > 0) {
+                    data.setInteressamento(feedback);
+                }
             }
             modifyEntry(uuid, data);
         } catch (Exception e){
