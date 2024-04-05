@@ -221,7 +221,14 @@ public class FirstPageController implements Initializable {
         }
     }
 
-    public void doShowReport() {
+    public void doShowReport(ActionEvent event) {
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("report.fxml")));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) { System.out.println("Errore durante la transizione in new-entry con switchToNewEntry in FirstPage"); }
     }
 
     public void doExportForExcels() {

@@ -7,6 +7,7 @@ import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
 import com.example.rub.functionalities.MyUtils;
 import com.example.rub.objects.NoteDisplayer;
+import javafx.animation.AnimationTimer;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
@@ -24,7 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class EntryDetailsPageController implements Initializable {
+public class EntryDetailsPageController implements Initializable, Runnable {
     private final ObjectProperty<Contatto> entryProperty = new SimpleObjectProperty<>();
     @FXML
     public DatePicker prossimaChiamata;
@@ -76,6 +77,8 @@ public class EntryDetailsPageController implements Initializable {
     public TextField partitaIva;
     @FXML
     public NoteDisplayer noteDisplayer;
+    @FXML
+    public Label savedText;
     private Contatto entryToDisplayDetails;
     public void switchToSearchEntry(ActionEvent event) {
         shutdown();
@@ -158,7 +161,10 @@ public class EntryDetailsPageController implements Initializable {
         }
     }
     public void doSaveChanges() {
-        DBManager.modifyEntry(entryToDisplayDetails.getId(),getContatto());
+        if(DBManager.modifyEntry(entryToDisplayDetails.getId(),getContatto())){
+            Thread thread = new Thread(this);
+            thread.start();
+        }
     }
 
     public void init(boolean fromScratch) {
@@ -249,5 +255,24 @@ public class EntryDetailsPageController implements Initializable {
     public void refresh(){
         init(false);
         noteDisplayer.refresh();
+    }
+
+    @Override
+    public void run() {
+        savedText.setVisible(true);
+        AnimationTimer timer = new AnimationTimer() {
+            double opacity = 1.0;
+            @Override
+            public void handle(long now) {
+                    opacity = opacity - 0.02;
+                    savedText.setOpacity(opacity);
+                    if (opacity == 0) {
+                        savedText.setVisible(false);
+                        savedText.setOpacity(1.0);
+                        this.stop();
+                    }
+            }
+        };
+        timer.start();
     }
 }

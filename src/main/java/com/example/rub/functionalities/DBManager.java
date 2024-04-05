@@ -131,7 +131,8 @@ public abstract class DBManager extends TagsManager{
         }
     }
 
-    public static void modifyEntry(UUID id, Contatto modifiedBean){
+    public static boolean modifyEntry(UUID id, Contatto modifiedBean){
+        boolean ret = false;
         try {
             update();
             Contatto oldBean = database.get(id);
@@ -164,6 +165,7 @@ public abstract class DBManager extends TagsManager{
             indexNewEntry(oldBean, id);
 
             MyUtils.writeAll(database, index, locationManager);
+            ret = true;
         } catch (Exception e){
             System.out.println("Errore durante la modifica di entry");
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -172,6 +174,7 @@ public abstract class DBManager extends TagsManager{
             alert.setContentText("Riprovare");
             alert.show();
         }
+        return ret;
     }
     public static void setNextCall(UUID uuid, LocalDate date, Interessamento feedback){
         try {
