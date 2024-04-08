@@ -262,15 +262,21 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         savedText.setVisible(true);
         AnimationTimer timer = new AnimationTimer() {
             double opacity = 1.0;
+            long startTime = -1;
             @Override
             public void handle(long now) {
+                if (startTime == -1){
+                    startTime = now;
+                }
+                if ((now - startTime) > 1000000000) {
                     opacity = opacity - 0.02;
                     savedText.setOpacity(opacity);
-                    if (opacity == 0) {
+                    if (opacity < 0) {
                         savedText.setVisible(false);
                         savedText.setOpacity(1.0);
                         this.stop();
                     }
+                }
             }
         };
         timer.start();

@@ -1,11 +1,17 @@
 package com.example.rub.objects;
 
+import com.example.rub.Main;
+import com.example.rub.ModifyNoteController;
 import com.example.rub.functionalities.NoteManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -20,6 +26,7 @@ public class NoteDisplayer extends VBox {
     ObservableList<DisplayableNote> notes;
     ListView<DisplayableNote> notesView;
     String path;
+
     public NoteDisplayer(){
         this.setMinHeight(250);
         this.setMinWidth(500);
@@ -47,11 +54,29 @@ public class NoteDisplayer extends VBox {
                 Node node = nodeList.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE){
                     Element e = (Element) node;
-                    notes.add(0,new DisplayableNote(e));
+                    if (!Boolean.parseBoolean(e.getAttribute("cancelled"))) {
+                        notes.add(0, new DisplayableNote(this, e));
+                    }
                 }
             }
         } catch (IOException | SAXException | ParserConfigurationException e) {
             System.out.println("no notes");
+        }
+    }
+
+    public void modifyNote(Element element){
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("modifyNote.fxml"));
+        try {
+            Parent root = loader.load();     //cambio scena
+            ModifyNoteController controller = loader.getController();
+            controller.setDocument(path, element);
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.showAndWait();
+            refresh();
+        } catch (Exception e){
+            System.out.println("Orrore!");
         }
     }
 }

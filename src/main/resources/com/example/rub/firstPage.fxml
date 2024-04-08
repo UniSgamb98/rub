@@ -13,6 +13,7 @@
     <Button onAction="#switchToNewEntry" prefHeight="130.0" prefWidth="130.0" text="Inserisci Nuovo" />
     <Button fx:id="importButton" onAction="#doImportFromExcels" prefHeight="0.0" prefWidth="0.0" text="Importa da Excels" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
     <Button fx:id="exportButton" onAction="#doExportForExcels" prefHeight="0.0" prefWidth="0.0" text="Esporta per Excels" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <Button fx:id="notesButton" onAction="#doNumberNotes" prefHeight="0.0" prefWidth="0.0" text="sistema note" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="3" />
     <Button onAction="#doShowCallsToMake" prefHeight="130.0" prefWidth="130.0" text="Chiamate di oggi" GridPane.columnIndex="1" GridPane.rowIndex="1" />
     <Button onAction="#doShowReport" prefHeight="130.0" prefWidth="130.0" text="Mostra Report" GridPane.columnIndex="0" GridPane.rowIndex="1" />
 

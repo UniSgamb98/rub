@@ -32,7 +32,7 @@ public class AllPurposeFilter extends FlowPane {
         } else {    //Ci sono filtri attivi retituisco una lista con cui fare RetainAll
             for (String i : activeFilters){
                 try {
-                    ret.addAll(DBManager.getEntryFromFilter(i));
+                    ret.addAll(DBManager.getEntriesFromFilter(i));
                 } catch (NullPointerException e){
                     System.out.println("Index non contiene il filtro");
                 }

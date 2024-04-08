@@ -6,7 +6,9 @@ import javafx.scene.text.Text;
 import org.w3c.dom.Element;
 
 public class DisplayableNote extends GridPane {
-    public DisplayableNote(Element element){
+    Element element;
+    public DisplayableNote(NoteDisplayer parent, Element element){
+        this.element = element;
         Label operator = new Label("Operatore: " + element.getAttribute("operatore"));
         Label duration = new Label("Durata: " + element.getAttribute("durata"));
         Text content = new Text(element.getTextContent());
@@ -19,5 +21,7 @@ public class DisplayableNote extends GridPane {
         GridPane.setConstraints(duration,2,0);
         GridPane.setConstraints(content,0,1);
         GridPane.setConstraints(day,0,0);
+        this.setOnMouseClicked(event -> parent.modifyNote(element));
     }
+
 }

@@ -35,7 +35,7 @@ public class FiltersToolColumn extends VBox {
         LinkedList<UUID> filteredList = new LinkedList<>();
         ArrayList<String> activeFilters = new ArrayList<>(locationFilter.getActiveFilters());
         for (String i : activeFilters){
-            LinkedList<UUID> addedElementFromSingleFilter = new LinkedList<>(DBManager.getEntryFromFilter(i));
+            LinkedList<UUID> addedElementFromSingleFilter = new LinkedList<>(DBManager.getEntriesFromFilter(i));
             for (UUID j : addedElementFromSingleFilter){
                 if(!filteredList.contains(j)){
                     filteredList.add(j);

@@ -2,6 +2,8 @@ package com.example.rub.functionalities;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -38,10 +40,29 @@ public class NoteManager {
         call.setAttribute("data",now.get(Calendar.DAY_OF_MONTH) + "/" + (now.get(Calendar.MONTH)+1) + "/" + now.get(Calendar.YEAR));
         call.setAttribute("operatore", GlobalContext.operator.name());
         call.setAttribute("durata", durata);
+        call.setAttribute("number", "" + (getNoteNumber(doc)+1));
+        call.setAttribute("cancelled", "false");
         call.setTextContent(note);
         Element root = doc.getDocumentElement();
         root.appendChild(call);
     }
+
+    public void modifyNote(Document doc, String noteNumber, String text, String feedback, String durata){
+        doc.getDocumentElement().normalize();
+        NodeList nodeList = doc.getElementsByTagName("chiamata");
+        for (int j = 0; j < nodeList.getLength(); j++) {
+            Node node = nodeList.item(j);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                Element e = (Element) node;
+                if (e.getAttribute("number").equals(noteNumber)){
+                    e.setTextContent(text);
+                    e.setAttribute("durata", durata);
+                    e.setAttribute("feedback", feedback); //TODO
+                }
+            }
+        }
+    }
+
     public void writeXml(Document doc, String output) throws TransformerException{
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
@@ -53,5 +74,15 @@ public class NoteManager {
     }
     public Document readXml(String input) throws IOException, SAXException {
         return docBuilder.parse("bin\\Note\\" + input + ".xml");
+    }
+
+    public int getNoteNumber(Document document){
+        int n = 0;
+        try {
+            NodeList nodeList = document.getElementsByTagName("chiamata");
+            n = nodeList.getLength();
+            System.out.println(n);
+        } catch (Exception ignored) {}
+        return n;
     }
 }

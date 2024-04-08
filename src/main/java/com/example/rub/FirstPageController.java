@@ -30,6 +30,7 @@ public class FirstPageController implements Initializable {
     public Button importButton;
     @FXML
     public Button exportButton;
+    public Button notesButton;
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -201,6 +202,8 @@ public class FirstPageController implements Initializable {
             importButton.setPrefSize(130.0,130.0);
             exportButton.setVisible(true);
             exportButton.setPrefSize(130.0,130.0);
+            notesButton.setPrefSize(130.0, 130.0);
+            notesButton.setVisible(true);
         }
     }
 
@@ -233,5 +236,9 @@ public class FirstPageController implements Initializable {
 
     public void doExportForExcels() {
         DBManager.export();
+    }
+
+    public void doNumberNotes() {
+        DBManager.notessss();
     }
 }

@@ -10,6 +10,10 @@ import com.example.rub.functionalities.locations.LocationManager;
 import com.example.rub.objects.DisplayableEntry;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.HBox;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -76,7 +80,7 @@ public abstract class DBManager extends TagsManager{
     public static HBox getDisplayableEntry(UUID uuid){
         return new DisplayableEntry(DBManager.retriveEntry(uuid));
     }
-    public static LinkedList<UUID> getEntryFromFilter (String filtro){
+    public static LinkedList<UUID> getEntriesFromFilter(String filtro){
         return index.get(filtro);
     }   //Restituisce una LinkedList di Contatti con il valore del filtro in comune
     public static void init(){
@@ -296,5 +300,31 @@ public abstract class DBManager extends TagsManager{
             alert.setContentText("Esportazione fallita");
         }
         alert.show();
+    }
+
+    public static void notessss() {
+        for(Contatto i : database.values()){
+            try {
+                int n = 1;
+                NoteManager nm = new NoteManager();
+                Document doc = nm.readXml(""+i.getNoteId());
+                doc.getDocumentElement().normalize();
+                NodeList nodeList = doc.getElementsByTagName("chiamata");
+                for (int j = 0; j < nodeList.getLength(); j++){
+                    Node node = nodeList.item(j);
+                    if (node.getNodeType() == Node.ELEMENT_NODE){
+                        Element e = (Element) node;
+                        if (e.getAttribute("number").isEmpty()){
+                            e.setAttribute("number", n+"");
+                            e.setAttribute("cancelled", "false");
+                            n++;
+                        }
+                    }
+                }
+                nm.writeXml(doc, i.getNoteId()+"");
+            } catch (Exception e) {
+                System.out.println("Errore con " + i);
+            }
+        }
     }
 }
