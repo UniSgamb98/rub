@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -200,10 +201,14 @@ public class FirstPageController implements Initializable {
         if (GlobalContext.operator == Operatori.TOMMASO || GlobalContext.operator == Operatori.GAETANO || GlobalContext.operator == Operatori.VICTORIA){
             importButton.setVisible(true);
             importButton.setPrefSize(130.0,130.0);
+            importButton.setMinHeight(Region.USE_COMPUTED_SIZE);
             exportButton.setVisible(true);
             exportButton.setPrefSize(130.0,130.0);
+            exportButton.setMinHeight(Region.USE_COMPUTED_SIZE);
             notesButton.setPrefSize(130.0, 130.0);
             notesButton.setVisible(true);
+            notesButton.setMinHeight(Region.USE_COMPUTED_SIZE);
+
         }
     }
 

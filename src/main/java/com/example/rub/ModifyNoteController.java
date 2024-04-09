@@ -51,7 +51,6 @@ public class ModifyNoteController implements Initializable {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
         } catch (Exception ignored) {}
-
     }
 
     @Override
