@@ -2,7 +2,6 @@ package com.example.rub;
 
 import com.example.rub.enums.Interessamento;
 import com.example.rub.functionalities.DBManager;
-import com.example.rub.functionalities.MyUtils;
 import com.example.rub.functionalities.NoteManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,7 +27,6 @@ public class ModifyNoteController implements Initializable {
     public TextArea note;
     String fileName;
     Element element;
-    EntryDetailsPageController controller;
     UUID entryID;
 
     public void setDocument(String path, Element element, UUID entryID){
