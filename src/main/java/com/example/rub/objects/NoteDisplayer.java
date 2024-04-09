@@ -7,11 +7,13 @@ import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.NoteManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.w3c.dom.Document;
@@ -79,10 +81,12 @@ public class NoteDisplayer extends VBox {
             controller.setDocument(path, element, entryID);
             Stage stage = new Stage();
             Scene scene = new Scene(root);
+            stage.setTitle("Modifica la nota");
+            stage.getIcons().add(new Image("AppIcon.png"));
             stage.setScene(scene);
             stage.showAndWait();
             this.controller.refresh();
-            refresh();
+            this.fireEvent(new ActionEvent());
         } catch (Exception e){
             System.out.println("Orrore!");
         }

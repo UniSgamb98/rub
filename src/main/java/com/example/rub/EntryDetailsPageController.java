@@ -20,13 +20,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class EntryDetailsPageController implements Initializable, Runnable, EventHandler<ActionEvent> {
+public class EntryDetailsPageController implements Initializable, Runnable {
     private final ObjectProperty<Contatto> entryProperty = new SimpleObjectProperty<>();
     @FXML
     public DatePicker prossimaChiamata;
@@ -80,6 +81,8 @@ public class EntryDetailsPageController implements Initializable, Runnable, Even
     public NoteDisplayer noteDisplayer;
     @FXML
     public Label savedText;
+    @FXML
+    public GridPane gridData;
     private Contatto entryToDisplayDetails;
 
     public void switchToSearchEntry(ActionEvent event) {
@@ -247,6 +250,11 @@ public class EntryDetailsPageController implements Initializable, Runnable, Even
     public void initialize(URL location, ResourceBundle resources) {
         tipoCliente.getItems().addAll(TipoCliente.LABORATORIO, TipoCliente.RIVENDITORE, TipoCliente.CENTROFRESAGGIO);
         interessamento.getItems().addAll(Interessamento.NON_TROVATO, Interessamento.NON_INERENTE, Interessamento.NULLO, Interessamento.RICHIAMARE, Interessamento.INFO,Interessamento.LISTINO,Interessamento.CAMPIONE, Interessamento.CLIENTE);
+        gridData.addEventFilter(ActionEvent.ACTION, event -> {
+            if (event.getTarget() instanceof NoteDisplayer) {
+                System.out.println("" + event.getSource() + event.getTarget());
+            }
+        });
     }
 
     public void shutdown(){
@@ -286,10 +294,5 @@ public class EntryDetailsPageController implements Initializable, Runnable, Even
             }
         };
         timer.start();
-    }
-
-    @Override
-    public void handle(ActionEvent event) {
-        System.out.println("Action EVENT");
     }
 }

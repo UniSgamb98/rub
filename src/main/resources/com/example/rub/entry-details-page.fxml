@@ -7,7 +7,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.EntryDetailsPageController">
     <center>
-<GridPane alignment="CENTER" prefHeight="350.0" prefWidth="650.0">
+<GridPane fx:id="gridData" alignment="CENTER" prefHeight="350.0" prefWidth="650.0">
     <Label text="Ragione Sociale:" GridPane.columnIndex="1" />
     <TextField fx:id="ragioneSociale" disable="true" GridPane.columnIndex="2" GridPane.columnSpan="3" />
 

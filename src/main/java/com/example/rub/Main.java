@@ -14,8 +14,8 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 380, 285);
         stage.setTitle("Orodent");
-        stage.setScene(scene);
         stage.getIcons().add(new Image("AppIcon.png"));
+        stage.setScene(scene);
         stage.show();
 
     }
