@@ -164,6 +164,9 @@ public class EntryDetailsPageController implements Initializable, Runnable, Even
     }
     public void doSaveChanges() {
         if(DBManager.modifyEntry(entryToDisplayDetails.getId(),getContatto())){
+            isModifiable.setSelected(false);
+            ActionEvent event = new ActionEvent(null, isModifiable);
+            allowChangesPressed(event);
             Thread thread = new Thread(this);
             thread.start();
         }
@@ -255,7 +258,7 @@ public class EntryDetailsPageController implements Initializable, Runnable, Even
             GlobalContext.openedEntries.remove(entryToDisplayDetails.getId());
             MyUtils.write(GlobalContext.openedEntries,"fileAperti");
     }
-    public void refresh(){  //ciao
+    public void refresh(){
         init(false);
         noteDisplayer.refresh();
     }
