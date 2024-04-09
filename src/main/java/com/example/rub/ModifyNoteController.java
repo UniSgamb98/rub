@@ -62,9 +62,10 @@ public class ModifyNoteController implements Initializable {
         try {
             NoteManager nm = new NoteManager();
             Document doc = nm.readXml(fileName);
-            nm.deleteNote(doc, element.getAttribute("number"));
-            nm.writeXml(doc, fileName);
-            DBManager.reduceVolteContattati(entryID);
+            if (nm.deleteNote(doc, element.getAttribute("number"))){
+                nm.writeXml(doc, fileName);
+                DBManager.reduceVolteContattati(entryID);
+            }
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
         } catch (Exception ignored) {}

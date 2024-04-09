@@ -21,7 +21,7 @@ public class DisplayableNote extends GridPane {
         GridPane.setConstraints(duration,2,0);
         GridPane.setConstraints(content,0,1);
         GridPane.setConstraints(day,0,0);
-        this.setOnMouseClicked(event -> parent.modifyNote(element));
+        this.setOnMouseClicked(event -> parent.openNoteModifications(element));
     }
 
 }

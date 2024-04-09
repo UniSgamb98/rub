@@ -1,19 +1,26 @@
 package com.example.rub;
 
 import com.example.rub.enums.Operatori;
+import com.example.rub.objects.NoteDisplayer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.net.URL;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class ReportController {
+public class ReportController implements Initializable {
 
     @FXML
     public ChoiceBox<Operatori> operator;
@@ -28,9 +35,10 @@ public class ReportController {
     @FXML
     public TextField durata;
     @FXML
-    public ListView History;
+    public NoteDisplayer History;
     @FXML
-    public ListView contacted;
+    public ListView<HBox> contacted;
+    ObservableList<HBox> contactedList;
 
     public void doGoBack(ActionEvent event) {
         try {
@@ -43,5 +51,11 @@ public class ReportController {
     }
 
     public void doShowReport(ActionEvent event) {
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        contactedList = FXCollections.observableArrayList();
+        contacted.setItems(contactedList);
     }
 }

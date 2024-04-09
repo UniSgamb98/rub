@@ -11,7 +11,6 @@ import javafx.animation.AnimationTimer;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -234,7 +233,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         entryProperty.set(entry);
     }
     public void setNoteDocument(){
-        noteDisplayer.setDocument(entryToDisplayDetails.getId(), this);
+        noteDisplayer.setDocument(entryToDisplayDetails.getId());
     }
     private void setFieldDisability(boolean state){
         for (TextField textField : Arrays.asList(ragioneSociale, personaDiRiferimento, citta, paese, emailReferente, telefono, regione, indirizzo, provincia, cap, civico, partitaIva, codiceFiscale, emailGenerica, sito, pec, titolare)) {
@@ -252,7 +251,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         interessamento.getItems().addAll(Interessamento.NON_TROVATO, Interessamento.NON_INERENTE, Interessamento.NULLO, Interessamento.RICHIAMARE, Interessamento.INFO,Interessamento.LISTINO,Interessamento.CAMPIONE, Interessamento.CLIENTE);
         gridData.addEventFilter(ActionEvent.ACTION, event -> {
             if (event.getTarget() instanceof NoteDisplayer) {
-                System.out.println("" + event.getSource() + event.getTarget());
+                refresh();
             }
         });
     }

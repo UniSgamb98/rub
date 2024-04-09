@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.example.rub.objects.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
@@ -8,8 +9,7 @@
 <BorderPane prefHeight="500.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.ReportController">
    <bottom>
        <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-           <Button layoutX="43.0" layoutY="124.0" mnemonicParsing="false" onAction="#doGoBack" text="Indietro"
-                   AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0"/>
+           <Button layoutX="43.0" layoutY="124.0" mnemonicParsing="false" onAction="#doGoBack" text="Indietro" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" />
        </AnchorPane>
    </bottom>
    <top>
@@ -23,76 +23,71 @@
        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
            <HBox alignment="CENTER_LEFT" spacing="10.0">
                <VBox.margin>
-                   <Insets left="40.0"/>
+                   <Insets left="40.0" />
                </VBox.margin>
-               <Label text="Operatore:"/>
-               <ChoiceBox fx:id="operator" prefWidth="150.0"/>
+               <Label text="Operatore:" />
+               <ChoiceBox fx:id="operator" prefWidth="150.0" />
            </HBox>
            <Separator prefWidth="200.0">
               <VBox.margin>
-                  <Insets bottom="10.0" top="10.0"/>
+                  <Insets bottom="10.0" top="10.0" />
               </VBox.margin>
            </Separator>
            <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
                <VBox>
                    <FlowPane.margin>
-                       <Insets right="30.0"/>
+                       <Insets right="30.0" />
                    </FlowPane.margin>
-                   <Label text="Frequenza chiamate"/>
-                   <LineChart fx:id="chart" minHeight="175.0" minWidth="300.0" prefHeight="150.0"
-                              prefWidth="259.0">
+                   <Label text="Frequenza chiamate" />
+                   <LineChart fx:id="chart" minHeight="175.0" minWidth="300.0" prefHeight="150.0" prefWidth="259.0">
                        <xAxis>
-                           <CategoryAxis side="BOTTOM"/>
+                           <CategoryAxis side="BOTTOM" />
                        </xAxis>
                        <yAxis>
-                           <NumberAxis side="LEFT"/>
+                           <NumberAxis side="LEFT" />
                        </yAxis>
                    </LineChart>
                </VBox>
                <GridPane maxHeight="100.0" maxWidth="265.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                    <columnConstraints>
-                       <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="-Infinity"/>
-                       <ColumnConstraints hgrow="SOMETIMES"/>
-                       <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="-Infinity"/>
-                       <ColumnConstraints hgrow="SOMETIMES"/>
+                       <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="-Infinity" />
+                       <ColumnConstraints hgrow="SOMETIMES" />
+                       <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="-Infinity" />
+                       <ColumnConstraints hgrow="SOMETIMES" />
                    </columnConstraints>
                    <rowConstraints>
-                       <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES"/>
-                       <RowConstraints maxHeight="83.0" minHeight="24.0" prefHeight="34.0" vgrow="SOMETIMES"/>
-                       <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES"/>
+                       <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                       <RowConstraints maxHeight="83.0" minHeight="24.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                       <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
                    </rowConstraints>
                    <Label text="Da:">
                        <GridPane.margin>
-                           <Insets right="5.0"/>
+                           <Insets right="5.0" />
                        </GridPane.margin>
                    </Label>
-                   <DatePicker fx:id="startDate" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1"/>
-                   <Label text="Durata:" GridPane.rowIndex="1"/>
+                   <DatePicker fx:id="startDate" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" />
+                   <Label text="Durata:" GridPane.rowIndex="1" />
                    <Label text="A:" GridPane.columnIndex="2">
                        <GridPane.margin>
-                           <Insets right="5.0"/>
+                           <Insets right="5.0" />
                        </GridPane.margin>
                    </Label>
-                   <DatePicker fx:id="stopDate" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="3"/>
-                   <CheckBox fx:id="includeMessages" mnemonicParsing="false" text="Includi messaggi"
-                             GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                   <Button mnemonicParsing="false" onAction="#doShowReport" text="Mostra Report"
-                           GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2"
-                           GridPane.valignment="BOTTOM"/>
-                   <TextField fx:id="durata" maxWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                   <DatePicker fx:id="stopDate" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="3" />
+                   <CheckBox fx:id="includeMessages" mnemonicParsing="false" text="Includi messaggi" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                   <Button mnemonicParsing="false" onAction="#doShowReport" text="Mostra Report" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                   <TextField fx:id="durata" maxWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </GridPane>
            </FlowPane>
            <Separator prefWidth="200.0">
               <VBox.margin>
-                  <Insets bottom="10.0" top="10.0"/>
+                  <Insets bottom="10.0" top="10.0" />
               </VBox.margin>
            </Separator>
            <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <VBox AnchorPane.rightAnchor="50.0">
-                   <Label text="Storico"/>
-                   <ListView fx:id="History" prefHeight="200.0" prefWidth="250.0"/>
+                   <NoteDisplayer fx:id="History" prefHeight="200.0" prefWidth="300.0" />
                </VBox>
-               <ListView fx:id="contacted" layoutX="48.0" layoutY="9.0" prefHeight="200.0" prefWidth="200.0"/>
+               <ListView fx:id="contacted" layoutX="48.0" layoutY="9.0" prefHeight="200.0" prefWidth="200.0" />
            </AnchorPane>
        </VBox>
    </center>

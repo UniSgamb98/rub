@@ -1,6 +1,5 @@
 package com.example.rub.objects;
 
-import com.example.rub.EntryDetailsPageController;
 import com.example.rub.Main;
 import com.example.rub.ModifyNoteController;
 import com.example.rub.functionalities.DBManager;
@@ -32,20 +31,16 @@ public class NoteDisplayer extends VBox {
     ListView<DisplayableNote> notesView;
     String path;
     UUID entryID;
-    EntryDetailsPageController controller;
 
     public NoteDisplayer(){
-        this.setMinHeight(250);
-        this.setMinWidth(500);
         notesView = new ListView<>();
         notes = FXCollections.observableArrayList();
         notesView.setItems(notes);
-        this.getChildren().add(new Label("Note"));
+        this.getChildren().add(new Label("Storico"));
         this.getChildren().add(notesView);
     }
 
-    public void setDocument(UUID entryID, EntryDetailsPageController controller) {
-        this.controller = controller;
+    public void setDocument(UUID entryID) {
         this.entryID = entryID;
         path = "" + DBManager.retriveEntry(entryID).getNoteId();
         manageNote();
@@ -73,7 +68,7 @@ public class NoteDisplayer extends VBox {
         }
     }
 
-    public void modifyNote(Element element){
+    public void openNoteModifications(Element element){
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("modifyNote.fxml"));
         try {
             Parent root = loader.load();     //cambio scena
@@ -85,7 +80,6 @@ public class NoteDisplayer extends VBox {
             stage.getIcons().add(new Image("AppIcon.png"));
             stage.setScene(scene);
             stage.showAndWait();
-            this.controller.refresh();
             this.fireEvent(new ActionEvent());
         } catch (Exception e){
             System.out.println("Orrore!");

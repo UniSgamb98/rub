@@ -63,7 +63,8 @@ public class NoteManager {
         }
     }
 
-    public void deleteNote(Document doc, String noteNumber){
+    public boolean deleteNote(Document doc, String noteNumber){
+        boolean ret = false;
         doc.getDocumentElement().normalize();
         NodeList nodeList = doc.getElementsByTagName("chiamata");
         for (int j = 0; j < nodeList.getLength(); j++) {
@@ -71,10 +72,14 @@ public class NoteManager {
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element e = (Element) node;
                 if (e.getAttribute("number").equals(noteNumber)){
-                    e.setAttribute("cancelled", "true");
+                    if(e.getAttribute("cancelled").equals("false")){
+                        e.setAttribute("cancelled", "true");
+                        ret = true;
+                    }
                 }
             }
         }
+        return ret;
     }
 
     public void writeXml(Document doc, String output) throws TransformerException{
