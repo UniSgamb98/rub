@@ -1,6 +1,8 @@
 package com.example.rub;
 
 import com.example.rub.enums.Interessamento;
+import com.example.rub.functionalities.DBManager;
+import com.example.rub.functionalities.MyUtils;
 import com.example.rub.functionalities.NoteManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +17,7 @@ import org.w3c.dom.Element;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 public class ModifyNoteController implements Initializable {
     @FXML
@@ -25,13 +28,15 @@ public class ModifyNoteController implements Initializable {
     public TextArea note;
     String fileName;
     Element element;
+    EntryDetailsPageController controller;
+    UUID entryID;
 
-    public void setDocument(String path, Element element){
+    public void setDocument(String path, Element element, UUID entryID){
         this.fileName = path;
         this.element = element;
+        this.entryID = entryID;
         note.setText(element.getTextContent());
         durata.setText(element.getAttribute("durata"));
-        System.out.println(element.getNodeName());
     }
 
     public void doGoBack(ActionEvent event) {
@@ -54,5 +59,17 @@ public class ModifyNoteController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         feedback.getItems().addAll(Interessamento.NON_TROVATO.name(), Interessamento.NON_INERENTE.name(), Interessamento.NULLO.name(), Interessamento.RICHIAMARE.name(), Interessamento.INFO.name(), Interessamento.LISTINO.name(), Interessamento.CAMPIONE.name(), Interessamento.CLIENTE.name());
+    }
+
+    public void doDeleteNote(ActionEvent event) {
+        try {
+            NoteManager nm = new NoteManager();
+            Document doc = nm.readXml(fileName);
+            nm.deleteNote(doc, element.getAttribute("number"));
+            nm.writeXml(doc, fileName);
+            DBManager.reduceVolteContattati(entryID);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close();
+        } catch (Exception ignored) {}
     }
 }

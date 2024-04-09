@@ -1,7 +1,9 @@
 package com.example.rub.objects;
 
+import com.example.rub.EntryDetailsPageController;
 import com.example.rub.Main;
 import com.example.rub.ModifyNoteController;
+import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.NoteManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,12 +22,15 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.util.UUID;
 
 public class NoteDisplayer extends VBox {
     Document document;
     ObservableList<DisplayableNote> notes;
     ListView<DisplayableNote> notesView;
     String path;
+    UUID entryID;
+    EntryDetailsPageController controller;
 
     public NoteDisplayer(){
         this.setMinHeight(250);
@@ -37,8 +42,10 @@ public class NoteDisplayer extends VBox {
         this.getChildren().add(notesView);
     }
 
-    public void setDocument(String docPath) {
-        path = docPath;
+    public void setDocument(UUID entryID, EntryDetailsPageController controller) {
+        this.controller = controller;
+        this.entryID = entryID;
+        path = "" + DBManager.retriveEntry(entryID).getNoteId();
         manageNote();
     }
     public void refresh(){
@@ -69,11 +76,12 @@ public class NoteDisplayer extends VBox {
         try {
             Parent root = loader.load();     //cambio scena
             ModifyNoteController controller = loader.getController();
-            controller.setDocument(path, element);
+            controller.setDocument(path, element, entryID);
             Stage stage = new Stage();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.showAndWait();
+            this.controller.refresh();
             refresh();
         } catch (Exception e){
             System.out.println("Orrore!");

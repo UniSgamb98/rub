@@ -327,4 +327,10 @@ public abstract class DBManager extends TagsManager{
             }
         }
     }
+
+    public static void reduceVolteContattati(UUID entryID) {
+        update();
+        retriveEntry(entryID).setVolteContattati(retriveEntry(entryID).getVolteContattati()-1);
+        MyUtils.write(database, "database");
+    }
 }

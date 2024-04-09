@@ -63,6 +63,20 @@ public class NoteManager {
         }
     }
 
+    public void deleteNote(Document doc, String noteNumber){
+        doc.getDocumentElement().normalize();
+        NodeList nodeList = doc.getElementsByTagName("chiamata");
+        for (int j = 0; j < nodeList.getLength(); j++) {
+            Node node = nodeList.item(j);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                Element e = (Element) node;
+                if (e.getAttribute("number").equals(noteNumber)){
+                    e.setAttribute("cancelled", "true");
+                }
+            }
+        }
+    }
+
     public void writeXml(Document doc, String output) throws TransformerException{
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();

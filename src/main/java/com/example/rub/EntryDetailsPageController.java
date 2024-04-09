@@ -11,6 +11,7 @@ import javafx.animation.AnimationTimer;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,7 +26,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class EntryDetailsPageController implements Initializable, Runnable {
+public class EntryDetailsPageController implements Initializable, Runnable, EventHandler<ActionEvent> {
     private final ObjectProperty<Contatto> entryProperty = new SimpleObjectProperty<>();
     @FXML
     public DatePicker prossimaChiamata;
@@ -80,6 +81,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
     @FXML
     public Label savedText;
     private Contatto entryToDisplayDetails;
+
     public void switchToSearchEntry(ActionEvent event) {
         shutdown();
         try {
@@ -226,7 +228,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         entryProperty.set(entry);
     }
     public void setNoteDocument(){
-        noteDisplayer.setDocument(""+entryToDisplayDetails.getNoteId());
+        noteDisplayer.setDocument(entryToDisplayDetails.getId(), this);
     }
     private void setFieldDisability(boolean state){
         for (TextField textField : Arrays.asList(ragioneSociale, personaDiRiferimento, citta, paese, emailReferente, telefono, regione, indirizzo, provincia, cap, civico, partitaIva, codiceFiscale, emailGenerica, sito, pec, titolare)) {
@@ -243,6 +245,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         tipoCliente.getItems().addAll(TipoCliente.LABORATORIO, TipoCliente.RIVENDITORE, TipoCliente.CENTROFRESAGGIO);
         interessamento.getItems().addAll(Interessamento.NON_TROVATO, Interessamento.NON_INERENTE, Interessamento.NULLO, Interessamento.RICHIAMARE, Interessamento.INFO,Interessamento.LISTINO,Interessamento.CAMPIONE, Interessamento.CLIENTE);
     }
+
     public void shutdown(){
             try {
                 GlobalContext.openedEntries = (ArrayList<UUID>) MyUtils.read("fileAperti");
@@ -280,5 +283,10 @@ public class EntryDetailsPageController implements Initializable, Runnable {
             }
         };
         timer.start();
+    }
+
+    @Override
+    public void handle(ActionEvent event) {
+        System.out.println("Action EVENT");
     }
 }
