@@ -75,7 +75,7 @@
                    <DatePicker fx:id="stopDate" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="3" />
                    <CheckBox fx:id="includeMessages" mnemonicParsing="false" text="Includi messaggi" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                    <Button mnemonicParsing="false" onAction="#doShowReport" text="Mostra Report" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-                   <TextField fx:id="durata" maxWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                   <Spinner fx:id="durata" editable="true" maxWidth="55.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </GridPane>
            </FlowPane>
            <Separator prefWidth="200.0">
@@ -87,7 +87,7 @@
                <VBox AnchorPane.rightAnchor="50.0">
                    <NoteDisplayer fx:id="History" prefHeight="200.0" prefWidth="300.0" />
                </VBox>
-               <ListView fx:id="contacted" layoutX="48.0" layoutY="9.0" prefHeight="200.0" prefWidth="200.0" />
+               <ListView fx:id="contacted" layoutX="18.0" layoutY="9.0" prefHeight="200.0" prefWidth="270.0" />
            </AnchorPane>
        </VBox>
    </center>

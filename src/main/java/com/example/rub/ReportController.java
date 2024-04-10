@@ -1,6 +1,11 @@
 package com.example.rub;
 
+import com.example.rub.beans.Contatto;
 import com.example.rub.enums.Operatori;
+import com.example.rub.enums.comparator.DateStringComp;
+import com.example.rub.functionalities.DBManager;
+import com.example.rub.functionalities.GlobalContext;
+import com.example.rub.functionalities.NoteManager;
 import com.example.rub.objects.NoteDisplayer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,10 +20,11 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.net.URL;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ReportController implements Initializable {
 
@@ -33,12 +39,15 @@ public class ReportController implements Initializable {
     @FXML
     public CheckBox includeMessages;
     @FXML
-    public TextField durata;
+    public Spinner<Integer> durata;
     @FXML
     public NoteDisplayer History;
     @FXML
     public ListView<HBox> contacted;
     ObservableList<HBox> contactedList;
+    ArrayList<Pair<UUID, String>> timeLine;
+    String start;
+    String stop;
 
     public void doGoBack(ActionEvent event) {
         try {
@@ -50,12 +59,62 @@ public class ReportController implements Initializable {
         } catch (Exception e) { System.out.println("Errore durante la transizione in firstPage con doGoBack in ReportController");   }
     }
 
-    public void doShowReport(ActionEvent event) {
+    public void doShowReport() {
+        try {
+            start = startDate.getValue().toString();
+            stop = stopDate.getValue().toString();
+            createTimeLine();
+            LinkedList<UUID> toDisplay = new LinkedList<>();
+            for(Pair<UUID, String> p : timeLine){
+                if (!toDisplay.contains(p.getKey())){
+                    toDisplay.add(p.getKey());
+                }
+            }
+            displayResults(toDisplay);
+        } catch (NullPointerException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Campi Mancanti");
+            alert.setContentText("Inserisci data di inizio e fine");
+            alert.setHeaderText("Dati mancanti!");
+            alert.show();
+        } catch (ParserConfigurationException e) {
+            System.out.println("no");
+        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        operator.getItems().addAll(Operatori.values());
+        if (!(GlobalContext.operator == Operatori.TOMMASO || GlobalContext.operator == Operatori.GAETANO || GlobalContext.operator == Operatori.VICTORIA)){
+            operator.setValue(GlobalContext.operator);
+            operator.setDisable(true);
+        }
         contactedList = FXCollections.observableArrayList();
         contacted.setItems(contactedList);
+        durata.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,300));
+    }
+
+    private void createTimeLine () throws ParserConfigurationException {
+        timeLine = new ArrayList<>();
+        LinkedList<UUID> allEntries = DBManager.getAllEntries();
+        NoteManager nm = new NoteManager();
+        for (UUID i : allEntries){
+            Contatto j = DBManager.retriveEntry(i);
+            LinkedList<String> annotationDates = nm.getAnnotationDates(j.getNoteId(), durata.getValue());
+            for (String k : annotationDates){
+                if (k.compareTo(start) >= 0 && k.compareTo(stop) <= 0) {
+                    timeLine.add(new Pair<>(j.getId(), k));
+                }
+            }
+        }
+        timeLine.sort(new DateStringComp());
+    }
+
+    private void displayResults(LinkedList<UUID> resultToDisplay){
+        contactedList.clear();
+
+        for (UUID uuid : resultToDisplay) {
+            contactedList.add(DBManager.getDisplayableEntry(uuid));
+        }
     }
 }

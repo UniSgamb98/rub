@@ -305,7 +305,6 @@ public abstract class DBManager extends TagsManager{
     public static void notessss() {
         for(Contatto i : database.values()){
             try {
-                int n = 1;
                 NoteManager nm = new NoteManager();
                 Document doc = nm.readXml(""+i.getNoteId());
                 doc.getDocumentElement().normalize();
@@ -314,11 +313,17 @@ public abstract class DBManager extends TagsManager{
                     Node node = nodeList.item(j);
                     if (node.getNodeType() == Node.ELEMENT_NODE){
                         Element e = (Element) node;
-                        if (e.getAttribute("number").isEmpty()){
-                            e.setAttribute("number", n+"");
-                            e.setAttribute("cancelled", "false");
-                            n++;
+                        String ka = e.getAttribute("data");
+                        String d = ka.substring(0, ka.indexOf("/"));
+                        String m = ka.substring(ka.indexOf("/")+1,ka.indexOf("/",ka.indexOf("/")+1));
+                        String y = ka.substring(ka.indexOf("/",ka.indexOf("/")+1)+1);
+                        if (d.length() == 1){
+                            d = "0" + d;
                         }
+                        if(m.length() == 1){
+                            m = "0" + m;
+                        }
+                        e.setAttribute("data", y + "-" + m + "-" + d);
                     }
                 }
                 nm.writeXml(doc, i.getNoteId()+"");

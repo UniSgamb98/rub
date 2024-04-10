@@ -18,6 +18,8 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.UUID;
 
 public class NoteManager {
     private final DocumentBuilder docBuilder;
@@ -37,7 +39,7 @@ public class NoteManager {
     public void addCallNote (Document doc, String note, String durata){
         Element call = doc.createElement("chiamata");
         Calendar now = Calendar.getInstance();
-        call.setAttribute("data",now.get(Calendar.DAY_OF_MONTH) + "/" + (now.get(Calendar.MONTH)+1) + "/" + now.get(Calendar.YEAR));
+        call.setAttribute("data",now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH)+1) + "-" + now.get(Calendar.DAY_OF_MONTH) );
         call.setAttribute("operatore", GlobalContext.operator.name());
         call.setAttribute("durata", durata);
         call.setAttribute("number", "" + (getNoteNumber(doc)+1));
@@ -103,5 +105,24 @@ public class NoteManager {
             System.out.println(n);
         } catch (Exception ignored) {}
         return n;
+    }
+
+    public LinkedList<String> getAnnotationDates (UUID noteId, int durata){
+        LinkedList<String> ret = new LinkedList<>();
+        try {
+            Document doc = readXml(""+noteId);
+            doc.getDocumentElement().normalize();
+            NodeList nodeList = doc.getElementsByTagName("chiamata");
+            for (int j = 0; j < nodeList.getLength(); j++) {
+                Node node = nodeList.item(j);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    Element e = (Element) node;
+                    if (Integer.parseInt(e.getAttribute("durata")) >= durata) {
+                        ret.add(e.getAttribute("data"));
+                    }
+                }
+            }
+        } catch (Exception ignored)   {}
+        return ret;
     }
 }
