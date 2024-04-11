@@ -40,7 +40,11 @@ public class NoteManager {
     public void addCallNote (Document doc, String note, int durata, boolean messaggio){
         Element call = doc.createElement("chiamata");
         Calendar now = Calendar.getInstance();
-        call.setAttribute("data",now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH)+1) + "-" + now.get(Calendar.DAY_OF_MONTH) );
+        String m = ""+(now.get(Calendar.MONTH)+1);
+        if (m.length() == 1)    m = "0"+m;
+        String d = ""+now.get(Calendar.DAY_OF_MONTH);
+        if (d.length() == 1)    d = "0"+d;
+        call.setAttribute("data",now.get(Calendar.YEAR) + "-" + m + "-" + d );
         call.setAttribute("operatore", GlobalContext.operator.name());
         call.setAttribute("durata", ""+durata);
         call.setAttribute("number", "" + (getNoteNumber(doc)+1));
@@ -109,7 +113,7 @@ public class NoteManager {
         return n;
     }
 
-    public LinkedList<String> getAnnotationDates (UUID noteId, int durata, Operatori operator){
+    public LinkedList<String> getAnnotationDates (UUID noteId, int durata, Operatori operator, boolean includeMessages){
         LinkedList<String> ret = new LinkedList<>();
         try {
             Document doc = readXml(""+noteId);
@@ -119,7 +123,9 @@ public class NoteManager {
                 Node node = nodeList.item(j);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element e = (Element) node;
-                    if (Integer.parseInt(e.getAttribute("durata")) >= durata && e.getAttribute("operatore").equals(operator.name())) {
+                    if (Integer.parseInt(e.getAttribute("durata")) >= durata &&
+                            e.getAttribute("operatore").equals(operator.name()) &&
+                            (e.getAttribute("messaggio").equals("false")) || includeMessages) {
                         ret.add(e.getAttribute("data"));
                     }
                 }

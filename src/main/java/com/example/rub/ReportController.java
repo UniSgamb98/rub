@@ -47,6 +47,7 @@ public class ReportController implements Initializable {
     public NoteDisplayer history;
     @FXML
     public ListView<HBox> contacted;
+    public ChoiceBox<String> filtro;
     ObservableList<HBox> contactedList;
     ArrayList<Pair<UUID, String>> timeLine;
     String start;
@@ -67,15 +68,12 @@ public class ReportController implements Initializable {
             start = startDate.getValue().toString();
             stop = stopDate.getValue().toString();
             createTimeLine();
-            LinkedList<UUID> toDisplay = new LinkedList<>();
-            for(Pair<UUID, String> p : timeLine){
-                if (!toDisplay.contains(p.getKey())){
-                    toDisplay.add(p.getKey());
-                }
-            }
-            displayResults(toDisplay);
+            filtro.getItems().clear();      //chissa perchè questa linea lancio un InvocationTargetException ma funziona tutto correttamente
+            filtro.getItems().add("Periodo analizzato");
+            filtro.getItems().addAll(getIntermediateDate(startDate.getValue(), stopDate.getValue()));
+            filtro.setValue("Periodo analizzato");
+            displayFilteredResults();
             setChart();
-
         } catch (NullPointerException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Campi Mancanti");
@@ -87,6 +85,21 @@ public class ReportController implements Initializable {
         }
     }
 
+    public void displayFilteredResults(){
+        LinkedList<UUID> toDisplay = new LinkedList<>();
+        for(Pair<UUID, String> p : timeLine){
+            if (filtro.getValue().equals("Periodo analizzato")){
+                if (!toDisplay.contains(p.getKey())){
+                    toDisplay.add(p.getKey());
+                }
+            } else {
+                if (!toDisplay.contains(p.getKey()) && p.getValue().equals(filtro.getValue())) {
+                    toDisplay.add(p.getKey());
+                }
+            }
+        }
+        displayResults(toDisplay);
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         operator.getItems().addAll(Operatori.values());
@@ -105,7 +118,7 @@ public class ReportController implements Initializable {
         NoteManager nm = new NoteManager();
         for (UUID i : allEntries){
             Contatto j = DBManager.retriveEntry(i);
-            LinkedList<String> annotationDates = nm.getAnnotationDates(j.getNoteId(), durata.getValue(), operator.getValue());
+            LinkedList<String> annotationDates = nm.getAnnotationDates(j.getNoteId(), durata.getValue(), operator.getValue(), includeMessages.isSelected());
             for (String k : annotationDates){
                 if (k.compareTo(start) >= 0 && k.compareTo(stop) <= 0) {
                     timeLine.add(new Pair<>(j.getId(), k));
@@ -142,7 +155,7 @@ public class ReportController implements Initializable {
 
     private ArrayList<String> getIntermediateDate (LocalDate start, LocalDate stop){
         ArrayList<String> ret = new ArrayList<>();
-        while (start.toString().compareTo(stop.toString()) < 0) {
+        while (start.toString().compareTo(stop.toString()) <= 0) {
             ret.add(start.toString());
             start = start.plusDays(1);
         }
@@ -152,5 +165,9 @@ public class ReportController implements Initializable {
     public void doShowNotes() {
         DisplayableEntry displayableEntry = (DisplayableEntry) contacted.getSelectionModel().getSelectedItem();
         history.setDocument(displayableEntry.getEntry().getId());
+    }
+
+    public void doFillWithToday() {
+        stopDate.setValue(LocalDate.now());
     }
 }
