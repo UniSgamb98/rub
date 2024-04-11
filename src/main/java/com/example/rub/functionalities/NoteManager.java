@@ -123,7 +123,7 @@ public class NoteManager {
                 Node node = nodeList.item(j);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element e = (Element) node;
-                    if (Integer.parseInt(e.getAttribute("durata")) >= durata &&
+                    if ((Integer.parseInt(e.getAttribute("durata")) >= durata || includeMessages) &&
                             e.getAttribute("operatore").equals(operator.name()) &&
                             (e.getAttribute("messaggio").equals("false")) || includeMessages) {
                         ret.add(e.getAttribute("data"));

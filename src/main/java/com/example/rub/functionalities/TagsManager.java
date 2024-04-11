@@ -79,15 +79,6 @@ public abstract class TagsManager {
             }
         }
     }
-    @Deprecated //TODO
-    protected static void changeIndexEntry(UUID id, String oldTag, String newTag){  //RIMOZIONE DEL TAG DA INDEX E DA GROUPEDTAGS SE NECESSARIO
-        if (index.get(oldTag).size() == 1){
-            index.remove(oldTag);
-        } else {
-            index.get(oldTag).remove(id);
-        }
-        insertTagInIndex(newTag, id);    //REINSERIMENTO DEL TAG NUOVO RICEVUTO
-    }
     private static void insertTagInIndex(String tag, UUID uuid){    //Aggiunge il tag l'uuid sotto la voce del tag fornito, se non trovato crea un tag
         if (index.containsKey(tag)) {   //TAG APPESO
             System.out.println("       Tag " + tag + " trovato in indice.");

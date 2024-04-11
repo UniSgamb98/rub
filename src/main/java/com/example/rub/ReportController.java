@@ -163,8 +163,10 @@ public class ReportController implements Initializable {
     }
 
     public void doShowNotes() {
-        DisplayableEntry displayableEntry = (DisplayableEntry) contacted.getSelectionModel().getSelectedItem();
-        history.setDocument(displayableEntry.getEntry().getId());
+        try {
+            DisplayableEntry displayableEntry = (DisplayableEntry) contacted.getSelectionModel().getSelectedItem();
+            history.setDocument(displayableEntry.getEntry().getId());
+        } catch (RuntimeException ignored) {}
     }
 
     public void doFillWithToday() {

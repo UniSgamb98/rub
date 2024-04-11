@@ -57,7 +57,7 @@ public class RegisterCallController implements Initializable {
         }
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
-        controllerProperty.get().refresh();     //TODO si puo fare con fireEvent
+        controllerProperty.get().refresh();
     }
     public void setEntryProperty(Contatto entry){
         entryProperty.set(entry);
