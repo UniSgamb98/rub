@@ -21,7 +21,7 @@
    </top>
    <center>
        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-           <HBox alignment="CENTER_LEFT" spacing="10.0">
+           <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="NEVER">
                <VBox.margin>
                    <Insets left="40.0" />
                </VBox.margin>
@@ -33,22 +33,22 @@
                   <Insets bottom="10.0" top="10.0" />
               </VBox.margin>
            </Separator>
-           <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
+           <HBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <VBox>
-                   <FlowPane.margin>
+                   <HBox.margin>
                        <Insets right="30.0" />
-                   </FlowPane.margin>
+                   </HBox.margin>
                    <Label text="Frequenza chiamate" />
-                   <LineChart fx:id="chart" minHeight="175.0" minWidth="300.0" prefHeight="150.0" prefWidth="259.0">
+                   <LineChart fx:id="chart" animated="false" minHeight="175.0" minWidth="300.0">
                        <xAxis>
                            <CategoryAxis side="BOTTOM" />
                        </xAxis>
                        <yAxis>
-                           <NumberAxis side="LEFT" />
+                           <NumberAxis side="LEFT" tickLabelGap="5.0" tickUnit="10.0" />
                        </yAxis>
                    </LineChart>
                </VBox>
-               <GridPane maxHeight="100.0" maxWidth="265.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane maxHeight="100.0" minHeight="100.0" minWidth="265.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                    <columnConstraints>
                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="-Infinity" />
                        <ColumnConstraints hgrow="SOMETIMES" />
@@ -77,18 +77,24 @@
                    <Button mnemonicParsing="false" onAction="#doShowReport" text="Mostra Report" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
                    <Spinner fx:id="durata" editable="true" maxWidth="55.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </GridPane>
-           </FlowPane>
+            <VBox.margin>
+               <Insets left="15.0" right="15.0" />
+            </VBox.margin>
+           </HBox>
            <Separator prefWidth="200.0">
               <VBox.margin>
                   <Insets bottom="10.0" top="10.0" />
               </VBox.margin>
            </Separator>
-           <AnchorPane prefHeight="200.0" prefWidth="200.0">
+           <HBox prefHeight="200.0" prefWidth="200.0" spacing="30.0" VBox.vgrow="SOMETIMES">
+               <ListView fx:id="contacted" layoutX="18.0" layoutY="9.0" minHeight="200.0" minWidth="270.0" onMouseClicked="#doShowNotes" />
                <VBox AnchorPane.rightAnchor="50.0">
-                   <NoteDisplayer fx:id="History" prefHeight="200.0" prefWidth="300.0" />
+                   <NoteDisplayer fx:id="history" minHeight="200.0" minWidth="300.0" />
                </VBox>
-               <ListView fx:id="contacted" layoutX="18.0" layoutY="9.0" prefHeight="200.0" prefWidth="270.0" />
-           </AnchorPane>
+            <VBox.margin>
+               <Insets bottom="10.0" left="15.0" right="15.0" />
+            </VBox.margin>
+           </HBox>
        </VBox>
    </center>
 </BorderPane>

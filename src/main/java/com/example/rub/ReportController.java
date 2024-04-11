@@ -6,6 +6,7 @@ import com.example.rub.enums.comparator.DateStringComp;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
 import com.example.rub.functionalities.NoteManager;
+import com.example.rub.objects.DisplayableEntry;
 import com.example.rub.objects.NoteDisplayer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,13 +18,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.*;
 
 public class ReportController implements Initializable {
@@ -31,7 +35,7 @@ public class ReportController implements Initializable {
     @FXML
     public ChoiceBox<Operatori> operator;
     @FXML
-    public LineChart chart;
+    public LineChart<String, Integer> chart;
     @FXML
     public DatePicker startDate;
     @FXML
@@ -41,7 +45,7 @@ public class ReportController implements Initializable {
     @FXML
     public Spinner<Integer> durata;
     @FXML
-    public NoteDisplayer History;
+    public NoteDisplayer history;
     @FXML
     public ListView<HBox> contacted;
     ObservableList<HBox> contactedList;
@@ -71,6 +75,8 @@ public class ReportController implements Initializable {
                 }
             }
             displayResults(toDisplay);
+            setChart();
+
         } catch (NullPointerException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Campi Mancanti");
@@ -100,7 +106,7 @@ public class ReportController implements Initializable {
         NoteManager nm = new NoteManager();
         for (UUID i : allEntries){
             Contatto j = DBManager.retriveEntry(i);
-            LinkedList<String> annotationDates = nm.getAnnotationDates(j.getNoteId(), durata.getValue());
+            LinkedList<String> annotationDates = nm.getAnnotationDates(j.getNoteId(), durata.getValue(), operator.getValue());
             for (String k : annotationDates){
                 if (k.compareTo(start) >= 0 && k.compareTo(stop) <= 0) {
                     timeLine.add(new Pair<>(j.getId(), k));
@@ -112,9 +118,40 @@ public class ReportController implements Initializable {
 
     private void displayResults(LinkedList<UUID> resultToDisplay){
         contactedList.clear();
-
         for (UUID uuid : resultToDisplay) {
             contactedList.add(DBManager.getDisplayableEntry(uuid));
         }
+    }
+
+    private void setChart(){
+        chart.getData().clear();
+        XYChart.Series<String, Integer> series = new XYChart.Series<>();
+        series.setName("N° Chiamate");
+        for (String i : getIntermediateDate(startDate.getValue(), stopDate.getValue())){
+            series.getData().add(new XYChart.Data<>(i, getFrequency(i)));
+        }
+        chart.getData().add(series);
+    }
+
+    private int getFrequency(String date){
+        int ret = 0;
+        for (Pair<UUID, String> i : timeLine){
+            if (i.getValue().equals(date))  ret++;
+        }
+        return ret;
+    }
+
+    private ArrayList<String> getIntermediateDate (LocalDate start, LocalDate stop){
+        ArrayList<String> ret = new ArrayList<>();
+        while (start.toString().compareTo(stop.toString()) < 0) {
+            ret.add(start.toString());
+            start = start.plusDays(1);
+        }
+        return ret;
+    }
+
+    public void doShowNotes(MouseEvent mouseEvent) {
+        DisplayableEntry displayableEntry = (DisplayableEntry) contacted.getSelectionModel().getSelectedItem();
+        history.setDocument(displayableEntry.getEntry().getId());
     }
 }

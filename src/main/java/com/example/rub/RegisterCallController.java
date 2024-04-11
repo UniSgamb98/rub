@@ -4,6 +4,7 @@ import com.example.rub.beans.Contatto;
 import com.example.rub.enums.Interessamento;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.NoteManager;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
@@ -25,9 +26,10 @@ public class RegisterCallController implements Initializable {
     @FXML
     public DatePicker prossimaChiamata;
     @FXML
-    public TextField durata;
+    public Spinner<Integer> durata;
     @FXML
     public TextArea note;
+    public CheckBox isMessage;
 
     public void doCancelRegistration(ActionEvent event){
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -44,7 +46,7 @@ public class RegisterCallController implements Initializable {
                 System.out.println("Creazione nuovo documento di nota");
                 doc = nm.createDocument(bean.getRagioneSociale());
             }
-            nm.addCallNote(doc, note.getText(), durata.getText());
+            nm.addCallNote(doc, note.getText(), durata.getValue(), isMessage.isSelected());
             Interessamento fedback = null;
             try {
                 fedback = Interessamento.valueOf(feedback.getValue());
@@ -67,5 +69,6 @@ public class RegisterCallController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         feedback.getItems().addAll(Interessamento.NON_TROVATO.name(), Interessamento.NON_INERENTE.name(), Interessamento.NULLO.name(), Interessamento.RICHIAMARE.name(), Interessamento.INFO.name(), Interessamento.LISTINO.name(), Interessamento.CAMPIONE.name(), Interessamento.CLIENTE.name());
+        durata.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,300));
     }
 }

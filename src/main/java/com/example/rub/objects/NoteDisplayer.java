@@ -50,6 +50,7 @@ public class NoteDisplayer extends VBox {
         manageNote();
     }
     private void manageNote(){
+        notes.clear();
         try {
             document = new NoteManager().readXml(path);
             document.getDocumentElement().normalize();

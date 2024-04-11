@@ -9,9 +9,8 @@ public class DisplayableEntry extends HBox {
 
     public DisplayableEntry(Contatto entryRequested){
         entry = entryRequested;
-        this.getChildren().add(new Label(entry.getRagioneSociale()));
+        this.getChildren().addAll(new Label(entry.getRagioneSociale()), new Label(" in "));
         this.getChildren().add(new Label(entry.getPaese()));
-        this.getChildren().add(new Label(entry.getCitta()));
     }
     public Contatto getEntry(){
         return entry;

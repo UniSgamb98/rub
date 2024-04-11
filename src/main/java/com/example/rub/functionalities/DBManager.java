@@ -324,6 +324,8 @@ public abstract class DBManager extends TagsManager{
                             m = "0" + m;
                         }
                         e.setAttribute("data", y + "-" + m + "-" + d);
+                        e.setAttribute("messaggio", "false");
+                        if (e.getAttribute("durata").isEmpty()) e.setAttribute("durata", "0");
                     }
                 }
                 nm.writeXml(doc, i.getNoteId()+"");

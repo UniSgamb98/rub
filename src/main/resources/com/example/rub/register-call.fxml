@@ -9,21 +9,32 @@
       <Label text="INFORMAZIONI DELLA CHIAMATA" BorderPane.alignment="CENTER" />
    </top>
    <left>
-      <VBox alignment="TOP_CENTER" prefHeight="383.0" prefWidth="196.0" BorderPane.alignment="CENTER">
-         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <VBox alignment="CENTER" prefHeight="383.0" prefWidth="196.0" BorderPane.alignment="CENTER">
+         <HBox alignment="CENTER">
             <Label alignment="CENTER" text="FeedBack:" />
             <ChoiceBox fx:id="feedback" prefHeight="25.0" prefWidth="70.0" />
+            <VBox.margin>
+               <Insets bottom="30.0" />
+            </VBox.margin>
          </HBox>
          <Label text="Programma la prossima chiamata:" />
          <DatePicker fx:id="prossimaChiamata" />
          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
             <Label alignment="CENTER" contentDisplay="TOP" prefHeight="63.0" prefWidth="63.0" text="Durata chiamata in minuti" textAlignment="CENTER" wrapText="true" />
-            <TextField fx:id="durata" prefHeight="25.0" prefWidth="92.0" />
+            <Spinner fx:id="durata" prefHeight="25.0" prefWidth="92.0" />
          </HBox>
+         <CheckBox fx:id="isMessage" mnemonicParsing="false" text="Era tramite messaggi">
+            <padding>
+               <Insets top="-20.0" />
+            </padding>
+         </CheckBox>
       </VBox>
    </left>
    <center>
-      <TextArea fx:id="note" prefHeight="200.0" prefWidth="200.0" wrapText="true" BorderPane.alignment="CENTER" />
+      <TextArea fx:id="note" prefHeight="200.0" prefWidth="200.0" wrapText="true" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets right="20.0" />
+         </BorderPane.margin></TextArea>
    </center>
    <bottom>
       <AnchorPane BorderPane.alignment="CENTER">

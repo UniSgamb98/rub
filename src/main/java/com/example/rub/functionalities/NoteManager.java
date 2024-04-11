@@ -1,5 +1,6 @@
 package com.example.rub.functionalities;
 
+import com.example.rub.enums.Operatori;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -36,14 +37,15 @@ public class NoteManager {
         return doc;
     }
 
-    public void addCallNote (Document doc, String note, String durata){
+    public void addCallNote (Document doc, String note, int durata, boolean messaggio){
         Element call = doc.createElement("chiamata");
         Calendar now = Calendar.getInstance();
         call.setAttribute("data",now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH)+1) + "-" + now.get(Calendar.DAY_OF_MONTH) );
         call.setAttribute("operatore", GlobalContext.operator.name());
-        call.setAttribute("durata", durata);
+        call.setAttribute("durata", ""+durata);
         call.setAttribute("number", "" + (getNoteNumber(doc)+1));
         call.setAttribute("cancelled", "false");
+        call.setAttribute("messaggio", "" + messaggio);
         call.setTextContent(note);
         Element root = doc.getDocumentElement();
         root.appendChild(call);
@@ -107,7 +109,7 @@ public class NoteManager {
         return n;
     }
 
-    public LinkedList<String> getAnnotationDates (UUID noteId, int durata){
+    public LinkedList<String> getAnnotationDates (UUID noteId, int durata, Operatori operator){
         LinkedList<String> ret = new LinkedList<>();
         try {
             Document doc = readXml(""+noteId);
@@ -117,7 +119,7 @@ public class NoteManager {
                 Node node = nodeList.item(j);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element e = (Element) node;
-                    if (Integer.parseInt(e.getAttribute("durata")) >= durata) {
+                    if (Integer.parseInt(e.getAttribute("durata")) >= durata && e.getAttribute("operatore").equals(operator.name())) {
                         ret.add(e.getAttribute("data"));
                     }
                 }

@@ -136,7 +136,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
             controller.setControllerProperty(this);
             Stage callStage = new Stage();
             callStage.setTitle("Chiamata");
-            Scene scene = new Scene(root, 380, 285);
+            Scene scene = new Scene(root, 450, 285);
             callStage.setScene(scene);
             callStage.getIcons().add(new Image("AppIcon.png"));
             callStage.show();
