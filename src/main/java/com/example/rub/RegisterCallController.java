@@ -4,7 +4,6 @@ import com.example.rub.beans.Contatto;
 import com.example.rub.enums.Interessamento;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.NoteManager;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;

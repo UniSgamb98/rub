@@ -150,7 +150,7 @@ public class ReportController implements Initializable {
         return ret;
     }
 
-    public void doShowNotes(MouseEvent mouseEvent) {
+    public void doShowNotes() {
         DisplayableEntry displayableEntry = (DisplayableEntry) contacted.getSelectionModel().getSelectedItem();
         history.setDocument(displayableEntry.getEntry().getId());
     }
