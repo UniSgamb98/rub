@@ -23,7 +23,7 @@
             <Label alignment="CENTER" contentDisplay="TOP" prefHeight="63.0" prefWidth="63.0" text="Durata chiamata in minuti" textAlignment="CENTER" wrapText="true" />
             <Spinner fx:id="durata" prefHeight="25.0" prefWidth="92.0" />
          </HBox>
-         <CheckBox fx:id="isMessage" mnemonicParsing="false" text="Era tramite messaggi">
+         <CheckBox fx:id="isMessage" mnemonicParsing="false" onContextMenuRequested="#requestContextMenu" text="Appunta come nota personale">
             <padding>
                <Insets top="-20.0" />
             </padding>

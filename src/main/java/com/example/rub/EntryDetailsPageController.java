@@ -83,14 +83,13 @@ public class EntryDetailsPageController implements Initializable, Runnable {
     @FXML
     public GridPane gridData;
     private Contatto entryToDisplayDetails;
+    private Scene oldScene;
 
-    public void switchToSearchEntry(ActionEvent event) {
+    public void doGoBack(ActionEvent event) {
         shutdown();
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("search-entry.fxml")));       //cambio scena
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
+            stage.setScene(oldScene);
             stage.show();
         } catch (Exception e) { System.out.println("Errore durante la transizione in search-entry con switchToSearchEntry in EntryDetailsPageController");   }
     }
@@ -231,6 +230,9 @@ public class EntryDetailsPageController implements Initializable, Runnable {
     }
     public void setEntryProperty(Contatto entry){
         entryProperty.set(entry);
+    }
+    public void setProperties(Scene oldScene){
+        this.oldScene = oldScene;
     }
     public void setNoteDocument(){
         noteDisplayer.setDocument(entryToDisplayDetails.getId());

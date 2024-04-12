@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -38,6 +39,7 @@ public class NoteDisplayer extends VBox {
         notesView.setItems(notes);
         this.getChildren().add(new Label("Storico"));
         this.getChildren().add(notesView);
+        this.widthProperty().addListener((obs, oldVal, newVal) -> setNoteWidth(this.getWidth()));
     }
 
     public void setDocument(UUID entryID) {
@@ -67,6 +69,7 @@ public class NoteDisplayer extends VBox {
         } catch (IOException | SAXException | ParserConfigurationException e) {
             System.out.println("no notes");
         }
+        setNoteWidth(this.getWidth());
     }
 
     public void openNoteModifications(Element element){
@@ -84,6 +87,12 @@ public class NoteDisplayer extends VBox {
             this.fireEvent(new ActionEvent());
         } catch (Exception e){
             System.out.println("Orrore!");
+        }
+    }
+
+    public void setNoteWidth(double width) {
+        for (DisplayableNote i : notes) {
+            i.setWrapping(width);
         }
     }
 }

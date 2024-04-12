@@ -83,6 +83,7 @@ public class SearchEntryController implements Initializable {
             controller.init(true);
             controller.setNoteDocument();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            controller.setProperties(stage.getScene());
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setOnHidden(e -> controller.shutdown());

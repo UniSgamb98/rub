@@ -95,7 +95,10 @@
          <TextField fx:id="emailGenerica" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="11" />
          <TextField fx:id="codiceFiscale" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="10" />
          <TextField fx:id="partitaIva" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-         <NoteDisplayer fx:id="noteDisplayer" minHeight="250.0" minWidth="500.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="16" />
+         <NoteDisplayer fx:id="noteDisplayer" minHeight="250.0" minWidth="500.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="16">
+            <opaqueInsets>
+               <Insets top="30.0" />
+            </opaqueInsets></NoteDisplayer>
          <columnConstraints>
             <ColumnConstraints />
             <ColumnConstraints />
@@ -127,7 +130,7 @@
 </GridPane>
     </center>
    <bottom>
-      <Button mnemonicParsing="false" onAction="#switchToSearchEntry" text="Indietro" BorderPane.alignment="BOTTOM_LEFT">
+      <Button mnemonicParsing="false" onAction="#doGoBack" text="Indietro" BorderPane.alignment="BOTTOM_LEFT">
          <BorderPane.margin>
             <Insets bottom="50.0" left="50.0" />
          </BorderPane.margin>

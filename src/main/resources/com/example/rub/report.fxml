@@ -74,7 +74,7 @@
                        </GridPane.margin>
                    </Label>
                    <DatePicker fx:id="stopDate" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                   <CheckBox fx:id="includeMessages" mnemonicParsing="false" text="Includi messaggi" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                   <CheckBox fx:id="includeMessages" mnemonicParsing="false" text="Includi messaggi" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                    <Button mnemonicParsing="false" onAction="#doShowReport" text="Mostra Report" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" />
                    <Spinner fx:id="durata" editable="true" maxWidth="55.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                <Button mnemonicParsing="false" onAction="#doFillWithToday" text="Oggi" GridPane.columnIndex="3" GridPane.halignment="CENTER">

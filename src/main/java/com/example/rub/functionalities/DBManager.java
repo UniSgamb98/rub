@@ -182,7 +182,7 @@ public abstract class DBManager extends TagsManager{
         }
         return ret;
     }
-    public static void setNextCall(UUID uuid, LocalDate date, Interessamento feedback){
+    public static void setNextCall(UUID uuid, LocalDate date, Interessamento feedback, boolean setAlsoUltimaChiamata){
         try {
             database = (HashMap<UUID, Contatto>) MyUtils.read("database");
             Contatto data = database.get(uuid);
@@ -193,7 +193,9 @@ public abstract class DBManager extends TagsManager{
             int month = now.get(Calendar.MONTH)+1;
             int day = now.get(Calendar.DAY_OF_MONTH);
             LocalDate today = LocalDate.of(year,month,day);
-            data.setUltimaChiamata(today);
+            if (setAlsoUltimaChiamata) {
+                data.setUltimaChiamata(today);
+            }
             if (feedback != null){
                 if (new InteressamentoComp().compare(feedback, data.getInteressamento()) > 0) {
                     data.setInteressamento(feedback);

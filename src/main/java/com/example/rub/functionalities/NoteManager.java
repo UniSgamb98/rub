@@ -108,7 +108,6 @@ public class NoteManager {
         try {
             NodeList nodeList = document.getElementsByTagName("chiamata");
             n = nodeList.getLength();
-            System.out.println(n);
         } catch (Exception ignored) {}
         return n;
     }

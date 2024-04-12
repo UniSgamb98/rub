@@ -3,6 +3,7 @@ package com.example.rub;
 import com.example.rub.beans.Contatto;
 import com.example.rub.enums.Interessamento;
 import com.example.rub.functionalities.DBManager;
+import com.example.rub.functionalities.GlobalContext;
 import com.example.rub.functionalities.NoteManager;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -11,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.stage.Stage;
 import org.w3c.dom.Document;
 
@@ -50,10 +52,13 @@ public class RegisterCallController implements Initializable {
             try {
                 fedback = Interessamento.valueOf(feedback.getValue());
             } catch (Exception ignored) {}
-            DBManager.setNextCall(bean.getId(), prossimaChiamata.getValue(), fedback);
+            DBManager.setNextCall(bean.getId(), prossimaChiamata.getValue(), fedback, true);
             nm.writeXml(doc, ""+bean.getNoteId());
         } catch (Exception e){
             System.out.println("Errore durante la scrittura del file Xml delle note");
+        }
+        if (prossimaChiamata.getValue()==null){
+            GlobalContext.notProgrammedCalls.add(entryProperty.get().getId());
         }
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
@@ -69,5 +74,9 @@ public class RegisterCallController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         feedback.getItems().addAll(Interessamento.NON_TROVATO.name(), Interessamento.NON_INERENTE.name(), Interessamento.NULLO.name(), Interessamento.RICHIAMARE.name(), Interessamento.INFO.name(), Interessamento.LISTINO.name(), Interessamento.CAMPIONE.name(), Interessamento.CLIENTE.name());
         durata.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,300));
+    }
+
+    public void requestContextMenu(ContextMenuEvent contextMenuEvent) {
+        System.out.println("Context");      //TODO fare l'overlay che fornisce un tooltip con uno stack pane e monitorando la posizione del cursore (il tempo allinterno del coso)
     }
 }
