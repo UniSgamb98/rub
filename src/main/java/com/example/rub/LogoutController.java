@@ -3,6 +3,7 @@ package com.example.rub;
 import com.example.rub.enums.Interessamento;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
+import com.example.rub.functionalities.MyUtils;
 import com.example.rub.objects.DisplayableEntry;
 import com.example.rub.objects.NoteDisplayer;
 import javafx.collections.FXCollections;
@@ -36,6 +37,7 @@ public class LogoutController implements Initializable {
             DisplayableEntry displayableEntry = (DisplayableEntry) contacted.getSelectionModel().getSelectedItem();
             GlobalContext.notProgrammedCalls.remove(displayableEntry.getEntry().getId());
             contactedList.remove(displayableEntry);
+            MyUtils.write(GlobalContext.notProgrammedCalls, GlobalContext.operator.name());
             if (contactedList.isEmpty()) {
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.close();
@@ -51,6 +53,7 @@ public class LogoutController implements Initializable {
             DisplayableEntry displayableEntry = (DisplayableEntry) contacted.getSelectionModel().getSelectedItem();
             DBManager.setNextCall(displayableEntry.getEntry().getId(), reminderDate.getValue(), Interessamento.BLANK, false);
             contactedList.remove(displayableEntry);
+            MyUtils.write(GlobalContext.notProgrammedCalls, GlobalContext.operator.name());
             if (contactedList.isEmpty()) {
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.close();
@@ -69,7 +72,9 @@ public class LogoutController implements Initializable {
     }
 
     public void doRemindMeLater(ActionEvent event) {
-
+        MyUtils.write(GlobalContext.notProgrammedCalls, GlobalContext.operator.name());
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     public void setProperties(Scene oldScene){

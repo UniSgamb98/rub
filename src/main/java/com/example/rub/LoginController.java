@@ -38,6 +38,7 @@ public class LoginController implements Initializable {
                 stage.setScene(scene);
                 stage.show();
             } catch (Exception e) {
+                e.printStackTrace();
                 System.out.println("Errore durante la transizione in firstPage con doLogin");
             }
         }

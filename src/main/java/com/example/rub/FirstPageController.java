@@ -6,6 +6,7 @@ import com.example.rub.enums.Operatori;
 import com.example.rub.enums.TipoCliente;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
+import com.example.rub.functionalities.MyUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +23,7 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.UUID;
@@ -35,7 +37,6 @@ public class FirstPageController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
-
     public void switchToNewEntry (ActionEvent event) {
         try {
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("new-entry.fxml")));
@@ -208,7 +209,21 @@ public class FirstPageController implements Initializable {
             notesButton.setPrefSize(130.0, 130.0);
             notesButton.setVisible(true);
             notesButton.setMinHeight(Region.USE_COMPUTED_SIZE);
-
+        }
+        try {
+            GlobalContext.notProgrammedCalls = (LinkedList<UUID>) MyUtils.read(GlobalContext.operator.name());
+            if (!GlobalContext.notProgrammedCalls.isEmpty()){
+                FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("logout.fxml")));
+                Parent root = loader.load();
+                LogoutController controller = loader.getController();
+                controller.setProperties(scene);
+                Scene newScene = new Scene(root);
+                Stage newStage = new Stage();
+                newStage.setScene(newScene);
+                newStage.show();
+            }
+        }  catch (IOException | ClassNotFoundException e) {
+            System.out.println("NIENTE DA RICORDARE");
         }
     }
 
