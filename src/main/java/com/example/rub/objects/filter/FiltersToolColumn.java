@@ -1,6 +1,6 @@
 package com.example.rub.objects.filter;
 
-import com.example.rub.enums.Interessamento;
+import com.example.rub.enums.Interessamento.InteressamentoStatus;
 import com.example.rub.enums.Operatori;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.MyUtils;
@@ -27,7 +27,7 @@ public class FiltersToolColumn extends VBox {
         locationFilter = new StateFilter(manager);
 
         operatori = new AllPurposeFilter(Operatori.HUGO.name(), Operatori.SANTOLO.name(), Operatori.VICTORIA.name());
-        interesse = new AllPurposeFilter(Interessamento.NON_INERENTE.name(), Interessamento.NON_INERENTE.name(), Interessamento.NULLO.name(), Interessamento.RICHIAMARE.name(), Interessamento.INFO.name(), Interessamento.LISTINO.name(), Interessamento.CAMPIONE.name(), Interessamento.CLIENTE.name());
+        interesse = new AllPurposeFilter(InteressamentoStatus.NON_INERENTE.name(), InteressamentoStatus.NON_INERENTE.name(), InteressamentoStatus.NULLO.name(), InteressamentoStatus.RICHIAMARE.name(), InteressamentoStatus.INFO.name(), InteressamentoStatus.LISTINO.name(), InteressamentoStatus.CAMPIONE.name(), InteressamentoStatus.CLIENTE.name());
         this.getChildren().addAll(new Separator(), locationFilter, new Separator(), operatori, new Separator(), interesse, new Separator());
         this.setSpacing(10.0);
     }

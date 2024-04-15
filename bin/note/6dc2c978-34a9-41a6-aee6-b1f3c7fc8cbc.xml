@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="AHRtec Service GmbH">
-            
+                
+    
     
     <chiamata cancelled="false" data="2024-04-11" durata="8" messaggio="false" number="1" operatore="SANTOLO">Parlato con il titolare Jens Werner,
 attesa conferma campione EOS</chiamata>
-        
+            
+    
     
     <chiamata cancelled="false" data="2024-04-12" durata="2" messaggio="false" number="2" operatore="SANTOLO">Chianato Werner per conferma campione e partita Iva</chiamata>
+        
     
     <chiamata cancelled="false" data="2024-04-12" durata="0" messaggio="false" number="3" operatore="SANTOLO">Inivato campione oggi 12/04</chiamata>
+    
+    <chiamata cancelled="false" data="2024-04-15" durata="2" messaggio="false" number="4" operatore="SANTOLO">Invio campione in realtà 15-04, allego offerta completa al Signor Werner</chiamata>
 </companyNotes>

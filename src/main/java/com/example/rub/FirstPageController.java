@@ -1,7 +1,7 @@
 package com.example.rub;
 
 import com.example.rub.beans.Contatto;
-import com.example.rub.enums.Interessamento;
+import com.example.rub.enums.Interessamento.InteressamentoStatus;
 import com.example.rub.enums.Operatori;
 import com.example.rub.enums.TipoCliente;
 import com.example.rub.functionalities.DBManager;
@@ -128,9 +128,9 @@ public class FirstPageController implements Initializable {
                 break;
             case 11:
                 if(attribute.isEmpty()) {
-                    bean.setInteressamento(Interessamento.BLANK);
+                    bean.setInteressamento(InteressamentoStatus.BLANK);
                 } else{
-                    bean.setInteressamento(Interessamento.valueOf(attribute));
+                    bean.setInteressamento(InteressamentoStatus.valueOf(attribute));
                 }
                 break;
             case 12:
@@ -231,11 +231,9 @@ public class FirstPageController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("calls-page.fxml"));
             Parent root = loader.load();
-            CallsPageController controller = loader.getController();
-            controller.setCallList(DBManager.getCallList());
             Stage callStage = new Stage();
             callStage.setTitle("Elenco Chiamate");
-            Scene scene = new Scene(root, 380, 285);
+            Scene scene = new Scene(root);
             callStage.setScene(scene);
             callStage.getIcons().add(new Image("AppIcon.png"));
             callStage.show();

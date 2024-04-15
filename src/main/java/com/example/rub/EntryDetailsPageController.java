@@ -1,7 +1,7 @@
 package com.example.rub;
 
 import com.example.rub.beans.Contatto;
-import com.example.rub.enums.Interessamento;
+import com.example.rub.enums.Interessamento.InteressamentoStatus;
 import com.example.rub.enums.TipoCliente;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
@@ -37,7 +37,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
     @FXML
     public ChoiceBox<TipoCliente> tipoCliente;
     @FXML
-    public ChoiceBox<Interessamento> interessamento;
+    public ChoiceBox<InteressamentoStatus> interessamento;
     @FXML
     public TextField emailReferente;
     @FXML
@@ -135,7 +135,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
             controller.setControllerProperty(this);
             Stage callStage = new Stage();
             callStage.setTitle("Chiamata");
-            Scene scene = new Scene(root, 450, 285);
+            Scene scene = new Scene(root);
             callStage.setScene(scene);
             callStage.getIcons().add(new Image("AppIcon.png"));
             callStage.show();
@@ -250,7 +250,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tipoCliente.getItems().addAll(TipoCliente.LABORATORIO, TipoCliente.RIVENDITORE, TipoCliente.CENTROFRESAGGIO);
-        interessamento.getItems().addAll(Interessamento.NON_TROVATO, Interessamento.NON_INERENTE, Interessamento.NULLO, Interessamento.RICHIAMARE, Interessamento.INFO,Interessamento.LISTINO,Interessamento.CAMPIONE, Interessamento.CLIENTE);
+        interessamento.getItems().addAll(InteressamentoStatus.NON_TROVATO, InteressamentoStatus.NON_INERENTE, InteressamentoStatus.NULLO, InteressamentoStatus.RICHIAMARE, InteressamentoStatus.INFO, InteressamentoStatus.LISTINO, InteressamentoStatus.CAMPIONE, InteressamentoStatus.CLIENTE);
         gridData.addEventFilter(ActionEvent.ACTION, event -> {
             if (event.getTarget() instanceof NoteDisplayer) {
                 refresh();

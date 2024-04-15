@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="DETALMIV">
-                            
+                                
+    
     
     
     
@@ -8,18 +9,23 @@
     
     <chiamata cancelled="true" data="2024-4-9" durata="15" number="1" operatore="GAETANO">Prova
 </chiamata>
-                        
+                            
 
+    
     
     
     
     
     <chiamata cancelled="true" data="2024-4-9" durata="" number="2" operatore="SANTOLO">l</chiamata>
-                
+                    
 
 
+    
     
     <chiamata cancelled="false" data="2024-04-12" durata="0" messaggio="false" number="3" operatore="SANTOLO"/>
+        
     
     <chiamata cancelled="false" data="2024-04-12" durata="0" messaggio="false" number="4" operatore="GAETANO"/>
+    
+    <chiamata cancelled="false" data="2024-04-15" durata="0" messaggio="false" number="5" operatore="SANTOLO"/>
 </companyNotes>

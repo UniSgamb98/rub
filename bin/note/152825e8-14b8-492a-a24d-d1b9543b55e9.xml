@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="Dental Design Reichert GmbH">
-                
+                    
+    
     
     
     <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="SANTOLO">richiamare dopo il 9 aprile</chiamata>
-            
+                
 
     
-    <chiamata cancelled="false" data="2024-04-09" durata="0" messaggio="false" number="2" operatore="SANTOLO">Richiamare, il Signor Olivier rientra prossima settimana</chiamata>
     
+    <chiamata cancelled="false" data="2024-04-09" durata="0" messaggio="false" number="2" operatore="SANTOLO">Richiamare, il Signor Olivier rientra prossima settimana</chiamata>
+        
+
+    <chiamata cancelled="false" data="2024-04-15" durata="0" messaggio="false" number="3" operatore="SANTOLO">Richiamare pomeriggio per info sull'eventuale necessità di Zirconia.
+</chiamata>
 </companyNotes>

@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="Allgaeu Dental Immenstadt GmbH">
-                
+                        
+    
+    
     
     
     <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="SANTOLO">Parlato con Giovanni, 100 dischi annui. Al momento hanno Ceramill. Richiamare mercoledì per presentazione</chiamata>
-            
+                    
 
 
+    
+    
     <chiamata cancelled="false" data="2024-04-12" durata="0" messaggio="false" number="2" operatore="SANTOLO">Richiamare lunedì per parlare con Giovanni</chiamata>
+        
+    
+    <chiamata cancelled="false" data="2024-04-15" durata="15" feedback="" messaggio="false" number="3" operatore="SANTOLO">Il Signor Giovanni ordinerà campione EOS e darà indicazioni quantità per offerta.</chiamata>
+    
 </companyNotes>

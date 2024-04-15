@@ -1,6 +1,6 @@
 package com.example.rub.beans;
 
-import com.example.rub.enums.Interessamento;
+import com.example.rub.enums.Interessamento.InteressamentoStatus;
 import com.example.rub.enums.Operatori;
 import com.example.rub.enums.TipoCliente;
 
@@ -20,7 +20,7 @@ public class Contatto implements Serializable {
     private String numeroCivico;
     private String provincia;
     private String cap;
-    private Interessamento interessamento;
+    private InteressamentoStatus interessamento;
     private TipoCliente tipoCliente;
     private String partitaIva;
     private String codiceFiscale;
@@ -34,6 +34,7 @@ public class Contatto implements Serializable {
     private UUID id;
     private UUID noteId;
     private Operatori operator;
+    private double coinvolgimento;
 
     public Contatto(){
         noteId = UUID.randomUUID();
@@ -66,7 +67,7 @@ public class Contatto implements Serializable {
     public int getVolteContattati() {
         return volteContattati;
     }
-    public Interessamento getInteressamento() {
+    public InteressamentoStatus getInteressamento() {
         return interessamento;
     }
     public String getRagioneSociale() {
@@ -114,6 +115,9 @@ public class Contatto implements Serializable {
     public UUID getNoteId() {
         return noteId;
     }
+    public double getCoinvolgimento() {
+        return coinvolgimento;
+    }
 
     public void setTipoCliente(TipoCliente tipoCliente) {
         this.tipoCliente = tipoCliente;
@@ -136,7 +140,7 @@ public class Contatto implements Serializable {
     public void setCitta(String citta) {
         this.citta = citta;
     }
-    public void setInteressamento(Interessamento interessamento) {
+    public void setInteressamento(InteressamentoStatus interessamento) {
         this.interessamento = interessamento;
     }
     public void setProssimaChiamata(LocalDate prossimaChiamata) {
@@ -192,6 +196,9 @@ public class Contatto implements Serializable {
     }
     public void setVolteContattati(int volteContattati) {
         this.volteContattati = volteContattati;
+    }
+    public void setCoinvolgimento(double coinvolgimento) {
+        this.coinvolgimento = coinvolgimento;
     }
 
     @Override

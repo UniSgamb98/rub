@@ -38,6 +38,14 @@ public class Main extends Application {
                 }
             }
         });
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            double direction;
+            if (stage.xProperty().get() < 200)    direction = 0;
+            else if (stage.xProperty().get() > 900)     direction = 1;
+            else direction = 0.5;
+            stage.setX(stage.getX()+((oldVal.doubleValue() - newVal.doubleValue())*direction));
+            System.out.println(stage.xProperty().get());
+        });
         stage.show();
     }
 

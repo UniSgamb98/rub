@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="BLANCO Fraeszentrum GmbH">
-                    
+                        
+    
     
     
     
     <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="SANTOLO">valutano presentazione</chiamata>
-                
+                    
+    
     
     
     
     <chiamata cancelled="false" data="2024-04-08" durata="0" messaggio="false" number="2" operatore="SANTOLO">Signor Sachse non ancora in ufficio, parlato con Filomena Marchese riferisce</chiamata>
-            
+                
 
 
+    
     <chiamata cancelled="false" data="2024-04-12" durata="0" messaggio="false" number="3" operatore="SANTOLO">Signor Sachse e Signora Marchese non trovati</chiamata>
+    
+    <chiamata cancelled="false" data="2024-04-15" durata="0" messaggio="false" number="4" operatore="SANTOLO">Riparlato con il Signor Sachse,
+ha visto la presentazione  (fanno 60-70 dischi al mese) ma non riescono a prendere altro fornitore.</chiamata>
 </companyNotes>

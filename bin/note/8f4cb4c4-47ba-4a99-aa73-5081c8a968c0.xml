@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="PROMEDENT">
-                        
+                                
+    
+    
     
     
     
     
     <chiamata cancelled="false" data="2024-04-09" durata="3" messaggio="false" number="1" operatore="HUGO">parlato con referente che mi dice di inviare su info la ns presentazione che la legge sempre il titolare sig. Pedro.</chiamata>
-                    
+                            
+    
+    
     
     
     
     
     <chiamata cancelled="false" data="2024-04-09" durata="0" messaggio="true" number="2" operatore="HUGO">mi risponde titolare che vuole un listino. </chiamata>
-                
+                        
 
+    
+    
     
     
     <chiamata cancelled="false" data="2024-04-09" durata="4" messaggio="false" number="3" operatore="HUGO">Invio campioni a pagamento
@@ -23,7 +29,14 @@
 2 discos  EOS de 22mm color D2
 2 discos  EOS de 22mm color D3.
 </chiamata>
-        
+                
 
+    
+    
     <chiamata cancelled="false" data="2024-04-11" durata="3" messaggio="false" number="4" operatore="HUGO">AVVISATO CLIENTE PER INVIO CAMPIONI IN ARRIVO OGGI 11 APRILE 2024.</chiamata>
+        
+    
+    <chiamata cancelled="false" data="2024-04-15" durata="3" messaggio="false" number="5" operatore="HUGO">non tovo i referenti in attesa di riscontro campioni . </chiamata>
+    
+    <chiamata cancelled="false" data="2024-04-15" durata="2" messaggio="false" number="6" operatore="HUGO">richiamo per avere feedback dei disichi inviati ... pedro è via vanessa occupata , attendo riscontro come richiesto via mail ed evevuale ordine post Test. </chiamata>
 </companyNotes>

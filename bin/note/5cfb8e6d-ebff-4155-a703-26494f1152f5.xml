@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="DENTALBRAZ">
-                                            
+                                                
+    
     
     
     
@@ -11,7 +12,8 @@
     
     
     <chiamata cancelled="false" data="2024-04-12" durata="3" feedback="" messaggio="false" number="1" operatore="HUGO">da risentire per avere un feedback </chiamata>
-                                        
+                                            
+    
     
     
     
@@ -22,7 +24,7 @@
     
     
     <chiamata cancelled="true" data="2024-04-12" durata="3" feedback="RICHIAMARE" messaggio="false" number="2" operatore="HUGO">da risentire per avere un feedback</chiamata>
-                                    
+                                        
 
 
 
@@ -31,4 +33,6 @@
 
 
 
+
+    <chiamata cancelled="false" data="2024-04-15" durata="2" messaggio="false" number="3" operatore="HUGO">non interessati hanno solo deposito online ma non trattano zirconio.</chiamata>
 </companyNotes>

@@ -1,6 +1,6 @@
 package com.example.rub;
 
-import com.example.rub.enums.Interessamento;
+import com.example.rub.enums.Interessamento.InteressamentoStatus;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
 import com.example.rub.functionalities.MyUtils;
@@ -51,7 +51,7 @@ public class LogoutController implements Initializable {
                 throw new Exception();
             }
             DisplayableEntry displayableEntry = (DisplayableEntry) contacted.getSelectionModel().getSelectedItem();
-            DBManager.setNextCall(displayableEntry.getEntry().getId(), reminderDate.getValue(), Interessamento.BLANK, false);
+            DBManager.setNextCall(displayableEntry.getEntry().getId(), reminderDate.getValue(), InteressamentoStatus.BLANK, -1, false);
             contactedList.remove(displayableEntry);
             MyUtils.write(GlobalContext.notProgrammedCalls, GlobalContext.operator.name());
             if (contactedList.isEmpty()) {

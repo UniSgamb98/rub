@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="ZIACOR">
-                
+                    
+    
     
     
     <chiamata cancelled="false" data="2024-04-05" durata="0" feedback="" messaggio="false" number="1" operatore="HUGO">INVIO PRESENTAZIONE PERCHE' PRIMA VALUTANO LORO VIA MAIL SE INTERESSA O MENO. </chiamata>
-            
+                
 
 
+
+    <chiamata cancelled="false" data="2024-04-15" durata="4" messaggio="false" number="2" operatore="HUGO">riesco a trovare il referente jesus che non ha mai ricevuto mail e mi da la sua diretta. In attesa per richiesta listino.</chiamata>
 </companyNotes>

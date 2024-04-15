@@ -1,6 +1,6 @@
 package com.example.rub;
 
-import com.example.rub.enums.Interessamento;
+import com.example.rub.enums.Interessamento.InteressamentoStatus;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.NoteManager;
 import javafx.event.ActionEvent;
@@ -55,7 +55,7 @@ public class ModifyNoteController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        feedback.getItems().addAll(Interessamento.NON_TROVATO.name(), Interessamento.NON_INERENTE.name(), Interessamento.NULLO.name(), Interessamento.RICHIAMARE.name(), Interessamento.INFO.name(), Interessamento.LISTINO.name(), Interessamento.CAMPIONE.name(), Interessamento.CLIENTE.name());
+        feedback.getItems().addAll(InteressamentoStatus.NON_TROVATO.name(), InteressamentoStatus.NON_INERENTE.name(), InteressamentoStatus.NULLO.name(), InteressamentoStatus.RICHIAMARE.name(), InteressamentoStatus.INFO.name(), InteressamentoStatus.LISTINO.name(), InteressamentoStatus.CAMPIONE.name(), InteressamentoStatus.CLIENTE.name());
     }
 
     public void doDeleteNote(ActionEvent event) {

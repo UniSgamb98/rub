@@ -2,7 +2,7 @@ package com.example.rub.functionalities;
 
 import com.example.rub.beans.Contatto;
 import com.example.rub.beans.DeletedContatto;
-import com.example.rub.enums.Interessamento;
+import com.example.rub.enums.Interessamento.InteressamentoStatus;
 import com.example.rub.enums.Operatori;
 import com.example.rub.enums.TipoCliente;
 import com.example.rub.enums.comparator.InteressamentoComp;
@@ -78,7 +78,7 @@ public abstract class DBManager extends TagsManager{
         return new LinkedList<>(database.keySet());
     }
     public static HBox getDisplayableEntry(UUID uuid){
-        return new DisplayableEntry(DBManager.retriveEntry(uuid));
+        return new DisplayableEntry(uuid);
     }
     public static LinkedList<UUID> getEntriesFromFilter(String filtro){
         return index.get(filtro);
@@ -167,6 +167,7 @@ public abstract class DBManager extends TagsManager{
             if (!Objects.equals(oldBean.getInteressamento(), modifiedBean.getInteressamento()))   oldBean.setInteressamento(modifiedBean.getInteressamento());
             if (!Objects.equals(oldBean.getUltimaChiamata(), modifiedBean.getUltimaChiamata()))   oldBean.setUltimaChiamata(modifiedBean.getUltimaChiamata());
             if (!Objects.equals(oldBean.getProssimaChiamata(), modifiedBean.getProssimaChiamata()))   oldBean.setProssimaChiamata(modifiedBean.getProssimaChiamata());
+            if (!Objects.equals(oldBean.getCoinvolgimento(), modifiedBean.getCoinvolgimento()))     oldBean.setCoinvolgimento(modifiedBean.getCoinvolgimento());
 
             indexNewEntry(oldBean, id);
 
@@ -182,12 +183,13 @@ public abstract class DBManager extends TagsManager{
         }
         return ret;
     }
-    public static void setNextCall(UUID uuid, LocalDate date, Interessamento feedback, boolean setAlsoUltimaChiamata){
+    public static void setNextCall(UUID uuid, LocalDate date, InteressamentoStatus feedback, double coinvolgimento, boolean setAlsoUltimaChiamata){
         try {
             database = (HashMap<UUID, Contatto>) MyUtils.read("database");
             Contatto data = database.get(uuid);
             data.setProssimaChiamata(date);
             data.incrementVolteContattati();
+            if (coinvolgimento != -1)   data.setCoinvolgimento(coinvolgimento);
             Calendar now = Calendar.getInstance();
             int year = now.get(Calendar.YEAR);
             int month = now.get(Calendar.MONTH)+1;
@@ -233,21 +235,22 @@ public abstract class DBManager extends TagsManager{
         System.out.println("il Database è stato ricreato");
     }
 
-    public static LinkedList<UUID> getCallList() {
+    public static LinkedList<UUID> getCallList(LocalDate fromWhen) {
         LinkedList<UUID> callList = new LinkedList<>();
         for (Contatto i : database.values()){
-            if(isToday(i.getProssimaChiamata())) { callList.add(i.getId());}
+            if(isSameDay(i.getProssimaChiamata(),fromWhen)) {
+                callList.add(i.getId());
+            }
         }
         return callList;
     }
 
-    private static boolean isToday(LocalDate dateToConvert) {
+    private static boolean isSameDay(LocalDate d2, LocalDate d1) {
         boolean ret = false;
-        Calendar now = Calendar.getInstance();
         try {
-            if (now.get(Calendar.DAY_OF_MONTH) == dateToConvert.getDayOfMonth() &&
-                    now.get(Calendar.MONTH) + 1 == dateToConvert.getMonthValue() &&
-                    now.get(Calendar.YEAR) == dateToConvert.getYear()) {
+            if (d1.getDayOfMonth() == d2.getDayOfMonth() &&
+                    d1.getMonthValue() == d2.getMonthValue() &&
+                    d1.getYear() == d2.getYear()) {
                 ret = true;
             }
         } catch (Exception ignored) {}
@@ -275,7 +278,7 @@ public abstract class DBManager extends TagsManager{
                 bw.write(i.getCap()+";");
                 try {
                     bw.write(i.getInteressamento().name() + ";");
-                }catch (Exception e) {  bw.write(Interessamento.BLANK.name() + ";");  }
+                }catch (Exception e) {  bw.write(InteressamentoStatus.BLANK.name() + ";");  }
                 try {
                     bw.write(i.getTipoCliente().name() + ";");
                 } catch (Exception e) { bw.write(TipoCliente.BLANK.name() +";");    }

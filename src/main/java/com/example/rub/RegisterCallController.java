@@ -2,6 +2,7 @@ package com.example.rub;
 
 import com.example.rub.beans.Contatto;
 import com.example.rub.enums.Interessamento;
+import com.example.rub.enums.Interessamento.InteressamentoStatus;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
 import com.example.rub.functionalities.NoteManager;
@@ -12,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.stage.Stage;
 import org.w3c.dom.Document;
 
@@ -30,7 +30,17 @@ public class RegisterCallController implements Initializable {
     public Spinner<Integer> durata;
     @FXML
     public TextArea note;
+    @FXML
     public CheckBox isMessage;
+    @FXML
+    public Label label3;
+    @FXML
+    public Label label2;
+    @FXML
+    public Label label1;
+    @FXML
+    public Slider coinvolgimento;
+    public Label label4;
 
     public void doCancelRegistration(ActionEvent event){
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -48,11 +58,14 @@ public class RegisterCallController implements Initializable {
                 doc = nm.createDocument(bean.getRagioneSociale());
             }
             nm.addCallNote(doc, note.getText(), durata.getValue(), isMessage.isSelected());
-            Interessamento fedback = null;
+            InteressamentoStatus fedback = null;
             try {
-                fedback = Interessamento.valueOf(feedback.getValue());
+                fedback = Interessamento.fromQuestionForm(feedback.getValue());
             } catch (Exception ignored) {}
-            DBManager.setNextCall(bean.getId(), prossimaChiamata.getValue(), fedback, true);
+            double temp;
+            if (isMessage.isSelected()) temp = -1;
+            else temp = coinvolgimento.getValue();
+            DBManager.setNextCall(bean.getId(), prossimaChiamata.getValue(), fedback, temp, true);
             nm.writeXml(doc, ""+bean.getNoteId());
         } catch (Exception e){
             System.out.println("Errore durante la scrittura del file Xml delle note");
@@ -72,11 +85,20 @@ public class RegisterCallController implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        feedback.getItems().addAll(Interessamento.NON_TROVATO.name(), Interessamento.NON_INERENTE.name(), Interessamento.NULLO.name(), Interessamento.RICHIAMARE.name(), Interessamento.INFO.name(), Interessamento.LISTINO.name(), Interessamento.CAMPIONE.name(), Interessamento.CLIENTE.name());
+        for (Interessamento i : Interessamento.getSet()){
+            feedback.getItems().add(i.getQuestionForm());
+        }
         durata.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,300));
     }
 
-    public void requestContextMenu(ContextMenuEvent contextMenuEvent) {
-        System.out.println("Context");      //TODO fare l'overlay che fornisce un tooltip con uno stack pane e monitorando la posizione del cursore (il tempo allinterno del coso)
+    public void hideCallScheduling() {
+        feedback.setVisible(!isMessage.isSelected());
+        prossimaChiamata.setVisible(!isMessage.isSelected());
+        coinvolgimento.setVisible(!isMessage.isSelected());
+        durata.setVisible(!isMessage.isSelected());
+        label1.setVisible(!isMessage.isSelected());
+        label2.setVisible(!isMessage.isSelected());
+        label3.setVisible(!isMessage.isSelected());
+        label4.setVisible(!isMessage.isSelected());
     }
 }
