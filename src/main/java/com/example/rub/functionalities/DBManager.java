@@ -9,7 +9,6 @@ import com.example.rub.enums.comparator.InteressamentoComp;
 import com.example.rub.functionalities.locations.LocationManager;
 import com.example.rub.objects.DisplayableEntry;
 import javafx.scene.control.Alert;
-import javafx.scene.layout.HBox;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -77,7 +76,7 @@ public abstract class DBManager extends TagsManager{
     public static LinkedList<UUID> getAllEntries (){
         return new LinkedList<>(database.keySet());
     }
-    public static HBox getDisplayableEntry(UUID uuid){
+    public static DisplayableEntry getDisplayableEntry(UUID uuid){
         return new DisplayableEntry(uuid);
     }
     public static LinkedList<UUID> getEntriesFromFilter(String filtro){
@@ -169,6 +168,9 @@ public abstract class DBManager extends TagsManager{
             if (!Objects.equals(oldBean.getProssimaChiamata(), modifiedBean.getProssimaChiamata()))   oldBean.setProssimaChiamata(modifiedBean.getProssimaChiamata());
             if (!Objects.equals(oldBean.getCoinvolgimento(), modifiedBean.getCoinvolgimento()))     oldBean.setCoinvolgimento(modifiedBean.getCoinvolgimento());
 
+            if (GlobalContext.notProgrammedCalls.contains(id) && oldBean.getProssimaChiamata() != null){
+                GlobalContext.notProgrammedCalls.remove(id);
+            }
             indexNewEntry(oldBean, id);
 
             MyUtils.writeAll(database, index, locationManager);

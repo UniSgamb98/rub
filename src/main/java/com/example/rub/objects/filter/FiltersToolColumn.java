@@ -2,6 +2,7 @@ package com.example.rub.objects.filter;
 
 import com.example.rub.enums.Interessamento.InteressamentoStatus;
 import com.example.rub.enums.Operatori;
+import com.example.rub.enums.TipoCliente;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.MyUtils;
 import com.example.rub.functionalities.locations.LocationManager;
@@ -17,6 +18,7 @@ public class FiltersToolColumn extends VBox {
     StateFilter locationFilter;
     AllPurposeFilter operatori;
     AllPurposeFilter interesse;
+    AllPurposeFilter tipologia;
     public FiltersToolColumn (){
         LocationManager manager = null;         //TODO si può scrivere meglio
         try {
@@ -28,7 +30,8 @@ public class FiltersToolColumn extends VBox {
 
         operatori = new AllPurposeFilter(Operatori.HUGO.name(), Operatori.SANTOLO.name(), Operatori.VICTORIA.name());
         interesse = new AllPurposeFilter(InteressamentoStatus.NON_INERENTE.name(), InteressamentoStatus.NON_INERENTE.name(), InteressamentoStatus.NULLO.name(), InteressamentoStatus.RICHIAMARE.name(), InteressamentoStatus.INFO.name(), InteressamentoStatus.LISTINO.name(), InteressamentoStatus.CAMPIONE.name(), InteressamentoStatus.CLIENTE.name());
-        this.getChildren().addAll(new Separator(), locationFilter, new Separator(), operatori, new Separator(), interesse, new Separator());
+        tipologia = new AllPurposeFilter(TipoCliente.LABORATORIO.name(), TipoCliente.RIVENDITORE.name(), TipoCliente.CENTROFRESAGGIO.name());
+        this.getChildren().addAll(new Separator(), locationFilter, new Separator(), operatori, new Separator(), interesse, new Separator(), tipologia, new Separator());
         this.setSpacing(10.0);
     }
     public LinkedList<UUID> getFilteredList(){
@@ -49,6 +52,10 @@ public class FiltersToolColumn extends VBox {
             filteredList.retainAll(a);
         }
         a = interesse.getFilteredList();
+        if (a != null){
+            filteredList.retainAll(a);
+        }
+        a = tipologia.getFilteredList();
         if (a != null){
             filteredList.retainAll(a);
         }

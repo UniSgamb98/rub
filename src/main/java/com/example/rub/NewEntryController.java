@@ -2,6 +2,7 @@ package com.example.rub;
 
 import com.example.rub.beans.Contatto;
 import com.example.rub.enums.Interessamento.InteressamentoStatus;
+import com.example.rub.enums.TipoCliente;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
 import javafx.event.ActionEvent;
@@ -94,6 +95,7 @@ public class NewEntryController {
         newEntry.setProvincia(provincia.getText());
         newEntry.setOperator(GlobalContext.operator);
         newEntry.setInteressamento(InteressamentoStatus.BLANK);
+        newEntry.setTipoCliente(TipoCliente.BLANK);
         return newEntry;
     }
 }

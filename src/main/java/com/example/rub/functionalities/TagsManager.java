@@ -22,6 +22,7 @@ public abstract class TagsManager {
         insertTagInIndex(newEntry.getProvincia(), uuid);
         insertTagInIndex(newEntry.getOperator().name(), uuid);
         insertTagInIndex(newEntry.getInteressamento().name(), uuid);
+        insertTagInIndex(newEntry.getTipoCliente().name(), uuid);
 
         insertNewEntryInLocationManager(newEntry);
     }

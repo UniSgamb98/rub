@@ -6,10 +6,13 @@ import com.example.rub.enums.TipoCliente;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
 import com.example.rub.functionalities.MyUtils;
+import com.example.rub.objects.DisplayableEntry;
 import com.example.rub.objects.NoteDisplayer;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -82,16 +85,28 @@ public class EntryDetailsPageController implements Initializable, Runnable {
     public Label savedText;
     @FXML
     public GridPane gridData;
+    @FXML
+    public Slider involvement;
     private Contatto entryToDisplayDetails;
-    private Scene oldScene;
+    ObservableList<DisplayableEntry> oldResults;
 
     public void doGoBack(ActionEvent event) {
         shutdown();
-        try {
+        try {   //cambio scena
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("search-entry.fxml")));
+            Parent root = loader.load();
+            SearchEntryController controller = loader.getController();
+            controller.savageOldList(oldResults);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(oldScene);
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
             stage.show();
-        } catch (Exception e) { System.out.println("Errore durante la transizione in search-entry con switchToSearchEntry in EntryDetailsPageController");   }
+        } catch (Exception e) { System.out.println("Errore durante la transizione in search-entry con doGoBack in EntryDetailsPageController");   }
+    }
+
+    public void preserveOldList(ObservableList<DisplayableEntry> oldList){
+        oldResults = FXCollections.observableArrayList();
+        oldResults.addAll(oldList);
     }
 
     public void allowChangesPressed(ActionEvent event){
@@ -201,6 +216,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         codiceFiscale.setText(entryToDisplayDetails.getCodiceFiscale());
         provincia.setText(entryToDisplayDetails.getProvincia());
         indirizzo.setText(entryToDisplayDetails.getIndirizzo());
+        involvement.setValue(entryToDisplayDetails.getCoinvolgimento());
     }
     private Contatto getContatto(){
         Contatto newEntry = new Contatto();                         //creazione Bean contatto
@@ -226,13 +242,11 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         newEntry.setCodiceFiscale(codiceFiscale.getText());
         newEntry.setProvincia(provincia.getText());
         newEntry.setIndirizzo(indirizzo.getText());
+        newEntry.setCoinvolgimento(involvement.getValue());
         return newEntry;
     }
     public void setEntryProperty(Contatto entry){
         entryProperty.set(entry);
-    }
-    public void setProperties(Scene oldScene){
-        this.oldScene = oldScene;
     }
     public void setNoteDocument(){
         noteDisplayer.setDocument(entryToDisplayDetails.getId());
@@ -241,6 +255,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         for (TextField textField : Arrays.asList(ragioneSociale, personaDiRiferimento, citta, paese, emailReferente, telefono, regione, indirizzo, provincia, cap, civico, partitaIva, codiceFiscale, emailGenerica, sito, pec, titolare)) {
             textField.setDisable(state);
         }
+        involvement.setDisable(state);
         interessamento.setDisable(state);
         tipoCliente.setDisable(state);
         ultimaChiamata.setDisable(state);

@@ -15,7 +15,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -30,8 +29,8 @@ public class SearchEntryController implements Initializable {
     @FXML
     public TextField rapidSearchBar;
     @FXML
-    public ListView<HBox> resultsView;
-    ObservableList<HBox> results;
+    public ListView<DisplayableEntry> resultsView;
+    ObservableList<DisplayableEntry> results;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -43,6 +42,12 @@ public class SearchEntryController implements Initializable {
             System.out.println("Problemi durante l'update dal Database persistente");
         }
         displayResults(DBManager.getAllEntries());
+    }
+    public void savageOldList(ObservableList<DisplayableEntry> oldList){
+        results.clear();
+        for (DisplayableEntry i : oldList){
+            results.add(new DisplayableEntry(i.getEntry().getId()));
+        }
     }
 
     public void doFilteredSearch() {
@@ -73,17 +78,17 @@ public class SearchEntryController implements Initializable {
     }
 
     public void doRequestEntryDetails(MouseEvent event){
-        DisplayableEntry displayableEntry = (DisplayableEntry) resultsView.getSelectionModel().getSelectedItem();
+        DisplayableEntry displayableEntry = resultsView.getSelectionModel().getSelectedItem();
         System.out.println("Apertura della scheda " + displayableEntry);
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("entry-details-page.fxml")));
         try {
             Parent root = loader.load();       //cambio scena
             EntryDetailsPageController controller = loader.getController();
+            controller.preserveOldList(results);
             controller.setEntryProperty(displayableEntry.getEntry());
             controller.init(true);
             controller.setNoteDocument();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            controller.setProperties(stage.getScene());
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setOnHidden(e -> controller.shutdown());

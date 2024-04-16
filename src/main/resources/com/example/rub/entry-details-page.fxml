@@ -2,6 +2,7 @@
 
 <?import com.example.rub.objects.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -141,6 +142,12 @@
            <BorderPane.margin>
                <Insets right="10.0" top="50.0" />
            </BorderPane.margin>
+           <VBox alignment="CENTER">
+               <Label text="Coinvolgimento" />
+               <Group>
+                   <Slider fx:id="involvement" blockIncrement="1.0" disable="true" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" prefWidth="100.0" showTickMarks="true" snapToTicks="true" value="1.0" />
+               </Group>
+           </VBox>
          <Label fx:id="savedText" text="Salvato!" visible="false">
             <padding>
                <Insets top="-10.0" />
