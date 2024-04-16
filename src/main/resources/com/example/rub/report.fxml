@@ -38,7 +38,7 @@
                    <HBox.margin>
                        <Insets right="30.0" />
                    </HBox.margin>
-                   <Label text="Frequenza chiamate" />
+                   <Label text="Frequenza" />
                    <LineChart fx:id="chart" animated="false" minHeight="175.0" minWidth="300.0" VBox.vgrow="ALWAYS">
                        <xAxis>
                            <CategoryAxis side="BOTTOM" />

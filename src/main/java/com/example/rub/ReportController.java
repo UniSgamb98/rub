@@ -121,7 +121,7 @@ public class ReportController implements Initializable {
             LinkedList<String> annotationDates = nm.getAnnotationDates(j.getNoteId(), durata.getValue(), operator.getValue(), includeMessages.isSelected());
             for (String k : annotationDates){
                 if (k.compareTo(start) >= 0 && k.compareTo(stop) <= 0) {
-                    timeLine.add(new Pair<>(j.getId(), k));
+                    timeLine.add(new Pair<>(i, k));
                 }
             }
         }

@@ -44,7 +44,6 @@ public class Main extends Application {
             else if (stage.xProperty().get() > 900)     direction = 1;
             else direction = 0.5;
             stage.setX(stage.getX()+((oldVal.doubleValue() - newVal.doubleValue())*direction));
-            System.out.println(stage.xProperty().get());
         });
         stage.show();
     }

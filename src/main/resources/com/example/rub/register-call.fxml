@@ -7,7 +7,7 @@
 
 <BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.RegisterCallController">
    <top>
-      <Label text="INFORMAZIONI DELLA CHIAMATA" BorderPane.alignment="CENTER" />
+      <Label text="COMUNICAZIONE CON IL CLIENTE" BorderPane.alignment="CENTER" />
    </top>
    <left>
       <VBox alignment="CENTER" prefHeight="383.0" prefWidth="196.0" BorderPane.alignment="CENTER">
@@ -17,18 +17,18 @@
                   <Insets bottom="30.0" />
                </VBox.margin>
             </CheckBox>
-            <Label fx:id="label1" alignment="CENTER" text="In questa chiamata ho:" />
+            <Label fx:id="label1" alignment="CENTER" text="Con il cliente ho:" />
             <ChoiceBox fx:id="feedback" prefHeight="25.0" prefWidth="180.0" />
             <VBox.margin>
                <Insets bottom="30.0" />
             </VBox.margin>
          </VBox>
-         <Label fx:id="label2" text="Programma la prossima chiamata:" />
+         <Label fx:id="label2" text="Programma il prossimo ricontatto" />
          <DatePicker fx:id="prossimaChiamata" />
-         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-            <Label fx:id="label3" alignment="CENTER" contentDisplay="TOP" prefHeight="63.0" prefWidth="63.0" text="Durata chiamata in minuti" textAlignment="CENTER" wrapText="true" />
+         <VBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <Label fx:id="label3" alignment="CENTER" contentDisplay="TOP" text="C'è stata una chiamata di minuti:" textAlignment="CENTER" wrapText="true" />
             <Spinner fx:id="durata" prefHeight="25.0" prefWidth="70.0" />
-         </HBox>
+         </VBox>
       </VBox>
    </left>
    <bottom>
@@ -42,7 +42,7 @@
    </bottom>
    <center>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
-         <Label text="Contenuto della chiamata" />
+         <Label text="Riepilogo della comunicazione" />
          <TextArea fx:id="note" wrapText="true">
             <VBox.margin>
                <Insets left="30.0" right="30.0" />

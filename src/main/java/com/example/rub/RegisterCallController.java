@@ -79,6 +79,7 @@ public class RegisterCallController implements Initializable {
     }
     public void setEntryProperty(Contatto entry){
         entryProperty.set(entry);
+        coinvolgimento.setValue(entryProperty.get().getCoinvolgimento());
     }
     public void setControllerProperty(EntryDetailsPageController controller) {
         controllerProperty.set(controller);
@@ -88,6 +89,8 @@ public class RegisterCallController implements Initializable {
         for (Interessamento i : Interessamento.getSet()){
             feedback.getItems().add(i.getQuestionForm());
         }
+       // feedback.getItems().subList(0, 3).clear();
+        feedback.getItems().remove(0);
         durata.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,300));
     }
 

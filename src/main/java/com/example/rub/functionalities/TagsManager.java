@@ -32,6 +32,8 @@ public abstract class TagsManager {
         removeTagFromIndex(id, temp.getRegione());
         removeTagFromIndex(id, temp.getProvincia());
         removeTagFromIndex(id, temp.getCitta());
+        removeTagFromIndex(id, temp.getTipoCliente().name());
+        removeTagFromIndex(id, temp.getInteressamento().name());
     }
     private static void removeTagFromIndex(UUID id, String tag){
         if (index.get(tag).size() == 1){
