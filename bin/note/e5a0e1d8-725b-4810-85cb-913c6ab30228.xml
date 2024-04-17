@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="AVINENT">
+                        
+    
+    
+    
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="RICHIAMARE" number="1" operatore="HUGO" previousInterest="RICHIAMARE">Parlo con l'impiegata che mi da il contatto diretto con la referente che ora è via per expodental a Madrid, invio presntazioneOrodent in attesa di un riscontro.</chiamata>
                     
     
     
     
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="HUGO">Parlo con l'impiegata che mi da il contatto diretto con la referente che ora è via per expodental a Madrid, invio presntazioneOrodent in attesa di un riscontro.</chiamata>
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="true" newInterest="RICHIAMARE" number="2" operatore="HUGO" previousInterest="RICHIAMARE">Inviato Listino 50 %  deposito dentale con sito web. in attesa di un riscontro.</chiamata>
                 
     
     
     
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="true" number="2" operatore="HUGO">Inviato Listino 50 %  deposito dentale con sito web. in attesa di un riscontro.</chiamata>
+    <chiamata cancelled="false" data="2024-04-09" durata="5" messaggio="false" newInterest="RICHIAMARE" number="3" operatore="HUGO" previousInterest="RICHIAMARE">hanno gia' molti fornitori provo a chiedere se posso almeno fornire un listino ma non vuole . Resta comunque il fatto che dice di tenere il contatto perciò riprogrammo una chiamata per luglio. </chiamata>
             
-    
-    
-    <chiamata cancelled="false" data="2024-04-09" durata="5" messaggio="false" number="3" operatore="HUGO">hanno gia' molti fornitori provo a chiedere se posso almeno fornire un listino ma non vuole . Resta comunque il fatto che dice di tenere il contatto perciò riprogrammo una chiamata per luglio. </chiamata>
-        
+
 
 </companyNotes>

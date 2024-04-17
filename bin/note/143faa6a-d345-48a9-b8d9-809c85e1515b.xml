@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="Matern Dental ">
-            
+                    
     
-    <chiamata cancelled="false" data="2024-04-04" durata="0" messaggio="false" number="1" operatore="SANTOLO">inviata presentazione e prezzi
+    
+    
+    <chiamata cancelled="false" data="2024-04-04" durata="0" messaggio="false" newInterest="NON_TROVATO" number="1" operatore="SANTOLO" previousInterest="NON_TROVATO">inviata presentazione e prezzi
 </chiamata>
-        
+                
 
+
+    
+    <chiamata cancelled="false" data="2024-04-17" durata="0" messaggio="false" newInterest="NON_TROVATO" number="2" operatore="SANTOLO" previousInterest="NON_TROVATO">Richiamare e parlare con Frau Baldy</chiamata>
+    
 </companyNotes>

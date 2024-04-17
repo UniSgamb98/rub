@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="NALON DENTAL">
+                            
+    
+    
+    
+    
+    
+    <chiamata cancelled="false" data="2024-04-08" durata="2" messaggio="false" newInterest="LISTINO" number="1" operatore="HUGO" previousInterest="LISTINO">iNTERESSSATI OK PER INVIO PRESENTAZIONE IN ATTESA FEEDBACK PER INVIARE IN SEGUITO OFFERTA E LISTINO. </chiamata>
+                        
+
+
+    
+    
+    
+    <chiamata cancelled="false" data="2024-04-15" durata="2" messaggio="false" newInterest="LISTINO" number="2" operatore="HUGO" previousInterest="LISTINO">Mi chiedono di reinviare presentazione resto in attesa di feedback per inviare un listino. </chiamata>
             
     
-    <chiamata cancelled="false" data="2024-04-08" durata="2" messaggio="false" number="1" operatore="HUGO">iNTERESSSATI OK PER INVIO PRESENTAZIONE IN ATTESA FEEDBACK PER INVIARE IN SEGUITO OFFERTA E LISTINO. </chiamata>
+    
+    <chiamata cancelled="false" data="2024-04-16" durata="4" feedback="LISTINO" messaggio="false" newInterest="LISTINO" number="3" operatore="HUGO" previousInterest="LISTINO">INVIATO LISTINO 55% SIAMO SUI 50 DISCHI MENSILI. </chiamata>
         
 
 </companyNotes>

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="Paal Dental Vertriebs GmbH">
+                    
+    
+    
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="CAMPIONE" number="1" operatore="SANTOLO" previousInterest="CAMPIONE">richiamare prossima settimana, già contattato a Febbraio</chiamata>
                 
-    
-    
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="SANTOLO">richiamare prossima settimana, già contattato a Febbraio</chiamata>
-            
 
 
-    <chiamata cancelled="false" data="2024-04-11" durata="15" messaggio="false" number="2" operatore="SANTOLO">Parlato con il signor Dietmar Paal, interessato a provare i dischi presso un amico con laboratorio (ReproDent). </chiamata>
+    
+    <chiamata cancelled="false" data="2024-04-11" durata="15" messaggio="false" newInterest="CAMPIONE" number="2" operatore="SANTOLO" previousInterest="CAMPIONE">Parlato con il signor Dietmar Paal, interessato a provare i dischi presso un amico con laboratorio (ReproDent). </chiamata>
+    
 </companyNotes>

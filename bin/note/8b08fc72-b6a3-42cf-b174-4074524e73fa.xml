@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="PROTESIS DENTAL APLICADA ">
+                        
+    
+    
+    
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="3" messaggio="false" newInterest="LISTINO" number="1" operatore="HUGO" previousInterest="LISTINO">iNTERESSATI TROVATI SU LINKEDIN INVIATO LISTINO 60%. iN ATTESA CHE DECIDANO.</chiamata>
                     
-    
-    
-    
-    <chiamata cancelled="false" data="2024-04-05" durata="3" messaggio="false" number="1" operatore="HUGO">iNTERESSATI TROVATI SU LINKEDIN INVIATO LISTINO 60%. iN ATTESA CHE DECIDANO.</chiamata>
-                
 
 
     
-    <chiamata cancelled="false" data="2024-04-12" durata="1" messaggio="true" number="2" operatore="HUGO">NON RIESCO A TROVARE NESSUNO AL TELEFONO, SCRIVO MAIL A JAVIER PER AVERE RISCONTO DEL LISTINO INVIATO. </chiamata>
     
-    <chiamata cancelled="false" data="2024-04-12" durata="3" messaggio="false" number="3" operatore="HUGO">RIESCO A PARLARE CON JAVI ENTRO MERCOLEDI POTREMO AVERE UN FEEDBACK</chiamata>
+    <chiamata cancelled="false" data="2024-04-12" durata="1" messaggio="true" newInterest="LISTINO" number="2" operatore="HUGO" previousInterest="LISTINO">NON RIESCO A TROVARE NESSUNO AL TELEFONO, SCRIVO MAIL A JAVIER PER AVERE RISCONTO DEL LISTINO INVIATO. </chiamata>
+        
+    
+    <chiamata cancelled="false" data="2024-04-12" durata="3" messaggio="false" newInterest="LISTINO" number="3" operatore="HUGO" previousInterest="LISTINO">RIESCO A PARLARE CON JAVI ENTRO MERCOLEDI POTREMO AVERE UN FEEDBACK</chiamata>
+    
 </companyNotes>

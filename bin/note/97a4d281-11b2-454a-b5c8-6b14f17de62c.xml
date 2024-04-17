@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="ANTON SL">
+                        
+    
+    
+    
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" feedback="" messaggio="true" newInterest="INFO" number="1" operatore="HUGO" previousInterest="INFO">Ricontatto garbine per avere un ricontro della mail e poter inviare un listino. In attesa risposta. </chiamata>
                     
-    
-    
-    
-    <chiamata cancelled="false" data="2024-04-05" durata="0" feedback="" messaggio="true" number="1" operatore="HUGO">Ricontatto garbine per avere un ricontro della mail e poter inviare un listino. In attesa risposta. </chiamata>
-                
 
 
 
-    <chiamata cancelled="false" data="2024-04-12" durata="2" messaggio="false" number="2" operatore="HUGO">sentita azienda richiamo lunedì Garbine </chiamata>
+    
+    <chiamata cancelled="false" data="2024-04-12" durata="2" messaggio="false" newInterest="INFO" number="2" operatore="HUGO" previousInterest="INFO">sentita azienda richiamo lunedì Garbine </chiamata>
+    
 </companyNotes>

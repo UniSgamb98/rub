@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="BITDENTAL">
+                            
+    
+    
+    
+    
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="LISTINO" number="1" operatore="HUGO" previousInterest="LISTINO">PARLO AL TELEFONO CON UN AMMINISTRATIVA E MI DA CONTATTO DIRETTO DELLA REFERENTE ESTER ALLA QUALE INVIO LA NS PRESENTAZIONE ORODENT VIA MIAL. 
+</chiamata>
                         
     
     
     
     
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="HUGO">PARLO AL TELEFONO CON UN AMMINISTRATIVA E MI DA CONTATTO DIRETTO DELLA REFERENTE ESTER ALLA QUALE INVIO LA NS PRESENTAZIONE ORODENT VIA MIAL. 
-</chiamata>
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="1" feedback="NON_TROVATO" messaggio="false" newInterest="LISTINO" number="2" operatore="HUGO" previousInterest="LISTINO">sollecito via mial il cliente e propongo listino 50%</chiamata>
                     
-    
-    
-    
-    
-    <chiamata cancelled="false" data="2024-04-05" durata="1" feedback="NON_TROVATO" messaggio="false" number="2" operatore="HUGO">sollecito via mial il cliente e propongo listino 50%</chiamata>
-                
 
 
     
-    <chiamata cancelled="false" data="2024-04-10" durata="4" messaggio="false" number="3" operatore="HUGO">Riprendo i contatti e scopro che non hanno mai ricevuto la ns presentazione. ref. Ester</chiamata>
     
+    <chiamata cancelled="false" data="2024-04-10" durata="4" messaggio="false" newInterest="LISTINO" number="3" operatore="HUGO" previousInterest="LISTINO">Riprendo i contatti e scopro che non hanno mai ricevuto la ns presentazione. ref. Ester</chiamata>
+        
+
 </companyNotes>

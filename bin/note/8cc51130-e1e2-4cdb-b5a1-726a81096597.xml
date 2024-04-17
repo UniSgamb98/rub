@@ -3,9 +3,8 @@
                 
     
     
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="HUGO">GIA NS CLIENTI CON BIOESTETIC</chiamata>
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="BLANK" number="1" operatore="HUGO" previousInterest="BLANK">GIA NS CLIENTI CON BIOESTETIC</chiamata>
             
 
 
-    <chiamata cancelled="false" data="2024-04-15" durata="0" messaggio="false" number="2" operatore="SANTOLO"/>
 </companyNotes>

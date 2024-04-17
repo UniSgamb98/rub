@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="LAB. BIOINNOVACION DENTAL">
-            
+                
     
-    <chiamata cancelled="false" data="2024-04-08" durata="4" messaggio="false" number="1" operatore="HUGO">CESAR REPSONSABILE CAD CAM MI CHIEDE INFO AZIENDALI , DICE CHE SONO GIA' CONTENTI DEI LORO FORNITORI MA RIESCO A CONVINCERLO PER UNA PRIMA MAIL ORODENT. iN ATTESA DI SAOERE I CONSUMI E POI ANDARE SUI LISTINI . </chiamata>
-        
+    
+    <chiamata cancelled="false" data="2024-04-08" durata="4" messaggio="false" newInterest="INFO" number="1" operatore="HUGO" previousInterest="INFO">CESAR REPSONSABILE CAD CAM MI CHIEDE INFO AZIENDALI , DICE CHE SONO GIA' CONTENTI DEI LORO FORNITORI MA RIESCO A CONVINCERLO PER UNA PRIMA MAIL ORODENT. iN ATTESA DI SAOERE I CONSUMI E POI ANDARE SUI LISTINI . </chiamata>
+            
+
 
 </companyNotes>

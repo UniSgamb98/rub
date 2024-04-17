@@ -66,7 +66,7 @@ public class InteressamentoComp implements Comparator<InteressamentoStatus> {
                     break;
                 case CLIENTE:
                     if (i2 != InteressamentoStatus.CLIENTE) {
-                        ret = -1;
+                        ret = 1;
                     }
                     break;
             }

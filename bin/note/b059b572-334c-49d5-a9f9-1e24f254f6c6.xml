@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="Delabo Group GmbH">
-        
-    <chiamata cancelled="false" data="2024-04-11" durata="0" messaggio="false" number="1" operatore="SANTOLO">Inviata presentazione all'indirizzo mail, verrà inoltrata ad Havers.</chiamata>
+            
     
+    <chiamata cancelled="false" data="2024-04-11" durata="0" messaggio="false" newInterest="INFO" number="1" operatore="SANTOLO" previousInterest="INFO">Inviata presentazione all'indirizzo mail, verrà inoltrata ad Havers.</chiamata>
+        
+
 </companyNotes>

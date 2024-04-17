@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="Huessen Zahntechnik">
+                        
+    
+    
+    
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="CAMPIONE" number="1" operatore="SANTOLO" previousInterest="CAMPIONE">non risponde</chiamata>
                     
     
     
     
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="SANTOLO">non risponde</chiamata>
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="CAMPIONE" number="2" operatore="SANTOLO" previousInterest="CAMPIONE">richiamare settimana prossima, rientra in ufficio Marcus Huessen</chiamata>
                 
-    
-    
-    
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="2" operatore="SANTOLO">richiamare settimana prossima, rientra in ufficio Marcus Huessen</chiamata>
-            
 
 
-    <chiamata cancelled="false" data="2024-04-11" durata="10" messaggio="false" number="3" operatore="SANTOLO">Parlato con Markus Huessen,
+    
+    <chiamata cancelled="false" data="2024-04-11" durata="10" messaggio="false" newInterest="CAMPIONE" number="3" operatore="SANTOLO" previousInterest="CAMPIONE">Parlato con Markus Huessen,
 reinvio presentazione e catalogo. Attesa scelta campione</chiamata>
+    
 </companyNotes>

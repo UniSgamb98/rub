@@ -40,6 +40,7 @@ public class RegisterCallController implements Initializable {
     public Label label1;
     @FXML
     public Slider coinvolgimento;
+    @FXML
     public Label label4;
 
     public void doCancelRegistration(ActionEvent event){
@@ -57,15 +58,10 @@ public class RegisterCallController implements Initializable {
                 System.out.println("Creazione nuovo documento di nota");
                 doc = nm.createDocument(bean.getRagioneSociale());
             }
-            nm.addCallNote(doc, note.getText(), durata.getValue(), isMessage.isSelected());
-            InteressamentoStatus fedback = null;
-            try {
-                fedback = Interessamento.fromQuestionForm(feedback.getValue());
-            } catch (Exception ignored) {}
-            double temp;
-            if (isMessage.isSelected()) temp = -1;
-            else temp = coinvolgimento.getValue();
-            DBManager.setNextCall(bean.getId(), prossimaChiamata.getValue(), fedback, temp, true);
+            InteressamentoStatus fedback = Interessamento.fromQuestionForm(feedback.getValue());
+            nm.addCallNote(doc, note.getText(), durata.getValue(), isMessage.isSelected(), bean.getInteressamento(), fedback);
+            double involvement = (isMessage.isSelected()? -1 : coinvolgimento.getValue());
+            DBManager.setNextCall(bean.getId(), prossimaChiamata.getValue(), fedback, involvement, !isMessage.isSelected());
             nm.writeXml(doc, ""+bean.getNoteId());
         } catch (Exception e){
             System.out.println("Errore durante la scrittura del file Xml delle note");
@@ -89,7 +85,6 @@ public class RegisterCallController implements Initializable {
         for (Interessamento i : Interessamento.getSet()){
             feedback.getItems().add(i.getQuestionForm());
         }
-       // feedback.getItems().subList(0, 3).clear();
         feedback.getItems().remove(0);
         durata.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,300));
     }

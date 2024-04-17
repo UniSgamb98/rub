@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="Fraeszentrum Saalfeld">
-            
+                
     
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="SANTOLO">Parlato con responsabile Cad-Cam. Hanno contratto con Armanngirbach</chiamata>
-        
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="BLANK" number="1" operatore="SANTOLO" previousInterest="BLANK">Parlato con responsabile Cad-Cam. Hanno contratto con Armanngirbach</chiamata>
+            
+
 
 </companyNotes>

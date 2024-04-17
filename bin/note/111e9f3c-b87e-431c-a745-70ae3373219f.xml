@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="DENTALOPEZ">
-            
+                
     
-    <chiamata cancelled="false" data="2024-04-11" durata="5" feedback="" messaggio="false" number="1" operatore="HUGO">ERA STAO CONTATTATO NEL 2022 ALL'EPOCA USAVA DISCHI DA 95 CON MACCHINE ZIRCOZAHN. PARLO AL TELEFONO CON MAURO CHE MI CONFERMA IL NOME DEL REFERENTE J. MANUEL . REINVIO INFO ORODENTIN ATTESA DI POTER INVIARE OFFERTA CON LISTINO. </chiamata>
-        
+    
+    <chiamata cancelled="false" data="2024-04-11" durata="5" feedback="" messaggio="false" newInterest="INFO" number="1" operatore="HUGO" previousInterest="INFO">ERA STAO CONTATTATO NEL 2022 ALL'EPOCA USAVA DISCHI DA 95 CON MACCHINE ZIRCOZAHN. PARLO AL TELEFONO CON MAURO CHE MI CONFERMA IL NOME DEL REFERENTE J. MANUEL . REINVIO INFO ORODENTIN ATTESA DI POTER INVIARE OFFERTA CON LISTINO. </chiamata>
+            
+
 
 </companyNotes>

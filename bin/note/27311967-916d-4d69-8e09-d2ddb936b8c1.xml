@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="AVANTGARDE Dentaltechnik GmbH">
+                    
+    
+    
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="NULLO" number="1" operatore="SANTOLO" previousInterest="NULLO">collaborano con fornitori da tempo, non interessati</chiamata>
                 
     
     
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="SANTOLO">collaborano con fornitori da tempo, non interessati</chiamata>
+    
+    <chiamata cancelled="false" data="2024-04-09" durata="0" messaggio="false" newInterest="NULLO" number="2" operatore="SANTOLO" previousInterest="NULLO">Usano produttore tedesco e non vogliono cambiare</chiamata>
             
-    
-    
-    <chiamata cancelled="false" data="2024-04-09" durata="0" messaggio="false" number="2" operatore="SANTOLO">Usano produttore tedesco e non vogliono cambiare</chiamata>
-        
+
 
 </companyNotes>

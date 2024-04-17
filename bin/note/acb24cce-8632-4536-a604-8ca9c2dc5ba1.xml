@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="HPDent  Gmbh ">
+                    
+    
+    
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="NULLO" number="1" operatore="SANTOLO" previousInterest="NULLO">richiama lui in giornata. Sarebbe interessato ad un private label</chiamata>
                 
-    
-    
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="SANTOLO">richiama lui in giornata. Sarebbe interessato ad un private label</chiamata>
-            
 
 
-    <chiamata cancelled="false" data="2024-04-11" durata="15" messaggio="false" number="2" operatore="SANTOLO">Parlato con il Signor Mannella, avevano avuto avvicinamento Aidite, comunque per scelte aziendali hanno deciso di non trattare Zirconia.</chiamata>
+    
+    <chiamata cancelled="false" data="2024-04-11" durata="15" messaggio="false" newInterest="NULLO" number="2" operatore="SANTOLO" previousInterest="NULLO">Parlato con il Signor Mannella, avevano avuto avvicinamento Aidite, comunque per scelte aziendali hanno deciso di non trattare Zirconia.</chiamata>
+    
 </companyNotes>

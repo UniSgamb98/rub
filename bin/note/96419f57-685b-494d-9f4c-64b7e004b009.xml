@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="Voigt Dental">
-            
+                    
     
-    <chiamata cancelled="false" data="2024-04-04" durata="0" messaggio="false" number="1" operatore="SANTOLO">inviata mail alla signora Feldboer / inoltra a Janz
+    
+    
+    <chiamata cancelled="false" data="2024-04-04" durata="0" messaggio="false" newInterest="NULLO" number="1" operatore="SANTOLO" previousInterest="NULLO">inviata mail alla signora Feldboer / inoltra a Janz
 </chiamata>
-        
+                
 
+
+    
+    <chiamata cancelled="false" data="2024-04-17" durata="0" messaggio="false" newInterest="NULLO" number="2" operatore="SANTOLO" previousInterest="NULLO">La signora Felboer ha detto che Janz ha visto la presentazione, purtroppo non c'è interesse al momento. Tengono i dati per un eventuale interesse futuro</chiamata>
+    
 </companyNotes>

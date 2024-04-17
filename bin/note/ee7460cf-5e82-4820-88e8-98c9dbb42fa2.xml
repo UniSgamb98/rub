@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="MASTERDENTAL">
-                
+                            
     
     
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="HUGO">IL CAPO NON C'E' AVVISO PER ESSERE RICHIAMATO E INTANTO INVIO PRESENTAZIONE ORODENT</chiamata>
-            
     
     
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="2" operatore="HUGO">RICHIAMATI MA SONO TUTTI ALLA FERIA DI MADRID.</chiamata>
-        
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" feedback="" messaggio="false" newInterest="INFO" number="1" operatore="HUGO" previousInterest="INFO">IL CAPO NON C'E' AVVISO PER ESSERE RICHIAMATO E INTANTO INVIO PRESENTAZIONE ORODENT IN CONTATTO CON LORO DALL'8 MARZO AD OGGI. </chiamata>
+                        
+    
+    
+    
+    
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="INFO" number="2" operatore="HUGO" previousInterest="INFO">RICHIAMATI MA SONO TUTTI ALLA FERIA DI MADRID.</chiamata>
+                    
 
+
+
+    
+    <chiamata cancelled="false" data="2024-04-17" durata="3" messaggio="false" newInterest="INFO" number="3" operatore="HUGO" previousInterest="INFO">HANNO  3 SEDI MADRID BARECLONA TENERIFE. DEVO RICHIAMARE PIU TARDI. </chiamata>
+    
 </companyNotes>

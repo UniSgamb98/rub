@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="Maisto Dental">
-            
+                
     
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="SANTOLO">Telefonata lunga con Antonio Maisto, ha contratto con Dental Direct e Ceramill. Valuta campioni e presentazione</chiamata>
-        
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="BLANK" number="1" operatore="SANTOLO" previousInterest="BLANK">Telefonata lunga con Antonio Maisto, ha contratto con Dental Direct e Ceramill. Valuta campioni e presentazione</chiamata>
+            
+
 
 </companyNotes>

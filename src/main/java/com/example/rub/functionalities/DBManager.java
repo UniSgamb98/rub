@@ -320,19 +320,8 @@ public abstract class DBManager extends TagsManager{
                     Node node = nodeList.item(j);
                     if (node.getNodeType() == Node.ELEMENT_NODE){
                         Element e = (Element) node;
-                        String ka = e.getAttribute("data");
-                        String d = ka.substring(0, ka.indexOf("/"));
-                        String m = ka.substring(ka.indexOf("/")+1,ka.indexOf("/",ka.indexOf("/")+1));
-                        String y = ka.substring(ka.indexOf("/",ka.indexOf("/")+1)+1);
-                        if (d.length() == 1){
-                            d = "0" + d;
-                        }
-                        if(m.length() == 1){
-                            m = "0" + m;
-                        }
-                        e.setAttribute("data", y + "-" + m + "-" + d);
-                        e.setAttribute("messaggio", "false");
-                        if (e.getAttribute("durata").isEmpty()) e.setAttribute("durata", "0");
+                        e.setAttribute("previousInterest", i.getInteressamento().name());
+                        e.setAttribute("newInterest", i.getInteressamento().name());
                     }
                 }
                 nm.writeXml(doc, i.getNoteId()+"");
@@ -346,5 +335,13 @@ public abstract class DBManager extends TagsManager{
         update();
         retriveEntry(entryID).setVolteContattati(retriveEntry(entryID).getVolteContattati()-1);
         MyUtils.write(database, "database");
+    }
+
+    public static int getOperatorTotalContacts(Operatori operatore){
+        int ret = 0;
+        for (Contatto i : database.values()){
+            if (i.getOperator().equals(operatore))  ret++;
+        }
+        return ret;
     }
 }

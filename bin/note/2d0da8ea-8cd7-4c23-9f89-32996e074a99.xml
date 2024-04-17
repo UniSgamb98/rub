@@ -3,9 +3,8 @@
                 
     
     
-    <chiamata cancelled="false" data="2024-04-09" durata="5" messaggio="false" number="1" operatore="HUGO">interessati a inserire nella pagina web i nostri dischi . In attesa riscontro. </chiamata>
+    <chiamata cancelled="false" data="2024-04-09" durata="5" messaggio="false" newInterest="LISTINO" number="1" operatore="HUGO" previousInterest="LISTINO">interessati a inserire nella pagina web i nostri dischi . In attesa riscontro. </chiamata>
             
 
 
-    <chiamata cancelled="false" data="2024-04-16" durata="0" messaggio="false" number="2" operatore="HUGO"/>
 </companyNotes>

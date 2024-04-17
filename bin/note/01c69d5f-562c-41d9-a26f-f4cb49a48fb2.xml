@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="FORMA DENTAL2003 - ESSENTIALAB">
-            
+                
     
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="HUGO">INVIATA PRSENTAZIONE DEVO RICHIMARE NEL POMERIGGIO. </chiamata>
-        
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="INFO" number="1" operatore="HUGO" previousInterest="INFO">INVIATA PRSENTAZIONE DEVO RICHIMARE NEL POMERIGGIO. </chiamata>
+            
+
 
 </companyNotes>

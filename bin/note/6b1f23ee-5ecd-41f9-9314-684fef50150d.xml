@@ -1,26 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="CDF GmbH   (Centrum fuer dentale Fraestech)">
+                                
+    
+    
+    
+    
+    
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="CAMPIONE" number="1" operatore="SANTOLO" previousInterest="CAMPIONE">Parlato con il Laborleiter Hr.Roessler, 95% Katana, curioso di conoscerci</chiamata>
+                            
+    
+    
+    
+    
+    
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="CAMPIONE" number="2" operatore="SANTOLO" previousInterest="CAMPIONE"/>
                         
     
     
     
     
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="SANTOLO">Parlato con il Laborleiter Hr.Roessler, 95% Katana, curioso di conoscerci</chiamata>
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="CAMPIONE" number="3" operatore="SANTOLO" previousInterest="CAMPIONE">Richiamare Lunedì, il Sign. Roessler non presente in ufficio</chiamata>
                     
     
     
     
     
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="2" operatore="SANTOLO"/>
+    <chiamata cancelled="false" data="2024-04-08" durata="0" messaggio="false" newInterest="CAMPIONE" number="4" operatore="SANTOLO" previousInterest="CAMPIONE">Parlato con Herr Roessler, guarda presentazione e mi invia feedback. Attesa eventuale campionatura</chiamata>
                 
-    
-    
-    
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="3" operatore="SANTOLO">Richiamare Lunedì, il Sign. Roessler non presente in ufficio</chiamata>
-            
-    
-    
-    <chiamata cancelled="false" data="2024-04-08" durata="0" messaggio="false" number="4" operatore="SANTOLO">Parlato con Herr Roessler, guarda presentazione e mi invia feedback. Attesa eventuale campionatura</chiamata>
-        
 
+
+    
+    <chiamata cancelled="false" data="2024-04-17" durata="1" messaggio="false" newInterest="CAMPIONE" number="5" operatore="SANTOLO" previousInterest="CAMPIONE">Parlato con il Signor Roessler, non ha ancora visto la presentazione. Ci darà un feedback e quantità indicative.</chiamata>
+    
 </companyNotes>

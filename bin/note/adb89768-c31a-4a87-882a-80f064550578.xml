@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="DEPPE Dental">
-                
+                            
     
     
-    <chiamata cancelled="false" data="2024-04-04" durata="0" messaggio="false" number="1" operatore="SANTOLO"/>
-            
     
     
-    <chiamata cancelled="false" data="2024-04-04" durata="0" messaggio="false" number="2" operatore="SANTOLO">Sign. Mueller in ferie fino a settimana prossima
+    
+    <chiamata cancelled="false" data="2024-04-04" durata="0" messaggio="false" newInterest="NON_TROVATO" number="1" operatore="SANTOLO" previousInterest="NON_TROVATO"/>
+                        
+    
+    
+    
+    
+    
+    <chiamata cancelled="false" data="2024-04-04" durata="0" messaggio="false" newInterest="NON_TROVATO" number="2" operatore="SANTOLO" previousInterest="NON_TROVATO">Sign. Mueller in ferie fino a settimana prossima
 </chiamata>
+                    
+
+
+    
+    
+    <chiamata cancelled="false" data="2024-04-17" durata="0" messaggio="false" newInterest="CAMPIONE" number="3" operatore="SANTOLO" previousInterest="NON_TROVATO">Inviata mail di reminder al Signor Mueller.</chiamata>
         
 
 </companyNotes>

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="Roecker Dental">
+                    
+    
+    
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="NON_TROVATO" number="1" operatore="SANTOLO" previousInterest="NON_TROVATO">Laboratorio molto grande, referente</chiamata>
                 
     
     
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="SANTOLO">Laboratorio molto grande, referente</chiamata>
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="1" messaggio="false" newInterest="NON_TROVATO" number="2" operatore="SANTOLO" previousInterest="NON_TROVATO">Signor Finsterer reperibile da Lunedì</chiamata>
             
-    
-    
-    <chiamata cancelled="false" data="2024-04-05" durata="1" messaggio="false" number="2" operatore="SANTOLO">Signor Finsterer reperibile da Lunedì</chiamata>
-        
+
 
 </companyNotes>

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="Fresdental">
+                    
+    
+    
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="RICHIAMARE" number="1" operatore="HUGO" previousInterest="RICHIAMARE">Interessati a  ricevere info su Orodent</chiamata>
                 
-    
-    
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="HUGO">Interessati a  ricevere info su Orodent</chiamata>
-            
 
 
-    <chiamata cancelled="false" data="2024-04-12" durata="0" messaggio="false" number="2" operatore="HUGO">SONO LEGATI A IVOCLAR ANCORA PER TUTTO I 2024 RESTIAMO IN CONTATTO PER VEDERE SE POTREMO RIFARE UNA PROPOSTA NEL 2025.</chiamata>
+    
+    <chiamata cancelled="false" data="2024-04-12" durata="0" messaggio="false" newInterest="RICHIAMARE" number="2" operatore="HUGO" previousInterest="RICHIAMARE">SONO LEGATI A IVOCLAR ANCORA PER TUTTO I 2024 RESTIAMO IN CONTATTO PER VEDERE SE POTREMO RIFARE UNA PROPOSTA NEL 2025.</chiamata>
+    
 </companyNotes>

@@ -12,7 +12,7 @@
    <left>
       <VBox alignment="CENTER" prefHeight="383.0" prefWidth="196.0" BorderPane.alignment="CENTER">
          <VBox alignment="CENTER">
-            <CheckBox fx:id="isMessage" mnemonicParsing="false" onAction="#hideCallScheduling" text="Appunta come nota">
+            <CheckBox fx:id="isMessage" mnemonicParsing="false" onAction="#hideCallScheduling" text="Appunta nota semplice">
                <VBox.margin>
                   <Insets bottom="30.0" />
                </VBox.margin>

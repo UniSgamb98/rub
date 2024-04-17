@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="Dentallabor Bredy GmbH">
-    <chiamata cancelled="false" data="2024-04-11" durata="2" messaggio="false" number="1" operatore="SANTOLO">Richiamare prossima settimana, CEO assente.</chiamata>
+            
+    
+    <chiamata cancelled="false" data="2024-04-11" durata="2" messaggio="false" newInterest="NON_TROVATO" number="1" operatore="SANTOLO" previousInterest="NON_TROVATO">Richiamare prossima settimana, CEO assente.</chiamata>
+        
+    
+    <chiamata cancelled="false" data="2024-04-15" durata="1" messaggio="false" newInterest="NON_TROVATO" number="2" operatore="SANTOLO" previousInterest="NON_TROVATO">Non trovato Hr Bredy, chiamare domani mattina</chiamata>
+    
 </companyNotes>

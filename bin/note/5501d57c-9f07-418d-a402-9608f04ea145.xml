@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="Zahntechnik Scharnau">
-                    
-    
-    
-    
-    <chiamata cancelled="false" data="2024-04-04" durata="0" messaggio="false" number="1" operatore="SANTOLO">Inviata presentazione
-</chiamata>
                 
+    
+    
+    <chiamata cancelled="false" data="2024-04-04" durata="0" messaggio="false" newInterest="BLANK" number="1" operatore="SANTOLO" previousInterest="BLANK">Inviata presentazione
+</chiamata>
+            
 
 
-    
-    <chiamata cancelled="false" data="2024-04-16" durata="0" messaggio="false" number="2" operatore="HUGO"/>
-    
-    <chiamata cancelled="false" data="2024-04-16" durata="0" messaggio="false" number="3" operatore="SANTOLO"/>
 </companyNotes>

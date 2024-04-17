@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="EQUIPADENT">
-            
+                    
     
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="HUGO">MAILPRESENTAZIONE ORODENT 08/03/2024</chiamata>
-        
+    
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="NULLO" number="1" operatore="HUGO" previousInterest="NULLO">MAILPRESENTAZIONE ORODENT 08/03/2024</chiamata>
+                
 
+
+    
+    <chiamata cancelled="false" data="2024-04-16" durata="2" messaggio="false" newInterest="NULLO" number="2" operatore="HUGO" previousInterest="NULLO">TRATTANO SOLO COLTENE</chiamata>
+    
 </companyNotes>

@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="Johannes Weithaus  dental kunststoffe">
-                    
-    
-    
-    
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="SANTOLO">Richiamare Herr Aeltestee dopo Pasqua</chiamata>
                 
+    
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="BLANK" number="1" operatore="SANTOLO" previousInterest="BLANK">Richiamare Herr Aeltestee dopo Pasqua</chiamata>
+            
 
 
-    
-    <chiamata cancelled="false" data="2024-04-16" durata="0" messaggio="false" number="2" operatore="HUGO"/>
-    
-    <chiamata cancelled="false" data="2024-04-16" durata="0" messaggio="false" number="3" operatore="HUGO"/>
 </companyNotes>

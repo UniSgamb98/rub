@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="LABOSHOP">
-            
+                
     
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="HUGO">Dear Mr. Cabras, 
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="NULLO" number="1" operatore="HUGO" previousInterest="NULLO">Dear Mr. Cabras, 
 
 thank you for your message and the presentation of your company and products. 
 At the moment we do not want to expand our product range in the area of dental zirconia. We ask for your understanding. 
@@ -20,6 +21,7 @@ Tel +49 9708 909-250
 pm@dt-shop.com
 www.dt-shop.com
 </chiamata>
-        
+            
+
 
 </companyNotes>

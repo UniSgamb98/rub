@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="H.u.H. Dental Studio GmbH">
+                            
+    
+    
+    
+    
+    
+    <chiamata cancelled="false" data="2024-04-04" durata="0" messaggio="false" newInterest="LISTINO" number="1" operatore="SANTOLO" previousInterest="LISTINO">Signor Grinke sta riflettendo su di noi, richiamare tra due settimane
+</chiamata>
                         
     
     
     
     
-    <chiamata cancelled="false" data="2024-04-04" durata="0" messaggio="false" number="1" operatore="SANTOLO">Signor Grinke sta riflettendo su di noi, richiamare tra due settimane
-</chiamata>
+    
+    <chiamata cancelled="false" data="2024-04-08" durata="15" messaggio="false" newInterest="LISTINO" number="2" operatore="SANTOLO" previousInterest="LISTINO">Parlato con il Sign. Grinke, ha chiesto un ulteriore eccezione sul prezzo per diventare nuovamente clienti. Proposta spedizione gratuita. Hanno usato finora Ceramill</chiamata>
                     
-    
-    
-    
-    
-    <chiamata cancelled="false" data="2024-04-08" durata="15" messaggio="false" number="2" operatore="SANTOLO">Parlato con il Sign. Grinke, ha chiesto un ulteriore eccezione sul prezzo per diventare nuovamente clienti. Proposta spedizione gratuita. Hanno usato finora Ceramill</chiamata>
-                
 
     
     
-    <chiamata cancelled="false" data="2024-04-09" durata="20" messaggio="false" number="3" operatore="SANTOLO">Parlato con il signor Hagen, ha effettuato un ordine di 15 dischi.
+    
+    <chiamata cancelled="false" data="2024-04-09" durata="20" messaggio="false" newInterest="LISTINO" number="3" operatore="SANTOLO" previousInterest="LISTINO">Parlato con il signor Hagen, ha effettuato un ordine di 15 dischi.
 Vorrebbe spese spedizione incluse, hià riferito siamo al massimo con i prezzi.</chiamata>
-        
+            
 
-    <chiamata cancelled="false" data="2024-04-12" durata="0" messaggio="false" number="4" operatore="SANTOLO">Cambiato Ragione Sociale:  Dentalstudio Hesepe GmbH e anche p.iva</chiamata>
+    
+    <chiamata cancelled="false" data="2024-04-12" durata="0" messaggio="false" newInterest="LISTINO" number="4" operatore="SANTOLO" previousInterest="LISTINO">Cambiato Ragione Sociale:  Dentalstudio Hesepe GmbH e anche p.iva</chiamata>
+    
 </companyNotes>

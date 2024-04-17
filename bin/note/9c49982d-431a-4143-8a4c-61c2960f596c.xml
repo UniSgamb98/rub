@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="ANTON GERL gmbh">
-            
+                
     
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="SANTOLO">non c'è più Ziesche,  parlato con il Sign. Friechte</chiamata>
-        
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="BLANK" number="1" operatore="SANTOLO" previousInterest="BLANK">non c'è più Ziesche,  parlato con il Sign. Friechte</chiamata>
+            
+
 
 </companyNotes>

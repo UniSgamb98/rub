@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="PROVALL">
+                
+    
+    
+    <chiamata cancelled="false" data="2024-04-12" durata="2" messaggio="false" newInterest="BLANK" number="1" operatore="HUGO" previousInterest="BLANK">richiamare barbara la titolare lunedì</chiamata>
             
     
-    <chiamata cancelled="false" data="2024-04-12" durata="2" messaggio="false" number="1" operatore="HUGO">richiamare barbara la titolare lunedì</chiamata>
+    
+    <chiamata cancelled="false" data="2024-04-15" durata="2" messaggio="false" newInterest="BLANK" number="2" operatore="HUGO" previousInterest="BLANK">devo richiamare per parlaree o con barbara o ref cadcam dopo le 11.330</chiamata>
         
     
-    <chiamata cancelled="false" data="2024-04-15" durata="2" messaggio="false" number="2" operatore="HUGO">devo richiamare per parlaree o con barbara o ref cadcam dopo le 11.330</chiamata>
+    <chiamata cancelled="false" data="2024-04-15" durata="5" messaggio="false" newInterest="BLANK" number="3" operatore="HUGO" previousInterest="BLANK">parlo con responsabile Barbara dischi mensili 50 circa invio listino 50%. </chiamata>
     
-    <chiamata cancelled="false" data="2024-04-15" durata="5" messaggio="false" number="3" operatore="HUGO">parlo con responsabile Barbara dischi mensili 50 circa invio listino 50%. </chiamata>
 </companyNotes>

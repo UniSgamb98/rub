@@ -1,15 +1,14 @@
 package com.example.rub;
 
 import com.example.rub.enums.Interessamento.InteressamentoStatus;
+import com.example.rub.enums.comparator.InteressamentoComp;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.NoteManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -35,6 +34,7 @@ public class ModifyNoteController implements Initializable {
         this.entryID = entryID;
         note.setText(element.getTextContent());
         durata.setText(element.getAttribute("durata"));
+        feedback.setValue(element.getAttribute("newInterest"));
     }
 
     public void doGoBack(ActionEvent event) {
@@ -46,8 +46,25 @@ public class ModifyNoteController implements Initializable {
         try {
             NoteManager nm = new NoteManager();
             Document doc = nm.readXml(fileName);
-            nm.modifyNote(doc, element.getAttribute("number"), note.getText(), feedback.getValue(), durata.getText());
-            nm.writeXml(doc, fileName);
+            boolean canProceed = true;
+            boolean trigger = (new InteressamentoComp().compare(DBManager.retriveEntry(entryID).getInteressamento(), InteressamentoStatus.valueOf(feedback.getValue()))) < 0;
+            if (trigger){
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Attenzione!");
+                alert.setContentText("Continuare?");
+                alert.setHeaderText("La modifica del feedback in seguito alla creazione di nuove note genera una lieve alterazione nei report");
+                alert.showAndWait();
+                try {
+                    ButtonType responseType = alert.getResult();
+                    String responseText = responseType.getText();
+                    canProceed = responseText.equals("OK");
+                }catch (NullPointerException e) {canProceed = false;}
+            }
+            if (canProceed) {
+                if (trigger)    DBManager.changeInteressamento(entryID, InteressamentoStatus.valueOf(feedback.getValue()));
+                nm.modifyNote(doc, element.getAttribute("number"), note.getText(), feedback.getValue(), durata.getText());
+                nm.writeXml(doc, fileName);
+            }
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
         } catch (Exception ignored) {}

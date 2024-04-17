@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="PEGADENT">
+                    
+    
+    
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="LISTINO" number="1" operatore="HUGO" previousInterest="LISTINO">NESSUNA RISPOSTA INVIO NEL FRATTEMPO PRESENTAZIONE ORODENT VIA MAIL.</chiamata>
                 
-    
-    
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="HUGO">NESSUNA RISPOSTA INVIO NEL FRATTEMPO PRESENTAZIONE ORODENT VIA MAIL.</chiamata>
-            
 
 
-    <chiamata cancelled="false" data="2024-04-12" durata="0" messaggio="true" number="2" operatore="HUGO">inviato listino 60% peter dice che già usano bloomdent e huge dental provo ugualmente con offerta . </chiamata>
+    
+    <chiamata cancelled="false" data="2024-04-12" durata="0" messaggio="true" newInterest="LISTINO" number="2" operatore="HUGO" previousInterest="LISTINO">inviato listino 60% peter dice che già usano bloomdent e huge dental provo ugualmente con offerta . </chiamata>
+    
 </companyNotes>

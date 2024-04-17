@@ -2,7 +2,6 @@ package com.example.rub;
 
 import com.example.rub.beans.Contatto;
 import com.example.rub.enums.Operatori;
-import com.example.rub.enums.comparator.DateStringComp;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
 import com.example.rub.functionalities.NoteManager;
@@ -47,9 +46,22 @@ public class ReportController implements Initializable {
     public NoteDisplayer history;
     @FXML
     public ListView<HBox> contacted;
+    @FXML
     public ChoiceBox<String> filtro;
+    public Label assignedContactsToOperator;
+    @FXML
+    public Label totalUniqueContacts;
+    @FXML
+    public Label totalNewSampling;
+    @FXML
+    public Label totalNewClients;
+    @FXML
+    public Label totalNewInfo;
+    @FXML
+    public Label totalCommunications;
     ObservableList<HBox> contactedList;
     ArrayList<Pair<UUID, String>> timeLine;
+    int[] reportInfo = {0,0,0,0,0};   //tot.aziende - tot comunicazioni - nuove info - nuove campionature - nuovi clienti
     String start;
     String stop;
 
@@ -72,8 +84,13 @@ public class ReportController implements Initializable {
             filtro.getItems().add("Periodo analizzato");
             filtro.getItems().addAll(getIntermediateDate(startDate.getValue(), stopDate.getValue()));
             filtro.setValue("Periodo analizzato");
-            displayFilteredResults();
+            displayFilterOptions();
             setChart();
+            totalUniqueContacts.setText(": " + reportInfo[0]);
+            totalCommunications.setText(": " + reportInfo[1]);
+            totalNewInfo.setText(": " + reportInfo[2]);
+            totalNewSampling.setText(": " + reportInfo[3]);
+            totalNewClients.setText(": " + reportInfo[4]);
         } catch (NullPointerException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Campi Mancanti");
@@ -81,24 +98,31 @@ public class ReportController implements Initializable {
             alert.setHeaderText("Dati mancanti!");
             alert.show();
         } catch (ParserConfigurationException e) {
-            System.out.println("no");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Errore");
+            alert.setContentText("Errore durante la lettura della nota");
+            alert.setHeaderText("Errore");
+            alert.show();
         }
     }
 
-    public void displayFilteredResults(){
-        LinkedList<UUID> toDisplay = new LinkedList<>();
-        for(Pair<UUID, String> p : timeLine){
-            if (filtro.getValue().equals("Periodo analizzato")){
-                if (!toDisplay.contains(p.getKey())){
-                    toDisplay.add(p.getKey());
-                }
-            } else {
-                if (!toDisplay.contains(p.getKey()) && p.getValue().equals(filtro.getValue())) {
-                    toDisplay.add(p.getKey());
+    public void displayFilterOptions(){
+        if (filtro.getValue()!= null) {
+            LinkedList<UUID> toDisplay = new LinkedList<>();
+            for (Pair<UUID, String> p : timeLine) {
+                if (filtro.getValue().equals("Periodo analizzato")) {
+                    if (!toDisplay.contains(p.getKey())) {
+                        toDisplay.add(p.getKey());
+                    }
+                } else {
+                    if (!toDisplay.contains(p.getKey()) && p.getValue().equals(filtro.getValue())) {
+                        toDisplay.add(p.getKey());
+                    }
                 }
             }
+            reportInfo[0] = toDisplay.size();
+            displayResults(toDisplay);
         }
-        displayResults(toDisplay);
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -114,18 +138,28 @@ public class ReportController implements Initializable {
 
     private void createTimeLine () throws ParserConfigurationException {
         timeLine = new ArrayList<>();
-        LinkedList<UUID> allEntries = DBManager.getAllEntries();
         NoteManager nm = new NoteManager();
-        for (UUID i : allEntries){
+        for (UUID i : DBManager.getAllEntries()){
             Contatto j = DBManager.retriveEntry(i);
-            LinkedList<String> annotationDates = nm.getAnnotationDates(j.getNoteId(), durata.getValue(), operator.getValue(), includeMessages.isSelected());
-            for (String k : annotationDates){
+            for (String k : nm.getAnnotationDates(j.getNoteId(), durata.getValue(), operator.getValue(), includeMessages.isSelected())){
+                switch (k.substring(k.length()-1)){
+                    case "A":
+                        reportInfo[2]++;
+                        break;
+                    case "B":
+                        reportInfo[3]++;
+                        break;
+                    case "C":
+                        reportInfo[4]++;
+                        break;
+                }
+                k = k.substring(0, k.length()-1);
                 if (k.compareTo(start) >= 0 && k.compareTo(stop) <= 0) {
                     timeLine.add(new Pair<>(i, k));
                 }
             }
         }
-        timeLine.sort(new DateStringComp());
+        reportInfo[1]=timeLine.size();
     }
 
     private void displayResults(LinkedList<UUID> resultToDisplay){
@@ -171,5 +205,23 @@ public class ReportController implements Initializable {
 
     public void doFillWithToday() {
         stopDate.setValue(LocalDate.now());
+        startDate.setValue(LocalDate.now());
+        doShowReport();
+    }
+
+    public void doFillWithMonth() {
+        startDate.setValue(LocalDate.now().minusMonths(1));
+        stopDate.setValue(LocalDate.now());
+        doShowReport();
+    }
+
+    public void doFillWithWeek() {
+        startDate.setValue(LocalDate.now().minusWeeks(1));
+        stopDate.setValue(LocalDate.now());
+        doShowReport();
+    }
+
+    public void operatorHasChanged( ) {
+        assignedContactsToOperator.setText(": "+DBManager.getOperatorTotalContacts(operator.getValue()));
     }
 }

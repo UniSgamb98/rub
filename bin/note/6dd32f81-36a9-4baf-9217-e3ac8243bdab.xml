@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="Geiger Dentaltechnik GmbH">
+                    
+    
+    
+    
+    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" newInterest="NULLO" number="1" operatore="SANTOLO" previousInterest="NULLO">non rispondono</chiamata>
                 
     
     
-    <chiamata cancelled="false" data="2024-04-05" durata="0" messaggio="false" number="1" operatore="SANTOLO">non rispondono</chiamata>
+    
+    <chiamata cancelled="false" data="2024-04-08" durata="0" messaggio="false" newInterest="NULLO" number="2" operatore="SANTOLO" previousInterest="NULLO">Parlato con il signor Hofmann, responsabile CAD-CAM. Al momento non interessati, già hanno il loro fornitore.</chiamata>
             
-    
-    
-    <chiamata cancelled="false" data="2024-04-08" durata="0" messaggio="false" number="2" operatore="SANTOLO">Parlato con il signor Hofmann, responsabile CAD-CAM. Al momento non interessati, già hanno il loro fornitore.</chiamata>
-        
+
 
 </companyNotes>

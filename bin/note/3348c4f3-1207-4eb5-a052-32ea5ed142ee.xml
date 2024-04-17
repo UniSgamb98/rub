@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="GEIZ Dental">
-            
+                    
     
-    <chiamata cancelled="false" data="2024-04-04" durata="0" messaggio="false" number="1" operatore="SANTOLO">mandato Reminder  Ufficio Acquisti
+    
+    
+    <chiamata cancelled="false" data="2024-04-04" durata="0" messaggio="false" newInterest="NON_TROVATO" number="1" operatore="SANTOLO" previousInterest="NON_TROVATO">mandato Reminder  Ufficio Acquisti
 </chiamata>
-        
+                
 
+
+    
+    <chiamata cancelled="false" data="2024-04-17" durata="0" messaggio="false" newInterest="NON_TROVATO" number="2" operatore="SANTOLO" previousInterest="NON_TROVATO">Ufficio Acquisti non reperibile telefonicamente,
+inviate due mail ma non c'è interesse se non c'è risposta.</chiamata>
+    
 </companyNotes>

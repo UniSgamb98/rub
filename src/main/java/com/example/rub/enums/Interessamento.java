@@ -55,38 +55,40 @@ public class Interessamento {
 
     public static InteressamentoStatus fromQuestionForm(String s){
         InteressamentoStatus ret = InteressamentoStatus.BLANK;
-        switch (s){
-            case "Trovato nessuno che mi ha risposto":
-                ret = InteressamentoStatus.NON_TROVATO;
-                break;
+        if (s != null) {
+            switch (s) {
+                case "Trovato nessuno che mi ha risposto":
+                    ret = InteressamentoStatus.NON_TROVATO;
+                    break;
 
-            case "Capito che non ha un utilizzo per il nostro prodotto":
-                ret = InteressamentoStatus.NON_INERENTE;
-                break;
+                case "Capito che non ha un utilizzo per il nostro prodotto":
+                    ret = InteressamentoStatus.NON_INERENTE;
+                    break;
 
-            case "Capito che non è interessato al nostro prodotto":
-                ret = InteressamentoStatus.NULLO;
-                break;
+                case "Capito che non è interessato al nostro prodotto":
+                    ret = InteressamentoStatus.NULLO;
+                    break;
 
-            case "Capito che devo richiamare per successivi riscontri":
-                ret = InteressamentoStatus.RICHIAMARE;
-                break;
+                case "Capito che devo richiamare per successivi riscontri":
+                    ret = InteressamentoStatus.RICHIAMARE;
+                    break;
 
-            case "Mandato informazioni sulla nostra azienda":
-                ret = InteressamentoStatus.INFO;
-                break;
+                case "Mandato informazioni sulla nostra azienda":
+                    ret = InteressamentoStatus.INFO;
+                    break;
 
-            case "Mandato il listino/catalogo":
-                ret = InteressamentoStatus.LISTINO;
-                break;
+                case "Mandato il listino/catalogo":
+                    ret = InteressamentoStatus.LISTINO;
+                    break;
 
-            case "Mandato un campione al cliente":
-                ret = InteressamentoStatus.CAMPIONE;
-                break;
+                case "Mandato un campione al cliente":
+                    ret = InteressamentoStatus.CAMPIONE;
+                    break;
 
-            case "Ottenuto un ordine del nostro prodotto":
-                ret = InteressamentoStatus.CLIENTE;
-                break;
+                case "Ottenuto un ordine del nostro prodotto":
+                    ret = InteressamentoStatus.CLIENTE;
+                    break;
+            }
         }
         return ret;
     }

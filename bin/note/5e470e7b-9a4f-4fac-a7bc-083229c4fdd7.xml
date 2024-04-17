@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="Fraeszentrum Hamburg  (ZISCHOW)">
+                    
+    
+    
+    
+    <chiamata cancelled="false" data="2024-04-04" durata="0" messaggio="false" newInterest="CAMPIONE" number="1" operatore="SANTOLO" previousInterest="CAMPIONE">Parlare con Frau Mume dopo l'8 Aprile, inviata mail presentazione 11.03
+</chiamata>
                 
     
     
-    <chiamata cancelled="false" data="2024-04-04" durata="0" messaggio="false" number="1" operatore="SANTOLO">Parlare con Frau Mume dopo l'8 Aprile, inviata mail presentazione 11.03
-</chiamata>
+    
+    <chiamata cancelled="false" data="2024-04-09" durata="10" messaggio="false" newInterest="CAMPIONE" number="2" operatore="SANTOLO" previousInterest="CAMPIONE">Ottima telefonata con Frau Sabine Mume, usa marca americana. Parlato di Amburgo, invio presentazione.</chiamata>
             
-    
-    
-    <chiamata cancelled="false" data="2024-04-09" durata="10" messaggio="false" number="2" operatore="SANTOLO">Ottima telefonata con Frau Sabine Mume, usa marca americana. Parlato di Amburgo, invio presentazione.</chiamata>
-        
+
 
 </companyNotes>

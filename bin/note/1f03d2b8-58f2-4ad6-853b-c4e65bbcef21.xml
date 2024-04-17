@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="InduDENT">
-                
+                    
     
     
-    <chiamata cancelled="false" data="2024-04-04" durata="0" messaggio="false" number="1" operatore="SANTOLO">Grande Centro Fresaggio, più contratti con più partner. Inviata presentazione e prezzi
+    
+    <chiamata cancelled="false" data="2024-04-04" durata="0" messaggio="false" newInterest="NULLO" number="1" operatore="SANTOLO" previousInterest="NULLO">Grande Centro Fresaggio, più contratti con più partner. Inviata presentazione e prezzi
 </chiamata>
-            
+                
 
     
-    <chiamata cancelled="false" data="2024-04-09" durata="0" messaggio="false" number="2" operatore="SANTOLO">Non hanno interesse</chiamata>
     
+    <chiamata cancelled="false" data="2024-04-09" durata="0" messaggio="false" newInterest="NULLO" number="2" operatore="SANTOLO" previousInterest="NULLO">Non hanno interesse</chiamata>
+        
+
 </companyNotes>
