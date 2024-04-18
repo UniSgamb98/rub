@@ -45,7 +45,7 @@ public class ReportController implements Initializable {
     @FXML
     public NoteDisplayer history;
     @FXML
-    public ListView<HBox> contacted;
+    public ListView<DisplayableEntry> contacted;
     @FXML
     public ChoiceBox<String> filtro;
     public Label assignedContactsToOperator;
@@ -71,7 +71,7 @@ public class ReportController implements Initializable {
     public Label subNewSampling;
     @FXML
     public HBox box;
-    ObservableList<HBox> contactedList;
+    ObservableList<DisplayableEntry> contactedList;
     ArrayList<Pair<UUID, String>> timeLine;
     int[] reportInfo = {0,0,0,0,0};   //tot.aziende - tot comunicazioni - nuove info - nuove campionature - nuovi clienti
     String start;
@@ -179,8 +179,11 @@ public class ReportController implements Initializable {
         durata.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,300));
         box.addEventFilter(ActionEvent.ACTION, event -> {
             if (event.getTarget() instanceof  NoteDisplayer) {
-
-                displayResults(new LinkedList<>(contactedList));
+                LinkedList<UUID> temp = new LinkedList<>();
+                for (DisplayableEntry i : contactedList){
+                    temp.add(i.getEntry().getId());
+                }
+                displayResults(temp);
             }
         });
     }
@@ -246,7 +249,7 @@ public class ReportController implements Initializable {
 
     public void doShowNotes() {
         try {
-            DisplayableEntry displayableEntry = (DisplayableEntry) contacted.getSelectionModel().getSelectedItem();
+            DisplayableEntry displayableEntry = contacted.getSelectionModel().getSelectedItem();
             history.setDocument(displayableEntry.getEntry().getId());
         } catch (RuntimeException ignored) {}
     }
