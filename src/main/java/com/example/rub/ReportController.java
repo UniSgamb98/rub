@@ -56,9 +56,21 @@ public class ReportController implements Initializable {
     @FXML
     public Label totalNewClients;
     @FXML
-    public Label totalNewInfo;
+    public Label totalNewPriceList;
     @FXML
     public Label totalCommunications;
+    @FXML
+    public Label subCommunications;
+    @FXML
+    public Label subUniqueContacts;
+    @FXML
+    public Label subNewClients;
+    @FXML
+    public Label subNewPriceList;
+    @FXML
+    public Label subNewSampling;
+    @FXML
+    public HBox box;
     ObservableList<HBox> contactedList;
     ArrayList<Pair<UUID, String>> timeLine;
     int[] reportInfo = {0,0,0,0,0};   //tot.aziende - tot comunicazioni - nuove info - nuove campionature - nuovi clienti
@@ -88,7 +100,7 @@ public class ReportController implements Initializable {
             setChart();
             totalUniqueContacts.setText(": " + reportInfo[0]);
             totalCommunications.setText(": " + reportInfo[1]);
-            totalNewInfo.setText(": " + reportInfo[2]);
+            totalNewPriceList.setText(": " + reportInfo[2]);
             totalNewSampling.setText(": " + reportInfo[3]);
             totalNewClients.setText(": " + reportInfo[4]);
         } catch (NullPointerException e) {
@@ -108,17 +120,48 @@ public class ReportController implements Initializable {
 
     public void displayFilterOptions(){
         if (filtro.getValue()!= null) {
+            history.clear();
             LinkedList<UUID> toDisplay = new LinkedList<>();
-            for (Pair<UUID, String> p : timeLine) {
-                if (filtro.getValue().equals("Periodo analizzato")) {
+            if (filtro.getValue().equals("Periodo analizzato")) {
+                for (Pair<UUID, String> p : timeLine) {
                     if (!toDisplay.contains(p.getKey())) {
                         toDisplay.add(p.getKey());
                     }
-                } else {
-                    if (!toDisplay.contains(p.getKey()) && p.getValue().equals(filtro.getValue())) {
-                        toDisplay.add(p.getKey());
+                }
+                subCommunications.setText(totalCommunications.getText());
+                subUniqueContacts.setText(totalUniqueContacts.getText());
+                subNewPriceList.setText(totalNewPriceList.getText());
+                subNewSampling.setText(totalNewSampling.getText());
+                subNewClients.setText(totalNewClients.getText());
+            } else {
+                int communications = 0;
+                int prices = 0;
+                int samples = 0;
+                int clients = 0;
+                for (Pair<UUID, String> p : timeLine) {
+                    if (p.getValue().substring(0, p.getValue().length()-1).equals(filtro.getValue())) {
+                        communications++;
+                        if (!toDisplay.contains(p.getKey())) {
+                            toDisplay.add(p.getKey());
+                            switch (p.getValue().substring(p.getValue().length()-1)){
+                                case "A":
+                                    prices++;
+                                    break;
+                                case "B":
+                                    samples++;
+                                    break;
+                                case "C":
+                                    clients++;
+                                    break;
+                            }
+                        }
                     }
                 }
+                subCommunications.setText(": " + communications);
+                subUniqueContacts.setText(": " + toDisplay.size());
+                subNewPriceList.setText(": " + prices);
+                subNewSampling.setText(": " + samples);
+                subNewClients.setText(": " + clients);
             }
             reportInfo[0] = toDisplay.size();
             displayResults(toDisplay);
@@ -134,6 +177,12 @@ public class ReportController implements Initializable {
         contactedList = FXCollections.observableArrayList();
         contacted.setItems(contactedList);
         durata.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,300));
+        box.addEventFilter(ActionEvent.ACTION, event -> {
+            if (event.getTarget() instanceof  NoteDisplayer) {
+
+                displayResults(new LinkedList<>(contactedList));
+            }
+        });
     }
 
     private void createTimeLine () throws ParserConfigurationException {
@@ -153,8 +202,7 @@ public class ReportController implements Initializable {
                         reportInfo[4]++;
                         break;
                 }
-                k = k.substring(0, k.length()-1);
-                if (k.compareTo(start) >= 0 && k.compareTo(stop) <= 0) {
+                if (k.substring(0, k.length()-1).compareTo(start) >= 0 && k.substring(0, k.length()-1).compareTo(stop) <= 0) {
                     timeLine.add(new Pair<>(i, k));
                 }
             }
@@ -171,18 +219,18 @@ public class ReportController implements Initializable {
 
     private void setChart(){
         chart.getData().clear();
-        XYChart.Series<String, Integer> series = new XYChart.Series<>();
-        series.setName("N° Chiamate");
+        XYChart.Series<String, Integer> chartData = new XYChart.Series<>();
+        chartData.setName("N° Chiamate");
         for (String i : getIntermediateDate(startDate.getValue(), stopDate.getValue())){
-            series.getData().add(new XYChart.Data<>(i, getFrequency(i)));
+            chartData.getData().add(new XYChart.Data<>(i, getFrequency(i)));
         }
-        chart.getData().add(series);
+        chart.getData().add(chartData);
     }
 
     private int getFrequency(String date){
         int ret = 0;
         for (Pair<UUID, String> i : timeLine){
-            if (i.getValue().equals(date))  ret++;
+            if (i.getValue().substring(0, i.getValue().length() - 1).equals(date))  ret++;
         }
         return ret;
     }

@@ -95,4 +95,6 @@ public class NoteDisplayer extends VBox {
             i.setWrapping(width);
         }
     }
+
+    public void clear() {notes.clear();}
 }

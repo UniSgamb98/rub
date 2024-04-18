@@ -199,7 +199,7 @@ public class FirstPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb){
         DBManager.init();
-        if (GlobalContext.operator == Operatori.TOMMASO || GlobalContext.operator == Operatori.GAETANO || GlobalContext.operator == Operatori.VICTORIA){
+        if (GlobalContext.operator == Operatori.TOMMASO){
             importButton.setVisible(true);
             importButton.setPrefSize(130.0,130.0);
             importButton.setMinHeight(Region.USE_COMPUTED_SIZE);

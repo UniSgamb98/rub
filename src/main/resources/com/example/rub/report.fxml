@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="690.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.ReportController">
+<BorderPane prefHeight="690.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.ReportController">
    <bottom>
        <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
            <Button layoutX="43.0" layoutY="124.0" mnemonicParsing="false" onAction="#doGoBack" text="Indietro" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" />
@@ -104,20 +104,20 @@
                    <rowConstraints>
                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                    </rowConstraints>
-                   <Label text="Totale aziende contattate" wrapText="true" />
+                   <Label text="Totale aziende contattate" wrapText="true" GridPane.rowIndex="1" />
                    <Label text="Totale nuove campionature" wrapText="true" GridPane.rowIndex="3" />
                    <Label text="Totale nuovi clienti" wrapText="true" GridPane.rowIndex="4" />
-                   <Label fx:id="totalUniqueContacts" text=": N/a" GridPane.columnIndex="1" />
+                   <Label fx:id="totalUniqueContacts" text=": N/a" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                    <Label fx:id="totalNewSampling" text=": N/a" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                    <Label fx:id="totalNewClients" text=": N/a" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                    <Label text="Totale nuovi listini inviati" wrapText="true" GridPane.rowIndex="2" />
-                   <Label fx:id="totalNewInfo" text=": N/a" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-               <Label text="Totale Comunicazioni" wrapText="true" GridPane.rowIndex="1" />
-               <Label fx:id="totalCommunications" text=": N/a" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                   <Label fx:id="totalNewPriceList" text=": N/a" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               <Label text="Totale Comunicazioni" wrapText="true" />
+               <Label fx:id="totalCommunications" text=": N/a" GridPane.columnIndex="1" />
                </GridPane>
             <VBox.margin>
                <Insets left="15.0" right="15.0" />
@@ -128,7 +128,7 @@
                   <Insets bottom="10.0" top="10.0" />
               </VBox.margin>
            </Separator>
-           <HBox prefHeight="200.0" prefWidth="200.0" spacing="30.0" VBox.vgrow="SOMETIMES">
+           <HBox fx:id="box" prefHeight="200.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="SOMETIMES">
                <VBox prefHeight="200.0" prefWidth="100.0">
                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                        <Label text="Contattati durante:" />
@@ -136,6 +136,29 @@
                    </HBox>
                    <ListView fx:id="contacted" minHeight="200.0" minWidth="270.0" onMouseClicked="#doShowNotes" VBox.vgrow="SOMETIMES" />
                </VBox>
+               <GridPane>
+                   <columnConstraints>
+                       <ColumnConstraints hgrow="SOMETIMES" minWidth="50.0" />
+                       <ColumnConstraints hgrow="SOMETIMES" minWidth="30.0" />
+                   </columnConstraints>
+                   <rowConstraints>
+                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                   </rowConstraints>
+                   <Label text="Comunicazioni" />
+                   <Label text="Aziende" wrapText="true" GridPane.rowIndex="1" />
+                   <Label text="Clienti" GridPane.rowIndex="4" />
+                   <Label fx:id="subCommunications" text=": N/a" GridPane.columnIndex="1" />
+                   <Label fx:id="subUniqueContacts" text=": N/a" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                   <Label fx:id="subNewClients" text=": N/a" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                   <Label text="Listini" GridPane.rowIndex="2" />
+                   <Label text="Campioni" GridPane.rowIndex="3" />
+                   <Label fx:id="subNewPriceList" text=": N/a" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                   <Label fx:id="subNewSampling" text=": N/a" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               </GridPane>
                <VBox AnchorPane.rightAnchor="50.0" HBox.hgrow="ALWAYS">
                    <NoteDisplayer fx:id="history" minHeight="200.0" minWidth="300.0" VBox.vgrow="SOMETIMES" />
                </VBox>

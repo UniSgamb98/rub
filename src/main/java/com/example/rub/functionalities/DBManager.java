@@ -344,4 +344,10 @@ public abstract class DBManager extends TagsManager{
         }
         return ret;
     }
+
+    public static void changeInteressamento(UUID entryID, InteressamentoStatus interessamentoStatus) {
+        removeTagFromIndex(entryID, database.get(entryID).getInteressamento().name());
+        insertTagInIndex(interessamentoStatus.name(), entryID);
+        database.get(entryID).setInteressamento(interessamentoStatus);
+    }
 }

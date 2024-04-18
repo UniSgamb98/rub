@@ -35,7 +35,7 @@ public abstract class TagsManager {
         removeTagFromIndex(id, temp.getTipoCliente().name());
         removeTagFromIndex(id, temp.getInteressamento().name());
     }
-    private static void removeTagFromIndex(UUID id, String tag){
+    protected static void removeTagFromIndex(UUID id, String tag){
         if (index.get(tag).size() == 1){
             index.remove(tag);
         } else {
@@ -82,7 +82,7 @@ public abstract class TagsManager {
             }
         }
     }
-    private static void insertTagInIndex(String tag, UUID uuid){    //Aggiunge il tag l'uuid sotto la voce del tag fornito, se non trovato crea un tag
+    protected static void insertTagInIndex(String tag, UUID uuid){    //Aggiunge il tag l'uuid sotto la voce del tag fornito, se non trovato crea un tag
         if (index.containsKey(tag)) {   //TAG APPESO
             System.out.println("       Tag " + tag + " trovato in indice.");
             LinkedList<UUID> tagsUUID = index.get(tag);
