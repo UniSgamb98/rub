@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import java.net.URL?>
 
 <?import com.example.rub.objects.filter.FiltersToolColumn?>
 <BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.SearchEntryController">
@@ -25,4 +26,7 @@
     <bottom>
         <Button mnemonicParsing="false" onAction="#doSwitchToFirstPage" text="Indietro" BorderPane.alignment="BASELINE_LEFT"/>
     </bottom>
+    <stylesheets>
+        <URL value="@search-entry.css"/>
+    </stylesheets>
 </BorderPane>

@@ -214,7 +214,7 @@ public class FirstPageController implements Initializable {
             GlobalContext.notProgrammedCalls = (LinkedList<UUID>) MyUtils.read(GlobalContext.operator.name());
             GlobalContext.notProgrammedCalls.removeIf(i -> DBManager.retriveEntry(i).getProssimaChiamata() != null);
             if (!GlobalContext.notProgrammedCalls.isEmpty()){
-                FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("logout.fxml")));
+                FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("login-reminder.fxml")));
                 Parent root = loader.load();
                 LogoutController controller = loader.getController();
                 controller.setProperties(scene);

@@ -5,6 +5,7 @@
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import java.net.URL?>
 
 <BorderPane prefHeight="690.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.ReportController">
    <bottom>
@@ -168,4 +169,7 @@
            </HBox>
        </VBox>
    </center>
+    <stylesheets>
+        <URL value="@report.css"/>
+    </stylesheets>
 </BorderPane>

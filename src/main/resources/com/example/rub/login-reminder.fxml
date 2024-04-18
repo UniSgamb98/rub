@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.example.rub.objects.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.LogoutController">
+    <top>
+        <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+            <Label text="Ben tornato!" />
+            <Label text="L'ultima volta hai lasciato questi contatti da riprogrammarne la chiamata" />
+        </VBox>
+    </top>
+    <left>
+        <ListView fx:id="contacted" onMouseClicked="#doShowNotes" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets bottom="60.0" left="15.0" top="30.0" />
+            </BorderPane.margin></ListView>
+    </left>
+    <right>
+        <NoteDisplayer fx:id="history" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets bottom="60.0" right="15.0" />
+            </BorderPane.margin></NoteDisplayer>
+    </right>
+    <center>
+        <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+            </rowConstraints>
+            <BorderPane.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </BorderPane.margin>
+            <Label fx:id="ragioneSociale" text="Azienda" />
+            <Label fx:id="paese" text="Paese" GridPane.rowIndex="1" />
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                <Label text="Data di richiamo:" />
+                <DatePicker fx:id="reminderDate" />
+                <HBox>
+                    <Button mnemonicParsing="false" onAction="#ignoreReminder" text="Ignora">
+                        <HBox.margin>
+                            <Insets bottom="10.0" right="10.0" top="5.0" />
+                        </HBox.margin>
+                    </Button>
+                    <Button mnemonicParsing="false" onAction="#setReminder" text="Invia">
+                        <HBox.margin>
+                            <Insets bottom="10.0" left="10.0" top="5.0" />
+                        </HBox.margin>
+                    </Button>
+                </HBox>
+            </VBox>
+        </GridPane>
+    </center>
+    <bottom>
+        <AnchorPane BorderPane.alignment="CENTER">
+            <Button mnemonicParsing="false" onAction="#doRemindMeLater" text="Ricordamelo più tardi" wrapText="true" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
+            </Button>
+        </AnchorPane>
+    </bottom>
+    <stylesheets>
+        <URL value="@logout.css" />
+    </stylesheets>
+</BorderPane>

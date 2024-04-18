@@ -15,7 +15,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -24,8 +23,8 @@ import java.util.ResourceBundle;
 import java.util.UUID;
 
 public class LogoutController implements Initializable {
-    public ListView<HBox> contacted;
-    ObservableList<HBox> contactedList;
+    public ListView<DisplayableEntry> contacted;
+    ObservableList<DisplayableEntry> contactedList;
     public NoteDisplayer history;
     public Label ragioneSociale;
     public Label paese;
@@ -34,7 +33,7 @@ public class LogoutController implements Initializable {
 
     public void ignoreReminder(ActionEvent event) {
         try {
-            DisplayableEntry displayableEntry = (DisplayableEntry) contacted.getSelectionModel().getSelectedItem();
+            DisplayableEntry displayableEntry = contacted.getSelectionModel().getSelectedItem();
             GlobalContext.notProgrammedCalls.remove(displayableEntry.getEntry().getId());
             contactedList.remove(displayableEntry);
             MyUtils.write(GlobalContext.notProgrammedCalls, GlobalContext.operator.name());
@@ -50,7 +49,7 @@ public class LogoutController implements Initializable {
             if (reminderDate.getValue() == null){
                 throw new Exception();
             }
-            DisplayableEntry displayableEntry = (DisplayableEntry) contacted.getSelectionModel().getSelectedItem();
+            DisplayableEntry displayableEntry = contacted.getSelectionModel().getSelectedItem();
             DBManager.setNextCall(displayableEntry.getEntry().getId(), reminderDate.getValue(), InteressamentoStatus.BLANK, -1, false);
             contactedList.remove(displayableEntry);
             MyUtils.write(GlobalContext.notProgrammedCalls, GlobalContext.operator.name());
@@ -97,7 +96,7 @@ public class LogoutController implements Initializable {
 
     public void doShowNotes() {
         try {
-            DisplayableEntry displayableEntry = (DisplayableEntry) contacted.getSelectionModel().getSelectedItem();
+            DisplayableEntry displayableEntry = contacted.getSelectionModel().getSelectedItem();
             history.setDocument(displayableEntry.getEntry().getId());
             ragioneSociale.setText(displayableEntry.getEntry().getRagioneSociale());
             paese.setText(displayableEntry.getEntry().getPaese());

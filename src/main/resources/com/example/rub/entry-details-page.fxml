@@ -5,6 +5,7 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import java.net.URL?>
 
 <BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.EntryDetailsPageController">
     <center>
@@ -167,4 +168,7 @@
          </Button>
        </VBox>
    </right>
+    <stylesheets>
+        <URL value="@entry-details-page.css"/>
+    </stylesheets>
 </BorderPane>
