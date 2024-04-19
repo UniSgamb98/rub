@@ -60,6 +60,16 @@ public class FirstPageController implements Initializable {
         System.out.println("Importazione contatti da file...");
         String in;
         Contatto newEntryFromFile;
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("loading.fxml")));
+        Stage stage1 = new Stage();
+        LoadingController controller = null;
+        try {
+            Scene scene1 = new Scene(loader.load());
+            controller = loader.getController();
+            stage1.setScene(scene1);
+            stage1.show();
+        } catch (Exception ignored) {}
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Importazione");
         alert.setContentText("Importazione avvenuta con successo");
@@ -70,26 +80,32 @@ public class FirstPageController implements Initializable {
             in = br.readLine();
             do{
                 newEntryFromFile = new Contatto();
-                int subStringStart = 0;
-                int subStringEnd = in.indexOf(";");
-                String subString;
-                for(int i = 0; i <= 23; i++){
+                try {
+                    int subStringStart = 0;
+                    int subStringEnd = in.indexOf(";");
+                    String subString;
+                    for (int i = 0; i <= 23; i++) {
+                        subString = in.substring(subStringStart, subStringEnd);
+                        fillAttribute(i, newEntryFromFile, subString);
 
-                    subString = in.substring(subStringStart, subStringEnd);
-                    fillAttribute(i, newEntryFromFile, subString);
-
-                    subStringStart = subStringEnd+1;
-                    subStringEnd = in.indexOf(";", subStringStart);
-                }
-                System.out.println("   Inserimento di " + newEntryFromFile);
-                DBManager.saveEntry(newEntryFromFile, false);
+                        subStringStart = subStringEnd + 1;
+                        subStringEnd = in.indexOf(";", subStringStart);
+                    }
+                    System.out.println("   Inserimento di " + newEntryFromFile);
+                    assert controller != null;
+                    controller.increment();
+                    DBManager.saveEntry(newEntryFromFile, true);
+                }catch (Exception e)    {
+                    assert controller != null;
+                    controller.addFailure(newEntryFromFile);}
             }while((in = br.readLine()) != null );
             br.close();
         } catch (IOException e){
             System.out.println("Errore nell'importazione da file txt");
             alert.setContentText("Importazione fallita:" + e.getCause().toString());
         }
-            alert.showAndWait();
+        DBManager.saveData();
+        alert.showAndWait();
     }
     private void fillAttribute (int index, Contatto bean, String attribute){
         switch (index){

@@ -47,7 +47,9 @@ public abstract class DBManager extends TagsManager{
         bean.setId(uuid);
         database.put(uuid, bean);
         indexNewEntry(bean, uuid);
-        MyUtils.writeAll(database, index, locationManager);
+        if (!isBeingReconstructed) {
+            MyUtils.writeAll(database, index, locationManager);
+        }
         System.out.println("Nuovo contatto inserito in database!");
     }
     public static void deleteEntry(UUID id){
@@ -120,6 +122,9 @@ public abstract class DBManager extends TagsManager{
         if (database == null) { //questa condizione è per eseguire il load solo la prima volta che si accede a firstpage
             update();
         }
+    }
+    public static void saveData(){
+        MyUtils.writeAll(database, index, locationManager);
     }
     public static void update(){
         try {
