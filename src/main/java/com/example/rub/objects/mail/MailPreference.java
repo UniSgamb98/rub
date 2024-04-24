@@ -11,10 +11,11 @@ import java.util.ArrayList;
 
 public class MailPreference extends VBox {
     Button addDraftButton;
-    ArrayList<MailBean> beansList;
+    ArrayList<MailDraft> mailDrafts;
     public MailPreference(){
         addDraftButton = new Button("Aggiungi Preset");
         addDraftButton.setOnAction(event -> addMailDraft(new MailBean()));
+        mailDrafts = new ArrayList<>();
         this.getChildren().add(addDraftButton);
     }
 
@@ -24,24 +25,27 @@ public class MailPreference extends VBox {
             Parent node = loader.load();
             MailDraft mailDraft = loader.getController();
             mailDraft.setProperties(bean, node, this);
-            beansList.add(bean);
+            mailDrafts.add(mailDraft);
             this.getChildren().add(node);
-        } catch (Exception ignored)   {}
+        } catch (Exception e)   {e.printStackTrace();}
     }
 
-    public void removeDraft(MailBean bean, Parent draft) {
-        beansList.remove(bean);
-        this.getChildren().remove(draft);
+    public void removeDraft(MailDraft draft, Parent view) {
+        mailDrafts.remove(draft);
+        this.getChildren().remove(view);
     }
 
     public void loadDrafts (ArrayList<MailBean> drafts){
-        beansList = drafts;
-        for (MailBean i : beansList){
+        for (MailBean i : drafts){
             addMailDraft(i);
         }
     }
 
     public void saveDrafts(){
-        MyUtils.write(beansList, GlobalContext.operator + "Mail");
+        ArrayList<MailBean> beansList = new ArrayList<>();
+        for (MailDraft i : mailDrafts){
+            beansList.add(i.getBean());
+        }
+        MyUtils.write(beansList, GlobalContext.operator + "MailSettings");
     }
 }

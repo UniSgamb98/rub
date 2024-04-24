@@ -6,6 +6,7 @@ import com.example.rub.enums.TipoCliente;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
 import com.example.rub.functionalities.MyUtils;
+import com.example.rub.objects.mail.EmailSenderShortcut;
 import com.example.rub.objects.note.DisplayableEntry;
 import com.example.rub.objects.note.NoteDisplayer;
 import javafx.animation.AnimationTimer;
@@ -23,6 +24,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -87,6 +89,10 @@ public class EntryDetailsPageController implements Initializable, Runnable {
     public GridPane gridData;
     @FXML
     public Slider involvement;
+    @FXML
+    public EmailSenderShortcut emailSenderShortcut;
+    @FXML
+    public HBox emailBox;
     private Contatto entryToDisplayDetails;
     ObservableList<DisplayableEntry> oldResults;
 
@@ -217,6 +223,8 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         provincia.setText(entryToDisplayDetails.getProvincia());
         indirizzo.setText(entryToDisplayDetails.getIndirizzo());
         involvement.setValue(entryToDisplayDetails.getCoinvolgimento());
+
+        emailSenderShortcut.setDestinatario(entryToDisplayDetails.getEmailReferente());
     }
     private Contatto getContatto(){
         Contatto newEntry = new Contatto();                         //creazione Bean contatto
@@ -287,6 +295,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
     public void refresh(){
         init(false);
         noteDisplayer.refresh();
+        emailSenderShortcut.refresh();
     }
 
     @Override
@@ -326,7 +335,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("mail-preferences.fxml"));
             Parent root = loader.load();
             MailPreferencesController controller = loader.getController();
-            controller.loadPreferences();
+            controller.loadPreferences(this);
             controller.setProperties(((Node) event.getSource()).getScene());
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

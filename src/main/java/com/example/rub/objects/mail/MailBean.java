@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class MailBean implements Serializable {
     private String title;
     private String contextText;
-    private ArrayList<File> attachments;
+    private final ArrayList<File> attachments;
 
     public MailBean(){
         attachments = new ArrayList<>();
@@ -15,9 +15,6 @@ public class MailBean implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-    public void setAttachments(ArrayList<File> attachments) {
-        this.attachments = attachments;
     }
     public void addAttachment(File attachment) {
         attachments.add(attachment);

@@ -1,6 +1,5 @@
 package com.example.rub.objects.note;
 
-import com.example.rub.objects.note.NoteDisplayer;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;

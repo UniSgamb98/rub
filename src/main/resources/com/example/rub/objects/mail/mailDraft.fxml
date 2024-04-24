@@ -15,4 +15,5 @@
    <VBox fx:id="attachmentList">
       <Button fx:id="addAttachmentButton" mnemonicParsing="false" onAction="#addAttachment" text="Aggiungi allegato" />
    </VBox>
+   <Button mnemonicParsing="false" onAction="#saveDraftChanges" rotate="90.0" text="Salva" />
 </MailDraft>

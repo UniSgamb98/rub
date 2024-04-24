@@ -40,18 +40,36 @@ public class MailDraft extends HBox{
         bean.removeAttachment(attachment.getFile());
     }
     public void selfRemove() {
-        controller.removeDraft(bean, view);
+        controller.removeDraft(this, view);
     }
 
+    /**
+     * Fornisce il MailDraft con tutti i riferimenti per gestire logica e view. Inoltre carica i dati dal forniti dal bean
+     * @param bean  Il modello da salvare
+     * @param view  La vista
+     * @param controller Il controller per chiamare le funzioni del Parent (MailPreferences) principalmente per add & remove di mailDrafts
+     */
     public void setProperties(MailBean bean, Parent view, MailPreference controller) {
         this.bean = bean;
         this.view = view;
         this.controller = controller;
         title.setText(bean.getTitle());
         contextText.setText(bean.getContextText());
+        for (File i : getBean().getAttachments()){
+            Attachment attachment = new Attachment(i, this);
+            attachmentList.getChildren().add(attachment);
+        }
     }
 
     public MailBean getBean() {
         return bean;
+    }
+
+    /**
+     * Salva nel modello l'input dell'utente a parte gli attachments che sono salvati in modello nel momento di creazione.
+     */
+    public void saveDraftChanges() {
+        bean.setContextText(contextText.getText());
+        bean.setTitle(title.getText());
     }
 }
