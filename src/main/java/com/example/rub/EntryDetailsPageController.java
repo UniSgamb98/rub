@@ -6,8 +6,8 @@ import com.example.rub.enums.TipoCliente;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
 import com.example.rub.functionalities.MyUtils;
-import com.example.rub.objects.DisplayableEntry;
-import com.example.rub.objects.NoteDisplayer;
+import com.example.rub.objects.note.DisplayableEntry;
+import com.example.rub.objects.note.NoteDisplayer;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -273,6 +273,8 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         });
     }
 
+
+
     public void shutdown(){
             try {
                 GlobalContext.openedEntries = (ArrayList<UUID>) MyUtils.read("fileAperti");
@@ -310,5 +312,28 @@ public class EntryDetailsPageController implements Initializable, Runnable {
             }
         };
         timer.start();
+    }
+
+    /**
+     * Precompila una bozza con la mail del Contatto che è stato aperto
+     */
+    public void sendEmail() throws IOException {
+        new ProcessBuilder("C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\OUTLOOK.EXE", "/c","ipm.note", "/m", entryProperty.get().getEmailReferente()).start();
+    }
+
+    public void openMailPreferences(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("mail-preferences.fxml"));
+            Parent root = loader.load();
+            MailPreferencesController controller = loader.getController();
+            controller.loadPreferences();
+            controller.setProperties(((Node) event.getSource()).getScene());
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Errore durante la transizione openMailPreferences in EntryDetailsPageController");
+        }
     }
 }

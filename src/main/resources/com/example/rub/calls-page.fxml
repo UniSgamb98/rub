@@ -25,6 +25,6 @@
       </VBox>
    </left>
    <stylesheets>
-      <URL value="@calls.page.css"/>
+      <URL value="@firstPage.css"/>
    </stylesheets>
 </BorderPane>

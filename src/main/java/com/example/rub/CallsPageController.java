@@ -1,7 +1,7 @@
 package com.example.rub;
 
 import com.example.rub.functionalities.DBManager;
-import com.example.rub.objects.DisplayableEntry;
+import com.example.rub.objects.note.DisplayableEntry;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

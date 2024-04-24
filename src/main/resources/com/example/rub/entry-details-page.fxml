@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.example.rub.objects.*?>
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import java.net.URL?>
 
+<?import com.example.rub.objects.note.NoteDisplayer?>
 <BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.EntryDetailsPageController">
     <center>
-<GridPane fx:id="gridData" alignment="CENTER" prefHeight="350.0" prefWidth="650.0">
+<GridPane id="dataGrid" fx:id="gridData" alignment="CENTER" prefHeight="350.0" prefWidth="650.0">
     <Label text="Ragione Sociale:" GridPane.columnIndex="1" />
-    <TextField fx:id="ragioneSociale" disable="true" GridPane.columnIndex="2" GridPane.columnSpan="3" />
+    <TextField id="savefield" fx:id="ragioneSociale" disable="true" GridPane.columnIndex="2" GridPane.columnSpan="3" />
 
     <Label text="Referente:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-    <TextField fx:id="personaDiRiferimento" disable="true" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+    <TextField id="savefield" fx:id="personaDiRiferimento" disable="true" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
 
     <Label text="Paese:" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-    <TextField fx:id="paese" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+    <TextField id="savefield" fx:id="paese" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="6" />
     <Label text="Città:" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-    <TextField fx:id="citta" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+    <TextField id="savefield" fx:id="citta" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="7" />
 
     <Label text="Telefono:" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-    <TextField fx:id="telefono" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+    <TextField id="savefield" fx:id="telefono" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="11" />
     <Label text="Email Referente:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-    <TextField fx:id="emailReferente" disable="true" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+    <TextField id="savefield" fx:id="emailReferente" disable="true" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3" />
 
     <Label text="Interessamento:" GridPane.columnIndex="1" GridPane.rowIndex="14" />
     <ChoiceBox fx:id="interessamento" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="14" />
@@ -60,16 +60,16 @@
       </top>
     </BorderPane>
          <Label text="Regione:" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-         <TextField fx:id="regione" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+         <TextField id="savefield" fx:id="regione" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="6" />
     <HBox alignment="CENTER_LEFT" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="7">
         <Label text="Via:">
             <padding>
                 <Insets right="5.0" />
             </padding>
         </Label>
-        <TextField fx:id="indirizzo" disable="true" prefHeight="25.0" prefWidth="220.0" />
+        <TextField id="savefield" fx:id="indirizzo" disable="true" prefHeight="25.0" prefWidth="220.0" />
         <Label text="Civico:" />
-        <TextField fx:id="civico" disable="true" prefHeight="25.0" prefWidth="37.0" />
+        <TextField id="savefield" fx:id="civico" disable="true" prefHeight="25.0" prefWidth="37.0" />
     </HBox>
          <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="5">
             <GridPane.margin>
@@ -77,9 +77,9 @@
             </GridPane.margin>
          </Separator>
          <Label text="Provincia:" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-         <TextField fx:id="provincia" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+         <TextField id="savefield" fx:id="provincia" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="8" />
          <Label text="CAP:" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-         <TextField fx:id="cap" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+         <TextField id="savefield" fx:id="cap" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="8" />
          <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="9">
             <GridPane.margin>
                <Insets bottom="10.0" top="10.0" />
@@ -91,12 +91,12 @@
          <Label text="Sito Web:" GridPane.columnIndex="1" GridPane.rowIndex="12" />
          <Label text="P.E.C:" GridPane.columnIndex="3" GridPane.rowIndex="12" />
          <Label text="Titolare:" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-         <TextField fx:id="titolare" disable="true" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="13" />
-         <TextField fx:id="sito" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="12" />
-         <TextField fx:id="pec" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="12" />
-         <TextField fx:id="emailGenerica" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="11" />
-         <TextField fx:id="codiceFiscale" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="10" />
-         <TextField fx:id="partitaIva" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+         <TextField id="savefield" fx:id="titolare" disable="true" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="13" />
+         <TextField id="savefield" fx:id="sito" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+         <TextField id="savefield" fx:id="pec" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="12" />
+         <TextField id="savefield" fx:id="emailGenerica" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="11" />
+         <TextField id="savefield" fx:id="codiceFiscale" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="10" />
+         <TextField id="savefield" fx:id="partitaIva" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="10" />
          <NoteDisplayer fx:id="noteDisplayer" minHeight="250.0" minWidth="500.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="16">
             <opaqueInsets>
                <Insets top="30.0" />
@@ -143,6 +143,19 @@
            <BorderPane.margin>
                <Insets right="10.0" top="50.0" />
            </BorderPane.margin>
+           <GridPane alignment="CENTER">
+               <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+               </columnConstraints>
+               <rowConstraints>
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+               </rowConstraints>
+               <Button alignment="CENTER" mnemonicParsing="false" onAction="#sendEmail" text="Manda Mail"
+                       GridPane.columnSpan="2147483647"/>
+               <Button mnemonicParsing="false" onAction="#openMailPreferences" text="Button" GridPane.columnIndex="1"/>
+           </GridPane>
            <VBox alignment="CENTER">
                <Label text="Coinvolgimento" />
                <Group>
@@ -169,6 +182,6 @@
        </VBox>
    </right>
     <stylesheets>
-        <URL value="@entry-details-page.css"/>
+        <URL value="@firstPage.css" />
     </stylesheets>
 </BorderPane>

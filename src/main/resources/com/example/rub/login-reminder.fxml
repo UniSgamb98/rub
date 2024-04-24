@@ -66,6 +66,6 @@
         </AnchorPane>
     </bottom>
     <stylesheets>
-        <URL value="@logout.css" />
+        <URL value="@firstPage.css" />
     </stylesheets>
 </BorderPane>

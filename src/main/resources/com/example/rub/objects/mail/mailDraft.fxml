@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.example.rub.objects.mail.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<MailDraft alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.objects.mail.MailDraft">
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+   <Button fx:id="removeButton" mnemonicParsing="false" onAction="#selfRemove" text="Rimuovi" />
+   <TextField fx:id="title" prefHeight="25.0" prefWidth="110.0" promptText="Oggetto" />
+   <TextArea fx:id="contextText" prefHeight="100.0" prefWidth="279.0" promptText="Contenuto" />
+   <VBox fx:id="attachmentList">
+      <Button fx:id="addAttachmentButton" mnemonicParsing="false" onAction="#addAttachment" text="Aggiungi allegato" />
+   </VBox>
+</MailDraft>

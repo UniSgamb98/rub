@@ -105,6 +105,6 @@
 
    </GridPane>
     <stylesheets>
-        <URL value="@new-entry.css"/>
+        <URL value="@firstPage.css"/>
     </stylesheets>
 </AnchorPane>

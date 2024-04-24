@@ -84,7 +84,7 @@ public class FirstPageController implements Initializable {
                     int subStringStart = 0;
                     int subStringEnd = in.indexOf(";");
                     String subString;
-                    for (int i = 0; i <= 23; i++) {
+                    for (int i = 0; i <= 24; i++) {
                         subString = in.substring(subStringStart, subStringEnd);
                         fillAttribute(i, newEntryFromFile, subString);
 
@@ -208,6 +208,14 @@ public class FirstPageController implements Initializable {
                 }
                 bean.setProssimaChiamata(j);
                 break;
+            case 24:
+                double c;
+                if (attribute.isEmpty()){
+                    c = 0;
+                }else {
+                    c = Double.parseDouble(attribute);
+                }
+                bean.setCoinvolgimento(c);
 
         }
     }
@@ -274,6 +282,6 @@ public class FirstPageController implements Initializable {
     }
 
     public void doNumberNotes() {
-        DBManager.notessss();
+        DBManager.notes();
     }
 }

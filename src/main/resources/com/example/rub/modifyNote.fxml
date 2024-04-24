@@ -55,6 +55,6 @@
       <Pane prefHeight="328.0" prefWidth="52.0" BorderPane.alignment="CENTER" />
    </right>
    <stylesheets>
-      <URL value="@modifyNote.css"/>
+      <URL value="@firstPage.css"/>
    </stylesheets>
 </BorderPane>

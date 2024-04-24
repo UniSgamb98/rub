@@ -1,4 +1,4 @@
-package com.example.rub.objects;
+package com.example.rub.objects.note;
 
 import com.example.rub.Main;
 import com.example.rub.ModifyNoteController;

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.example.rub.objects.*?>
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import java.net.URL?>
 
 <BorderPane prefHeight="690.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.ReportController">
    <bottom>
@@ -161,7 +161,7 @@
                    <Label fx:id="subNewSampling" text=": N/a" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </GridPane>
                <VBox AnchorPane.rightAnchor="50.0" HBox.hgrow="ALWAYS">
-                   <NoteDisplayer fx:id="history" minHeight="200.0" minWidth="300.0" VBox.vgrow="SOMETIMES" />
+                   <NoteDisplayer fx:id="history" minHeight="200.0" minWidth="300.0" styleClass="notedisplayer" VBox.vgrow="SOMETIMES" />
                </VBox>
             <VBox.margin>
                <Insets bottom="10.0" left="15.0" right="15.0" />
@@ -170,6 +170,6 @@
        </VBox>
    </center>
     <stylesheets>
-        <URL value="@report.css"/>
+        <URL value="@firstPage.css" />
     </stylesheets>
 </BorderPane>

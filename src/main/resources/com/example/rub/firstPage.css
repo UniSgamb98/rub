@@ -1,5 +1,87 @@
-.root {
-    -fx-font-size: 12px;
-    -fx-font-family: sans-serif;
-    -fx-background-color: #ffffff;
+.root
+{
+    -rosewatercol: rgb(245, 224, 220);
+    -flamingocol: rgb(242, 205, 205);
+    -pinkcol: #f5c2e7;
+    -mauvecol: #cba6f7;
+    -redcol: #f38ba8;
+    -marooncol: #eba0ac;
+    -peachcol: #fab387;
+    -yellowcol: #f9e2af;
+    -greencol: #a6e3a1;
+    -tealcol: #94e2d5;
+    -skycol: #89dceb;
+    -sapphirecol: #74c7ec;
+    -bluecol: #89b4fa;
+    -lavendercol: #b4befe;
+    -accentcol: -tealcol;
+    -textcol: #cdd6f4;
+    -subtext1col: #bac2de;
+    -subtext0col: #a6adc8;
+    -overlay2col: #9399b2;
+    -overlay1col: #7f849c;
+    -overlay0col: #6c7086;
+    -surface2col: #585b70;
+    -surface1col: #45475a;
+    -surface0col: #313244;
+    -basecol: #1e1e2e;
+    -mantlecol: #181825;
+    -crustcol: #11111b;
 }
+/*
+.root {
+    -fx-background-color: -basecol;
+    -fx-border-style: none;
+    -fx-border-width: 0;
+    -fx-border-insets: 0;
+}
+.root * {
+    -fx-font-size: 12;
+    -fx-text-fill: -textcol;
+    -fx-fill: -textcol;
+    -fx-border-style: none;
+    -fx-border-width: 0;
+    -fx-border-insets: 0;
+    -fx-background-radius: 12;
+}
+
+#dataGrid *:disabled{
+    -fx-text-fill: -textcol;
+    -fx-border-style: none;
+    -fx-border-color: -subtext0col;
+    -fx-border-width: 0.5;
+    -fx-border-insets: 0;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-background-color: -basecol;
+    -fx-opacity: 1.0;
+}
+.button, .choice-box, .toggle-button {
+    -fx-background-color: -surface0col;
+    -fx-text-fill: -textcol;
+    -fx-fill: -textcol;
+    -fx-background-radius: 12;
+}
+
+.toggle-button:selected{
+    -fx-background-color: -subtext1col;
+    -fx-text-fill: -crustcol;
+
+}
+
+.choice-box > .label {
+    -fx-background-color: -surface0col;
+    -fx-text-fill: -textcol;
+}
+
+.choice-box .context-menu {
+    -fx-background-color: -surface0col;
+}
+
+.label{
+    -fx-text-fill: -textcol;
+}
+
+.button:hover {
+    -fx-background-color: -surface1col;
+}*/

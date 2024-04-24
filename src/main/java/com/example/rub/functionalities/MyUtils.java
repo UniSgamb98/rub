@@ -13,6 +13,7 @@ public abstract class MyUtils {
             oos.close();
             fos.close();
         } catch (Exception e){
+            e.printStackTrace();
             System.out.println("Scrittura file fallita: "+ fileName);
         }
     }

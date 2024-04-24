@@ -1,4 +1,4 @@
-package com.example.rub.objects;
+package com.example.rub.objects.note;
 
 import com.example.rub.beans.Contatto;
 import com.example.rub.functionalities.DBManager;

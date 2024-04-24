@@ -7,7 +7,7 @@ import com.example.rub.enums.Operatori;
 import com.example.rub.enums.TipoCliente;
 import com.example.rub.enums.comparator.InteressamentoComp;
 import com.example.rub.functionalities.locations.LocationManager;
-import com.example.rub.objects.DisplayableEntry;
+import com.example.rub.objects.note.DisplayableEntry;
 import javafx.scene.control.Alert;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -302,6 +302,7 @@ public abstract class DBManager extends TagsManager{
                 bw.write(i.getVolteContattati()+";");
                 bw.write(i.getUltimaChiamata()+";");
                 bw.write(i.getProssimaChiamata()+";");
+                bw.write(i.getCoinvolgimento()+";");
                 bw.newLine();
             }
             bw.flush();
@@ -314,7 +315,7 @@ public abstract class DBManager extends TagsManager{
         alert.show();
     }
 
-    public static void notessss() {
+    public static void notes() {
         for(Contatto i : database.values()){
             try {
                 NoteManager nm = new NoteManager();
