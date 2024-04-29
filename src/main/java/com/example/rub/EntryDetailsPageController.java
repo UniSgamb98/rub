@@ -323,13 +323,6 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         timer.start();
     }
 
-    /**
-     * Precompila una bozza con la mail del Contatto che è stato aperto
-     */
-    public void sendEmail() throws IOException {
-        new ProcessBuilder("C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\OUTLOOK.EXE", "/c","ipm.note", "/m", entryProperty.get().getEmailReferente()).start();
-    }
-
     public void openMailPreferences(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("mail-preferences.fxml"));

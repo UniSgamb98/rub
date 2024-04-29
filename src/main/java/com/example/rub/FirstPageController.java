@@ -274,7 +274,7 @@ public class FirstPageController implements Initializable {
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        } catch (Exception e) { System.out.println("Errore durante la transizione in new-entry con switchToNewEntry in FirstPage"); }
+        } catch (Exception e) { System.out.println("Errore durante la transizione in showReport con switchToNewEntry in FirstPage"); }
     }
 
     public void doExportForExcels() {
