@@ -92,17 +92,17 @@ public class ReportController implements Initializable {
             start = startDate.getValue().toString();
             stop = stopDate.getValue().toString();
             createTimeLine();
-            filtro.getItems().clear();      //chissa perchè questa linea lancio un InvocationTargetException ma funziona tutto correttamente
-            filtro.getItems().add("Periodo analizzato");
-            filtro.getItems().addAll(getIntermediateDate(startDate.getValue(), stopDate.getValue()));
-            filtro.setValue("Periodo analizzato");
             displayFilterOptions();
-            setChart();
             totalUniqueContacts.setText(": " + reportInfo[0]);
             totalCommunications.setText(": " + reportInfo[1]);
             totalNewPriceList.setText(": " + reportInfo[2]);
             totalNewSampling.setText(": " + reportInfo[3]);
             totalNewClients.setText(": " + reportInfo[4]);
+            filtro.getItems().retainAll("Periodo analizzato");
+            if (!filtro.getItems().contains("Periodo analizzato"))  filtro.getItems().add("Periodo analizzato");    //si verifica solo la prima volta
+            filtro.getItems().addAll(getIntermediateDate(startDate.getValue(), stopDate.getValue()));
+            filtro.setValue("Periodo analizzato");
+            setChart();
         } catch (NullPointerException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Campi Mancanti");
@@ -122,6 +122,7 @@ public class ReportController implements Initializable {
         if (filtro.getValue()!= null) {
             history.clear();
             LinkedList<UUID> toDisplay = new LinkedList<>();
+            System.out.println(filtro.getValue());
             if (filtro.getValue().equals("Periodo analizzato")) {
                 for (Pair<UUID, String> p : timeLine) {
                     if (!toDisplay.contains(p.getKey())) {
@@ -191,21 +192,24 @@ public class ReportController implements Initializable {
     private void createTimeLine () throws ParserConfigurationException {
         timeLine = new ArrayList<>();
         NoteManager nm = new NoteManager();
+        reportInfo[2] = 0;
+        reportInfo[3] = 0;
+        reportInfo[4] = 0;
         for (UUID i : DBManager.getAllEntries()){
             Contatto j = DBManager.retriveEntry(i);
             for (String k : nm.getAnnotationDates(j.getNoteId(), durata.getValue(), operator.getValue(), includeMessages.isSelected())){
-                switch (k.substring(k.length()-1)){
-                    case "A":
-                        reportInfo[2]++;
-                        break;
-                    case "B":
-                        reportInfo[3]++;
-                        break;
-                    case "C":
-                        reportInfo[4]++;
-                        break;
-                }
                 if (k.substring(0, k.length()-1).compareTo(start) >= 0 && k.substring(0, k.length()-1).compareTo(stop) <= 0) {
+                    switch (k.substring(k.length()-1)){
+                        case "A":
+                            reportInfo[2]++;
+                            break;
+                        case "B":
+                            reportInfo[3]++;
+                            break;
+                        case "C":
+                            reportInfo[4]++;
+                            break;
+                    }
                     timeLine.add(new Pair<>(i, k));
                 }
             }

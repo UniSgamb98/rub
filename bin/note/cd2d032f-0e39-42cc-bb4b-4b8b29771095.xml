@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<companyNotes Name="My Dental Family Service GmbH">
+            
+    
+    <chiamata cancelled="false" data="2024-04-18" durata="0" messaggio="false" newInterest="NON_TROVATO" number="1" operatore="SANTOLO" previousInterest="NON_TROVATO">Richiamare Lunedì per parlare con Frau Stahl, responsabile materiali.</chiamata>
+        
+
+    <chiamata cancelled="false" data="2024-04-23" durata="0" messaggio="false" newInterest="INFO" number="2" operatore="SANTOLO" previousInterest="NON_TROVATO">Parlato con la Signora Stahl,  presentazione inoltrata al Signor Schneider  (responsabile Acquisti). 
+Richiamare prossima settimana</chiamata>
+</companyNotes>
