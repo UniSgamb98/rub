@@ -35,6 +35,7 @@ public class Contatto implements Serializable {
     private UUID noteId;
     private Operatori operator;
     private double coinvolgimento;
+    private int checkpoint;
 
     public Contatto(){
         noteId = UUID.randomUUID();
@@ -42,6 +43,9 @@ public class Contatto implements Serializable {
 
     public String getTelefono() {
         return telefono;
+    }
+    public int getCheckpoint() {
+        return checkpoint;
     }
     public Operatori getOperator() {
         return operator;
@@ -124,6 +128,9 @@ public class Contatto implements Serializable {
     }
     public void setNoteId(UUID noteId) {
         this.noteId = noteId;
+    }
+    public void setCheckpoint(int checkpoint) {
+        this.checkpoint = checkpoint;
     }
     public void setTelefono(String telefono) {
         this.telefono = telefono;

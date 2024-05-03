@@ -9,7 +9,7 @@
     <left>
         <FiltersToolColumn fx:id="filterTool" prefHeight="200.0" prefWidth="220.0" BorderPane.alignment="CENTER" />
     </left>
-   <center>
+    <center>
        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
            <ListView fx:id="resultsView" onMouseClicked="#doRequestEntryDetails" prefHeight="366.0" prefWidth="413.0" />
        </HBox>

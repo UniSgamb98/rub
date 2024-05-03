@@ -129,11 +129,11 @@ public class ReportController implements Initializable {
                         toDisplay.add(p.getKey());
                     }
                 }
-                subCommunications.setText(totalCommunications.getText());
-                subUniqueContacts.setText(totalUniqueContacts.getText());
-                subNewPriceList.setText(totalNewPriceList.getText());
-                subNewSampling.setText(totalNewSampling.getText());
-                subNewClients.setText(totalNewClients.getText());
+                subUniqueContacts.setText(": " + reportInfo[0]);
+                subCommunications.setText(": " + reportInfo[1]);
+                subNewPriceList.setText(": " + reportInfo[2]);
+                subNewSampling.setText(": " + reportInfo[3]);
+                subNewClients.setText(": " + reportInfo[4]);
             } else {
                 int communications = 0;
                 int prices = 0;

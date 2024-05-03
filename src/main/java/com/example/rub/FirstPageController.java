@@ -33,7 +33,10 @@ public class FirstPageController implements Initializable {
     public Button importButton;
     @FXML
     public Button exportButton;
+    @FXML
     public Button notesButton;
+    @FXML
+    public Button settingsButton;
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -216,7 +219,10 @@ public class FirstPageController implements Initializable {
                     c = Double.parseDouble(attribute);
                 }
                 bean.setCoinvolgimento(c);
-
+                break;
+            case 25:
+                bean.setCheckpoint(Integer.parseInt(attribute));
+                break;
         }
     }
 
@@ -230,9 +236,12 @@ public class FirstPageController implements Initializable {
             exportButton.setVisible(true);
             exportButton.setPrefSize(130.0,130.0);
             exportButton.setMinHeight(Region.USE_COMPUTED_SIZE);
-            notesButton.setPrefSize(130.0, 130.0);
+        /*    notesButton.setPrefSize(130.0, 130.0);
             notesButton.setVisible(true);
             notesButton.setMinHeight(Region.USE_COMPUTED_SIZE);
+            settingsButton.setPrefSize(130.0, 130.0);
+            settingsButton.setVisible(true);
+            settingsButton.setMinHeight(Region.USE_COMPUTED_SIZE);*/
         }
         try {
             GlobalContext.notProgrammedCalls = (LinkedList<UUID>) MyUtils.read(GlobalContext.operator.name());
@@ -283,5 +292,15 @@ public class FirstPageController implements Initializable {
 
     public void doNumberNotes() {
         DBManager.notes();
+    }
+
+    public void openSettings(ActionEvent event) {
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("settings.fxml")));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) { System.out.println("Errore durante la transizione in settings con openSettings in FirstPage"); }
     }
 }
