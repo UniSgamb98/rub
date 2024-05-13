@@ -1,6 +1,9 @@
 package com.example.rub;
 
+import com.example.rub.enums.LogType;
+import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
+import com.example.rub.functionalities.MyUtils;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,6 +25,7 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST, event -> {
             if(!GlobalContext.notProgrammedCalls.isEmpty()) {
+                MyUtils.log(LogType.WINDOW, "logout");
                 try {
                     Stage theStage = (Stage) event.getSource();
                     Scene oldScene = theStage.getScene();
@@ -34,8 +38,13 @@ public class Main extends Application {
                     theStage.show();
                     event.consume();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    MyUtils.log(LogType.ERROR);
+                    MyUtils.log(LogType.MESSAGE, e);
+                    System.out.println("errore con logout Main.java");
                 }
+            } else {
+                MyUtils.log(LogType.EXIT);
+                DBManager.export(true);
             }
         });
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
@@ -45,6 +54,7 @@ public class Main extends Application {
             else direction = 0.5;
             stage.setX(stage.getX()+((oldVal.doubleValue() - newVal.doubleValue())*direction));
         });
+        stage.sceneProperty().addListener((obs, oldVal, newVal) -> MyUtils.log(LogType.WINDOW, newVal.getRoot().getId()));
         stage.show();
     }
 

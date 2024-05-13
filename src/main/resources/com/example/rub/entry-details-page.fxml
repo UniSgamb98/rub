@@ -9,7 +9,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.EntryDetailsPageController">
+<BorderPane id="entryDetails" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.EntryDetailsPageController">
     <center>
 <GridPane id="dataGrid" fx:id="gridData" alignment="CENTER" prefHeight="350.0" prefWidth="650.0">
     <Label text="Ragione Sociale:" GridPane.columnIndex="1" />

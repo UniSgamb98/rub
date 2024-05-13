@@ -1,5 +1,6 @@
 package com.example.rub.functionalities;
 
+import com.example.rub.enums.LogType;
 import com.example.rub.enums.Operatori;
 import com.example.rub.enums.Interessamento.InteressamentoStatus;
 import com.example.rub.enums.comparator.InteressamentoComp;
@@ -19,6 +20,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.LinkedList;
@@ -112,7 +114,10 @@ public class NoteManager {
         try {
             NodeList nodeList = document.getElementsByTagName("chiamata");
             n = nodeList.getLength();
-        } catch (Exception ignored) {}
+        } catch (Exception e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
+        }
         return n;
     }
 
@@ -152,7 +157,11 @@ public class NoteManager {
                     }
                 }
             }
-        } catch (Exception ignored)   {}
+        } catch (FileNotFoundException ignored)   {}
+        catch (Exception e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
+        }
         return ret;
     }
 }

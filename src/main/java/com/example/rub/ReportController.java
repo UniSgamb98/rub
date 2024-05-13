@@ -1,9 +1,11 @@
 package com.example.rub;
 
 import com.example.rub.beans.Contatto;
+import com.example.rub.enums.LogType;
 import com.example.rub.enums.Operatori;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
+import com.example.rub.functionalities.MyUtils;
 import com.example.rub.functionalities.NoteManager;
 import com.example.rub.objects.note.DisplayableEntry;
 import com.example.rub.objects.note.NoteDisplayer;
@@ -84,7 +86,11 @@ public class ReportController implements Initializable {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        } catch (Exception e) { System.out.println("Errore durante la transizione in firstPage con doGoBack in ReportController");   }
+        } catch (Exception e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
+            System.out.println("Errore durante la transizione in firstPage con doGoBack in ReportController");
+        }
     }
 
     public void doShowReport() {

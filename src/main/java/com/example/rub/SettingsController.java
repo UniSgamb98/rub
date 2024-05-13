@@ -1,5 +1,7 @@
 package com.example.rub;
 
+import com.example.rub.enums.LogType;
+import com.example.rub.functionalities.MyUtils;
 import com.example.rub.objects.settings.Options;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,6 +37,8 @@ public class SettingsController {
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
             System.out.println("Errore durante la transizione in firstPage con doLogin");
         }
     }
@@ -53,9 +57,5 @@ public class SettingsController {
         Document doc = docBuilder.newDocument();
         Element rootElement = doc.createElement("Settings");
         doc.appendChild(rootElement);
-
-
-
-
     }
 }

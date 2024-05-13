@@ -3,8 +3,10 @@ package com.example.rub;
 import com.example.rub.beans.Contatto;
 import com.example.rub.enums.Interessamento;
 import com.example.rub.enums.Interessamento.InteressamentoStatus;
+import com.example.rub.enums.LogType;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
+import com.example.rub.functionalities.MyUtils;
 import com.example.rub.functionalities.NoteManager;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -48,6 +50,7 @@ public class RegisterCallController implements Initializable {
         stage.close();
     }
     public void doRegisterCall(ActionEvent event) {
+        MyUtils.log(LogType.ADDNOTE, note.getText());
         Contatto bean = entryProperty.get();
         try {
             NoteManager nm = new NoteManager();
@@ -61,9 +64,11 @@ public class RegisterCallController implements Initializable {
             InteressamentoStatus fedback = Interessamento.fromQuestionForm(feedback.getValue());
             nm.addCallNote(doc, note.getText(), durata.getValue(), isMessage.isSelected(), bean.getInteressamento(), fedback);
             double involvement = (isMessage.isSelected()? -1 : coinvolgimento.getValue());
-            DBManager.setNextCall(bean.getId(), prossimaChiamata.getValue(), fedback, involvement, !isMessage.isSelected());
+            DBManager.setNextCall(bean.getId(), prossimaChiamata.getValue(), fedback, involvement, !isMessage.isSelected(), isMessage.isSelected());
             nm.writeXml(doc, ""+bean.getNoteId());
         } catch (Exception e){
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
             System.out.println("Errore durante la scrittura del file Xml delle note");
         }
         if (prossimaChiamata.getValue()==null){
@@ -76,6 +81,7 @@ public class RegisterCallController implements Initializable {
     public void setEntryProperty(Contatto entry){
         entryProperty.set(entry);
         coinvolgimento.setValue(entryProperty.get().getCoinvolgimento());
+        prossimaChiamata.setValue(entry.getProssimaChiamata());
     }
     public void setControllerProperty(EntryDetailsPageController controller) {
         controllerProperty.set(controller);

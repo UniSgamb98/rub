@@ -1,7 +1,9 @@
 package com.example.rub;
 
+import com.example.rub.enums.LogType;
 import com.example.rub.enums.Operatori;
 import com.example.rub.functionalities.GlobalContext;
+import com.example.rub.functionalities.MyUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,13 +34,15 @@ public class LoginController implements Initializable {
         if (Arrays.asList(Operatori.values()).contains(operator.getValue())) {
             GlobalContext.operator = operator.getValue();
             try {
+                MyUtils.log(LogType.ACCESS);
                 Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("firstPage.fxml")));       //cambio scena
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
             } catch (Exception e) {
-                e.printStackTrace();
+                MyUtils.log(LogType.ERROR);
+                MyUtils.log(LogType.MESSAGE, e);
                 System.out.println("Errore durante la transizione in firstPage con doLogin");
             }
         }

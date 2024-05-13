@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import com.example.rub.objects.note.NoteDisplayer?>
-<BorderPane prefHeight="690.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.ReportController">
+<BorderPane id="report" prefHeight="690.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.ReportController">
    <bottom>
        <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
            <Button layoutX="43.0" layoutY="124.0" mnemonicParsing="false" onAction="#doGoBack" text="Indietro" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" />

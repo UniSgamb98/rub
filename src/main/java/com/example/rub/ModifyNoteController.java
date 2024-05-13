@@ -1,8 +1,10 @@
 package com.example.rub;
 
 import com.example.rub.enums.Interessamento.InteressamentoStatus;
+import com.example.rub.enums.LogType;
 import com.example.rub.enums.comparator.InteressamentoComp;
 import com.example.rub.functionalities.DBManager;
+import com.example.rub.functionalities.MyUtils;
 import com.example.rub.functionalities.NoteManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,6 +45,7 @@ public class ModifyNoteController implements Initializable {
     }
 
     public void doSend(ActionEvent event) {
+        MyUtils.log(LogType.MODIFYNOTE, DBManager.retriveEntry(entryID));
         try {
             NoteManager nm = new NoteManager();
             Document doc = nm.readXml(fileName);
@@ -67,7 +70,10 @@ public class ModifyNoteController implements Initializable {
             }
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
-        } catch (Exception ignored) {}
+        } catch (Exception e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
+        }
     }
 
     @Override
@@ -85,6 +91,9 @@ public class ModifyNoteController implements Initializable {
             }
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
-        } catch (Exception ignored) {}
+        } catch (Exception e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
+        }
     }
 }

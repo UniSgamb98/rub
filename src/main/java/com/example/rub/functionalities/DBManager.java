@@ -3,6 +3,7 @@ package com.example.rub.functionalities;
 import com.example.rub.beans.Contatto;
 import com.example.rub.beans.DeletedContatto;
 import com.example.rub.enums.Interessamento.InteressamentoStatus;
+import com.example.rub.enums.LogType;
 import com.example.rub.enums.Operatori;
 import com.example.rub.enums.TipoCliente;
 import com.example.rub.enums.comparator.InteressamentoComp;
@@ -14,10 +15,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -40,7 +38,10 @@ public abstract class DBManager extends TagsManager{
                 update();
             } catch (Exception e) {
                 System.out.println("Salvataggio rischioso, Errore durante l'update del Database persistente");
+                MyUtils.log(LogType.ERROR);
+                MyUtils.log(LogType.MESSAGE, e);
             }
+            MyUtils.log(LogType.NEWENTRY, bean);
         }
         format(bean);
         UUID uuid = UUID.randomUUID();
@@ -53,9 +54,12 @@ public abstract class DBManager extends TagsManager{
         System.out.println("Nuovo contatto inserito in database!");
     }
     public static void deleteEntry(UUID id){
+        MyUtils.log(LogType.DELETEENTRY, database.get(id));
         try {
             update();
         } catch (Exception e){
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
             System.out.println("Errore durante l'eliminazione di una entry");
         }
         try {
@@ -133,9 +137,15 @@ public abstract class DBManager extends TagsManager{
                 index = (HashMap<String, LinkedList<UUID>>) MyUtils.read("indice");
                 locationManager = (LocationManager) MyUtils.read("mondo");
             } catch (Exception e) {
+                MyUtils.log(LogType.CAUSED, " recupero indici");
+                MyUtils.log(LogType.MESSAGE, e);
                 reconstruct();
             }
+        }   catch (StreamCorruptedException e) {
+            throw new RuntimeException();
         } catch (Exception e){
+            MyUtils.log(LogType.CAUSED, "a ricostruzione");
+            MyUtils.log(LogType.MESSAGE, e);
             rebuild();
         }
     }
@@ -148,30 +158,100 @@ public abstract class DBManager extends TagsManager{
 
             removeEntryFromLocationManager(id);
             removeEntryFromIndex(id);
+            MyUtils.log(LogType.MODIFYENTRY, oldBean);
+            if (!oldBean.getRagioneSociale().equals(modifiedBean.getRagioneSociale())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "ragione sociale", oldBean.getRagioneSociale(), modifiedBean.getRagioneSociale());
+                oldBean.setRagioneSociale(modifiedBean.getRagioneSociale());
+            }
 
-            if (!oldBean.getRagioneSociale().equals(modifiedBean.getRagioneSociale()))   oldBean.setRagioneSociale(modifiedBean.getRagioneSociale());
-            if (!oldBean.getPersonaRiferimento().equals(modifiedBean.getPersonaRiferimento()))   oldBean.setPersonaRiferimento(modifiedBean.getPersonaRiferimento());
-            if (!oldBean.getEmailReferente().equals(modifiedBean.getEmailReferente())) oldBean.setEmailReferente(modifiedBean.getEmailReferente());
-            if (!oldBean.getPaese().equals(modifiedBean.getPaese()))   oldBean.setPaese(modifiedBean.getPaese());
-            if (!oldBean.getRegione().equals(modifiedBean.getRegione()))   oldBean.setRegione(modifiedBean.getRegione());
-            if (!oldBean.getCitta().equals(modifiedBean.getCitta()))   oldBean.setCitta(modifiedBean.getCitta());
-            if (!oldBean.getIndirizzo().equals(modifiedBean.getIndirizzo()))   oldBean.setIndirizzo(modifiedBean.getIndirizzo());
-            if (!oldBean.getNumeroCivico().equals(modifiedBean.getNumeroCivico()))   oldBean.setNumeroCivico(modifiedBean.getNumeroCivico());
-            if (!oldBean.getProvincia().equals(modifiedBean.getProvincia()))   oldBean.setProvincia(modifiedBean.getProvincia());
-            if (!oldBean.getCap().equals(modifiedBean.getCap()))   oldBean.setCap(modifiedBean.getCap());
-            if (!oldBean.getPartitaIva().equals(modifiedBean.getPartitaIva()))   oldBean.setPartitaIva(modifiedBean.getPartitaIva());
-            if (!oldBean.getCodiceFiscale().equals(modifiedBean.getCodiceFiscale()))   oldBean.setCodiceFiscale(modifiedBean.getCodiceFiscale());
-            if (!oldBean.getTelefono().equals(modifiedBean.getTelefono()))   oldBean.setTelefono(modifiedBean.getTelefono());
-            if (!oldBean.getEmailGenereica().equals(modifiedBean.getEmailGenereica()))   oldBean.setEmailGenereica(modifiedBean.getEmailGenereica());
-            if (!oldBean.getEmailCertificata().equals(modifiedBean.getEmailCertificata()))   oldBean.setEmailCertificata(modifiedBean.getEmailCertificata());
-            if (!oldBean.getSitoWeb().equals(modifiedBean.getSitoWeb()))   oldBean.setSitoWeb(modifiedBean.getSitoWeb());
-            if (!oldBean.getTitolare().equals(modifiedBean.getTitolare()))   oldBean.setTitolare(modifiedBean.getTitolare());
-            if (oldBean.getVolteContattati() != modifiedBean.getVolteContattati())  oldBean.setVolteContattati(modifiedBean.getVolteContattati());
-            if (!Objects.equals(oldBean.getTipoCliente(), modifiedBean.getTipoCliente()))   oldBean.setTipoCliente(modifiedBean.getTipoCliente());
-            if (!Objects.equals(oldBean.getInteressamento(), modifiedBean.getInteressamento()))   oldBean.setInteressamento(modifiedBean.getInteressamento());
-            if (!Objects.equals(oldBean.getUltimaChiamata(), modifiedBean.getUltimaChiamata()))   oldBean.setUltimaChiamata(modifiedBean.getUltimaChiamata());
-            if (!Objects.equals(oldBean.getProssimaChiamata(), modifiedBean.getProssimaChiamata()))   oldBean.setProssimaChiamata(modifiedBean.getProssimaChiamata());
-            if (!Objects.equals(oldBean.getCoinvolgimento(), modifiedBean.getCoinvolgimento()))     oldBean.setCoinvolgimento(modifiedBean.getCoinvolgimento());
+            if (!oldBean.getPersonaRiferimento().equals(modifiedBean.getPersonaRiferimento())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "persona riferimento", oldBean.getPersonaRiferimento(), modifiedBean.getPersonaRiferimento());
+                oldBean.setPersonaRiferimento(modifiedBean.getPersonaRiferimento());
+            }
+            if (!oldBean.getEmailReferente().equals(modifiedBean.getEmailReferente())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "email referente", oldBean.getEmailReferente(), modifiedBean.getEmailReferente());
+                oldBean.setEmailReferente(modifiedBean.getEmailReferente());
+            }
+            if (!oldBean.getPaese().equals(modifiedBean.getPaese())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "paese", oldBean.getPaese(), modifiedBean.getPaese());
+                oldBean.setPaese(modifiedBean.getPaese());
+            }
+            if (!oldBean.getRegione().equals(modifiedBean.getRegione())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "regione", oldBean.getRegione(), modifiedBean.getRegione());
+                oldBean.setRegione(modifiedBean.getRegione());
+            }
+            if (!oldBean.getCitta().equals(modifiedBean.getCitta())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "citta", oldBean.getCitta(), modifiedBean.getCitta());
+                oldBean.setCitta(modifiedBean.getCitta());
+            }
+            if (!oldBean.getIndirizzo().equals(modifiedBean.getIndirizzo())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "indirizzo", oldBean.getIndirizzo(), modifiedBean.getIndirizzo());
+                oldBean.setIndirizzo(modifiedBean.getIndirizzo());
+            }
+            if (!oldBean.getNumeroCivico().equals(modifiedBean.getNumeroCivico())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "numero civico", oldBean.getNumeroCivico(), modifiedBean.getNumeroCivico());
+                oldBean.setNumeroCivico(modifiedBean.getNumeroCivico());
+            }
+            if (!oldBean.getProvincia().equals(modifiedBean.getProvincia())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "provincia", oldBean.getProvincia(), modifiedBean.getProvincia());
+                oldBean.setProvincia(modifiedBean.getProvincia());
+            }
+            if (!oldBean.getCap().equals(modifiedBean.getCap())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "cap", oldBean.getCap(), modifiedBean.getCap());
+                oldBean.setCap(modifiedBean.getCap());
+            }
+            if (!oldBean.getPartitaIva().equals(modifiedBean.getPartitaIva())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "partita IVA", oldBean.getPartitaIva(), modifiedBean.getPartitaIva());
+                oldBean.setPartitaIva(modifiedBean.getPartitaIva());
+            }
+            if (!oldBean.getCodiceFiscale().equals(modifiedBean.getCodiceFiscale())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "codice fiscale", oldBean.getCodiceFiscale(), modifiedBean.getCodiceFiscale());
+                oldBean.setCodiceFiscale(modifiedBean.getCodiceFiscale());
+            }
+            if (!oldBean.getTelefono().equals(modifiedBean.getTelefono())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "telefono", oldBean.getTelefono(), modifiedBean.getTelefono());
+                oldBean.setTelefono(modifiedBean.getTelefono());
+            }
+            if (!oldBean.getEmailGenereica().equals(modifiedBean.getEmailGenereica())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "email generica", oldBean.getEmailGenereica(), modifiedBean.getEmailGenereica());
+                oldBean.setEmailGenereica(modifiedBean.getEmailGenereica());
+            }
+            if (!oldBean.getEmailCertificata().equals(modifiedBean.getEmailCertificata())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "email certificata", oldBean.getEmailCertificata(), modifiedBean.getEmailCertificata());
+                oldBean.setEmailCertificata(modifiedBean.getEmailCertificata());
+            }
+            if (!oldBean.getSitoWeb().equals(modifiedBean.getSitoWeb())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "sito web", oldBean.getSitoWeb(), modifiedBean.getSitoWeb());
+                oldBean.setSitoWeb(modifiedBean.getSitoWeb());
+            }
+            if (!oldBean.getTitolare().equals(modifiedBean.getTitolare())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "titolare", oldBean.getTitolare(), modifiedBean.getTitolare());
+                oldBean.setTitolare(modifiedBean.getTitolare());
+            }
+            if (oldBean.getVolteContattati() != modifiedBean.getVolteContattati()){
+                MyUtils.log(LogType.SPECIFYCHANGE, "volte contattati", oldBean.getVolteContattati(), modifiedBean.getVolteContattati());
+                oldBean.setVolteContattati(modifiedBean.getVolteContattati());
+            }
+            if (!Objects.equals(oldBean.getTipoCliente(), modifiedBean.getTipoCliente())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "tipo cliente", oldBean.getTipoCliente(), modifiedBean.getTipoCliente());
+                oldBean.setTipoCliente(modifiedBean.getTipoCliente());
+            }
+            if (!Objects.equals(oldBean.getInteressamento(), modifiedBean.getInteressamento())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "interessamento", oldBean.getInteressamento(), modifiedBean.getInteressamento());
+                oldBean.setInteressamento(modifiedBean.getInteressamento());
+            }
+            if (!Objects.equals(oldBean.getUltimaChiamata(), modifiedBean.getUltimaChiamata())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "ultima chiamata", oldBean.getUltimaChiamata(), modifiedBean.getUltimaChiamata());
+                oldBean.setUltimaChiamata(modifiedBean.getUltimaChiamata());
+            }
+            if (!Objects.equals(oldBean.getProssimaChiamata(), modifiedBean.getProssimaChiamata())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "prossima chiamata", oldBean.getProssimaChiamata(), modifiedBean.getProssimaChiamata());
+                oldBean.setProssimaChiamata(modifiedBean.getProssimaChiamata());
+            }
+            if (!Objects.equals(oldBean.getCoinvolgimento(), modifiedBean.getCoinvolgimento())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "coinvolgimento", oldBean.getCoinvolgimento(), modifiedBean.getCoinvolgimento());
+                oldBean.setCoinvolgimento(modifiedBean.getCoinvolgimento());
+            }
 
             if (GlobalContext.notProgrammedCalls.contains(id) && oldBean.getProssimaChiamata() != null){
                 GlobalContext.notProgrammedCalls.remove(id);
@@ -187,28 +267,32 @@ public abstract class DBManager extends TagsManager{
             alert.setTitle("Attenzione");
             alert.setContentText("Riprovare");
             alert.show();
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
         }
         return ret;
     }
-    public static void setNextCall(UUID uuid, LocalDate date, InteressamentoStatus feedback, double coinvolgimento, boolean setAlsoUltimaChiamata){
+    public static void setNextCall(UUID uuid, LocalDate date, InteressamentoStatus feedback, double coinvolgimento, boolean setAlsoProssimaChiamata, boolean isPersonalNote){
         try {
             database = (HashMap<UUID, Contatto>) MyUtils.read("database");
             Contatto data = database.get(uuid);
-            data.setProssimaChiamata(date);
-            data.incrementVolteContattati();
-            if (coinvolgimento != -1)   data.setCoinvolgimento(coinvolgimento);
-            Calendar now = Calendar.getInstance();
-            int year = now.get(Calendar.YEAR);
-            int month = now.get(Calendar.MONTH)+1;
-            int day = now.get(Calendar.DAY_OF_MONTH);
-            LocalDate today = LocalDate.of(year,month,day);
-            if (setAlsoUltimaChiamata) {
+            if (!isPersonalNote){
+                data.incrementVolteContattati();
+                if (coinvolgimento != -1)   data.setCoinvolgimento(coinvolgimento);
+                if (feedback != null){
+                    if (new InteressamentoComp().compare(feedback, data.getInteressamento()) > 0) {
+                        data.setInteressamento(feedback);
+                    }
+                }
+                Calendar now = Calendar.getInstance();
+                int year = now.get(Calendar.YEAR);
+                int month = now.get(Calendar.MONTH)+1;
+                int day = now.get(Calendar.DAY_OF_MONTH);
+                LocalDate today = LocalDate.of(year,month,day);
                 data.setUltimaChiamata(today);
             }
-            if (feedback != null){
-                if (new InteressamentoComp().compare(feedback, data.getInteressamento()) > 0) {
-                    data.setInteressamento(feedback);
-                }
+            if (setAlsoProssimaChiamata) {
+                data.setProssimaChiamata(date);
             }
             modifyEntry(uuid, data);
         } catch (Exception e){
@@ -218,6 +302,8 @@ public abstract class DBManager extends TagsManager{
             alert.setContentText("Riprovare");
             alert.show();
             System.out.println("Errore durante setNextCall in DBManager");
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
         }
     }
 
@@ -234,6 +320,7 @@ public abstract class DBManager extends TagsManager{
     }
 
     private static void rebuild(){
+        export(true);
         database = new HashMap<>();
         index = new HashMap<>();
         locationManager = new LocationManager();
@@ -245,30 +332,27 @@ public abstract class DBManager extends TagsManager{
     public static LinkedList<UUID> getCallList(LocalDate fromWhen) {
         LinkedList<UUID> callList = new LinkedList<>();
         for (Contatto i : database.values()){
-            if(isSameDay(i.getProssimaChiamata(),fromWhen)) {
-                callList.add(i.getId());
-            }
+            try {
+                if (i.getProssimaChiamata().equals(fromWhen) && (i.getOperator() == Operatori.VICTORIA || GlobalContext.operator == i.getOperator())) {
+                    callList.add(i.getId());
+                }
+            } catch (NullPointerException ignored)  {}
         }
         return callList;
     }
 
-    private static boolean isSameDay(LocalDate d2, LocalDate d1) {
-        boolean ret = false;
-        try {
-            if (d1.getDayOfMonth() == d2.getDayOfMonth() &&
-                    d1.getMonthValue() == d2.getMonthValue() &&
-                    d1.getYear() == d2.getYear()) {
-                ret = true;
-            }
-        } catch (Exception ignored) {}
-        return ret;
-    }
-    public static void export() {
+    public static void export(boolean isBackup) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Esportazione");
         alert.setContentText("Esportazione avvenuta");
+        File file;
         try {
-            File file = new File("Importa.txt");
+            if (isBackup) {
+                Calendar now = Calendar.getInstance();
+                file = new File("Backups\\" + now.get(Calendar.DAY_OF_MONTH) + "-" + (now.get(Calendar.MONTH)+1) + "-" + now.get(Calendar.YEAR) + "_" + now.get(Calendar.HOUR_OF_DAY) + "x" + now.get(Calendar.MINUTE) + "x" + now.get(Calendar.SECOND) + ".txt");
+            } else {
+                file = new File("Importa.txt");
+            }
             FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
             for (Contatto i : database.values()){
@@ -311,8 +395,12 @@ public abstract class DBManager extends TagsManager{
         catch(IOException e) {
             alert.setAlertType(Alert.AlertType.WARNING);
             alert.setContentText("Esportazione fallita");
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
+        } catch (NullPointerException ignored) {}
+        if (!isBackup) {
+            alert.show();
         }
-        alert.show();
     }
 
     public static void notes() {
@@ -332,6 +420,8 @@ public abstract class DBManager extends TagsManager{
                 }
                 nm.writeXml(doc, i.getNoteId()+"");
             } catch (Exception e) {
+                MyUtils.log(LogType.ERROR);
+                MyUtils.log(LogType.MESSAGE, e);
                 System.out.println("Errore con " + i);
             }
         }

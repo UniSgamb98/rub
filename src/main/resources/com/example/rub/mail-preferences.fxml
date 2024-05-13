@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="400.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.MailPreferencesController">
+<BorderPane id="mailPreferences" prefHeight="400.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.MailPreferencesController">
    <bottom>
       <HBox BorderPane.alignment="CENTER">
          <Button mnemonicParsing="false" onAction="#goBack" text="Indietro">

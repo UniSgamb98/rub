@@ -1,5 +1,6 @@
 package com.example.rub;
 
+import com.example.rub.enums.LogType;
 import com.example.rub.functionalities.GlobalContext;
 import com.example.rub.functionalities.MyUtils;
 import com.example.rub.objects.mail.MailBean;
@@ -26,6 +27,8 @@ public class MailPreferencesController {
             stage.show();
             previousController.refresh();
         } catch (Exception e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
             System.out.println("Errore durante la transizione in firstPage con doLogin");
         }
     }

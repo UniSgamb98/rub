@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.example.rub.objects.*?>
 <?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.LogoutController">
+<?import com.example.rub.objects.note.NoteDisplayer?>
+<BorderPane id="logout" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.LogoutController">
    <top>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <Label text="Prima che tu te ne vada..." />
@@ -20,7 +20,7 @@
          </BorderPane.margin></ListView>
    </left>
    <right>
-      <NoteDisplayer fx:id="history" styleClass="notedisplayer" BorderPane.alignment="CENTER">
+      <NoteDisplayer fx:id="history" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="60.0" right="15.0" />
          </BorderPane.margin></NoteDisplayer>

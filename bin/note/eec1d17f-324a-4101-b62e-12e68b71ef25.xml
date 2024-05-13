@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="Dentallabor Köhler Ästhetik+Präzision">
-        
+            
+    
     <chiamata cancelled="false" data="2024-04-18" durata="2" messaggio="false" newInterest="INFO" number="1" operatore="SANTOLO" previousInterest="INFO">Parlato con il Laborleiter, signor Beier.
 Hanno contratto con Katana e per il momento non c'è possibilità ma valuta volentieri la nostra presentazione.</chiamata>
-    
+        
+
+    <chiamata cancelled="false" data="2024-05-06" durata="0" messaggio="false" newInterest="INFO" number="2" operatore="SANTOLO" previousInterest="INFO">Il Signor Beier rientra prossima settimana, la segretaria riferisce che la presentazione è arrivata ed è stata anche stampata.</chiamata>
 </companyNotes>

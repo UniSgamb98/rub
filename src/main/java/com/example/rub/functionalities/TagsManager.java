@@ -2,6 +2,7 @@ package com.example.rub.functionalities;
 
 import com.example.rub.beans.Contatto;
 import com.example.rub.beans.DeletedContatto;
+import com.example.rub.enums.LogType;
 import com.example.rub.functionalities.locations.*;
 
 import java.util.HashMap;
@@ -64,6 +65,8 @@ public abstract class TagsManager {
                 locationManager.addState(state);
             }
         } catch (Exception e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
             System.out.println("Errore durante l'inserimento di newEntry in LocationManager");
         }
     }

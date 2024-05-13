@@ -2,9 +2,11 @@ package com.example.rub;
 
 import com.example.rub.beans.Contatto;
 import com.example.rub.enums.Interessamento.InteressamentoStatus;
+import com.example.rub.enums.LogType;
 import com.example.rub.enums.TipoCliente;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
+import com.example.rub.functionalities.MyUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,7 +63,11 @@ public class NewEntryController {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        } catch (Exception e) { System.out.println("Errore durante la transizione in firstPage con sendNewEntry");   }
+        } catch (Exception e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
+            System.out.println("Errore durante la transizione in firstPage con sendNewEntry");
+        }
     }
 
     public void abortNewEntry(ActionEvent event){
@@ -71,7 +77,11 @@ public class NewEntryController {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        } catch (Exception e) { System.out.println("Errore durante la transizione in firstPage con abortNewEntry");   }
+        } catch (Exception e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
+            System.out.println("Errore durante la transizione in firstPage con abortNewEntry");
+        }
     }
 
     private Contatto getContatto() {

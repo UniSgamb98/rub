@@ -2,6 +2,7 @@ package com.example.rub;
 
 import com.example.rub.beans.Contatto;
 import com.example.rub.enums.Interessamento.InteressamentoStatus;
+import com.example.rub.enums.LogType;
 import com.example.rub.enums.TipoCliente;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
@@ -107,7 +108,11 @@ public class EntryDetailsPageController implements Initializable, Runnable {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        } catch (Exception e) { System.out.println("Errore durante la transizione in search-entry con doGoBack in EntryDetailsPageController");   }
+        } catch (Exception e) {
+            System.out.println("Errore durante la transizione in search-entry con doGoBack in EntryDetailsPageController");
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
+        }
     }
 
     public void preserveOldList(ObservableList<DisplayableEntry> oldList){
@@ -142,6 +147,8 @@ public class EntryDetailsPageController implements Initializable, Runnable {
                 GlobalContext.openedEntries.remove(entryToDisplayDetails.getId());
                 MyUtils.write(GlobalContext.openedEntries, "fileAperti");
             } catch (IOException | ClassNotFoundException e) {
+                MyUtils.log(LogType.ERROR);
+                MyUtils.log(LogType.MESSAGE, e);
                 throw new RuntimeException(e);
             }
         }
@@ -161,6 +168,8 @@ public class EntryDetailsPageController implements Initializable, Runnable {
             callStage.getIcons().add(new Image("AppIcon.png"));
             callStage.show();
         } catch (IOException e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
             System.out.println("Errore durante la transizione in register-call con doRegisterCall in EntryDetailsPageController");
         }
     }
@@ -180,6 +189,8 @@ public class EntryDetailsPageController implements Initializable, Runnable {
                 stage.setScene(scene);
                 stage.show();
             } catch (Exception e) {
+                MyUtils.log(LogType.ERROR);
+                MyUtils.log(LogType.MESSAGE, e);
                 System.out.println("Errore durante la transizione in search-entry con doDelete in EntryDetailsPageController");
             }
         }
@@ -335,6 +346,8 @@ public class EntryDetailsPageController implements Initializable, Runnable {
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
             System.out.println("Errore durante la transizione openMailPreferences in EntryDetailsPageController");
         }
     }

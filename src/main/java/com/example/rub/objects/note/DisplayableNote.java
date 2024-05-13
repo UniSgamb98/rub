@@ -10,8 +10,8 @@ public class DisplayableNote extends GridPane {
     Element element;
     public DisplayableNote(NoteDisplayer parent, Element element){
         this.element = element;
-        Label operator = new Label("Operatore: " + element.getAttribute("newInterest"));
-        Label duration = new Label("Durata: " + element.getAttribute("previousInterest"));
+        Label operator = new Label("Operatore: " + element.getAttribute("operatore"));
+        Label duration = new Label("Durata: " + element.getAttribute("durata"));
         content = new Text(element.getTextContent());
         Label day = new Label("Giorno: " + element.getAttribute("data"));
         GridPane.setColumnSpan(content,3);

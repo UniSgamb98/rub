@@ -1,6 +1,7 @@
 package com.example.rub;
 
 import com.example.rub.enums.Interessamento.InteressamentoStatus;
+import com.example.rub.enums.LogType;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
 import com.example.rub.functionalities.MyUtils;
@@ -40,6 +41,8 @@ public class LogoutController implements Initializable {
             if (contactedList.isEmpty()) {
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.close();
+                MyUtils.log(LogType.EXIT);
+                DBManager.export(true);
             }
         } catch (Exception e)   { System.out.println("non è stato selezionato un contatto");    }
     }
@@ -50,12 +53,14 @@ public class LogoutController implements Initializable {
                 throw new Exception();
             }
             DisplayableEntry displayableEntry = contacted.getSelectionModel().getSelectedItem();
-            DBManager.setNextCall(displayableEntry.getEntry().getId(), reminderDate.getValue(), InteressamentoStatus.BLANK, -1, false);
+            DBManager.setNextCall(displayableEntry.getEntry().getId(), reminderDate.getValue(), InteressamentoStatus.BLANK, -1, true, true);
             contactedList.remove(displayableEntry);
             MyUtils.write(GlobalContext.notProgrammedCalls, GlobalContext.operator.name());
             if (contactedList.isEmpty()) {
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.close();
+                MyUtils.log(LogType.EXIT);
+                DBManager.export(true);
             }
         } catch (Exception e)   { System.out.println("non è stato selezionato un contatto");   }
     }
@@ -66,6 +71,8 @@ public class LogoutController implements Initializable {
             stage.setScene(oldScene);
             stage.show();
         } catch (Exception e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
             System.out.println("Errore durante la transizione in firstPage con doLogin");
         }
     }
@@ -74,6 +81,9 @@ public class LogoutController implements Initializable {
         MyUtils.write(GlobalContext.notProgrammedCalls, GlobalContext.operator.name());
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
+        MyUtils.log(LogType.MESSAGE, "Ha lasciato un promemoria per il prossimo login");
+        MyUtils.log(LogType.EXIT);
+        DBManager.export(true);
     }
 
     public void setProperties(Scene oldScene){
@@ -100,6 +110,9 @@ public class LogoutController implements Initializable {
             history.setDocument(displayableEntry.getEntry().getId());
             ragioneSociale.setText(displayableEntry.getEntry().getRagioneSociale());
             paese.setText(displayableEntry.getEntry().getPaese());
-        } catch (RuntimeException ignored) {}
+        } catch (RuntimeException e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
+        }
     }
 }

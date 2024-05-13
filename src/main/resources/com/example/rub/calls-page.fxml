@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
 
-<BorderPane prefHeight="285.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.CallsPageController">
+<BorderPane id="calls-page" prefHeight="285.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.CallsPageController">
    <bottom>
       <AnchorPane prefHeight="82.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <Button mnemonicParsing="false" onAction="#exit" text="Indietro" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="20.0">
@@ -21,7 +21,7 @@
             <Label text="Chiamate programmate il " />
             <DatePicker fx:id="date" onAction="#dateChange" prefWidth="150.0" />
          </HBox>
-         <ListView fx:id="callList" prefHeight="291.0" prefWidth="124.0" />
+         <ListView fx:id="callList" onMouseClicked="#doRequestEntryDetails" prefHeight="291.0" prefWidth="124.0" />
       </VBox>
    </left>
    <stylesheets>

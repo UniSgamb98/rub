@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
 
-<AnchorPane prefHeight="189.0" prefWidth="508.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.NewEntryController">
+<AnchorPane id="newEntry" prefHeight="189.0" prefWidth="508.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.NewEntryController">
    <GridPane alignment="CENTER" prefHeight="208.0" prefWidth="508.0">
        <Label text="Ragione Sociale:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
        <TextField fx:id="ragioneSociale" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="0" />

@@ -8,7 +8,7 @@
     <update check="background"/>
     <resources>
         <j2se version="11.0.22+" href="http://java.sun.com/products/autodl/j2se"/>
-        <jar href="rub.jar" size="264737" download="eager"/>
+        <jar href="rub.jar" size="269399" download="eager"/>
     </resources>
     <jfx:javafx-desc width="600" height="400" main-class="com.example.rub.Main" name="Main"/>
 </jnlp>

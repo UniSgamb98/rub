@@ -2,6 +2,7 @@ package com.example.rub;
 
 import com.example.rub.beans.Contatto;
 import com.example.rub.enums.Interessamento.InteressamentoStatus;
+import com.example.rub.enums.LogType;
 import com.example.rub.enums.Operatori;
 import com.example.rub.enums.TipoCliente;
 import com.example.rub.functionalities.DBManager;
@@ -47,7 +48,11 @@ public class FirstPageController implements Initializable {
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        } catch (Exception e) { System.out.println("Errore durante la transizione in new-entry con switchToNewEntry in FirstPage"); }
+        } catch (Exception e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
+            System.out.println("Errore durante la transizione in new-entry con switchToNewEntry in FirstPage");
+        }
     }
     public void switchToSearchEntry(ActionEvent event){
         try {
@@ -56,7 +61,11 @@ public class FirstPageController implements Initializable {
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        } catch (Exception e) { System.out.println("Errore durante la transizione in search-entry con switchToSearchEntry in FirstPage"); }
+        } catch (Exception e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
+            System.out.println("Errore durante la transizione in search-entry con switchToSearchEntry in FirstPage");
+        }
     }
 
     public void doImportFromExcels() {
@@ -71,7 +80,10 @@ public class FirstPageController implements Initializable {
             controller = loader.getController();
             stage1.setScene(scene1);
             stage1.show();
-        } catch (Exception ignored) {}
+        } catch (Exception e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
+        }
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Importazione");
@@ -104,6 +116,8 @@ public class FirstPageController implements Initializable {
             }while((in = br.readLine()) != null );
             br.close();
         } catch (IOException e){
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
             System.out.println("Errore nell'importazione da file txt");
             alert.setContentText("Importazione fallita:" + e.getCause().toString());
         }
@@ -221,8 +235,8 @@ public class FirstPageController implements Initializable {
                 bean.setCoinvolgimento(c);
                 break;
             case 25:
-                bean.setCheckpoint(Integer.parseInt(attribute));
-                break;
+                //bean.setCheckpoint(Integer.parseInt(attribute));
+                //break;
         }
     }
 
@@ -245,7 +259,14 @@ public class FirstPageController implements Initializable {
         }
         try {
             GlobalContext.notProgrammedCalls = (LinkedList<UUID>) MyUtils.read(GlobalContext.operator.name());
-            GlobalContext.notProgrammedCalls.removeIf(i -> DBManager.retriveEntry(i).getProssimaChiamata() != null);
+            LinkedList<UUID> temp = new LinkedList<>();
+            for (UUID i : GlobalContext.notProgrammedCalls){
+                if (DBManager.retriveEntry(i).getProssimaChiamata() == null){
+                    temp.add(i);
+                }
+            }
+            GlobalContext.notProgrammedCalls = temp;
+           // GlobalContext.notProgrammedCalls.removeIf(i -> DBManager.retriveEntry(i).getProssimaChiamata() != null);
             if (!GlobalContext.notProgrammedCalls.isEmpty()){
                 FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("login-reminder.fxml")));
                 Parent root = loader.load();
@@ -258,13 +279,16 @@ public class FirstPageController implements Initializable {
             }
         }  catch (IOException | ClassNotFoundException e) {
             System.out.println("NIENTE DA RICORDARE");
+            MyUtils.log(LogType.MESSAGE, "Non ha promemoria dall'ultimo log out");
         }
     }
 
-    public void doShowCallsToMake() {
+    public void doShowCallsToMake(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("calls-page.fxml"));
             Parent root = loader.load();
+            CallsPageController controller = loader.getController();
+            controller.setProperties((Stage) ((Node) event.getSource()).getScene().getWindow());
             Stage callStage = new Stage();
             callStage.setTitle("Elenco Chiamate");
             Scene scene = new Scene(root);
@@ -272,6 +296,8 @@ public class FirstPageController implements Initializable {
             callStage.getIcons().add(new Image("AppIcon.png"));
             callStage.show();
         } catch (Exception e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
             System.out.println("Errore durante la visualizzazione di callList con doShowCallList in FirstPageController");
         }
     }
@@ -283,11 +309,15 @@ public class FirstPageController implements Initializable {
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        } catch (Exception e) { System.out.println("Errore durante la transizione in showReport con switchToNewEntry in FirstPage"); }
+        } catch (Exception e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
+            System.out.println("Errore durante la transizione in showReport con switchToNewEntry in FirstPage");
+        }
     }
 
     public void doExportForExcels() {
-        DBManager.export();
+        DBManager.export(false);
     }
 
     public void doNumberNotes() {
@@ -301,6 +331,10 @@ public class FirstPageController implements Initializable {
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        } catch (Exception e) { System.out.println("Errore durante la transizione in settings con openSettings in FirstPage"); }
+        } catch (Exception e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
+            System.out.println("Errore durante la transizione in settings con openSettings in FirstPage");
+        }
     }
 }

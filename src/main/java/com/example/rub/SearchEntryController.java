@@ -1,6 +1,8 @@
 package com.example.rub;
 
+import com.example.rub.enums.LogType;
 import com.example.rub.functionalities.DBManager;
+import com.example.rub.functionalities.MyUtils;
 import com.example.rub.objects.note.DisplayableEntry;
 import com.example.rub.objects.filter.FiltersToolColumn;
 import javafx.collections.FXCollections;
@@ -40,6 +42,8 @@ public class SearchEntryController implements Initializable {
             DBManager.update();
         } catch (Exception e) {
             System.out.println("Problemi durante l'update dal Database persistente");
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
         }
         displayResults(DBManager.getAllEntries());
     }
@@ -94,6 +98,8 @@ public class SearchEntryController implements Initializable {
             stage.setOnHidden(e -> controller.shutdown());
             stage.show();
         } catch (Exception e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
             System.out.println("Errore durante la transizione in firstPage con doRequestEntryDetails in SearchEntryController");
         }
     }
@@ -105,6 +111,10 @@ public class SearchEntryController implements Initializable {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        } catch (Exception e) { System.out.println("Errore durante la transizione in firstPage con doSwitchToFirstPage in SearchEntryController");   }
+        } catch (Exception e) {
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
+            System.out.println("Errore durante la transizione in firstPage con doSwitchToFirstPage in SearchEntryController");
+        }
     }
 }

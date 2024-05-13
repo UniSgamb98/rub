@@ -2,11 +2,12 @@ package com.example.rub.beans;
 
 import com.example.rub.functionalities.GlobalContext;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
-public class DeletedContatto {
+public class DeletedContatto implements Serializable {
     private final Contatto contatto;
     private final String fromWho;
     private final Date when;
