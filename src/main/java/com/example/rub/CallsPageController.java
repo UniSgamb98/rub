@@ -55,7 +55,7 @@ public class CallsPageController implements Initializable {
         setCallList(DBManager.getCallList(date.getValue()));
     }
 
-    public void doRequestEntryDetails(MouseEvent mouseEvent) {
+    public void doRequestEntryDetails() {
         DisplayableEntry displayableEntry = callList.getSelectionModel().getSelectedItem();
         System.out.println("Apertura della scheda " + displayableEntry);
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("entry-details-page.fxml")));
