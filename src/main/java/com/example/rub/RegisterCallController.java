@@ -81,7 +81,6 @@ public class RegisterCallController implements Initializable {
     public void setEntryProperty(Contatto entry){
         entryProperty.set(entry);
         coinvolgimento.setValue(entryProperty.get().getCoinvolgimento());
-        prossimaChiamata.setValue(entry.getProssimaChiamata());
     }
     public void setControllerProperty(EntryDetailsPageController controller) {
         controllerProperty.set(controller);

@@ -110,9 +110,6 @@ public class LogoutController implements Initializable {
             history.setDocument(displayableEntry.getEntry().getId());
             ragioneSociale.setText(displayableEntry.getEntry().getRagioneSociale());
             paese.setText(displayableEntry.getEntry().getPaese());
-        } catch (RuntimeException e) {
-            MyUtils.log(LogType.ERROR);
-            MyUtils.log(LogType.MESSAGE, e);
-        }
+        } catch (RuntimeException ignored) {}
     }
 }

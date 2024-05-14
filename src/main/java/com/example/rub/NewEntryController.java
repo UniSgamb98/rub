@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class NewEntryController {
@@ -106,6 +107,7 @@ public class NewEntryController {
         newEntry.setOperator(GlobalContext.operator);
         newEntry.setInteressamento(InteressamentoStatus.BLANK);
         newEntry.setTipoCliente(TipoCliente.BLANK);
+        newEntry.setAcquisizione(LocalDate.now());
         return newEntry;
     }
 }

@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -99,7 +100,7 @@ public class FirstPageController implements Initializable {
                     int subStringStart = 0;
                     int subStringEnd = in.indexOf(";");
                     String subString;
-                    for (int i = 0; i <= 24; i++) {
+                    for (int i = 0; i <= 25; i++) {
                         subString = in.substring(subStringStart, subStringEnd);
                         fillAttribute(i, newEntryFromFile, subString);
 
@@ -235,6 +236,18 @@ public class FirstPageController implements Initializable {
                 bean.setCoinvolgimento(c);
                 break;
             case 25:
+                LocalDate o = LocalDate.now();
+                if (attribute.isEmpty()){
+                    o = o.minusMonths(1);
+                }else {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd");
+                    o = LocalDate.parse(attribute, formatter);
+                }
+                bean.setAcquisizione(o);
+                break;
+
+
+            //case 26:
                 //bean.setCheckpoint(Integer.parseInt(attribute));
                 //break;
         }
@@ -276,6 +289,8 @@ public class FirstPageController implements Initializable {
                 Stage newStage = new Stage();
                 newStage.setScene(newScene);
                 newStage.show();
+            } else{
+                MyUtils.log(LogType.MESSAGE, "Non ha promemoria dall'ultimo log out");
             }
         }  catch (IOException | ClassNotFoundException e) {
             System.out.println("NIENTE DA RICORDARE");

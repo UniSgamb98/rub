@@ -29,7 +29,7 @@ public class FiltersToolColumn extends VBox {
         locationFilter = new StateFilter(manager);
 
         operatori = new AllPurposeFilter(Operatori.HUGO.name(), Operatori.SANTOLO.name(), Operatori.VICTORIA.name());
-        interesse = new AllPurposeFilter(InteressamentoStatus.BLANK.name(), InteressamentoStatus.NON_TROVATO.name(), InteressamentoStatus.NON_INERENTE.name(), InteressamentoStatus.NULLO.name(), InteressamentoStatus.RICHIAMARE.name(), InteressamentoStatus.INFO.name(), InteressamentoStatus.LISTINO.name(), InteressamentoStatus.CAMPIONE.name(), InteressamentoStatus.CLIENTE.name());
+        interesse = new AllPurposeFilter(InteressamentoStatus.NON_TROVATO.name(), InteressamentoStatus.NON_INERENTE.name(), InteressamentoStatus.NULLO.name(), InteressamentoStatus.RICHIAMARE.name(), InteressamentoStatus.INFO.name(), InteressamentoStatus.LISTINO.name(), InteressamentoStatus.CAMPIONE.name(), InteressamentoStatus.CLIENTE.name());
         tipologia = new AllPurposeFilter(TipoCliente.LABORATORIO.name(), TipoCliente.RIVENDITORE.name(), TipoCliente.CENTROFRESAGGIO.name());
         this.getChildren().addAll(new Separator(), locationFilter, new Separator(), operatori, new Separator(), interesse, new Separator(), tipologia, new Separator());
         this.setSpacing(10.0);

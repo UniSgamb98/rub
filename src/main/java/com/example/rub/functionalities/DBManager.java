@@ -333,7 +333,7 @@ public abstract class DBManager extends TagsManager{
         LinkedList<UUID> callList = new LinkedList<>();
         for (Contatto i : database.values()){
             try {
-                if (i.getProssimaChiamata().equals(fromWhen) && (i.getOperator() == Operatori.VICTORIA || GlobalContext.operator == i.getOperator())) {
+                if (i.getProssimaChiamata().equals(fromWhen) && GlobalContext.operator == i.getOperator()) {
                     callList.add(i.getId());
                 }
             } catch (NullPointerException ignored)  {}

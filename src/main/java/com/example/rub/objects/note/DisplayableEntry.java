@@ -14,6 +14,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class DisplayableEntry extends HBox {
@@ -33,6 +34,12 @@ public class DisplayableEntry extends HBox {
                 backgroundPaint = Color.CHARTREUSE;
                 break;
 
+        }
+        if (/*entry.getInteressamento().equals(Interessamento.InteressamentoStatus.BLANK) &&*/ entry.getAcquisizione().isAfter(LocalDate.now().minusWeeks(2))){
+            backgroundPaint = Color.MAGENTA;
+        }
+        if (entry.getProssimaChiamata() != null && entry.getProssimaChiamata().isBefore(LocalDate.now())){
+            this.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3))));
         }
         this.getChildren().add(getIcon());
         this.setBackground(new Background(new BackgroundFill(backgroundPaint, CornerRadii.EMPTY, Insets.EMPTY)));
