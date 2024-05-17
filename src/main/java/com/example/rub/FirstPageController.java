@@ -100,7 +100,7 @@ public class FirstPageController implements Initializable {
                     int subStringStart = 0;
                     int subStringEnd = in.indexOf(";");
                     String subString;
-                    for (int i = 0; i <= 25; i++) {
+                    for (int i = 0; i <= 26; i++) {
                         subString = in.substring(subStringStart, subStringEnd);
                         fillAttribute(i, newEntryFromFile, subString);
 
@@ -228,8 +228,8 @@ public class FirstPageController implements Initializable {
                 break;
             case 24:
                 double c;
-                if (attribute.isEmpty()){
-                    c = 0;
+                if (attribute.isEmpty() || Double.parseDouble(attribute) == 0.0){
+                    c = 1;
                 }else {
                     c = Double.parseDouble(attribute);
                 }
@@ -247,9 +247,9 @@ public class FirstPageController implements Initializable {
                 break;
 
 
-            //case 26:
-                //bean.setCheckpoint(Integer.parseInt(attribute));
-                //break;
+            case 26:
+                bean.setCheckpoint(Integer.parseInt(attribute));
+                break;
         }
     }
 
@@ -263,10 +263,10 @@ public class FirstPageController implements Initializable {
             exportButton.setVisible(true);
             exportButton.setPrefSize(130.0,130.0);
             exportButton.setMinHeight(Region.USE_COMPUTED_SIZE);
-        /*    notesButton.setPrefSize(130.0, 130.0);
+            notesButton.setPrefSize(130.0, 130.0);
             notesButton.setVisible(true);
             notesButton.setMinHeight(Region.USE_COMPUTED_SIZE);
-            settingsButton.setPrefSize(130.0, 130.0);
+        /*    settingsButton.setPrefSize(130.0, 130.0);
             settingsButton.setVisible(true);
             settingsButton.setMinHeight(Region.USE_COMPUTED_SIZE);*/
         }

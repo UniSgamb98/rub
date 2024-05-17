@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="Gold Quadrat GmbH">
-            
+                            
+    
+    
+    
+    
     
     <chiamata cancelled="false" data="2024-04-18" durata="0" messaggio="false" newInterest="NON_TROVATO" number="1" operatore="SANTOLO" previousInterest="NON_TROVATO">Richiamare lunedì e chiedere del Direttore ufficio Tecnico e Vendite (Eriksenn).</chiamata>
-        
+                        
 
+    
+    
+    
+    
     <chiamata cancelled="false" data="2024-05-09" durata="0" messaggio="false" newInterest="NON_TROVATO" number="2" operatore="SANTOLO" previousInterest="NON_TROVATO">Riprovare nel pomeriggio</chiamata>
+                
+    
+    
+    
+    <chiamata cancelled="false" data="2024-05-13" durata="0" messaggio="false" newInterest="RICHIAMARE" number="3" operatore="SANTOLO" previousInterest="NON_TROVATO">Richiamare domani e parlare con Frau Sandra Kirsch, responsabile materiali.</chiamata>
+            
+
+    
+    <chiamata cancelled="false" data="2024-05-14" durata="0" messaggio="false" newInterest="INFO" number="4" operatore="SANTOLO" previousInterest="RICHIAMARE">Parlato con Sandra Kirsch, inoltra la nostra presentazione al CEO (Herr Muehlenberg).
+Nel caso c'è interesse fornisce lui un feedback.</chiamata>
+    
 </companyNotes>

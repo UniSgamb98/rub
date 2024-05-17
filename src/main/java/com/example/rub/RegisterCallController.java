@@ -62,7 +62,8 @@ public class RegisterCallController implements Initializable {
                 doc = nm.createDocument(bean.getRagioneSociale());
             }
             InteressamentoStatus fedback = Interessamento.fromQuestionForm(feedback.getValue());
-            nm.addCallNote(doc, note.getText(), durata.getValue(), isMessage.isSelected(), bean.getInteressamento(), fedback);
+            int checkpoint = getCheckpoint(fedback, bean.getCheckpoint());
+            nm.addCallNote(doc, note.getText(), durata.getValue(), isMessage.isSelected(), bean.getInteressamento(), fedback, checkpoint);
             double involvement = (isMessage.isSelected()? -1 : coinvolgimento.getValue());
             DBManager.setNextCall(bean.getId(), prossimaChiamata.getValue(), fedback, involvement, !isMessage.isSelected(), isMessage.isSelected());
             nm.writeXml(doc, ""+bean.getNoteId());
@@ -78,11 +79,24 @@ public class RegisterCallController implements Initializable {
         stage.close();
         controllerProperty.get().refresh();
     }
-    public void setEntryProperty(Contatto entry){
+
+    private static int getCheckpoint(InteressamentoStatus fedback, int beanCheckpoint) {
+        int checkpoint = 0;
+        if (fedback != null){
+            if (fedback.equals(InteressamentoStatus.LISTINO) && beanCheckpoint < 1){
+                checkpoint = 1;
+            }else if (fedback.equals(InteressamentoStatus.CAMPIONE) && beanCheckpoint < 2){
+                checkpoint = 2;
+            }else if (fedback.equals(InteressamentoStatus.CLIENTE) && beanCheckpoint < 3){
+                checkpoint = 3;
+            }
+        }
+        return checkpoint;
+    }
+
+    public void setEntryProperty(Contatto entry, EntryDetailsPageController controller){
         entryProperty.set(entry);
         coinvolgimento.setValue(entryProperty.get().getCoinvolgimento());
-    }
-    public void setControllerProperty(EntryDetailsPageController controller) {
         controllerProperty.set(controller);
     }
     @Override

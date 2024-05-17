@@ -252,6 +252,11 @@ public abstract class DBManager extends TagsManager{
                 MyUtils.log(LogType.SPECIFYCHANGE, "coinvolgimento", oldBean.getCoinvolgimento(), modifiedBean.getCoinvolgimento());
                 oldBean.setCoinvolgimento(modifiedBean.getCoinvolgimento());
             }
+            if (!Objects.equals(oldBean.getCheckpoint(), modifiedBean.getCheckpoint())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "Checkpoint", oldBean.getCheckpoint(), modifiedBean.getCheckpoint());
+                oldBean.setCheckpoint(modifiedBean.getCheckpoint());
+            }
+
 
             if (GlobalContext.notProgrammedCalls.contains(id) && oldBean.getProssimaChiamata() != null){
                 GlobalContext.notProgrammedCalls.remove(id);
@@ -280,8 +285,15 @@ public abstract class DBManager extends TagsManager{
                 data.incrementVolteContattati();
                 if (coinvolgimento != -1)   data.setCoinvolgimento(coinvolgimento);
                 if (feedback != null){
-                    if (new InteressamentoComp().compare(feedback, data.getInteressamento()) > 0) {
+                    if (feedback.equals(InteressamentoStatus.NULLO) || new InteressamentoComp().compare(feedback, data.getInteressamento()) > 0){
                         data.setInteressamento(feedback);
+                    }
+                    if (feedback.equals(InteressamentoStatus.LISTINO) && data.getCheckpoint() < 1){
+                        data.setCheckpoint(1);
+                    }else if (feedback.equals(InteressamentoStatus.CAMPIONE) && data.getCheckpoint() < 2){
+                        data.setCheckpoint(2);
+                    } else if (feedback.equals(InteressamentoStatus.CLIENTE) && data.getCheckpoint() < 3){
+                        data.setCheckpoint(3);
                     }
                 }
                 Calendar now = Calendar.getInstance();
@@ -387,6 +399,8 @@ public abstract class DBManager extends TagsManager{
                 bw.write(i.getUltimaChiamata()+";");
                 bw.write(i.getProssimaChiamata()+";");
                 bw.write(i.getCoinvolgimento()+";");
+                bw.write(i.getAcquisizione()+";");
+                bw.write(i.getCheckpoint()+";");
                 bw.newLine();
             }
             bw.flush();
@@ -414,8 +428,7 @@ public abstract class DBManager extends TagsManager{
                     Node node = nodeList.item(j);
                     if (node.getNodeType() == Node.ELEMENT_NODE){
                         Element e = (Element) node;
-                        e.setAttribute("previousInterest", i.getInteressamento().name());
-                        e.setAttribute("newInterest", i.getInteressamento().name());
+                        e.setAttribute("checkpoint", "0");
                     }
                 }
                 nm.writeXml(doc, i.getNoteId()+"");

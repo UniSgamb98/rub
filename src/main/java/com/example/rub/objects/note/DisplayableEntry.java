@@ -1,6 +1,7 @@
 package com.example.rub.objects.note;
 
 import com.example.rub.beans.Contatto;
+import com.example.rub.enums.Interessamento;
 import com.example.rub.functionalities.DBManager;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -35,12 +36,15 @@ public class DisplayableEntry extends HBox {
                 break;
 
         }
-        if (/*entry.getInteressamento().equals(Interessamento.InteressamentoStatus.BLANK) &&*/ entry.getAcquisizione().isAfter(LocalDate.now().minusWeeks(2))){
+        if (!entry.getInteressamento().equals(Interessamento.InteressamentoStatus.NULLO) && entry.getAcquisizione().isAfter(LocalDate.now().minusWeeks(2))){
             backgroundPaint = Color.MAGENTA;
         }
         if (entry.getProssimaChiamata() != null && entry.getProssimaChiamata().isBefore(LocalDate.now())){
             this.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3))));
+        } else if (entry.getProssimaChiamata() == null && (!entry.getInteressamento().equals(Interessamento.InteressamentoStatus.NULLO) && !entry.getInteressamento().equals(Interessamento.InteressamentoStatus.NON_INERENTE)) && !entry.getInteressamento().equals(Interessamento.InteressamentoStatus.CLIENTE) ) {
+            this.setBorder(new Border(new BorderStroke(Color.YELLOW, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3))));
         }
+
         this.getChildren().add(getIcon());
         this.setBackground(new Background(new BackgroundFill(backgroundPaint, CornerRadii.EMPTY, Insets.EMPTY)));
         this.getChildren().addAll(new Label(entry.getRagioneSociale()), new Label(" in "));

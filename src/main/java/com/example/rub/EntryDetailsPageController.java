@@ -94,10 +94,31 @@ public class EntryDetailsPageController implements Initializable, Runnable {
     public EmailSenderShortcut emailSenderShortcut;
     @FXML
     public HBox emailBox;
+    @FXML
+    public CheckBox check1;
+    @FXML
+    public CheckBox check2;
+    @FXML
+    public CheckBox check3;
+    @FXML
+    public Button registerCallButton;
     private Contatto entryToDisplayDetails;
     ObservableList<DisplayableEntry> oldResults;
 
     public void doGoBack(ActionEvent event) {
+        if (!entryToDisplayDetails.compare(getContatto())){
+            ButtonType yes = new ButtonType("yes");
+            ButtonType no = new ButtonType("no");
+            Alert a = new Alert(Alert.AlertType.CONFIRMATION, "Salvare prima di continuare?", yes, no);
+            a.setTitle("Salvataggio");
+            a.setHeaderText("(╯°□°)╯︵ ┻━┻");
+
+            a.showAndWait().ifPresent(response -> {
+                if (response == yes) {
+                    doSaveChanges();
+                }
+            });
+        }
         shutdown();
         try {   //cambio scena
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("search-entry.fxml")));
@@ -120,7 +141,8 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         oldResults.addAll(oldList);
     }
 
-    public void allowChangesPressed(ActionEvent event){
+    public void allowChangesPressed(){
+
         if (isModifiable.isSelected()) {  //Checkbox = true
             try {
                 GlobalContext.openedEntries = (ArrayList<UUID>) MyUtils.read("fileAperti");
@@ -130,37 +152,57 @@ public class EntryDetailsPageController implements Initializable, Runnable {
             if (!GlobalContext.openedEntries.contains(entryToDisplayDetails.getId())) {
                 GlobalContext.openedEntries.add(entryToDisplayDetails.getId());
                 MyUtils.write(GlobalContext.openedEntries, "fileAperti");
-                saveButton.setVisible(true);
                 setFieldDisability(false);
             } else {    //Apertura fallita
-                ((CheckBox) event.getTarget()).setSelected(false);
+                isModifiable.setSelected(false);
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Impossibile salvare cambiamenti");
                 alert.setContentText("Qualcun'altro ha aperto la scheda che cerchi di modificare");
                 alert.showAndWait();
             }
         } else {    //Checkbox = false
-            saveButton.setVisible(false);
-            setFieldDisability(true);
-            try {
-                GlobalContext.openedEntries = (ArrayList<UUID>) MyUtils.read("fileAperti");
-                GlobalContext.openedEntries.remove(entryToDisplayDetails.getId());
-                MyUtils.write(GlobalContext.openedEntries, "fileAperti");
-            } catch (IOException | ClassNotFoundException e) {
-                MyUtils.log(LogType.ERROR);
-                MyUtils.log(LogType.MESSAGE, e);
-                throw new RuntimeException(e);
+            if (checkCheck()){
+                setFieldDisability(true);
+                try {
+                    GlobalContext.openedEntries = (ArrayList<UUID>) MyUtils.read("fileAperti");
+                    GlobalContext.openedEntries.remove(entryToDisplayDetails.getId());
+                    MyUtils.write(GlobalContext.openedEntries, "fileAperti");
+                } catch (IOException | ClassNotFoundException e) {
+                    MyUtils.log(LogType.ERROR);
+                    MyUtils.log(LogType.MESSAGE, e);
+                    throw new RuntimeException(e);
+                }
             }
         }
     }
 
+    private boolean checkCheck() {
+        boolean ret = true;
+        if (!entryToDisplayDetails.compare(getContatto())){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Salvataggio");
+            alert.setContentText("Salvare le modifiche prima di continuare?");
+            alert.showAndWait();
+            boolean result = alert.getResult().getText().equals("OK");
+            if (result){
+                doSaveChanges();
+            } else {
+                ret = false;
+                isModifiable.setSelected(true);
+            }
+        }
+        return ret;
+    }
+
     public void doRegisterCall() {
         try {
+            if (!entryToDisplayDetails.compare(getContatto())){
+                doSaveChanges();
+            }
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("register-call.fxml"));
             Parent root = loader.load();
             RegisterCallController controller = loader.getController();
-            controller.setEntryProperty(entryToDisplayDetails);
-            controller.setControllerProperty(this);
+            controller.setEntryProperty(entryToDisplayDetails, this);
             Stage callStage = new Stage();
             callStage.setTitle("Chiamata");
             Scene scene = new Scene(root);
@@ -197,11 +239,9 @@ public class EntryDetailsPageController implements Initializable, Runnable {
     }
     public void doSaveChanges() {
         if(DBManager.modifyEntry(entryToDisplayDetails.getId(),getContatto())){
-            isModifiable.setSelected(false);
-            ActionEvent event = new ActionEvent(null, isModifiable);
-            allowChangesPressed(event);
             Thread thread = new Thread(this);
             thread.start();
+            entryToDisplayDetails = DBManager.retriveEntry(entryToDisplayDetails.getId());
         }
     }
 
@@ -212,6 +252,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
             entryToDisplayDetails = DBManager.retriveEntry(entryToDisplayDetails.getId());
         }
         ragioneSociale.setText(entryToDisplayDetails.getRagioneSociale());
+      //  paese.textProperty().addListener((obs, oldVal, newVal) -> notifyChange());
         personaDiRiferimento.setText(entryToDisplayDetails.getPersonaRiferimento());
         paese.setText(entryToDisplayDetails.getPaese());
         citta.setText(entryToDisplayDetails.getCitta());
@@ -235,33 +276,68 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         indirizzo.setText(entryToDisplayDetails.getIndirizzo());
         involvement.setValue(entryToDisplayDetails.getCoinvolgimento());
 
+        if (entryToDisplayDetails.getCheckpoint() >= 1) {check1.setSelected(true);}
+        if (entryToDisplayDetails.getCheckpoint() >= 2) {check2.setSelected(true);}
+        if (entryToDisplayDetails.getCheckpoint() >= 3) {check3.setSelected(true);}
+
         emailSenderShortcut.setDestinatario(entryToDisplayDetails.getEmailReferente());
+
+        try {
+            GlobalContext.openedEntries = (ArrayList<UUID>) MyUtils.read("fileAperti");
+        } catch (Exception e) {
+            GlobalContext.openedEntries = new ArrayList<>();
+        }
+        if (!GlobalContext.openedEntries.contains(entryToDisplayDetails.getId())) {
+            GlobalContext.openedEntries.add(entryToDisplayDetails.getId());
+            MyUtils.write(GlobalContext.openedEntries, "fileAperti");
+            setFieldDisability(false);
+            isModifiable.setSelected(true);
+        }
     }
     private Contatto getContatto(){
         Contatto newEntry = new Contatto();                         //creazione Bean contatto
         newEntry.setRagioneSociale(ragioneSociale.getText());
-        newEntry.setCitta(citta.getText());
-        newEntry.setEmailReferente(emailReferente.getText());
-        newEntry.setPaese(paese.getText());
         newEntry.setPersonaRiferimento(personaDiRiferimento.getText());
+        newEntry.setEmailReferente(emailReferente.getText());
         newEntry.setTelefono(telefono.getText());
+        newEntry.setPaese(paese.getText());
+        newEntry.setRegione(regione.getText());
+        newEntry.setCitta(citta.getText());
+        newEntry.setIndirizzo(indirizzo.getText());
+        newEntry.setNumeroCivico(civico.getText());
+        newEntry.setProvincia(provincia.getText());
+        newEntry.setCap(cap.getText());
         newEntry.setInteressamento(interessamento.getValue());
         newEntry.setTipoCliente(tipoCliente.getValue());
+        newEntry.setPartitaIva(partitaIva.getText());
+        newEntry.setCodiceFiscale(codiceFiscale.getText());
+        newEntry.setTitolare(titolare.getText());
+        newEntry.setEmailGenereica(emailGenerica.getText());
+        newEntry.setEmailCertificata(pec.getText());
         newEntry.setVolteContattati(Integer.parseInt(volteContattati.getText()));
         newEntry.setUltimaChiamata(ultimaChiamata.getValue());
         newEntry.setProssimaChiamata(prossimaChiamata.getValue());
-        newEntry.setRegione(regione.getText());
-        newEntry.setCap(cap.getText());
-        newEntry.setEmailCertificata(pec.getText());
-        newEntry.setEmailGenereica(emailGenerica.getText());
-        newEntry.setTitolare(titolare.getText());
-        newEntry.setPartitaIva(partitaIva.getText());
-        newEntry.setNumeroCivico(civico.getText());
         newEntry.setSitoWeb(sito.getText());
-        newEntry.setCodiceFiscale(codiceFiscale.getText());
-        newEntry.setProvincia(provincia.getText());
-        newEntry.setIndirizzo(indirizzo.getText());
         newEntry.setCoinvolgimento(involvement.getValue());
+
+        if (check3.isSelected()){
+            newEntry.setCheckpoint(3);
+        }else {
+            if (check2.isSelected()){
+                newEntry.setCheckpoint(2);
+            }else {
+                if (check1.isSelected()){
+                    newEntry.setCheckpoint(1);
+                } else {
+                    newEntry.setCheckpoint(0);
+                }
+            }
+        }
+
+        newEntry.setId(entryToDisplayDetails.getId());          // questi servono per far funzionare il metodo Contatto.equals(Contatto)
+        newEntry.setNoteId(entryToDisplayDetails.getNoteId());
+        newEntry.setOperator(entryToDisplayDetails.getOperator());
+        newEntry.setAcquisizione(entryToDisplayDetails.getAcquisizione());
         return newEntry;
     }
     public void setEntryProperty(Contatto entry){
@@ -274,11 +350,16 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         for (TextField textField : Arrays.asList(ragioneSociale, personaDiRiferimento, citta, paese, emailReferente, telefono, regione, indirizzo, provincia, cap, civico, partitaIva, codiceFiscale, emailGenerica, sito, pec, titolare)) {
             textField.setDisable(state);
         }
-        involvement.setDisable(state);
+        /*involvement.setDisable(state);
+        for (CheckBox checkpoint : Arrays.asList(check1, check2, check3)){
+            checkpoint.setDisable(state);
+        }*/
         interessamento.setDisable(state);
         tipoCliente.setDisable(state);
         ultimaChiamata.setDisable(state);
         prossimaChiamata.setDisable(state);
+        saveButton.setVisible(!state);
+        registerCallButton.setVisible(!state);
     }
 
     @Override
@@ -351,4 +432,35 @@ public class EntryDetailsPageController implements Initializable, Runnable {
             System.out.println("Errore durante la transizione openMailPreferences in EntryDetailsPageController");
         }
     }
+
+    public void manageCheckpoint(ActionEvent event) {
+        String name = ((CheckBox) event.getTarget()).getId();
+        boolean state = ((CheckBox) event.getTarget()).isSelected();
+        switch (name){
+            case "check1":
+                if (!state) {
+                    check2.setSelected(false);
+                    check3.setSelected(false);
+                }
+                break;
+            case "check2":
+                if (state){
+                    check1.setSelected(true);
+                }else {
+                    check3.setSelected(false);
+                }
+                break;
+            case "check3":
+                if (state) {
+                    check1.setSelected(true);
+                    check2.setSelected(true);
+                }
+                break;
+        }
+
+    }
+
+    public void notifyChange() {
+    }
+
 }

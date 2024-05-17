@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="PROTETIK - Clément Peponnet">
-        
+                        
+    
+    
+    
+    
     <chiamata cancelled="false" data="2024-04-18" durata="3" messaggio="false" newInterest="LISTINO" number="1" operatore="HUGO" previousInterest="LISTINO">ok la sua segretria mi conferma che sarò richiamato per iniziare collaborazione gli e era stato già dato un listino 50%</chiamata>
+                    
+
+    
+    
+    
+    <chiamata cancelled="false" data="2024-05-10" durata="1" messaggio="false" newInterest="NON_TROVATO" number="2" operatore="HUGO" previousInterest="LISTINO">HO LASCIATO MESSAGGIO IN SEGRETERIA PER ESSERE RICHIAMATO COME DA ACCORDI</chiamata>
+            
+
+    
+    <chiamata cancelled="false" data="2024-05-15" durata="2" messaggio="false" newInterest="NULLO" number="3" operatore="HUGO" previousInterest="LISTINO">non vogliono altri marchi </chiamata>
     
 </companyNotes>

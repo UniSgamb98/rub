@@ -28,6 +28,16 @@
     -mantlecol: #181825;
     -crustcol: #11111b;
 }
+#entryDetails .check-box{
+    -fx-opacity: 1.0;
+}
+#dataGrid *:disabled{
+    -fx-opacity: 1.0;
+    -fx-background-color: white;
+}
+#entryDetails .slider{
+    -fx-opacity: 1.0
+}
 /*
 .root {
     -fx-background-color: -basecol;

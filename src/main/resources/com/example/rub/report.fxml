@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.example.rub.objects.note.*?>
 <?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import com.example.rub.objects.note.NoteDisplayer?>
-<BorderPane id="report" prefHeight="690.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.ReportController">
+<BorderPane id="report" prefHeight="730.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.ReportController">
    <bottom>
        <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
            <Button layoutX="43.0" layoutY="124.0" mnemonicParsing="false" onAction="#doGoBack" text="Indietro" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" />
@@ -99,26 +99,69 @@
                 </LineChart>
                <GridPane>
                    <columnConstraints>
-                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="93.0" />
-                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.0" minWidth="10.0" prefWidth="111.0" />
+                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" />
+                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.0" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.0" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.0" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.0" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.0" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.0" minWidth="10.0" />
                    </columnConstraints>
                    <rowConstraints>
+                       <RowConstraints />
                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                    </rowConstraints>
-                   <Label text="Totale aziende contattate" wrapText="true" GridPane.rowIndex="1" />
-                   <Label text="Totale nuove campionature" wrapText="true" GridPane.rowIndex="3" />
-                   <Label text="Totale nuovi clienti" wrapText="true" GridPane.rowIndex="4" />
-                   <Label fx:id="totalUniqueContacts" text=": N/a" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                   <Label fx:id="totalNewSampling" text=": N/a" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                   <Label fx:id="totalNewClients" text=": N/a" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                   <Label text="Totale nuovi listini inviati" wrapText="true" GridPane.rowIndex="2" />
-                   <Label fx:id="totalNewPriceList" text=": N/a" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-               <Label text="Totale Comunicazioni" wrapText="true" />
-               <Label fx:id="totalCommunications" text=": N/a" GridPane.columnIndex="1" />
+                   <Label text="Totale aziende contattate" wrapText="true" GridPane.rowIndex="2" />
+                   <Label text="Totale nuove campionature" wrapText="true" GridPane.rowIndex="4" />
+                   <Label text="Totale nuovi clienti" wrapText="true" GridPane.rowIndex="5" />
+                   <Label fx:id="totalUniqueContacts" text=": N/a" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                   <Label fx:id="totalNewSampling" text=": N/a" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                   <Label fx:id="totalNewClients" text=": N/a" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                   <Label text="Totale nuovi listini inviati" wrapText="true" GridPane.rowIndex="3" />
+                   <Label fx:id="totalNewPriceList" text=": N/a" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               <Label text="Totale Comunicazioni" wrapText="true" GridPane.rowIndex="1" />
+               <Label fx:id="totalCommunications" text=": N/a" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               <Label text="Blank" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+               <Label fx:id="blanks" text=": N/a" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+               <Label text="Info" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                  <GridPane.margin>
+                     <Insets left="5.0" />
+                  </GridPane.margin></Label>
+               <Label fx:id="infos" text=": N/a" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+               <Label text="Non Trovati" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+               <Label text="Non Inerenti:" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+               <Label text="Interesse Nullo" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+               <Label text="Richiamare" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+               <Label fx:id="notFounds" text=": N/a" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+               <Label fx:id="notRelateds" text=": N/a" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+               <Label fx:id="nullInterests" text=": N/a" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+               <Label text="Listini" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                  <GridPane.margin>
+                     <Insets left="5.0" />
+                  </GridPane.margin></Label>
+               <Label fx:id="priceLists" text=": N/a" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+               <Label fx:id="samples" text=": N/a" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+               <Label text="Campioni" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                  <GridPane.margin>
+                     <Insets left="5.0" />
+                  </GridPane.margin></Label>
+               <Label text="Clienti" GridPane.columnIndex="5" GridPane.rowIndex="4">
+                  <GridPane.margin>
+                     <Insets left="5.0" />
+                  </GridPane.margin></Label>
+               <Label fx:id="recalls" text=": N/a" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+               <Label fx:id="clients" text=": N/a" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+               <Separator orientation="VERTICAL" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="5">
+                  <GridPane.margin>
+                     <Insets left="3.0" />
+                  </GridPane.margin>
+               </Separator>
+               <Label text="Novità" GridPane.columnSpan="2" GridPane.halignment="CENTER" />
+               <Label text="Lavoro Svolto" GridPane.columnIndex="3" GridPane.columnSpan="4" GridPane.halignment="CENTER" />
                </GridPane>
             <VBox.margin>
                <Insets left="15.0" right="15.0" />
