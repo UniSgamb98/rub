@@ -107,7 +107,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
 
     public void doGoBack(ActionEvent event) {
         if (!entryToDisplayDetails.compare(getContatto())){
-            ButtonType yes = new ButtonType("yes");
+            ButtonType yes = new ButtonType("si");
             ButtonType no = new ButtonType("no");
             Alert a = new Alert(Alert.AlertType.CONFIRMATION, "Salvare prima di continuare?", yes, no);
             a.setTitle("Salvataggio");
@@ -209,6 +209,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
             callStage.setScene(scene);
             callStage.getIcons().add(new Image("AppIcon.png"));
             callStage.show();
+            MyUtils.log(LogType.WINDOW, scene.getRoot().getId());
         } catch (IOException e) {
             MyUtils.log(LogType.ERROR);
             MyUtils.log(LogType.MESSAGE, e);
@@ -252,7 +253,6 @@ public class EntryDetailsPageController implements Initializable, Runnable {
             entryToDisplayDetails = DBManager.retriveEntry(entryToDisplayDetails.getId());
         }
         ragioneSociale.setText(entryToDisplayDetails.getRagioneSociale());
-      //  paese.textProperty().addListener((obs, oldVal, newVal) -> notifyChange());
         personaDiRiferimento.setText(entryToDisplayDetails.getPersonaRiferimento());
         paese.setText(entryToDisplayDetails.getPaese());
         citta.setText(entryToDisplayDetails.getCitta());
