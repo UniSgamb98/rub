@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="DENTIDIS SARL">
+                    
+    
+    
+    
+    <chiamata cancelled="false" checkpoint="0" data="2024-04-18" durata="3" messaggio="false" newInterest="INFO" number="1" operatore="HUGO" previousInterest="INFO">Richiamare nel pomeriggio</chiamata>
                 
     
     
-    <chiamata cancelled="false" data="2024-04-18" durata="3" messaggio="false" newInterest="INFO" number="1" operatore="HUGO" previousInterest="INFO">Richiamare nel pomeriggio</chiamata>
+    
+    <chiamata cancelled="false" checkpoint="0" data="2024-04-18" durata="4" messaggio="false" newInterest="INFO" number="2" operatore="HUGO" previousInterest="INFO">SPIEGO TUTTO AD AUDREY CHE SI RICORDA POCO E APPROFITTO PER POTER INVIARE UN'ALTRA MAIL.  SI SCUSA PERCHE'MVANNO SPESSO IN GIRO PER FIERE E SONO IMPEGNATI, DALLE PRECEDENTI CONVERSAZIONI COMUNQUE RISULTA UN BUON FEEDBACK ED INTERESSAMENTO. </chiamata>
             
-    
-    
-    <chiamata cancelled="false" data="2024-04-18" durata="4" messaggio="false" newInterest="INFO" number="2" operatore="HUGO" previousInterest="INFO">SPIEGO TUTTO AD AUDREY CHE SI RICORDA POCO E APPROFITTO PER POTER INVIARE UN'ALTRA MAIL.  SI SCUSA PERCHE'MVANNO SPESSO IN GIRO PER FIERE E SONO IMPEGNATI, DALLE PRECEDENTI CONVERSAZIONI COMUNQUE RISULTA UN BUON FEEDBACK ED INTERESSAMENTO. </chiamata>
-        
 
-    <chiamata cancelled="false" data="2024-05-07" durata="3" messaggio="false" newInterest="RICHIAMARE" number="3" operatore="HUGO" previousInterest="INFO">parlo con Audery che  mi conferma l'interesse di Pisseloup per una collaborazione resto in attesa per un loro feeedback</chiamata>
+    
+    <chiamata cancelled="false" checkpoint="0" data="2024-05-07" durata="3" messaggio="false" newInterest="RICHIAMARE" number="3" operatore="HUGO" previousInterest="INFO">parlo con Audery che  mi conferma l'interesse di Pisseloup per una collaborazione resto in attesa per un loro feeedback</chiamata>
+    
 </companyNotes>

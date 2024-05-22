@@ -23,7 +23,7 @@ public class Interessamento {
         String ret = null;
         switch (getStatus()){
             case BLANK:
-                ret = "N/a";
+                ret = "Nessuna novità";
                 break;
             case NON_TROVATO:
                 ret = "Trovato nessuno che mi ha risposto";

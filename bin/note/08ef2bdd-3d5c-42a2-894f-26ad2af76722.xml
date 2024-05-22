@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="dental EGGERT GmbH">
+                    
+    
+    
+    
+    <chiamata cancelled="false" checkpoint="0" data="2024-04-19" durata="5" messaggio="false" newInterest="RICHIAMARE" number="1" operatore="SANTOLO" previousInterest="RICHIAMARE">Parlato con la Signora Jerneitzig, suggerisce di parlare con il Signor Mueller (attualmente in malattia). Lui è più esperto di prodotti tecnici.</chiamata>
                 
-    
-    
-    <chiamata cancelled="false" data="2024-04-19" durata="5" messaggio="false" newInterest="RICHIAMARE" number="1" operatore="SANTOLO" previousInterest="RICHIAMARE">Parlato con la Signora Jerneitzig, suggerisce di parlare con il Signor Mueller (attualmente in malattia). Lui è più esperto di prodotti tecnici.</chiamata>
-            
 
     
-    <chiamata cancelled="false" data="2024-04-22" durata="3" messaggio="false" newInterest="NON_TROVATO" number="2" operatore="SANTOLO" previousInterest="RICHIAMARE">Il signor Mueller non è ancora rientrato, riprovare.</chiamata>
     
-    <chiamata cancelled="false" data="2024-04-24" durata="3" messaggio="false" newInterest="NON_INERENTE" number="3" operatore="SANTOLO" previousInterest="RICHIAMARE">Ho parlato con il Signor Mueller, loro vendono i prodotti di Dental-Union.
+    <chiamata cancelled="false" checkpoint="0" data="2024-04-22" durata="3" messaggio="false" newInterest="NON_TROVATO" number="2" operatore="SANTOLO" previousInterest="RICHIAMARE">Il signor Mueller non è ancora rientrato, riprovare.</chiamata>
+        
+    
+    <chiamata cancelled="false" checkpoint="0" data="2024-04-24" durata="3" messaggio="false" newInterest="NON_INERENTE" number="3" operatore="SANTOLO" previousInterest="RICHIAMARE">Ho parlato con il Signor Mueller, loro vendono i prodotti di Dental-Union.
 Quindi referente sempre P.Josten</chiamata>
+    
 </companyNotes>

@@ -23,44 +23,44 @@ public class InteressamentoComp implements Comparator<InteressamentoStatus> {
                     }
                     break;
                 case NON_INERENTE:
-                    if (i2 == InteressamentoStatus.BLANK || i2 == InteressamentoStatus.NON_TROVATO) {
+                    if (i2 == InteressamentoStatus.BLANK || i2 == InteressamentoStatus.NON_TROVATO || i2 == InteressamentoStatus.RICHIAMARE) {
                         ret = 1;
-                    } else if (i2 == InteressamentoStatus.NULLO || i2 == InteressamentoStatus.RICHIAMARE || i2 == InteressamentoStatus.INFO || i2 == InteressamentoStatus.LISTINO || i2 == InteressamentoStatus.CAMPIONE || i2 == InteressamentoStatus.CLIENTE ){
+                    } else if (i2 == InteressamentoStatus.NULLO || i2 == InteressamentoStatus.INFO || i2 == InteressamentoStatus.LISTINO || i2 == InteressamentoStatus.CAMPIONE || i2 == InteressamentoStatus.CLIENTE ){
                         ret = -1;
                     }
                     break;
                 case NULLO:
-                    if (i2 == InteressamentoStatus.BLANK || i2 == InteressamentoStatus.NON_TROVATO || i2 == InteressamentoStatus.NON_INERENTE) {
+                    if (i2 == InteressamentoStatus.BLANK || i2 == InteressamentoStatus.NON_TROVATO || i2 == InteressamentoStatus.RICHIAMARE) {
                         ret = 1;
-                    } else if (i2 == InteressamentoStatus.RICHIAMARE || i2 == InteressamentoStatus.INFO || i2 == InteressamentoStatus.LISTINO || i2 == InteressamentoStatus.CAMPIONE || i2 == InteressamentoStatus.CLIENTE ){
+                    } else if (i2 == InteressamentoStatus.INFO || i2 == InteressamentoStatus.LISTINO || i2 == InteressamentoStatus.CAMPIONE || i2 == InteressamentoStatus.CLIENTE || i2 == InteressamentoStatus.NON_INERENTE ){
                         ret = -1;
                     }
                     break;
                 case RICHIAMARE:
-                    if (i2 == InteressamentoStatus.BLANK || i2 == InteressamentoStatus.NON_TROVATO || i2 == InteressamentoStatus.NON_INERENTE || i2 == InteressamentoStatus.NULLO) {
+                    if (i2 == InteressamentoStatus.BLANK || i2 == InteressamentoStatus.NON_TROVATO) {
                         ret = 1;
-                    } else if (i2 == InteressamentoStatus.INFO || i2 == InteressamentoStatus.LISTINO || i2 == InteressamentoStatus.CAMPIONE || i2 == InteressamentoStatus.CLIENTE ){
+                    } else if (i2 == InteressamentoStatus.INFO || i2 == InteressamentoStatus.LISTINO || i2 == InteressamentoStatus.CAMPIONE || i2 == InteressamentoStatus.CLIENTE || i2 == InteressamentoStatus.NON_INERENTE || i2 == InteressamentoStatus.NULLO ){
                         ret = -1;
                     }
                     break;
                 case INFO:
-                    if (i2 == InteressamentoStatus.BLANK || i2 == InteressamentoStatus.NON_TROVATO || i2 == InteressamentoStatus.NON_INERENTE || i2 == InteressamentoStatus.NULLO || i2 == InteressamentoStatus.RICHIAMARE) {
+                    if (i2 == InteressamentoStatus.BLANK || i2 == InteressamentoStatus.NON_TROVATO || i2 == InteressamentoStatus.RICHIAMARE) {
                         ret = 1;
-                    } else if (i2 == InteressamentoStatus.LISTINO || i2 == InteressamentoStatus.CAMPIONE || i2 == InteressamentoStatus.CLIENTE){
+                    } else if (i2 == InteressamentoStatus.LISTINO || i2 == InteressamentoStatus.CAMPIONE || i2 == InteressamentoStatus.CLIENTE || i2 == InteressamentoStatus.NON_INERENTE || i2 == InteressamentoStatus.NULLO){
                         ret = -1;
                     }
                     break;
                 case LISTINO:
-                    if (i2 == InteressamentoStatus.BLANK || i2 == InteressamentoStatus.NON_TROVATO || i2 == InteressamentoStatus.NON_INERENTE || i2 == InteressamentoStatus.NULLO || i2 == InteressamentoStatus.RICHIAMARE || i2 == InteressamentoStatus.INFO) {
+                    if (i2 == InteressamentoStatus.BLANK || i2 == InteressamentoStatus.NON_TROVATO || i2 == InteressamentoStatus.RICHIAMARE || i2 == InteressamentoStatus.INFO) {
                         ret = 1;
-                    } else if (i2 == InteressamentoStatus.CAMPIONE || i2 == InteressamentoStatus.CLIENTE){
+                    } else if (i2 == InteressamentoStatus.CAMPIONE || i2 == InteressamentoStatus.CLIENTE || i2 == InteressamentoStatus.NON_INERENTE || i2 == InteressamentoStatus.NULLO){
                         ret = -1;
                     }
                     break;
                 case CAMPIONE:
-                    if (i2 == InteressamentoStatus.BLANK || i2 == InteressamentoStatus.NON_TROVATO || i2 == InteressamentoStatus.NON_INERENTE || i2 == InteressamentoStatus.NULLO || i2 == InteressamentoStatus.RICHIAMARE || i2 == InteressamentoStatus.INFO || i2 == InteressamentoStatus.LISTINO) {
+                    if (i2 == InteressamentoStatus.BLANK || i2 == InteressamentoStatus.NON_TROVATO || i2 == InteressamentoStatus.RICHIAMARE || i2 == InteressamentoStatus.INFO || i2 == InteressamentoStatus.LISTINO) {
                         ret = 1;
-                    }else if (i2 == InteressamentoStatus.CLIENTE){
+                    }else if (i2 == InteressamentoStatus.CLIENTE || i2 == InteressamentoStatus.NON_INERENTE || i2 == InteressamentoStatus.NULLO){
                         ret = -1;
                     }
                     break;

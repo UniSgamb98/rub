@@ -1,6 +1,7 @@
 package com.example.rub;
 
 import com.example.rub.enums.LogType;
+import com.example.rub.enums.comparator.EntryComp;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.MyUtils;
 import com.example.rub.objects.note.DisplayableEntry;
@@ -49,8 +50,14 @@ public class SearchEntryController implements Initializable {
     }
     public void savageOldList(ObservableList<DisplayableEntry> oldList){
         results.clear();
-        for (DisplayableEntry i : oldList){
-            results.add(new DisplayableEntry(i.getEntry().getId()));
+        try {
+            for (DisplayableEntry i : oldList) {
+                results.add(new DisplayableEntry(i.getEntry().getId()));
+            }
+        } catch (NullPointerException ignored){}
+        if (results.isEmpty()){
+            for (UUID i : DBManager.getAllEntries())
+                results.add(new DisplayableEntry(i));
         }
     }
 
@@ -62,6 +69,7 @@ public class SearchEntryController implements Initializable {
     }
     private void displayResults(LinkedList<UUID> resultToDisplay){
         results.clear();
+        resultToDisplay.sort(new EntryComp());
 
         for (UUID uuid : resultToDisplay) {
             results.add(DBManager.getDisplayableEntry(uuid));

@@ -242,6 +242,26 @@ public class ReportController implements Initializable {
         reportInfo[3] = 0;
         reportInfo[4] = 0;
 
+        workTips[0] = "";
+        workTips[1] = "";
+        workTips[2] = "";
+        workTips[3] = "";
+        workTips[4] = "";
+        workTips[5] = "";
+        workTips[6] = "";
+        workTips[7] = "";
+        workTips[8] = "";
+
+        workInfo[0] = 0;
+        workInfo[1] = 0;
+        workInfo[2] = 0;
+        workInfo[3] = 0;
+        workInfo[4] = 0;
+        workInfo[5] = 0;
+        workInfo[6] = 0;
+        workInfo[7] = 0;
+        workInfo[8] = 0;
+
         for (UUID i : DBManager.getAllEntries()){
             Contatto j = DBManager.retriveEntry(i);
             boolean firstTime = true;

@@ -244,7 +244,6 @@ public class Contatto implements Serializable {
         if (!Objects.equals(ultimaChiamata, c.getUltimaChiamata())) ret = false;
         if (!Objects.equals(prossimaChiamata, c.getProssimaChiamata())) ret = false;
         if (!sitoWeb.equals(c.getSitoWeb())) ret = false;
-        if (!id.equals(c.getId())) ret = false;
         if (!noteId.equals(c.getNoteId())) ret = false;
         if (!operator.equals(c.getOperator())) ret = false;
         if (!(coinvolgimento == (c.getCoinvolgimento()))) ret = false;

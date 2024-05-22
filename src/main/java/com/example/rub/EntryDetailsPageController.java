@@ -1,8 +1,10 @@
 package com.example.rub;
 
 import com.example.rub.beans.Contatto;
+import com.example.rub.beans.OpenedEntry;
 import com.example.rub.enums.Interessamento.InteressamentoStatus;
 import com.example.rub.enums.LogType;
+import com.example.rub.enums.Outcome;
 import com.example.rub.enums.TipoCliente;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
@@ -132,7 +134,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         } catch (Exception e) {
             System.out.println("Errore durante la transizione in search-entry con doGoBack in EntryDetailsPageController");
             MyUtils.log(LogType.ERROR);
-            MyUtils.log(LogType.MESSAGE, e);
+            MyUtils.log(LogType.MESSAGE, e );
         }
     }
 
@@ -145,12 +147,12 @@ public class EntryDetailsPageController implements Initializable, Runnable {
 
         if (isModifiable.isSelected()) {  //Checkbox = true
             try {
-                GlobalContext.openedEntries = (ArrayList<UUID>) MyUtils.read("fileAperti");
+                GlobalContext.openedEntries = (ArrayList<OpenedEntry>) MyUtils.read("fileAperti");
             } catch (Exception e) {
                 GlobalContext.openedEntries = new ArrayList<>();
             }
-            if (!GlobalContext.openedEntries.contains(entryToDisplayDetails.getId())) {
-                GlobalContext.openedEntries.add(entryToDisplayDetails.getId());
+            if (!GlobalContext.isEntryOpened(entryToDisplayDetails.getId())) {
+                GlobalContext.openedEntries.add(new OpenedEntry(entryToDisplayDetails.getId(), GlobalContext.operator));
                 MyUtils.write(GlobalContext.openedEntries, "fileAperti");
                 setFieldDisability(false);
             } else {    //Apertura fallita
@@ -161,12 +163,12 @@ public class EntryDetailsPageController implements Initializable, Runnable {
                 alert.showAndWait();
             }
         } else {    //Checkbox = false
-            if (checkCheck()){
-                setFieldDisability(true);
+            if (HasBeenChanged()){
                 try {
-                    GlobalContext.openedEntries = (ArrayList<UUID>) MyUtils.read("fileAperti");
-                    GlobalContext.openedEntries.remove(entryToDisplayDetails.getId());
+                    GlobalContext.openedEntries = (ArrayList<OpenedEntry>) MyUtils.read("fileAperti");
+                    GlobalContext.closeOpenedEntry(entryToDisplayDetails.getId());
                     MyUtils.write(GlobalContext.openedEntries, "fileAperti");
+                    setFieldDisability(true);
                 } catch (IOException | ClassNotFoundException e) {
                     MyUtils.log(LogType.ERROR);
                     MyUtils.log(LogType.MESSAGE, e);
@@ -176,7 +178,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         }
     }
 
-    private boolean checkCheck() {
+    private boolean HasBeenChanged() {
         boolean ret = true;
         if (!entryToDisplayDetails.compare(getContatto())){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -239,11 +241,26 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         }
     }
     public void doSaveChanges() {
-        if(DBManager.modifyEntry(entryToDisplayDetails.getId(),getContatto())){
-            Thread thread = new Thread(this);
-            thread.start();
-            entryToDisplayDetails = DBManager.retriveEntry(entryToDisplayDetails.getId());
+        Outcome outcome = DBManager.modifyEntry(entryToDisplayDetails.getId(), getContatto());
+        Thread thread;
+        switch (outcome){
+            case SUCCESS:
+                thread = new Thread(this);
+                thread.start();
+                entryToDisplayDetails = DBManager.retriveEntry(entryToDisplayDetails.getId());
+                break;
+            case FAILURE:
+                //do nothing
+                break;
+            case RECOVERED_SUCCESS:
+                thread = new Thread(this);
+                thread.start();
+                recoverIdOfDisplayedEntry();
+                break;
         }
+    }
+    public void recoverIdOfDisplayedEntry(){
+        entryToDisplayDetails = DBManager.retriveEntry(DBManager.recoverFromNoteId(entryToDisplayDetails.getNoteId()));
     }
 
     public void init(boolean fromScratch) {
@@ -283,12 +300,12 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         emailSenderShortcut.setDestinatario(entryToDisplayDetails.getEmailReferente());
 
         try {
-            GlobalContext.openedEntries = (ArrayList<UUID>) MyUtils.read("fileAperti");
+            GlobalContext.openedEntries = (ArrayList<OpenedEntry>) MyUtils.read("fileAperti");
         } catch (Exception e) {
             GlobalContext.openedEntries = new ArrayList<>();
         }
-        if (!GlobalContext.openedEntries.contains(entryToDisplayDetails.getId())) {
-            GlobalContext.openedEntries.add(entryToDisplayDetails.getId());
+        if (!GlobalContext.isEntryOpened(entryToDisplayDetails.getId())) {
+            GlobalContext.openedEntries.add(new OpenedEntry(entryToDisplayDetails.getId(), GlobalContext.operator));
             MyUtils.write(GlobalContext.openedEntries, "fileAperti");
             setFieldDisability(false);
             isModifiable.setSelected(true);
@@ -334,7 +351,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
             }
         }
 
-        newEntry.setId(entryToDisplayDetails.getId());          // questi servono per far funzionare il metodo Contatto.equals(Contatto)
+        // questi servono per far funzionare il metodo Contatto.equals(Contatto)
         newEntry.setNoteId(entryToDisplayDetails.getNoteId());
         newEntry.setOperator(entryToDisplayDetails.getOperator());
         newEntry.setAcquisizione(entryToDisplayDetails.getAcquisizione());
@@ -350,8 +367,8 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         for (TextField textField : Arrays.asList(ragioneSociale, personaDiRiferimento, citta, paese, emailReferente, telefono, regione, indirizzo, provincia, cap, civico, partitaIva, codiceFiscale, emailGenerica, sito, pec, titolare)) {
             textField.setDisable(state);
         }
-        /*involvement.setDisable(state);
-        for (CheckBox checkpoint : Arrays.asList(check1, check2, check3)){
+        involvement.setDisable(state);
+        /*for (CheckBox checkpoint : Arrays.asList(check1, check2, check3)){
             checkpoint.setDisable(state);
         }*/
         interessamento.setDisable(state);
@@ -373,15 +390,13 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         });
     }
 
-
-
     public void shutdown(){
             try {
-                GlobalContext.openedEntries = (ArrayList<UUID>) MyUtils.read("fileAperti");
+                GlobalContext.openedEntries = (ArrayList<OpenedEntry>) MyUtils.read("fileAperti");
             } catch (Exception e){
                 GlobalContext.openedEntries = new ArrayList<>();
             }
-            GlobalContext.openedEntries.remove(entryToDisplayDetails.getId());
+            GlobalContext.closeOpenedEntry(entryToDisplayDetails.getId());
             MyUtils.write(GlobalContext.openedEntries,"fileAperti");
     }
     public void refresh(){
