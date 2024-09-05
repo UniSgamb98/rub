@@ -96,7 +96,30 @@ public class FirstPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        DBManager.init();
+        if (DBManager.isNull()) {
+            DBManager.init();
+            try {
+                GlobalContext.notProgrammedCalls.removeIf(i -> DBManager.retriveEntry(i).getProssimaChiamata() != null);
+                if (!GlobalContext.notProgrammedCalls.isEmpty()) {
+                    FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("login-reminder.fxml")));
+                    Parent root = loader.load();
+                    LogoutController controller = loader.getController();
+                    controller.setProperties(scene);
+                    Scene newScene = new Scene(root);
+                    Stage newStage = new Stage();
+                    newStage.getIcons().add(new Image("AppIcon.png"));
+                    newStage.setTitle("Promemoria amichevole");
+
+                    newStage.setScene(newScene);
+                    newStage.show();
+                } else {
+                    MyUtils.log(LogType.MESSAGE, "Non ha promemoria dall'ultimo log out");
+                }
+            } catch (IOException e) {
+                System.out.println("NIENTE DA RICORDARE");
+                MyUtils.log(LogType.MESSAGE, "Non ha promemoria dall'ultimo log out");
+            }
+        }
         if (GlobalContext.operator == Operatori.TOMMASO){
             importButton.setVisible(true);
             importButton.setPrefSize(130.0,130.0);
@@ -110,31 +133,6 @@ public class FirstPageController implements Initializable {
         /*    settingsButton.setPrefSize(130.0, 130.0);
             settingsButton.setVisible(true);
             settingsButton.setMinHeight(Region.USE_COMPUTED_SIZE);*/
-        }
-        try {
-            LinkedList<UUID> temp = new LinkedList<>();
-            for (UUID i : GlobalContext.notProgrammedCalls){
-                if (DBManager.retriveEntry(i).getProssimaChiamata() == null){
-                    temp.add(i);
-                }
-            }
-            GlobalContext.notProgrammedCalls = temp;
-           // GlobalContext.notProgrammedCalls.removeIf(i -> DBManager.retriveEntry(i).getProssimaChiamata() != null);
-            if (!GlobalContext.notProgrammedCalls.isEmpty()){
-                FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("login-reminder.fxml")));
-                Parent root = loader.load();
-                LogoutController controller = loader.getController();
-                controller.setProperties(scene);
-                Scene newScene = new Scene(root);
-                Stage newStage = new Stage();
-                newStage.setScene(newScene);
-                newStage.show();
-            } else{
-                MyUtils.log(LogType.MESSAGE, "Non ha promemoria dall'ultimo log out");
-            }
-        }  catch (IOException e) {
-            System.out.println("NIENTE DA RICORDARE");
-            MyUtils.log(LogType.MESSAGE, "Non ha promemoria dall'ultimo log out");
         }
     }
 

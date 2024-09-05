@@ -38,6 +38,8 @@ public class Contatto implements Serializable {
     private double coinvolgimento;
     private int checkpoint;
     private LocalDate acquisizione;
+    private String telefono2;
+    private String cellulare;
 
     public Contatto(){
         noteId = UUID.randomUUID();
@@ -45,6 +47,12 @@ public class Contatto implements Serializable {
 
     public String getTelefono() {
         return telefono;
+    }
+    public String getTelefono2() {
+        return telefono2;
+    }
+    public String getCellulare() {
+        return cellulare;
     }
     public int getCheckpoint() {
         return checkpoint;
@@ -133,6 +141,12 @@ public class Contatto implements Serializable {
     }
     public void setNoteId(UUID noteId) {
         this.noteId = noteId;
+    }
+    public void setTelefono2(String telefono2) {
+        this.telefono2 = telefono2;
+    }
+    public void setCellulare(String cellulare) {
+        this.cellulare = cellulare;
     }
     public void setCheckpoint(int checkpoint) {
         this.checkpoint = checkpoint;
@@ -249,6 +263,8 @@ public class Contatto implements Serializable {
         if (!(coinvolgimento == (c.getCoinvolgimento()))) ret = false;
         if (!(checkpoint == (c.getCheckpoint()))) ret = false;
         if (!acquisizione.equals(c.getAcquisizione())) ret = false;
+        if (!telefono2.equals(c.getTelefono2())) ret = false;
+        if (!cellulare.equals(c.getCellulare())) ret = false;
         return ret;
     }
 }

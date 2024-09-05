@@ -4,6 +4,7 @@ import com.example.rub.beans.Contatto;
 import com.example.rub.beans.OpenedEntry;
 import com.example.rub.enums.Interessamento.InteressamentoStatus;
 import com.example.rub.enums.LogType;
+import com.example.rub.enums.Operatori;
 import com.example.rub.enums.Outcome;
 import com.example.rub.enums.TipoCliente;
 import com.example.rub.functionalities.DBManager;
@@ -26,8 +27,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -104,8 +109,21 @@ public class EntryDetailsPageController implements Initializable, Runnable {
     public CheckBox check3;
     @FXML
     public Button registerCallButton;
+    @FXML
+    public VBox adminExpandedInfos;
+    @FXML
+    public ChoiceBox<Operatori> operator;
+    @FXML
+    public TextField noteId;
+    @FXML
+    public DatePicker acquisition;
+    @FXML
+    public TextField telefono2;
+    @FXML
+    public TextField cellulare;
     private Contatto entryToDisplayDetails;
     ObservableList<DisplayableEntry> oldResults;
+    final KeyCombination keyCombinationShiftC = new KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_DOWN);
 
     public void doGoBack(ActionEvent event) {
         if (!entryToDisplayDetails.compare(getContatto())){
@@ -264,6 +282,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
     }
 
     public void init(boolean fromScratch) {
+        adminExpandedInfos.setVisible(false);
         if (fromScratch) {  //true entro da search entry / false ho chiuso la finestra di registra chiamata
             entryToDisplayDetails = entryProperty.get();
         } else {
@@ -298,6 +317,10 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         if (entryToDisplayDetails.getCheckpoint() >= 3) {check3.setSelected(true);}
 
         emailSenderShortcut.setDestinatario(entryToDisplayDetails.getEmailReferente());
+
+        operator.setValue(entryToDisplayDetails.getOperator());
+        noteId.setText(entryToDisplayDetails.getNoteId().toString());
+        acquisition.setValue(entryToDisplayDetails.getAcquisizione());
 
         try {
             GlobalContext.openedEntries = (ArrayList<OpenedEntry>) MyUtils.read("fileAperti");
@@ -336,6 +359,8 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         newEntry.setProssimaChiamata(prossimaChiamata.getValue());
         newEntry.setSitoWeb(sito.getText());
         newEntry.setCoinvolgimento(involvement.getValue());
+        newEntry.setCellulare(cellulare.getText());
+        newEntry.setTelefono2(telefono2.getText());
 
         if (check3.isSelected()){
             newEntry.setCheckpoint(3);
@@ -352,9 +377,9 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         }
 
         // questi servono per far funzionare il metodo Contatto.equals(Contatto)
-        newEntry.setNoteId(entryToDisplayDetails.getNoteId());
-        newEntry.setOperator(entryToDisplayDetails.getOperator());
-        newEntry.setAcquisizione(entryToDisplayDetails.getAcquisizione());
+        newEntry.setNoteId(UUID.fromString(noteId.getText()));
+        newEntry.setOperator(operator.getValue());
+        newEntry.setAcquisizione(acquisition.getValue());
         return newEntry;
     }
     public void setEntryProperty(Contatto entry){
@@ -364,28 +389,38 @@ public class EntryDetailsPageController implements Initializable, Runnable {
         noteDisplayer.setDocument(entryToDisplayDetails.getId());
     }
     private void setFieldDisability(boolean state){
-        for (TextField textField : Arrays.asList(ragioneSociale, personaDiRiferimento, citta, paese, emailReferente, telefono, regione, indirizzo, provincia, cap, civico, partitaIva, codiceFiscale, emailGenerica, sito, pec, titolare)) {
+        for (TextField textField : Arrays.asList(ragioneSociale, personaDiRiferimento, citta, paese, emailReferente, telefono, telefono2, cellulare, regione, indirizzo, provincia, cap, civico, partitaIva, codiceFiscale, emailGenerica, sito, pec, titolare)) {
             textField.setDisable(state);
         }
         involvement.setDisable(state);
-        /*for (CheckBox checkpoint : Arrays.asList(check1, check2, check3)){
+        for (CheckBox checkpoint : Arrays.asList(check1, check2, check3)){
             checkpoint.setDisable(state);
-        }*/
+        }
         interessamento.setDisable(state);
         tipoCliente.setDisable(state);
         ultimaChiamata.setDisable(state);
         prossimaChiamata.setDisable(state);
         saveButton.setVisible(!state);
         registerCallButton.setVisible(!state);
+
+        operator.setDisable(state);
+        noteId.setDisable(state);
+        acquisition.setDisable(state);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tipoCliente.getItems().addAll(TipoCliente.LABORATORIO, TipoCliente.RIVENDITORE, TipoCliente.CENTROFRESAGGIO);
+        operator.getItems().addAll(Operatori.HUGO, Operatori.SANTOLO, Operatori.VICTORIA, Operatori.TOMMASO, Operatori.GAETANO);
         interessamento.getItems().addAll(InteressamentoStatus.NON_TROVATO, InteressamentoStatus.NON_INERENTE, InteressamentoStatus.NULLO, InteressamentoStatus.RICHIAMARE, InteressamentoStatus.INFO, InteressamentoStatus.LISTINO, InteressamentoStatus.CAMPIONE, InteressamentoStatus.CLIENTE);
         gridData.addEventFilter(ActionEvent.ACTION, event -> {
             if (event.getTarget() instanceof NoteDisplayer) {
                 refresh();
+            }
+        });
+        ragioneSociale.setOnKeyPressed(event -> {
+            if (keyCombinationShiftC.match(event)) {
+                adminExpandedInfos.setVisible(true);
             }
         });
     }

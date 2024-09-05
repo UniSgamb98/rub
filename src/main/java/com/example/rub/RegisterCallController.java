@@ -74,7 +74,7 @@ public class RegisterCallController implements Initializable {
             MyUtils.log(LogType.MESSAGE, e);
             System.out.println("Errore durante la scrittura del file Xml delle note");
         }
-        if (prossimaChiamata.getValue()==null && !GlobalContext.notProgrammedCalls.contains(entryProperty.get().getId())){
+        if ((prossimaChiamata.getValue()==null && (!Interessamento.fromQuestionForm(feedback.getValue()).equals(InteressamentoStatus.NULLO) && !(Interessamento.fromQuestionForm(feedback.getValue()).equals(InteressamentoStatus.NON_INERENTE) )) && !GlobalContext.notProgrammedCalls.contains(entryProperty.get().getId()))){
             if (outcome.equals(Outcome.RECOVERED_SUCCESS))  entryProperty.set(DBManager.retriveEntry(DBManager.recoverFromNoteId(entryProperty.get().getNoteId())));
             GlobalContext.notProgrammedCalls.add(entryProperty.get().getId());
         }

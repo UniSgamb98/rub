@@ -3,6 +3,7 @@ package com.example.rub;
 import com.example.rub.beans.Contatto;
 import com.example.rub.enums.LogType;
 import com.example.rub.enums.Operatori;
+import com.example.rub.enums.comparator.EntryComp;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
 import com.example.rub.functionalities.MyUtils;
@@ -330,6 +331,7 @@ public class ReportController implements Initializable {
 
     private void displayResults(LinkedList<UUID> resultToDisplay){
         contactedList.clear();
+        resultToDisplay.sort(new EntryComp());
         for (UUID uuid : resultToDisplay) {
             contactedList.add(DBManager.getDisplayableEntry(uuid));
         }

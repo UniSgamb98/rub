@@ -12,7 +12,7 @@ public class InteressamentoComp implements Comparator<InteressamentoStatus> {
             switch (i1) {
                 case BLANK:
                     if (i2 != InteressamentoStatus.BLANK) {
-                        ret = 1;
+                        ret = -1;
                     }
                     break;
                 case NON_TROVATO:

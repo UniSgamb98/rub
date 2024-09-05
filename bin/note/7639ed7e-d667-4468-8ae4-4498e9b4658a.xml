@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="ANPHI DENTAL">
-                                
+                                                
+    
+    
+    
+    
     
     
     
@@ -8,31 +12,62 @@
     
     
     <chiamata cancelled="false" checkpoint="0" data="2024-04-18" durata="3" messaggio="false" newInterest="LISTINO" number="1" operatore="HUGO" previousInterest="LISTINO">LA SUA ASSISTENTE MI DA APPUNTAMENTO TELEFONICO CON PHILIPPE PISSELOUP MERCOLEDI 24 IN MATTINATA. </chiamata>
-                            
+                                            
 
     
     
     
     
     
+    
+    
+    
+    
     <chiamata cancelled="false" checkpoint="0" data="2024-04-24" durata="3" messaggio="false" newInterest="RICHIAMARE" number="2" operatore="HUGO" previousInterest="LISTINO">LA SUA SEGRETARIA MI DICE CHE NON E' IN UFFICIO NEMMENO OGGI OERO' DAL SITO VEDO CHE HA 4 FRESATORI PERCIO' PROVO A FARE POFFERTA LISTINO 50% PE RAVERE UNA SUA REAZIONE DATO CHE A FEBBRAIO AVEVA MOSTRATO INTERESSE PER I NOSTRI PRODOTTI. </chiamata>
-                    
+                                    
+    
+    
+    
+    
     
     
     
     
     <chiamata cancelled="false" checkpoint="0" data="2024-05-07" durata="1" messaggio="false" newInterest="NON_TROVATO" number="3" operatore="HUGO" previousInterest="LISTINO"/>
-                
+                                
+    
+    
+    
+    
     
     
     
     <chiamata cancelled="false" checkpoint="0" data="2024-05-09" durata="1" messaggio="false" newInterest="NON_TROVATO" number="4" operatore="HUGO" previousInterest="LISTINO"/>
-            
+                            
     
     
-    <chiamata cancelled="false" checkpoint="0" data="2024-05-10" durata="1" messaggio="false" newInterest="NON_TROVATO" number="5" operatore="HUGO" previousInterest="LISTINO">SEMPRE SEGRTERIA RIORGANIZZO CHIAMATA. </chiamata>
-        
+    
+    
+    
+    
+    <chiamata cancelled="false" checkpoint="0" data="2024-05-10" durata="1" messaggio="false" newInterest="NON_TROVATO" number="5" operatore="HUGO" previousInterest="LISTINO">SEMPRE SEGRETERIA RIORGANIZZO CHIAMATA. </chiamata>
+                        
+    
+    
+    
+    
     
     <chiamata cancelled="false" checkpoint="0" data="2024-05-15" durata="3" messaggio="false" newInterest="RICHIAMARE" number="6" operatore="HUGO" previousInterest="LISTINO">parlato con la moglie lui molto occupato anche con la scuola  ..richiamo settimana prossima</chiamata>
+                    
+
     
+    
+    
+    <chiamata cancelled="false" checkpoint="0" data="2024-05-21" durata="2" messaggio="false" newInterest="RICHIAMARE" number="7" operatore="HUGO" previousInterest="LISTINO">appuntamento telefonico ore 11 lui ha pure una scuola perciò utile anche per eventuali workshop Orodent. </chiamata>
+            
+
+    
+    <chiamata cancelled="false" checkpoint="0" data="2024-05-22" durata="2" messaggio="false" newInterest="RICHIAMARE" number="8" operatore="HUGO" previousInterest="LISTINO">Richiamare Philippe venerdi mattina </chiamata>
+    
+    <chiamata cancelled="false" checkpoint="0" data="2024-05-24" durata="0" messaggio="false" newInterest="NON_INERENTE" number="9" operatore="HUGO" previousInterest="LISTINO"/>
 </companyNotes>

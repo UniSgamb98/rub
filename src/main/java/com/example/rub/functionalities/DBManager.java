@@ -124,13 +124,13 @@ public abstract class DBManager extends TagsManager{
         }
         return ret;
     }
-    private static void loadData(){     //Legge il database e indice dai file salvati persistentemente
-        if (database == null) { //questa condizione è per eseguire il load solo la prima volta che si accede a firstpage
-            try {
-                GlobalContext.notProgrammedCalls = (LinkedList<UUID>) MyUtils.read(GlobalContext.operator.name());
-            } catch (IOException | ClassNotFoundException ignored) {}
-            update();
+    private static void loadData() {     //Legge il database e indice dai file salvati persistentemente
+        try {
+            GlobalContext.notProgrammedCalls = (LinkedList<UUID>) MyUtils.read(GlobalContext.operator.name());
+        } catch (Exception e) {
+            GlobalContext.notProgrammedCalls = new LinkedList<>();
         }
+        update();
     }
     public static void saveData(){
         MyUtils.writeAll(database, index, locationManager);
@@ -138,19 +138,19 @@ public abstract class DBManager extends TagsManager{
     public static Outcome update(){
         Outcome res = Outcome.FAILURE;
         LinkedList<UUID> callRemindersNoteId = new LinkedList<>();
-        try {
-            for (UUID i : GlobalContext.notProgrammedCalls) {
-                callRemindersNoteId.add(DBManager.retriveEntry(i).getNoteId());
+            try {
+                for (UUID i : GlobalContext.notProgrammedCalls) {
+                    callRemindersNoteId.add(DBManager.retriveEntry(i).getNoteId());
+                }
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("L'ultima volta avevi lasciato alcuni contatti da riprogrammare la richiamata");
+                alert.setContentText("Sono state perse le identità di questi. Cercali tra quelli evidenziati con un riquadro giallo");
+                alert.setTitle("Perdita di dati");
+                //alert.show();
+               // GlobalContext.notProgrammedCalls.clear();
+              //  MyUtils.write(GlobalContext.notProgrammedCalls, GlobalContext.operator.name());
             }
-        } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("L'ultima volta avevi lasciato alcuni contatti da riprogrammare la richiamata");
-            alert.setContentText("Sono state perse le identità di questi. Cercali tra quelli evidenziati con un riquadro giallo");
-            alert.setTitle("Perdita di dati");
-            alert.show();
-            GlobalContext.notProgrammedCalls.clear();
-            MyUtils.write(GlobalContext.notProgrammedCalls, GlobalContext.operator.name());
-        }
         try {
             database = (HashMap<UUID, Contatto>) MyUtils.read("database");
             try {
@@ -334,6 +334,26 @@ public abstract class DBManager extends TagsManager{
                 MyUtils.log(LogType.SPECIFYCHANGE, "Checkpoint", oldBean.getCheckpoint(), modifiedBean.getCheckpoint());
                 oldBean.setCheckpoint(modifiedBean.getCheckpoint());
             }
+            if (!Objects.equals(oldBean.getOperator(), modifiedBean.getOperator())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "Operator", oldBean.getOperator(), modifiedBean.getOperator());
+                oldBean.setOperator(modifiedBean.getOperator());
+            }
+            if (!Objects.equals(oldBean.getNoteId(), modifiedBean.getNoteId())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "NoteId", oldBean.getNoteId(), modifiedBean.getNoteId());
+                oldBean.setNoteId(modifiedBean.getNoteId());
+            }
+            if (!Objects.equals(oldBean.getAcquisizione(), modifiedBean.getAcquisizione())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "Acquisizione", oldBean.getAcquisizione(), modifiedBean.getAcquisizione());
+                oldBean.setAcquisizione(modifiedBean.getAcquisizione());
+            }
+            if (!Objects.equals(oldBean.getCellulare(), modifiedBean.getCellulare())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "Cellulare", oldBean.getCellulare(), modifiedBean.getCellulare());
+                oldBean.setCellulare(modifiedBean.getCellulare());
+            }
+            if (!Objects.equals(oldBean.getTelefono2(), modifiedBean.getTelefono2())){
+                MyUtils.log(LogType.SPECIFYCHANGE, "Telefono2", oldBean.getTelefono2(), modifiedBean.getTelefono2());
+                oldBean.setTelefono2(modifiedBean.getTelefono2());
+            }
 
 
             if (GlobalContext.notProgrammedCalls.contains(id) && oldBean.getProssimaChiamata() != null){
@@ -488,6 +508,8 @@ public abstract class DBManager extends TagsManager{
                 bw.write(i.getCoinvolgimento()+";");
                 bw.write(i.getAcquisizione()+";");
                 bw.write(i.getCheckpoint()+";");
+                bw.write(i.getTelefono2()+";");
+                bw.write(i.getCellulare()+";");
                 bw.newLine();
             }
             bw.flush();
@@ -561,7 +583,7 @@ public abstract class DBManager extends TagsManager{
                 int subStringStart = 0;
                 int subStringEnd = in.indexOf(";");
                 String subString;
-                for (int i = 0; i <= 26; i++) {
+                for (int i = 0; i <= 28; i++) {
                     subString = in.substring(subStringStart, subStringEnd);
                     fillAttribute(i, newEntryFromFile, subString);
 
@@ -697,10 +719,14 @@ public abstract class DBManager extends TagsManager{
                 }
                 bean.setAcquisizione(o);
                 break;
-
-
             case 26:
                 bean.setCheckpoint(Integer.parseInt(attribute));
+                break;
+            case 27:
+                bean.setTelefono2(attribute);
+                break;
+            case 28:
+                bean.setCellulare(attribute);
                 break;
         }
     }
@@ -710,5 +736,8 @@ public abstract class DBManager extends TagsManager{
             if(i.getNoteId().equals(noteId)) ret = i.getId();
         }
         return ret;
+    }
+    public  static boolean isNull(){
+        return database == null;
     }
 }
