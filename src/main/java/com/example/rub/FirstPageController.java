@@ -300,7 +300,7 @@ public class FirstPageController implements Initializable {
 
     public void doShowCallsToMake(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource("calls-page.fxml"));
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("calls-page.fxml"));
             Parent root = loader.load();
             CallsPageController controller = loader.getController();
             controller.setProperties((Stage) ((Node) event.getSource()).getScene().getWindow());

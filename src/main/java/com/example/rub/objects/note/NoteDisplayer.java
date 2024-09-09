@@ -1,6 +1,6 @@
 package com.example.rub.objects.note;
 
-import com.example.rub.Main;
+import com.example.rub.App;
 import com.example.rub.ModifyNoteController;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.NoteManager;
@@ -73,7 +73,7 @@ public class NoteDisplayer extends VBox {
     }
 
     public void openNoteModifications(Element element){
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("modifyNote.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("modifyNote.fxml"));
         try {
             Parent root = loader.load();     //cambio scena
             ModifyNoteController controller = loader.getController();
