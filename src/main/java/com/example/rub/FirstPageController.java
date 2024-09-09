@@ -21,10 +21,8 @@ import javafx.stage.Window;
 
 import java.io.*;
 import java.net.URL;
-import java.util.LinkedList;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.UUID;
 
 public class FirstPageController implements Initializable {
     @FXML
@@ -146,7 +144,7 @@ public class FirstPageController implements Initializable {
         }
         if(!alreadyOpen) {
             try {
-                FXMLLoader loader = new FXMLLoader(Main.class.getResource("calls-page.fxml"));
+                FXMLLoader loader = new FXMLLoader(App.class.getResource("calls-page.fxml"));
                 Parent root = loader.load();
                 CallsPageController controller = loader.getController();
                 controller.setProperties((Stage) ((Node) event.getSource()).getScene().getWindow());

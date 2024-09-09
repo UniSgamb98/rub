@@ -219,7 +219,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
             if (!entryToDisplayDetails.compare(getContatto())){
                 doSaveChanges();
             }
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource("register-call.fxml"));
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("register-call.fxml"));
             Parent root = loader.load();
             RegisterCallController controller = loader.getController();
             controller.setEntryProperty(entryToDisplayDetails, this);
@@ -467,7 +467,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
 
     public void openMailPreferences(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource("mail-preferences.fxml"));
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("mail-preferences.fxml"));
             Parent root = loader.load();
             MailPreferencesController controller = loader.getController();
             controller.loadPreferences(this);
