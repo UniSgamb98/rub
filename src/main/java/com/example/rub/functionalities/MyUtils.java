@@ -64,7 +64,7 @@ public abstract class MyUtils {
         try{
             FileWriter fw = new FileWriter(GlobalContext.operator.name() + "_log.txt", true);
             Calendar now = Calendar.getInstance();
-            fw.write("[" + now.get(Calendar.DAY_OF_MONTH) + "/" + (now.get(Calendar.MONTH)+1) + "/" + now.get(Calendar.YEAR) + "--" + now.get(Calendar.HOUR_OF_DAY) + ":" + now.get(Calendar.MINUTE) + "." + now.get(Calendar.SECOND) + "] ");
+            fw.write("[" + now.get(Calendar.DAY_OF_MONTH) + "/" + (now.get(Calendar.MONTH)+1) + "/" + now.get(Calendar.YEAR) + "--" + now.get(Calendar.HOUR_OF_DAY) + ":" + now.get(Calendar.MINUTE) + "." + now.get(Calendar.SECOND) + "-" + now.get(Calendar.MILLISECOND) + "] ");
             switch (s){
                 case ACCESS:
                     fw.write("Ha aperto CRM");

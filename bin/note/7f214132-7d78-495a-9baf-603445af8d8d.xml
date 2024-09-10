@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="ORTOPLUS">
-        
-    <chiamata cancelled="false" data="2024-04-19" durata="5" messaggio="false" newInterest="INFO" number="1" operatore="HUGO" previousInterest="INFO">fanno altre cose tra cui invisilign ma a me avevano detto di inviare la prresentazione perciò la ragazza del cad cam mi dice che avviserà i responsabili per eventualmente ricontattarci. </chiamata>
+            
     
+    <chiamata cancelled="false" checkpoint="0" data="2024-04-19" durata="5" messaggio="false" newInterest="INFO" number="1" operatore="HUGO" previousInterest="INFO">fanno altre cose tra cui invisilign ma a me avevano detto di inviare la prresentazione perciò la ragazza del cad cam mi dice che avviserà i responsabili per eventualmente ricontattarci. </chiamata>
+        
+
 </companyNotes>

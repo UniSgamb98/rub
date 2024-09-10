@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.example.rub.objects.filter.*?>
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import java.net.URL?>
 
-<BorderPane id="searchEntry" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.SearchEntryController">
+<?import com.example.rub.objects.filter.FiltersToolColumn?>
+<BorderPane id="searchEntry" prefHeight="490.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.SearchEntryController">
     <left>
         <FiltersToolColumn fx:id="filterTool" prefHeight="200.0" prefWidth="220.0" BorderPane.alignment="CENTER" />
     </left>
     <center>
        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
            <ListView fx:id="resultsView" onMouseClicked="#doRequestEntryDetails" prefHeight="366.0" prefWidth="413.0" />
+         <Button mnemonicParsing="false" onAction="#copyList" visible="false" text="Copia elenco" />
        </HBox>
    </center>
    <top>
@@ -24,9 +25,9 @@
       <Button mnemonicParsing="false" onAction="#doFilteredSearch" text="Aggiorna" BorderPane.alignment="TOP_CENTER" />
    </right>
     <bottom>
-        <Button mnemonicParsing="false" onAction="#doSwitchToFirstPage" text="Indietro" BorderPane.alignment="BASELINE_LEFT"/>
+        <Button mnemonicParsing="false" onAction="#doSwitchToFirstPage" text="Indietro" BorderPane.alignment="BASELINE_LEFT" />
     </bottom>
     <stylesheets>
-        <URL value="@firstPage.css"/>
+        <URL value="@firstPage.css" />
     </stylesheets>
 </BorderPane>

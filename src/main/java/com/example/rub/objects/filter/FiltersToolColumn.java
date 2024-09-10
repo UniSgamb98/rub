@@ -9,7 +9,10 @@ import com.example.rub.functionalities.locations.LocationManager;
 import com.example.rub.objects.filter.generic.AllPurposeFilter;
 import com.example.rub.objects.filter.location.StateFilter;
 import javafx.scene.control.Separator;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.VBox;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.UUID;
@@ -19,6 +22,8 @@ public class FiltersToolColumn extends VBox {
     AllPurposeFilter operatori;
     AllPurposeFilter interesse;
     AllPurposeFilter tipologia;
+    ToggleButton nullRecall;
+    ToggleButton missedRecall;
     public FiltersToolColumn (){
         LocationManager manager = null;
         try {
@@ -31,8 +36,12 @@ public class FiltersToolColumn extends VBox {
         operatori = new AllPurposeFilter(Operatori.HUGO.name(), Operatori.SANTOLO.name(), Operatori.VICTORIA.name());
         interesse = new AllPurposeFilter(InteressamentoStatus.NON_TROVATO.name(), InteressamentoStatus.NON_INERENTE.name(), InteressamentoStatus.NULLO.name(), InteressamentoStatus.RICHIAMARE.name(), InteressamentoStatus.INFO.name(), InteressamentoStatus.LISTINO.name(), InteressamentoStatus.CAMPIONE.name(), InteressamentoStatus.CLIENTE.name());
         tipologia = new AllPurposeFilter(TipoCliente.LABORATORIO.name(), TipoCliente.RIVENDITORE.name(), TipoCliente.CENTROFRESAGGIO.name());
-        this.getChildren().addAll(new Separator(), locationFilter, new Separator(), operatori, new Separator(), interesse, new Separator(), tipologia, new Separator());
+        nullRecall = new ToggleButton("Non Programmati");
+        missedRecall = new ToggleButton("Chiamata Mancata");
+        this.getChildren().addAll(new Separator(), locationFilter, new Separator(), operatori, new Separator(), interesse, new Separator(), tipologia, new Separator(), nullRecall, missedRecall, new Separator());
         this.setSpacing(10.0);
+        missedRecall.selectedProperty().addListener((observable -> nullRecall.setSelected(false)));
+        nullRecall.selectedProperty().addListener((observable -> missedRecall.setSelected(false)));
     }
     public LinkedList<UUID> getFilteredList(){
         LinkedList<UUID> filteredList = new LinkedList<>();
@@ -58,6 +67,12 @@ public class FiltersToolColumn extends VBox {
         a = tipologia.getFilteredList();
         if (a != null){
             filteredList.retainAll(a);
+        }
+        if (nullRecall.isSelected()){
+            filteredList.removeIf(i -> (DBManager.retriveEntry(i).getProssimaChiamata() != null) || (DBManager.retriveEntry(i).getInteressamento() == InteressamentoStatus.NULLO) || (DBManager.retriveEntry(i).getInteressamento() == InteressamentoStatus.NON_INERENTE) || (DBManager.retriveEntry(i).getInteressamento() == InteressamentoStatus.CLIENTE));
+        }
+        if (missedRecall.isSelected()){
+            filteredList.removeIf(i -> (DBManager.retriveEntry(i).getProssimaChiamata() == null || !DBManager.retriveEntry(i).getProssimaChiamata().isBefore(LocalDate.now())));
         }
 
 

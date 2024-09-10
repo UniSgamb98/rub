@@ -40,7 +40,7 @@ public class App extends Application {
                 } catch (Exception e) {
                     MyUtils.log(LogType.ERROR);
                     MyUtils.log(LogType.MESSAGE, e);
-                    System.out.println("errore con logout com.example.rub.Main.java");
+                    System.out.println("errore con logout Main.java");
                 }
             } else {
                 MyUtils.log(LogType.EXIT);

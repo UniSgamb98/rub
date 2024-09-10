@@ -23,7 +23,7 @@ public class Interessamento {
         String ret = null;
         switch (getStatus()){
             case BLANK:
-                ret = "N/a";
+                ret = "Nessuna novità";
                 break;
             case NON_TROVATO:
                 ret = "Trovato nessuno che mi ha risposto";
@@ -35,7 +35,7 @@ public class Interessamento {
                 ret = "Capito che non è interessato al nostro prodotto";
                 break;
             case RICHIAMARE:
-                ret = "Capito che devo richiamare per successivi riscontri";
+                ret = "Sollecitato il feedback del disco prova";
                 break;
             case INFO:
                 ret = "Mandato informazioni sulla nostra azienda";
@@ -69,7 +69,7 @@ public class Interessamento {
                     ret = InteressamentoStatus.NULLO;
                     break;
 
-                case "Capito che devo richiamare per successivi riscontri":
+                case "Sollecitato il feedback del disco prova":
                     ret = InteressamentoStatus.RICHIAMARE;
                     break;
 
@@ -107,10 +107,10 @@ public class Interessamento {
         ret.add(new Interessamento(InteressamentoStatus.NON_TROVATO));
         ret.add(new Interessamento(InteressamentoStatus.NON_INERENTE));
         ret.add(new Interessamento(InteressamentoStatus.NULLO));
-        ret.add(new Interessamento(InteressamentoStatus.RICHIAMARE));
         ret.add(new Interessamento(InteressamentoStatus.INFO));
         ret.add(new Interessamento(InteressamentoStatus.LISTINO));
         ret.add(new Interessamento(InteressamentoStatus.CAMPIONE));
+        ret.add(new Interessamento(InteressamentoStatus.RICHIAMARE));
         ret.add(new Interessamento(InteressamentoStatus.CLIENTE));
         return ret;
     }

@@ -11,174 +11,195 @@
 
 <BorderPane id="entryDetails" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rub.EntryDetailsPageController">
     <center>
-<GridPane id="dataGrid" fx:id="gridData" alignment="CENTER" prefHeight="350.0" prefWidth="650.0">
-    <Label text="Ragione Sociale:" GridPane.columnIndex="1" />
-    <TextField id="savefield" fx:id="ragioneSociale" disable="true" GridPane.columnIndex="2" GridPane.columnSpan="3" />
+        <GridPane id="dataGrid" fx:id="gridData" alignment="CENTER" prefHeight="350.0" prefWidth="650.0">
+            <Label text="Ragione Sociale:" GridPane.columnIndex="1" />
+            <TextField id="savefield" fx:id="ragioneSociale" disable="true" onAction="#notifyChange" GridPane.columnIndex="2" GridPane.columnSpan="3" />
 
-    <Label text="Referente:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-    <TextField id="savefield" fx:id="personaDiRiferimento" disable="true" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+            <Label text="Referente:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         <Label text="Telefono 2:" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+            <TextField id="savefield" fx:id="personaDiRiferimento" disable="true" onAction="#notifyChange" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
 
-    <Label text="Paese:" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-    <TextField id="savefield" fx:id="paese" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-    <Label text="Città:" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-    <TextField id="savefield" fx:id="citta" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <Label text="Paese:" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField id="savefield" fx:id="paese" disable="true" onAction="#notifyChange" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <Label text="Città:" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField id="savefield" fx:id="citta" disable="true" onAction="#notifyChange" GridPane.columnIndex="2" GridPane.rowIndex="7" />
 
-    <Label text="Telefono:" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-    <TextField id="savefield" fx:id="telefono" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="11" />
-    <Label text="Email Referente:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-    <TextField id="savefield" fx:id="emailReferente" disable="true" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+            <Label text="Telefono:" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+            <TextField id="savefield" fx:id="telefono" disable="true" onAction="#notifyChange" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+            <Label text="Email Referente:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField id="savefield" fx:id="emailReferente" disable="true" onAction="#notifyChange" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3" />
 
-    <Label text="Interessamento:" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-    <ChoiceBox fx:id="interessamento" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="14" />
-    <Label text="Tipo Cliente:" GridPane.columnIndex="3" GridPane.rowIndex="14" />
-    <ChoiceBox fx:id="tipoCliente" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="14" />
-    <BorderPane GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="15">
-      <top>
-        <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
-            <Label text="N* contatti: " />
-            <Label fx:id="volteContattati" text="X" GridPane.columnIndex="1" />
+            <Label text="Interessamento:" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+            <ChoiceBox fx:id="interessamento" disable="true" onAction="#notifyChange" GridPane.columnIndex="2" GridPane.rowIndex="15" />
+            <Label text="Tipo Cliente:" GridPane.columnIndex="3" GridPane.rowIndex="15" />
+            <ChoiceBox fx:id="tipoCliente" disable="true" onAction="#notifyChange" GridPane.columnIndex="4" GridPane.rowIndex="15" />
+            <BorderPane GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="16">
+                <top>
+                    <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
+                        <Label text="N* contatti: " />
+                        <Label fx:id="volteContattati" text="X" GridPane.columnIndex="1" />
 
-            <Label text="Ultima Chiamata: " GridPane.rowIndex="2" />
-            <Label text="Prox Chiamata: " GridPane.columnIndex="3" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets left="15.0" />
-               </GridPane.margin></Label>
-                  <DatePicker fx:id="ultimaChiamata" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <DatePicker fx:id="prossimaChiamata" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                  <columnConstraints>
-                     <ColumnConstraints />
-                     <ColumnConstraints />
-                     <ColumnConstraints />
-                     <ColumnConstraints />
-                     <ColumnConstraints />
-                  </columnConstraints>
-                  <rowConstraints>
-                     <RowConstraints />
-                     <RowConstraints />
-                     <RowConstraints />
-                     <RowConstraints />
-                  </rowConstraints>
+                        <Label text="Ultima Chiamata: " GridPane.rowIndex="2" />
+                        <Label text="Prox Chiamata: " GridPane.columnIndex="3" GridPane.rowIndex="2">
+                            <GridPane.margin>
+                                <Insets left="15.0" />
+                            </GridPane.margin></Label>
+                        <DatePicker fx:id="ultimaChiamata" disable="true" onAction="#notifyChange" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <DatePicker fx:id="prossimaChiamata" disable="true" onAction="#notifyChange" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                        <columnConstraints>
+                            <ColumnConstraints />
+                            <ColumnConstraints />
+                            <ColumnConstraints />
+                            <ColumnConstraints />
+                            <ColumnConstraints />
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints />
+                            <RowConstraints />
+                            <RowConstraints />
+                            <RowConstraints />
+                        </rowConstraints>
+                    </GridPane>
+                </top>
+            </BorderPane>
+            <Label text="Regione:" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+            <TextField id="savefield" fx:id="regione" disable="true" onAction="#notifyChange" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+            <HBox alignment="CENTER_LEFT" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="7">
+                <Label text="Via:">
+                    <padding>
+                        <Insets right="5.0" />
+                    </padding>
+                </Label>
+                <TextField id="savefield" fx:id="indirizzo" disable="true" onAction="#notifyChange" prefHeight="25.0" prefWidth="220.0" />
+                <Label text="Civico:" />
+                <TextField id="savefield" fx:id="civico" disable="true" onAction="#notifyChange" prefHeight="25.0" prefWidth="37.0" />
+            </HBox>
+            <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="5">
+                <GridPane.margin>
+                    <Insets bottom="10.0" top="10.0" />
+                </GridPane.margin>
+            </Separator>
+            <Label text="Provincia:" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <TextField id="savefield" fx:id="provincia" disable="true" onAction="#notifyChange" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+            <Label text="CAP:" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+            <TextField id="savefield" fx:id="cap" disable="true" onAction="#notifyChange" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+            <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="9">
+                <GridPane.margin>
+                    <Insets bottom="10.0" top="10.0" />
+                </GridPane.margin>
+            </Separator>
+            <Label text="P.Iva:" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            <Label text="Codice Fiscale:" GridPane.columnIndex="3" GridPane.rowIndex="10" />
+            <Label text="Email:" GridPane.columnIndex="3" GridPane.rowIndex="11" />
+            <Label text="Sito Web:" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+            <Label text="P.E.C:" GridPane.columnIndex="3" GridPane.rowIndex="13" />
+            <Label text="Titolare:" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+            <TextField id="savefield" fx:id="titolare" disable="true" onAction="#notifyChange" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="14" />
+         <TextField fx:id="telefono2" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+            <TextField id="savefield" fx:id="sito" disable="true" onAction="#notifyChange" GridPane.columnIndex="2" GridPane.rowIndex="13" />
+            <TextField id="savefield" fx:id="pec" disable="true" onAction="#notifyChange" GridPane.columnIndex="4" GridPane.rowIndex="13" />
+            <TextField id="savefield" fx:id="emailGenerica" disable="true" onAction="#notifyChange" GridPane.columnIndex="4" GridPane.rowIndex="11" />
+            <TextField id="savefield" fx:id="codiceFiscale" disable="true" onAction="#notifyChange" GridPane.columnIndex="4" GridPane.rowIndex="10" />
+            <TextField id="savefield" fx:id="partitaIva" disable="true" onAction="#notifyChange" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+            <NoteDisplayer fx:id="noteDisplayer" minHeight="250.0" minWidth="500.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="17">
+                <opaqueInsets>
+                    <Insets top="30.0" />
+                </opaqueInsets></NoteDisplayer>
+         <Label text="Cellulare:" GridPane.columnIndex="3" GridPane.rowIndex="12" />
+         <TextField fx:id="cellulare" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="12" />
+            <columnConstraints>
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints minWidth="35.0" prefWidth="250.0" />
+                <ColumnConstraints maxWidth="114.0" minWidth="0.0" prefWidth="0.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+            <RowConstraints />
+            </rowConstraints>
         </GridPane>
-      </top>
-    </BorderPane>
-         <Label text="Regione:" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-         <TextField id="savefield" fx:id="regione" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-    <HBox alignment="CENTER_LEFT" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="7">
-        <Label text="Via:">
-            <padding>
-                <Insets right="5.0" />
-            </padding>
-        </Label>
-        <TextField id="savefield" fx:id="indirizzo" disable="true" prefHeight="25.0" prefWidth="220.0" />
-        <Label text="Civico:" />
-        <TextField id="savefield" fx:id="civico" disable="true" prefHeight="25.0" prefWidth="37.0" />
-    </HBox>
-         <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="5">
-            <GridPane.margin>
-               <Insets bottom="10.0" top="10.0" />
-            </GridPane.margin>
-         </Separator>
-         <Label text="Provincia:" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-         <TextField id="savefield" fx:id="provincia" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-         <Label text="CAP:" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-         <TextField id="savefield" fx:id="cap" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="8" />
-         <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="9">
-            <GridPane.margin>
-               <Insets bottom="10.0" top="10.0" />
-            </GridPane.margin>
-         </Separator>
-         <Label text="P.Iva:" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-         <Label text="Codice Fiscale:" GridPane.columnIndex="3" GridPane.rowIndex="10" />
-         <Label text="Email:" GridPane.columnIndex="3" GridPane.rowIndex="11" />
-         <Label text="Sito Web:" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-         <Label text="P.E.C:" GridPane.columnIndex="3" GridPane.rowIndex="12" />
-         <Label text="Titolare:" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-         <TextField id="savefield" fx:id="titolare" disable="true" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="13" />
-         <TextField id="savefield" fx:id="sito" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="12" />
-         <TextField id="savefield" fx:id="pec" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="12" />
-         <TextField id="savefield" fx:id="emailGenerica" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="11" />
-         <TextField id="savefield" fx:id="codiceFiscale" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="10" />
-         <TextField id="savefield" fx:id="partitaIva" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-         <NoteDisplayer fx:id="noteDisplayer" minHeight="250.0" minWidth="500.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="16">
-            <opaqueInsets>
-               <Insets top="30.0" />
-            </opaqueInsets></NoteDisplayer>
-         <columnConstraints>
-            <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints minWidth="35.0" prefWidth="250.0" />
-            <ColumnConstraints maxWidth="114.0" minWidth="0.0" prefWidth="0.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-         </rowConstraints>
-</GridPane>
     </center>
-   <bottom>
-      <Button mnemonicParsing="false" onAction="#doGoBack" text="Indietro" BorderPane.alignment="BOTTOM_LEFT">
-         <BorderPane.margin>
-            <Insets bottom="50.0" left="50.0" />
-         </BorderPane.margin>
-      </Button>
-   </bottom>
-   <right>
-       <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
-           <BorderPane.margin>
-               <Insets right="10.0" top="50.0" />
-           </BorderPane.margin>
-           <HBox fx:id="emailBox" alignment="CENTER">
-               <EmailSenderShortcut fx:id="emailSenderShortcut" />
-               <Button mnemonicParsing="false" onAction="#openMailPreferences" wrapText="true" GridPane.columnIndex="1">
-                   <graphic>
-                       <ImageView fitHeight="20.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true">
-                           <Image url="https://icons.iconarchive.com/icons/alienvalley/osx-dock-replacement/128/settings-icon.png" />
-                       </ImageView>
-                   </graphic>
-               </Button>
-           </HBox>
-           <VBox alignment="CENTER">
-               <Label text="Coinvolgimento" />
-               <Group>
-                   <Slider fx:id="involvement" blockIncrement="1.0" disable="true" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" prefWidth="100.0" showTickMarks="true" snapToTicks="true" value="1.0" />
-               </Group>
-           </VBox>
-         <Label fx:id="savedText" text="Salvato!" visible="false">
-            <padding>
-               <Insets top="-10.0" />
-            </padding>
-         </Label>
-           <CheckBox fx:id="isModifiable" mnemonicParsing="false" onAction="#allowChangesPressed" text="Abilita Modifiche" />
-           <Button fx:id="saveButton" mnemonicParsing="false" onAction="#doSaveChanges" text="Salva" visible="false" />
-           <Button alignment="CENTER" mnemonicParsing="false" onAction="#doRegisterCall" prefHeight="70.0" prefWidth="98.0" text="Registra Comunicazione" textAlignment="CENTER" wrapText="true">
-              <VBox.margin>
-                  <Insets top="50.0" />
-              </VBox.margin>
-           </Button>
-         <Button alignment="CENTER" mnemonicParsing="false" onAction="#doDelete" text="Elimina Record">
-            <VBox.margin>
-               <Insets top="80.0" />
-            </VBox.margin>
-         </Button>
-       </VBox>
-   </right>
+    <bottom>
+        <Button mnemonicParsing="false" onAction="#doGoBack" text="Indietro" BorderPane.alignment="BOTTOM_LEFT">
+            <BorderPane.margin>
+                <Insets bottom="50.0" left="50.0" />
+            </BorderPane.margin>
+        </Button>
+    </bottom>
+    <right>
+        <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets right="10.0" top="50.0" />
+            </BorderPane.margin>
+            <HBox fx:id="emailBox" alignment="CENTER">
+                <EmailSenderShortcut fx:id="emailSenderShortcut" />
+                <Button mnemonicParsing="false" onAction="#openMailPreferences" wrapText="true" GridPane.columnIndex="1">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="https://icons.iconarchive.com/icons/alienvalley/osx-dock-replacement/128/settings-icon.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </HBox>
+            <VBox alignment="CENTER">
+                <Label text="Coinvolgimento" />
+                <Group>
+                    <Slider fx:id="involvement" blockIncrement="1.0" disable="true" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" prefWidth="100.0" showTickMarks="true" snapToTicks="true" value="1.0" />
+                </Group>
+            </VBox>
+            <Label fx:id="savedText" text="Salvato!" visible="false">
+                <padding>
+                    <Insets top="-10.0" />
+                </padding>
+            </Label>
+            <CheckBox fx:id="isModifiable" mnemonicParsing="false" onAction="#allowChangesPressed" text="Abilita Modifiche" />
+            <VBox fx:id="adminExpandedInfos" alignment="CENTER" spacing="10.0">
+                <padding>
+                    <Insets right="10.0"/>
+                </padding>
+                <TextField fx:id="noteId"/>
+                <ChoiceBox fx:id="operator" prefWidth="150.0"/>
+                <DatePicker fx:id="acquisition"/>
+                <VBox>
+                    <CheckBox fx:id="check1" disable="true" mnemonicParsing="false" onAction="#manageCheckpoint"
+                              text="Listino"/>
+                    <CheckBox fx:id="check2" disable="true" mnemonicParsing="false" onAction="#manageCheckpoint"
+                              text="Campione"/>
+                    <CheckBox fx:id="check3" disable="true" mnemonicParsing="false" onAction="#manageCheckpoint"
+                              text="Ordine"/>
+                </VBox>
+            </VBox>
+            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#doSaveChanges" text="Salva" visible="false" />
+            <Button fx:id="registerCallButton" alignment="CENTER" mnemonicParsing="false" onAction="#doRegisterCall" prefHeight="70.0" prefWidth="98.0" text="Registra Comunicazione" textAlignment="CENTER" visible="false" wrapText="true">
+                <VBox.margin>
+                    <Insets top="50.0" />
+                </VBox.margin>
+            </Button>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#doDelete" text="Elimina Record">
+                <VBox.margin>
+                    <Insets top="80.0" />
+                </VBox.margin>
+            </Button>
+        </VBox>
+    </right>
     <stylesheets>
         <URL value="@firstPage.css" />
     </stylesheets>

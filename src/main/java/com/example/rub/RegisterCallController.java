@@ -4,6 +4,7 @@ import com.example.rub.beans.Contatto;
 import com.example.rub.enums.Interessamento;
 import com.example.rub.enums.Interessamento.InteressamentoStatus;
 import com.example.rub.enums.LogType;
+import com.example.rub.enums.Outcome;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
 import com.example.rub.functionalities.MyUtils;
@@ -52,6 +53,7 @@ public class RegisterCallController implements Initializable {
     public void doRegisterCall(ActionEvent event) {
         MyUtils.log(LogType.ADDNOTE, note.getText());
         Contatto bean = entryProperty.get();
+        Outcome outcome = Outcome.FAILURE;
         try {
             NoteManager nm = new NoteManager();
             Document doc;
@@ -62,27 +64,43 @@ public class RegisterCallController implements Initializable {
                 doc = nm.createDocument(bean.getRagioneSociale());
             }
             InteressamentoStatus fedback = Interessamento.fromQuestionForm(feedback.getValue());
-            nm.addCallNote(doc, note.getText(), durata.getValue(), isMessage.isSelected(), bean.getInteressamento(), fedback);
+            int checkpoint = getCheckpoint(fedback, bean.getCheckpoint());
+            nm.addCallNote(doc, note.getText(), durata.getValue(), isMessage.isSelected(), bean.getInteressamento(), fedback, checkpoint);
             double involvement = (isMessage.isSelected()? -1 : coinvolgimento.getValue());
-            DBManager.setNextCall(bean.getId(), prossimaChiamata.getValue(), fedback, involvement, !isMessage.isSelected(), isMessage.isSelected());
+            outcome = DBManager.setNextCall(bean.getId(), prossimaChiamata.getValue(), fedback, involvement, !isMessage.isSelected(), isMessage.isSelected(), bean.getNoteId());
             nm.writeXml(doc, ""+bean.getNoteId());
         } catch (Exception e){
             MyUtils.log(LogType.ERROR);
             MyUtils.log(LogType.MESSAGE, e);
             System.out.println("Errore durante la scrittura del file Xml delle note");
         }
-        if (prossimaChiamata.getValue()==null){
+        if ((prossimaChiamata.getValue()==null && (!Interessamento.fromQuestionForm(feedback.getValue()).equals(InteressamentoStatus.NULLO) && !(Interessamento.fromQuestionForm(feedback.getValue()).equals(InteressamentoStatus.NON_INERENTE) )) && !GlobalContext.notProgrammedCalls.contains(entryProperty.get().getId()))){
+            if (outcome.equals(Outcome.RECOVERED_SUCCESS))  entryProperty.set(DBManager.retriveEntry(DBManager.recoverFromNoteId(entryProperty.get().getNoteId())));
             GlobalContext.notProgrammedCalls.add(entryProperty.get().getId());
         }
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
+        if (outcome.equals(Outcome.RECOVERED_SUCCESS))  controllerProperty.get().recoverIdOfDisplayedEntry();
         controllerProperty.get().refresh();
     }
-    public void setEntryProperty(Contatto entry){
+
+    private static int getCheckpoint(InteressamentoStatus fedback, int beanCheckpoint) {
+        int checkpoint = 0;
+        if (fedback != null){
+            if (fedback.equals(InteressamentoStatus.LISTINO) && beanCheckpoint < 1){
+                checkpoint = 1;
+            }else if (fedback.equals(InteressamentoStatus.CAMPIONE) && beanCheckpoint < 2){
+                checkpoint = 2;
+            }else if (fedback.equals(InteressamentoStatus.CLIENTE) && beanCheckpoint < 3){
+                checkpoint = 3;
+            }
+        }
+        return checkpoint;
+    }
+
+    public void setEntryProperty(Contatto entry, EntryDetailsPageController controller){
         entryProperty.set(entry);
         coinvolgimento.setValue(entryProperty.get().getCoinvolgimento());
-    }
-    public void setControllerProperty(EntryDetailsPageController controller) {
         controllerProperty.set(controller);
     }
     @Override
@@ -90,7 +108,7 @@ public class RegisterCallController implements Initializable {
         for (Interessamento i : Interessamento.getSet()){
             feedback.getItems().add(i.getQuestionForm());
         }
-        feedback.getItems().remove(0);
+        feedback.setValue("Nessuna novità");
         durata.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,300));
     }
 

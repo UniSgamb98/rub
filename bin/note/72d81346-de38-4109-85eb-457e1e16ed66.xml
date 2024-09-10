@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <companyNotes Name="DENT ALL">
+                                    
+    
+    
+    
+    
+    
+    
+    
+    <chiamata cancelled="false" checkpoint="0" data="2024-04-18" durata="0" feedback="" messaggio="false" newInterest="NULLO" number="1" operatore="HUGO" previousInterest="NULLO">richiamare tra un ora mr Gauthier</chiamata>
                                 
     
     
@@ -7,21 +16,16 @@
     
     
     
-    <chiamata cancelled="false" data="2024-04-18" durata="0" feedback="" messaggio="false" newInterest="NULLO" number="1" operatore="HUGO" previousInterest="NULLO">richiamare tra un ora mr Gauthier</chiamata>
+    
+    <chiamata cancelled="false" checkpoint="0" data="2024-04-18" durata="2" feedback="" messaggio="false" newInterest="NULLO" number="2" operatore="HUGO" previousInterest="NULLO">richiamare domattina era già  andato via , vederese c'è ancora interesse. </chiamata>
                             
-    
-    
-    
-    
-    
-    
-    <chiamata cancelled="false" data="2024-04-18" durata="2" feedback="" messaggio="false" newInterest="NULLO" number="2" operatore="HUGO" previousInterest="NULLO">richiamare domattina era già  andato via , vederese c'è ancora interesse. </chiamata>
-                        
 
 
 
 
     
-    <chiamata cancelled="false" data="2024-04-19" durata="4" messaggio="false" newInterest="NULLO" number="3" operatore="HUGO" previousInterest="NULLO">Gauthier dice che non ha mai mostrato interesse e che aveva già detto che hanno già i loro fornitori. </chiamata>
     
+    <chiamata cancelled="false" checkpoint="0" data="2024-04-19" durata="4" messaggio="false" newInterest="NULLO" number="3" operatore="HUGO" previousInterest="NULLO">Gauthier dice che non ha mai mostrato interesse e che aveva già detto che hanno già i loro fornitori. </chiamata>
+        
+
 </companyNotes>

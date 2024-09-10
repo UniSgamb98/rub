@@ -6,6 +6,7 @@ import com.example.rub.enums.TipoCliente;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Contatto implements Serializable {
@@ -37,6 +38,8 @@ public class Contatto implements Serializable {
     private double coinvolgimento;
     private int checkpoint;
     private LocalDate acquisizione;
+    private String telefono2;
+    private String cellulare;
 
     public Contatto(){
         noteId = UUID.randomUUID();
@@ -45,14 +48,18 @@ public class Contatto implements Serializable {
     public String getTelefono() {
         return telefono;
     }
+    public String getTelefono2() {
+        return telefono2;
+    }
+    public String getCellulare() {
+        return cellulare;
+    }
     public int getCheckpoint() {
         return checkpoint;
     }
-
     public LocalDate getAcquisizione() {
         return acquisizione;
     }
-
     public Operatori getOperator() {
         return operator;
     }
@@ -135,6 +142,12 @@ public class Contatto implements Serializable {
     public void setNoteId(UUID noteId) {
         this.noteId = noteId;
     }
+    public void setTelefono2(String telefono2) {
+        this.telefono2 = telefono2;
+    }
+    public void setCellulare(String cellulare) {
+        this.cellulare = cellulare;
+    }
     public void setCheckpoint(int checkpoint) {
         this.checkpoint = checkpoint;
     }
@@ -156,11 +169,9 @@ public class Contatto implements Serializable {
     public void setInteressamento(InteressamentoStatus interessamento) {
         this.interessamento = interessamento;
     }
-
     public void setAcquisizione(LocalDate acquisizione) {
         this.acquisizione = acquisizione;
     }
-
     public void setProssimaChiamata(LocalDate prossimaChiamata) {
         this.prossimaChiamata = prossimaChiamata;
     }
@@ -222,5 +233,38 @@ public class Contatto implements Serializable {
     @Override
     public String toString(){
         return "[" + ragioneSociale + "|" + personaRiferimento + "|" + paese + "|" + citta + "|" + tipoCliente + "|" + interessamento + "|" + telefono + "|" + emailReferente + "]";
+    }
+
+    public boolean compare(Contatto c){
+        boolean ret = ragioneSociale.equals(c.getRagioneSociale());
+        if (!personaRiferimento.equals(c.getPersonaRiferimento())) ret = false;
+        if (!emailReferente.equals(c.getEmailReferente())) ret = false;
+        if (!telefono.equals(c.getTelefono())) ret = false;
+        if (!paese.equals(c.getPaese())) ret = false;
+        if (!regione.equals(c.getRegione())) ret = false;
+        if (!citta.equals(c.getCitta())) ret = false;
+        if (!indirizzo.equals(c.getIndirizzo())) ret = false;
+        if (!numeroCivico.equals(c.getNumeroCivico())) ret = false;
+        if (!provincia.equals(c.getProvincia())) ret = false;
+        if (!cap.equals(c.getCap())) ret = false;
+        if (!interessamento.equals(c.getInteressamento())) ret = false;
+        if (!tipoCliente.equals(c.getTipoCliente())) ret = false;
+        if (!partitaIva.equals(c.getPartitaIva())) ret = false;
+        if (!codiceFiscale.equals(c.getCodiceFiscale())) ret = false;
+        if (!titolare.equals(c.getTitolare())) ret = false;
+        if (!emailGenereica.equals(c.getEmailGenereica())) ret = false;
+        if (!emailCertificata.equals(c.getEmailCertificata())) ret = false;
+        if (!(volteContattati == c.getVolteContattati())) ret = false;
+        if (!Objects.equals(ultimaChiamata, c.getUltimaChiamata())) ret = false;
+        if (!Objects.equals(prossimaChiamata, c.getProssimaChiamata())) ret = false;
+        if (!sitoWeb.equals(c.getSitoWeb())) ret = false;
+        if (!noteId.equals(c.getNoteId())) ret = false;
+        if (!operator.equals(c.getOperator())) ret = false;
+        if (!(coinvolgimento == (c.getCoinvolgimento()))) ret = false;
+        if (!(checkpoint == (c.getCheckpoint()))) ret = false;
+        if (!acquisizione.equals(c.getAcquisizione())) ret = false;
+        if (!telefono2.equals(c.getTelefono2())) ret = false;
+        if (!cellulare.equals(c.getCellulare())) ret = false;
+        return ret;
     }
 }

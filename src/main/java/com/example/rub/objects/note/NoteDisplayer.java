@@ -2,7 +2,9 @@ package com.example.rub.objects.note;
 
 import com.example.rub.App;
 import com.example.rub.ModifyNoteController;
+import com.example.rub.enums.LogType;
 import com.example.rub.functionalities.DBManager;
+import com.example.rub.functionalities.MyUtils;
 import com.example.rub.functionalities.NoteManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -83,10 +85,12 @@ public class NoteDisplayer extends VBox {
             stage.setTitle("Modifica la nota");
             stage.getIcons().add(new Image("AppIcon.png"));
             stage.setScene(scene);
+            MyUtils.log(LogType.WINDOW, scene.getRoot().getId());
             stage.showAndWait();
             this.fireEvent(new ActionEvent());
         } catch (Exception e){
-            System.out.println("Orrore!");
+            MyUtils.log(LogType.ERROR);
+            MyUtils.log(LogType.MESSAGE, e);
         }
     }
 

@@ -53,7 +53,7 @@ public class LogoutController implements Initializable {
                 throw new Exception();
             }
             DisplayableEntry displayableEntry = contacted.getSelectionModel().getSelectedItem();
-            DBManager.setNextCall(displayableEntry.getEntry().getId(), reminderDate.getValue(), InteressamentoStatus.BLANK, -1, true, true);
+            DBManager.setNextCall(displayableEntry.getEntry().getId(), reminderDate.getValue(), InteressamentoStatus.BLANK, -1, true, true, displayableEntry.getEntry().getNoteId());
             contactedList.remove(displayableEntry);
             MyUtils.write(GlobalContext.notProgrammedCalls, GlobalContext.operator.name());
             if (contactedList.isEmpty()) {

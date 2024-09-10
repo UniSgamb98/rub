@@ -1,10 +1,7 @@
 package com.example.rub;
 
-import com.example.rub.beans.Contatto;
-import com.example.rub.enums.Interessamento.InteressamentoStatus;
 import com.example.rub.enums.LogType;
 import com.example.rub.enums.Operatori;
-import com.example.rub.enums.TipoCliente;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
 import com.example.rub.functionalities.MyUtils;
@@ -20,15 +17,12 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.*;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.LinkedList;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.UUID;
 
 public class FirstPageController implements Initializable {
     @FXML
@@ -71,191 +65,59 @@ public class FirstPageController implements Initializable {
 
     public void doImportFromExcels() {
         System.out.println("Importazione contatti da file...");
-        String in;
-        Contatto newEntryFromFile;
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("loading.fxml")));
         Stage stage1 = new Stage();
-        LoadingController controller = null;
+        LoadingController controller;
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Importazione");
+        alert.setContentText("Importazione avvenuta con successo");
         try {
             Scene scene1 = new Scene(loader.load());
             controller = loader.getController();
             stage1.setScene(scene1);
             stage1.show();
-        } catch (Exception e) {
+            try {
+                controller.addFailure(DBManager.importa("Importa.txt"));
+            } catch (IOException e) {
+                MyUtils.log(LogType.ERROR);
+                MyUtils.log(LogType.MESSAGE, e);
+                System.out.println("Errore nell'importazione da file txt");
+                alert.setContentText("Importazione fallita:" + e.getCause().toString());
+            }
+        } catch (IOException e) {
             MyUtils.log(LogType.ERROR);
             MyUtils.log(LogType.MESSAGE, e);
-        }
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Importazione");
-        alert.setContentText("Importazione avvenuta con successo");
-        try{
-            File file = new File("Importa.txt");
-            FileReader fr = new FileReader(file);
-            BufferedReader br = new BufferedReader(fr);
-            in = br.readLine();
-            do{
-                newEntryFromFile = new Contatto();
-                try {
-                    int subStringStart = 0;
-                    int subStringEnd = in.indexOf(";");
-                    String subString;
-                    for (int i = 0; i <= 25; i++) {
-                        subString = in.substring(subStringStart, subStringEnd);
-                        fillAttribute(i, newEntryFromFile, subString);
-
-                        subStringStart = subStringEnd + 1;
-                        subStringEnd = in.indexOf(";", subStringStart);
-                    }
-                    System.out.println("   Inserimento di " + newEntryFromFile);
-                    assert controller != null;
-                    controller.increment();
-                    DBManager.saveEntry(newEntryFromFile, true);
-                }catch (Exception e)    {
-                    assert controller != null;
-                    controller.addFailure(newEntryFromFile);}
-            }while((in = br.readLine()) != null );
-            br.close();
-        } catch (IOException e){
-            MyUtils.log(LogType.ERROR);
-            MyUtils.log(LogType.MESSAGE, e);
-            System.out.println("Errore nell'importazione da file txt");
-            alert.setContentText("Importazione fallita:" + e.getCause().toString());
         }
         DBManager.saveData();
         alert.showAndWait();
     }
-    private void fillAttribute (int index, Contatto bean, String attribute){
-        switch (index){
-            case 0:
-                bean.setRagioneSociale(attribute);
-                break;
-            case 1:
-                bean.setPersonaRiferimento(attribute);
-                break;
-            case 2:
-                bean.setEmailReferente(attribute);
-                break;
-            case 3:
-                bean.setTelefono(attribute);
-                break;
-            case 4:
-                bean.setPaese(attribute);
-                break;
-            case 5:
-                bean.setRegione(attribute);
-                break;
-            case 6:
-                bean.setCitta(attribute);
-                break;
-            case 7:
-                bean.setIndirizzo(attribute);
-                break;
-            case 8:
-                bean.setNumeroCivico(attribute);
-                break;
-            case 9:
-                bean.setProvincia(attribute);
-                break;
-            case 10:
-                bean.setCap(attribute);
-                break;
-            case 11:
-                if(attribute.isEmpty()) {
-                    bean.setInteressamento(InteressamentoStatus.BLANK);
-                } else{
-                    bean.setInteressamento(InteressamentoStatus.valueOf(attribute));
-                }
-                break;
-            case 12:
-                if (attribute.isEmpty()){
-                    bean.setTipoCliente(TipoCliente.BLANK);
-                } else {
-                    bean.setTipoCliente(TipoCliente.valueOf(attribute));
-                }
-                break;
-            case 13:
-                bean.setPartitaIva(attribute);
-                break;
-            case 14:
-                bean.setCodiceFiscale(attribute);
-                break;
-            case 15:
-                bean.setTitolare(attribute);
-                break;
-            case 16:
-                bean.setEmailGenereica(attribute);
-                break;
-            case 17:
-                bean.setEmailCertificata(attribute);
-                break;
-            case 18:
-                bean.setSitoWeb(attribute);
-                break;
-            case 19:
-                if(!attribute.isBlank()){
-                    System.out.println(UUID.fromString(attribute));
-                    bean.setNoteId(UUID.fromString(attribute));
-                }
-                break;
-            case 20:
-                if (attribute.isEmpty()) {
-                    bean.setOperator(Operatori.BLANK);
-                } else {
-                    bean.setOperator(Operatori.valueOf(attribute));
-                }
-                break;
-            case 21:
-                bean.setVolteContattati(Integer.parseInt(attribute));
-                break;
-            case 22:
-                LocalDate t;
-                try{
-                    t = LocalDate.parse(attribute);
-                } catch (Exception e){
-                    t = null;
-                }
-                bean.setUltimaChiamata(t);
-                break;
-            case 23:
-                LocalDate j;
-                try{
-                    j = LocalDate.parse(attribute);
-                }catch (Exception e){
-                    j = null;
-                }
-                bean.setProssimaChiamata(j);
-                break;
-            case 24:
-                double c;
-                if (attribute.isEmpty()){
-                    c = 0;
-                }else {
-                    c = Double.parseDouble(attribute);
-                }
-                bean.setCoinvolgimento(c);
-                break;
-            case 25:
-                LocalDate o = LocalDate.now();
-                if (attribute.isEmpty()){
-                    o = o.minusMonths(1);
-                }else {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd");
-                    o = LocalDate.parse(attribute, formatter);
-                }
-                bean.setAcquisizione(o);
-                break;
-
-
-            //case 26:
-                //bean.setCheckpoint(Integer.parseInt(attribute));
-                //break;
-        }
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        DBManager.init();
+        if (DBManager.isNull()) {
+            DBManager.init();
+            try {
+                GlobalContext.notProgrammedCalls.removeIf(i -> DBManager.retriveEntry(i).getProssimaChiamata() != null);
+                if (!GlobalContext.notProgrammedCalls.isEmpty()) {
+                    FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("login-reminder.fxml")));
+                    Parent root = loader.load();
+                    LogoutController controller = loader.getController();
+                    controller.setProperties(scene);
+                    Scene newScene = new Scene(root);
+                    Stage newStage = new Stage();
+                    newStage.getIcons().add(new Image("AppIcon.png"));
+                    newStage.setTitle("Promemoria amichevole");
+
+                    newStage.setScene(newScene);
+                    newStage.show();
+                } else {
+                    MyUtils.log(LogType.MESSAGE, "Non ha promemoria dall'ultimo log out");
+                }
+            } catch (IOException e) {
+                System.out.println("NIENTE DA RICORDARE");
+                MyUtils.log(LogType.MESSAGE, "Non ha promemoria dall'ultimo log out");
+            }
+        }
         if (GlobalContext.operator == Operatori.TOMMASO){
             importButton.setVisible(true);
             importButton.setPrefSize(130.0,130.0);
@@ -263,57 +125,40 @@ public class FirstPageController implements Initializable {
             exportButton.setVisible(true);
             exportButton.setPrefSize(130.0,130.0);
             exportButton.setMinHeight(Region.USE_COMPUTED_SIZE);
-        /*    notesButton.setPrefSize(130.0, 130.0);
+            notesButton.setPrefSize(130.0, 130.0);
             notesButton.setVisible(true);
             notesButton.setMinHeight(Region.USE_COMPUTED_SIZE);
-            settingsButton.setPrefSize(130.0, 130.0);
+        /*    settingsButton.setPrefSize(130.0, 130.0);
             settingsButton.setVisible(true);
             settingsButton.setMinHeight(Region.USE_COMPUTED_SIZE);*/
-        }
-        try {
-            GlobalContext.notProgrammedCalls = (LinkedList<UUID>) MyUtils.read(GlobalContext.operator.name());
-            LinkedList<UUID> temp = new LinkedList<>();
-            for (UUID i : GlobalContext.notProgrammedCalls){
-                if (DBManager.retriveEntry(i).getProssimaChiamata() == null){
-                    temp.add(i);
-                }
-            }
-            GlobalContext.notProgrammedCalls = temp;
-           // GlobalContext.notProgrammedCalls.removeIf(i -> DBManager.retriveEntry(i).getProssimaChiamata() != null);
-            if (!GlobalContext.notProgrammedCalls.isEmpty()){
-                FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("login-reminder.fxml")));
-                Parent root = loader.load();
-                LogoutController controller = loader.getController();
-                controller.setProperties(scene);
-                Scene newScene = new Scene(root);
-                Stage newStage = new Stage();
-                newStage.setScene(newScene);
-                newStage.show();
-            } else{
-                MyUtils.log(LogType.MESSAGE, "Non ha promemoria dall'ultimo log out");
-            }
-        }  catch (IOException | ClassNotFoundException e) {
-            System.out.println("NIENTE DA RICORDARE");
-            MyUtils.log(LogType.MESSAGE, "Non ha promemoria dall'ultimo log out");
         }
     }
 
     public void doShowCallsToMake(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(App.class.getResource("calls-page.fxml"));
-            Parent root = loader.load();
-            CallsPageController controller = loader.getController();
-            controller.setProperties((Stage) ((Node) event.getSource()).getScene().getWindow());
-            Stage callStage = new Stage();
-            callStage.setTitle("Elenco Chiamate");
-            Scene scene = new Scene(root);
-            callStage.setScene(scene);
-            callStage.getIcons().add(new Image("AppIcon.png"));
-            callStage.show();
-        } catch (Exception e) {
-            MyUtils.log(LogType.ERROR);
-            MyUtils.log(LogType.MESSAGE, e);
-            System.out.println("Errore durante la visualizzazione di callList con doShowCallList in FirstPageController");
+        boolean alreadyOpen = false;
+        for (Window i : Window.getWindows()){
+            if (Objects.equals(i.getScene().getRoot().getId(), "calls-page")){
+                i.requestFocus();
+                alreadyOpen = true;
+            }
+        }
+        if(!alreadyOpen) {
+            try {
+                FXMLLoader loader = new FXMLLoader(App.class.getResource("calls-page.fxml"));
+                Parent root = loader.load();
+                CallsPageController controller = loader.getController();
+                controller.setProperties((Stage) ((Node) event.getSource()).getScene().getWindow());
+                Stage callStage = new Stage();
+                callStage.setTitle("Elenco Chiamate");
+                Scene scene = new Scene(root);
+                callStage.setScene(scene);
+                callStage.getIcons().add(new Image("AppIcon.png"));
+                callStage.show();
+            } catch (Exception e) {
+                MyUtils.log(LogType.ERROR);
+                MyUtils.log(LogType.MESSAGE, e);
+                System.out.println("Errore durante la visualizzazione di callList con doShowCallList in FirstPageController");
+            }
         }
     }
 

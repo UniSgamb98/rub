@@ -108,6 +108,8 @@ public class NewEntryController {
         newEntry.setInteressamento(InteressamentoStatus.BLANK);
         newEntry.setTipoCliente(TipoCliente.BLANK);
         newEntry.setAcquisizione(LocalDate.now());
+        newEntry.setCellulare("");  //sono pigro
+        newEntry.setTelefono2("");  //sono pigro
         return newEntry;
     }
 }

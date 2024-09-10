@@ -1,6 +1,8 @@
 package com.example.rub;
 
+import com.example.rub.beans.Contatto;
 import com.example.rub.enums.LogType;
+import com.example.rub.enums.comparator.EntryComp;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.MyUtils;
 import com.example.rub.objects.note.DisplayableEntry;
@@ -19,6 +21,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.Objects;
@@ -49,8 +55,14 @@ public class SearchEntryController implements Initializable {
     }
     public void savageOldList(ObservableList<DisplayableEntry> oldList){
         results.clear();
-        for (DisplayableEntry i : oldList){
-            results.add(new DisplayableEntry(i.getEntry().getId()));
+        try {
+            for (DisplayableEntry i : oldList) {
+                results.add(new DisplayableEntry(i.getEntry().getId()));
+            }
+        } catch (NullPointerException ignored){}
+        if (results.isEmpty()){
+            for (UUID i : DBManager.getAllEntries())
+                results.add(new DisplayableEntry(i));
         }
     }
 
@@ -62,6 +74,7 @@ public class SearchEntryController implements Initializable {
     }
     private void displayResults(LinkedList<UUID> resultToDisplay){
         results.clear();
+        resultToDisplay.sort(new EntryComp());
 
         for (UUID uuid : resultToDisplay) {
             results.add(DBManager.getDisplayableEntry(uuid));
@@ -117,4 +130,22 @@ public class SearchEntryController implements Initializable {
             System.out.println("Errore durante la transizione in firstPage con doSwitchToFirstPage in SearchEntryController");
         }
     }
+
+    public void copyList() {
+        try {
+            File file = new File("List.txt");
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            for(DisplayableEntry i : results){
+                Contatto j = i.getEntry();
+                bw.write(j.getRagioneSociale()+ " : " + j.getTelefono());
+                bw.newLine();
+            }
+            bw.flush();
+            bw.close();
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

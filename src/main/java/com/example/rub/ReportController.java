@@ -3,6 +3,7 @@ package com.example.rub;
 import com.example.rub.beans.Contatto;
 import com.example.rub.enums.LogType;
 import com.example.rub.enums.Operatori;
+import com.example.rub.enums.comparator.EntryComp;
 import com.example.rub.functionalities.DBManager;
 import com.example.rub.functionalities.GlobalContext;
 import com.example.rub.functionalities.MyUtils;
@@ -73,9 +74,28 @@ public class ReportController implements Initializable {
     public Label subNewSampling;
     @FXML
     public HBox box;
+    @FXML
+    public Label blanks;
+    public Label infos;
+    @FXML
+    public Label notFounds;
+    @FXML
+    public Label notRelateds;
+    @FXML
+    public Label nullInterests;
+    @FXML
+    public Label priceLists;
+    @FXML
+    public Label samples;
+    @FXML
+    public Label recalls;
+    @FXML
+    public Label clients;
     ObservableList<DisplayableEntry> contactedList;
     ArrayList<Pair<UUID, String>> timeLine;
-    int[] reportInfo = {0,0,0,0,0};   //tot.aziende - tot comunicazioni - nuove info - nuove campionature - nuovi clienti
+    int[] reportInfo = {0,0,0,0,0};   //tot.aziende - tot comunicazioni - nuove listino - nuove campionature - nuovi clienti
+    int[] workInfo = {0,0,0,0,0,0,0,0,0};
+    String[] workTips = {"","","","","","","","",""};
     String start;
     String stop;
 
@@ -104,6 +124,26 @@ public class ReportController implements Initializable {
             totalNewPriceList.setText(": " + reportInfo[2]);
             totalNewSampling.setText(": " + reportInfo[3]);
             totalNewClients.setText(": " + reportInfo[4]);
+            blanks.setText(": " + workInfo[0]);
+            notFounds.setText(": " + workInfo[1]);
+            notRelateds.setText(": " + workInfo[2]);
+            nullInterests.setText(": " + workInfo[3]);
+            recalls.setText(": " + workInfo[4]);
+            infos.setText(": " + workInfo[5]);
+            priceLists.setText(": " + workInfo[6]);
+            samples.setText(": " + workInfo[7]);
+            clients.setText(": " + workInfo[8]);
+
+            blanks.setTooltip(new Tooltip(workTips[0]));
+            notFounds.setTooltip(new Tooltip(workTips[1]));
+            notRelateds.setTooltip(new Tooltip(workTips[2]));
+            nullInterests.setTooltip(new Tooltip(workTips[3]));
+            recalls.setTooltip(new Tooltip(workTips[4]));
+            infos.setTooltip(new Tooltip(workTips[5]));
+            priceLists.setTooltip(new Tooltip(workTips[6]));
+            samples.setTooltip(new Tooltip(workTips[7]));
+            clients.setTooltip(new Tooltip(workTips[8]));
+
             filtro.getItems().retainAll("Periodo analizzato");
             if (!filtro.getItems().contains("Periodo analizzato"))  filtro.getItems().add("Periodo analizzato");    //si verifica solo la prima volta
             filtro.getItems().addAll(getIntermediateDate(startDate.getValue(), stopDate.getValue()));
@@ -146,11 +186,11 @@ public class ReportController implements Initializable {
                 int samples = 0;
                 int clients = 0;
                 for (Pair<UUID, String> p : timeLine) {
-                    if (p.getValue().substring(0, p.getValue().length()-1).equals(filtro.getValue())) {
+                    if (p.getValue().substring(0, p.getValue().length()-2).equals(filtro.getValue())) {
                         communications++;
                         if (!toDisplay.contains(p.getKey())) {
                             toDisplay.add(p.getKey());
-                            switch (p.getValue().substring(p.getValue().length()-1)){
+                            switch (p.getValue().substring(p.getValue().length()-2,p.getValue().length()-1)){
                                 case "A":
                                     prices++;
                                     break;
@@ -170,7 +210,6 @@ public class ReportController implements Initializable {
                 subNewSampling.setText(": " + samples);
                 subNewClients.setText(": " + clients);
             }
-            reportInfo[0] = toDisplay.size();
             displayResults(toDisplay);
         }
     }
@@ -198,14 +237,39 @@ public class ReportController implements Initializable {
     private void createTimeLine () throws ParserConfigurationException {
         timeLine = new ArrayList<>();
         NoteManager nm = new NoteManager();
+        reportInfo[0] = 0;
+        reportInfo[1] = 0;
         reportInfo[2] = 0;
         reportInfo[3] = 0;
         reportInfo[4] = 0;
+
+        workTips[0] = "";
+        workTips[1] = "";
+        workTips[2] = "";
+        workTips[3] = "";
+        workTips[4] = "";
+        workTips[5] = "";
+        workTips[6] = "";
+        workTips[7] = "";
+        workTips[8] = "";
+
+        workInfo[0] = 0;
+        workInfo[1] = 0;
+        workInfo[2] = 0;
+        workInfo[3] = 0;
+        workInfo[4] = 0;
+        workInfo[5] = 0;
+        workInfo[6] = 0;
+        workInfo[7] = 0;
+        workInfo[8] = 0;
+
         for (UUID i : DBManager.getAllEntries()){
             Contatto j = DBManager.retriveEntry(i);
+            boolean firstTime = true;
             for (String k : nm.getAnnotationDates(j.getNoteId(), durata.getValue(), operator.getValue(), includeMessages.isSelected())){
-                if (k.substring(0, k.length()-1).compareTo(start) >= 0 && k.substring(0, k.length()-1).compareTo(stop) <= 0) {
-                    switch (k.substring(k.length()-1)){
+                String dateOfAnnotation = k.substring(0, k.length() - 2);
+                if (dateOfAnnotation.compareTo(start) >= 0 && dateOfAnnotation.compareTo(stop) <= 0) {
+                    switch (k.substring(k.length()-2,k.length()-1)){
                         case "A":
                             reportInfo[2]++;
                             break;
@@ -217,6 +281,48 @@ public class ReportController implements Initializable {
                             break;
                     }
                     timeLine.add(new Pair<>(i, k));
+                    if(firstTime) {
+                        reportInfo[0]++;
+                        firstTime = false;
+                    }
+                    switch (k.substring(k.length()-1)){
+                        case "A":
+                            workInfo[0]++;
+                            workTips[0] = workTips[0] + j.getRagioneSociale() + "\n";
+                            break;
+                        case "B":
+                            workInfo[1]++;
+                            workTips[1] = workTips[1] + j.getRagioneSociale() + "\n";
+                            break;
+                        case "C":
+                            workInfo[2]++;
+                            workTips[2] = workTips[2] + j.getRagioneSociale() + "\n";
+                            break;
+                        case "D":
+                            workInfo[3]++;
+                            workTips[3] = workTips[3] + j.getRagioneSociale() + "\n";
+                            break;
+                        case "E":
+                            workInfo[4]++;
+                            workTips[4] = workTips[4] + j.getRagioneSociale() + "\n";
+                            break;
+                        case "F":
+                            workInfo[5]++;
+                            workTips[5] = workTips[5] + j.getRagioneSociale() + "\n";
+                            break;
+                        case "G":
+                            workInfo[6]++;
+                            workTips[6] = workTips[6] + j.getRagioneSociale() + "\n";
+                            break;
+                        case "H":
+                            workInfo[7]++;
+                            workTips[7] = workTips[7] + j.getRagioneSociale() + "\n";
+                            break;
+                        case "I":
+                            workInfo[8]++;
+                            workTips[8] = workTips[8] + j.getRagioneSociale() + "\n";
+                            break;
+                    }
                 }
             }
         }
@@ -225,6 +331,7 @@ public class ReportController implements Initializable {
 
     private void displayResults(LinkedList<UUID> resultToDisplay){
         contactedList.clear();
+        resultToDisplay.sort(new EntryComp());
         for (UUID uuid : resultToDisplay) {
             contactedList.add(DBManager.getDisplayableEntry(uuid));
         }
@@ -238,12 +345,18 @@ public class ReportController implements Initializable {
             chartData.getData().add(new XYChart.Data<>(i, getFrequency(i)));
         }
         chart.getData().add(chartData);
+
+        for (XYChart.Series<String, Integer> s : chart.getData()) {
+            for (XYChart.Data<String, Integer> d : s.getData()) {
+                Tooltip.install(d.getNode(), new Tooltip("" + d.getYValue().doubleValue()));
+            }
+        }
     }
 
     private int getFrequency(String date){
         int ret = 0;
         for (Pair<UUID, String> i : timeLine){
-            if (i.getValue().substring(0, i.getValue().length() - 1).equals(date))  ret++;
+            if (i.getValue().substring(0, i.getValue().length() - 2).equals(date))  ret++;
         }
         return ret;
     }

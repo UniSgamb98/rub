@@ -3,7 +3,6 @@ package com.example.rub.functionalities;
 import com.example.rub.enums.LogType;
 import com.example.rub.enums.Operatori;
 import com.example.rub.enums.Interessamento.InteressamentoStatus;
-import com.example.rub.enums.comparator.InteressamentoComp;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -41,7 +40,7 @@ public class NoteManager {
         return doc;
     }
 
-    public void addCallNote (Document doc, String note, int durata, boolean messaggio, InteressamentoStatus oldValue, InteressamentoStatus newValue){
+    public void addCallNote (Document doc, String note, int durata, boolean messaggio, InteressamentoStatus oldValue, InteressamentoStatus newValue, int checkpoint){
         Element call = doc.createElement("chiamata");
         Calendar now = Calendar.getInstance();
         String m = ""+(now.get(Calendar.MONTH)+1);
@@ -54,6 +53,8 @@ public class NoteManager {
         call.setAttribute("number", "" + (getNoteNumber(doc)+1));
         call.setAttribute("cancelled", "false");
         call.setAttribute("messaggio", "" + messaggio);
+        call.setAttribute("checkpoint", checkpoint+"");
+
         call.setTextContent(note);
         call.setAttribute("previousInterest", oldValue.name());
         call.setAttribute("newInterest", newValue.name());
@@ -136,22 +137,48 @@ public class NoteManager {
                             ((e.getAttribute("messaggio").equals("false")) || includeMessages) &&
                             e.getAttribute("cancelled").equals("false")) {
                         String t = e.getAttribute("data");
-                        if (new InteressamentoComp().compare(InteressamentoStatus.valueOf(e.getAttribute("previousInterest")), InteressamentoStatus.valueOf(e.getAttribute("newInterest"))) < 0) {
-                            switch (InteressamentoStatus.valueOf(e.getAttribute("newInterest"))) {
-                                case LISTINO:
-                                    t = t + "A";
-                                    break;
-                                case CAMPIONE:
-                                    t = t + "B";
-                                    break;
-                                case CLIENTE:
-                                    t = t + "C";
-                                    break;
-                                default:
-                                    t = t + "X";
-                            }
-                        } else {
-                            t = t + "X";
+
+                        switch (e.getAttribute("checkpoint")) {
+                            case "1":
+                                t = t + "A";
+                                break;
+                            case "2":
+                                t = t + "B";
+                                break;
+                            case "3":
+                                t = t + "C";
+                                break;
+                            default:
+                                t = t + "X";
+                        }
+                        switch (InteressamentoStatus.valueOf(e.getAttribute("newInterest"))){
+                            case BLANK:
+                                t = t + "A";
+                                break;
+                            case NON_TROVATO:
+                                t = t + "B";
+                                break;
+                            case NON_INERENTE:
+                                t = t + "C";
+                                break;
+                            case NULLO:
+                                t = t + "D";
+                                break;
+                            case RICHIAMARE:
+                                t = t + "E";
+                                break;
+                            case INFO:
+                                t = t + "F";
+                                break;
+                            case LISTINO:
+                                t = t + "G";
+                                break;
+                            case CAMPIONE:
+                                t = t + "H";
+                                break;
+                            case CLIENTE:
+                                t = t + "I";
+                                break;
                         }
                         ret.add(t);
                     }
