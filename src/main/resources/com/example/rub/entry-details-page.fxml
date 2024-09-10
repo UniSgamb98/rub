@@ -16,6 +16,7 @@
             <TextField id="savefield" fx:id="ragioneSociale" disable="true" onAction="#notifyChange" GridPane.columnIndex="2" GridPane.columnSpan="3" />
 
             <Label text="Referente:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         <Label text="Telefono 2:" GridPane.columnIndex="1" GridPane.rowIndex="12" />
             <TextField id="savefield" fx:id="personaDiRiferimento" disable="true" onAction="#notifyChange" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
 
             <Label text="Paese:" GridPane.columnIndex="1" GridPane.rowIndex="6" />
@@ -28,11 +29,11 @@
             <Label text="Email Referente:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField id="savefield" fx:id="emailReferente" disable="true" onAction="#notifyChange" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3" />
 
-            <Label text="Interessamento:" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-            <ChoiceBox fx:id="interessamento" onAction="#notifyChange" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="14" />
-            <Label text="Tipo Cliente:" GridPane.columnIndex="3" GridPane.rowIndex="14" />
-            <ChoiceBox fx:id="tipoCliente" onAction="#notifyChange" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="14" />
-            <BorderPane GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="15">
+            <Label text="Interessamento:" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+            <ChoiceBox fx:id="interessamento" disable="true" onAction="#notifyChange" GridPane.columnIndex="2" GridPane.rowIndex="15" />
+            <Label text="Tipo Cliente:" GridPane.columnIndex="3" GridPane.rowIndex="15" />
+            <ChoiceBox fx:id="tipoCliente" disable="true" onAction="#notifyChange" GridPane.columnIndex="4" GridPane.rowIndex="15" />
+            <BorderPane GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="16">
                 <top>
                     <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
                         <Label text="N* contatti: " />
@@ -90,19 +91,22 @@
             <Label text="P.Iva:" GridPane.columnIndex="1" GridPane.rowIndex="10" />
             <Label text="Codice Fiscale:" GridPane.columnIndex="3" GridPane.rowIndex="10" />
             <Label text="Email:" GridPane.columnIndex="3" GridPane.rowIndex="11" />
-            <Label text="Sito Web:" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-            <Label text="P.E.C:" GridPane.columnIndex="3" GridPane.rowIndex="12" />
-            <Label text="Titolare:" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-            <TextField id="savefield" fx:id="titolare" disable="true" onAction="#notifyChange" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="13" />
-            <TextField id="savefield" fx:id="sito" disable="true" onAction="#notifyChange" GridPane.columnIndex="2" GridPane.rowIndex="12" />
-            <TextField id="savefield" fx:id="pec" disable="true" onAction="#notifyChange" GridPane.columnIndex="4" GridPane.rowIndex="12" />
+            <Label text="Sito Web:" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+            <Label text="P.E.C:" GridPane.columnIndex="3" GridPane.rowIndex="13" />
+            <Label text="Titolare:" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+            <TextField id="savefield" fx:id="titolare" disable="true" onAction="#notifyChange" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="14" />
+         <TextField fx:id="telefono2" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+            <TextField id="savefield" fx:id="sito" disable="true" onAction="#notifyChange" GridPane.columnIndex="2" GridPane.rowIndex="13" />
+            <TextField id="savefield" fx:id="pec" disable="true" onAction="#notifyChange" GridPane.columnIndex="4" GridPane.rowIndex="13" />
             <TextField id="savefield" fx:id="emailGenerica" disable="true" onAction="#notifyChange" GridPane.columnIndex="4" GridPane.rowIndex="11" />
             <TextField id="savefield" fx:id="codiceFiscale" disable="true" onAction="#notifyChange" GridPane.columnIndex="4" GridPane.rowIndex="10" />
             <TextField id="savefield" fx:id="partitaIva" disable="true" onAction="#notifyChange" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-            <NoteDisplayer fx:id="noteDisplayer" minHeight="250.0" minWidth="500.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="16">
+            <NoteDisplayer fx:id="noteDisplayer" minHeight="250.0" minWidth="500.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="17">
                 <opaqueInsets>
                     <Insets top="30.0" />
                 </opaqueInsets></NoteDisplayer>
+         <Label text="Cellulare:" GridPane.columnIndex="3" GridPane.rowIndex="12" />
+         <TextField fx:id="cellulare" disable="true" GridPane.columnIndex="4" GridPane.rowIndex="12" />
             <columnConstraints>
                 <ColumnConstraints />
                 <ColumnConstraints />
@@ -129,6 +133,7 @@
                 <RowConstraints />
                 <RowConstraints />
                 <RowConstraints />
+            <RowConstraints />
             </rowConstraints>
         </GridPane>
     </center>
@@ -144,11 +149,6 @@
             <BorderPane.margin>
                 <Insets right="10.0" top="50.0" />
             </BorderPane.margin>
-            <VBox>
-                <CheckBox fx:id="check1" disable="true" mnemonicParsing="false" onAction="#manageCheckpoint" text="Listino" />
-                <CheckBox fx:id="check2" disable="true" mnemonicParsing="false" onAction="#manageCheckpoint" text="Campione" />
-                <CheckBox fx:id="check3" disable="true" mnemonicParsing="false" onAction="#manageCheckpoint" text="Ordine" />
-            </VBox>
             <HBox fx:id="emailBox" alignment="CENTER">
                 <EmailSenderShortcut fx:id="emailSenderShortcut" />
                 <Button mnemonicParsing="false" onAction="#openMailPreferences" wrapText="true" GridPane.columnIndex="1">
@@ -171,6 +171,22 @@
                 </padding>
             </Label>
             <CheckBox fx:id="isModifiable" mnemonicParsing="false" onAction="#allowChangesPressed" text="Abilita Modifiche" />
+            <VBox fx:id="adminExpandedInfos" alignment="CENTER" spacing="10.0">
+                <padding>
+                    <Insets right="10.0"/>
+                </padding>
+                <TextField fx:id="noteId"/>
+                <ChoiceBox fx:id="operator" prefWidth="150.0"/>
+                <DatePicker fx:id="acquisition"/>
+                <VBox>
+                    <CheckBox fx:id="check1" disable="true" mnemonicParsing="false" onAction="#manageCheckpoint"
+                              text="Listino"/>
+                    <CheckBox fx:id="check2" disable="true" mnemonicParsing="false" onAction="#manageCheckpoint"
+                              text="Campione"/>
+                    <CheckBox fx:id="check3" disable="true" mnemonicParsing="false" onAction="#manageCheckpoint"
+                              text="Ordine"/>
+                </VBox>
+            </VBox>
             <Button fx:id="saveButton" mnemonicParsing="false" onAction="#doSaveChanges" text="Salva" visible="false" />
             <Button fx:id="registerCallButton" alignment="CENTER" mnemonicParsing="false" onAction="#doRegisterCall" prefHeight="70.0" prefWidth="98.0" text="Registra Comunicazione" textAlignment="CENTER" visible="false" wrapText="true">
                 <VBox.margin>
