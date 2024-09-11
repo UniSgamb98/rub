@@ -11,10 +11,6 @@ import com.example.rub.enums.comparator.InteressamentoComp;
 import com.example.rub.functionalities.locations.LocationManager;
 import com.example.rub.objects.note.DisplayableEntry;
 import javafx.scene.control.Alert;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -362,6 +358,7 @@ public abstract class DBManager extends TagsManager{
             indexNewEntry(oldBean, id);
 
             MyUtils.writeAll(database, index, locationManager);
+
             ret = Outcome.SUCCESS;
         } catch (NullPointerException e){
             if (modifyEntry(recoverFromNoteId(modifiedBean.getNoteId()), modifiedBean).equals(Outcome.SUCCESS)) ret = Outcome.RECOVERED_SUCCESS;
@@ -528,7 +525,14 @@ public abstract class DBManager extends TagsManager{
     }
 
     public static void notes() {
-        for(Contatto i : database.values()){
+        for (Contatto i : database.values()){
+            if (i.getOperator() == Operatori.SANTOLO)   {
+                i.setOperator(Operatori.TERESA);
+                modifyEntry(i.getId(), i);
+            }
+        }
+        MyUtils.writeAll(database, index, locationManager);
+        /*for(Contatto i : database.values()){
             try {
                 NoteManager nm = new NoteManager();
                 Document doc = nm.readXml(""+i.getNoteId());
@@ -547,7 +551,7 @@ public abstract class DBManager extends TagsManager{
                 MyUtils.log(LogType.MESSAGE, e);
                 System.out.println("Errore con " + i);
             }
-        }
+        }*/
     }
 
     public static void reduceVolteContattati(UUID entryID) {

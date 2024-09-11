@@ -33,7 +33,7 @@ public class FiltersToolColumn extends VBox {
         }
         locationFilter = new StateFilter(manager);
 
-        operatori = new AllPurposeFilter(Operatori.HUGO.name(), Operatori.SANTOLO.name(), Operatori.VICTORIA.name());
+        operatori = new AllPurposeFilter(Operatori.getOperatorNames());
         interesse = new AllPurposeFilter(InteressamentoStatus.NON_TROVATO.name(), InteressamentoStatus.NON_INERENTE.name(), InteressamentoStatus.NULLO.name(), InteressamentoStatus.RICHIAMARE.name(), InteressamentoStatus.INFO.name(), InteressamentoStatus.LISTINO.name(), InteressamentoStatus.CAMPIONE.name(), InteressamentoStatus.CLIENTE.name());
         tipologia = new AllPurposeFilter(TipoCliente.LABORATORIO.name(), TipoCliente.RIVENDITORE.name(), TipoCliente.CENTROFRESAGGIO.name());
         nullRecall = new ToggleButton("Non Programmati");

@@ -15,7 +15,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -26,12 +25,14 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        operator.getItems().addAll(Operatori.values());
+        operator.getItems().addAll(Operatori.getOperators());
+        operator.getItems().remove(Operatori.SANTOLO);
+        operator.getItems().remove(Operatori.HUGO);
         //operator.setValue(Operatori.TOMMASO);
     }
 
     public void doLogin(ActionEvent event) {
-        if (Arrays.asList(Operatori.values()).contains(operator.getValue())) {
+        if (Operatori.getOperators().contains(operator.getValue())) {
             GlobalContext.operator = operator.getValue();
             try {
                 MyUtils.log(LogType.ACCESS);

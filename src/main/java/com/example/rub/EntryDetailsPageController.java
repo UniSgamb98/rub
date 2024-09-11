@@ -411,7 +411,7 @@ public class EntryDetailsPageController implements Initializable, Runnable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tipoCliente.getItems().addAll(TipoCliente.LABORATORIO, TipoCliente.RIVENDITORE, TipoCliente.CENTROFRESAGGIO);
-        operator.getItems().addAll(Operatori.HUGO, Operatori.SANTOLO, Operatori.VICTORIA, Operatori.TOMMASO, Operatori.GAETANO);
+        operator.getItems().addAll(Operatori.getOperators());
         interessamento.getItems().addAll(InteressamentoStatus.NON_TROVATO, InteressamentoStatus.NON_INERENTE, InteressamentoStatus.NULLO, InteressamentoStatus.RICHIAMARE, InteressamentoStatus.INFO, InteressamentoStatus.LISTINO, InteressamentoStatus.CAMPIONE, InteressamentoStatus.CLIENTE);
         gridData.addEventFilter(ActionEvent.ACTION, event -> {
             if (event.getTarget() instanceof NoteDisplayer) {
